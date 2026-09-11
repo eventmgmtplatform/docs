@@ -1,0 +1,19 @@
+{
+  "release": "wiki-v1.0.0-extension-2026-09-11",
+  "target_repository": "eventmgmtplatform/event-mgmt-docs",
+  "target_branch": "gh-pages",
+  "strategy": "additive-extension",
+  "new_sections": [
+    "V1 map",
+    "five OEM image architecture",
+    "ESS conceptual",
+    "GNM Core Foundation",
+    "ServiceNow Core Foundation",
+    "CACF Core Foundation",
+    "frontend full architecture",
+    "IaC/GCP/Kubernetes",
+    "global Defect Prevention Matrix V1->V2"
+  ],
+  "preserve_existing": true,
+  "validation_note": "Run mkdocs build --strict in publication environment before push."
+}

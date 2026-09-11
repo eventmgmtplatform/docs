@@ -53,3 +53,9 @@ flowchart LR
 Para el detalle por integración, consultar
 [system-integration-instances.md](system-integration-instances.md) y los
 documentos de cada servicio.
+
+
+## Extensiones de arquitectura
+
+- [Flujos de solución ejecutados](solution-flows.md)
+- [Topología del runtime local](runtime-topology.md)

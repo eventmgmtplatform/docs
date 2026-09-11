@@ -64,3 +64,12 @@ flowchart TB
 
 La documentación detallada está en [Arquitectura](architecture/index.md),
 [Modelo de dominio](concepts/domain-model.md) y [Flujo de eventos](concepts/event-flow.md).
+
+
+## Documentación ampliada
+
+- [Flujos de solución ejecutados](architecture/solution-flows.md)
+- [Topología del runtime local](architecture/runtime-topology.md)
+- [Defect Prevention global](project/defect-prevention.md)
+- [Cobertura documental](project/documentation-coverage.md)
+- [Integraciones de plataforma](platform/integrations/index.md)
