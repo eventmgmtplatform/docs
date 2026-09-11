@@ -7,6 +7,8 @@ ADR-001 confirmado por el usuario el 2026-09-09. No es certificación de release
 
 ![Arquitectura del Event Processor](diagrams/Arquitectura%20del%20Procesador%20de%20Eventos%20Open%20Source.png)
 
+![Vista del Event Processor en el Architecture Atlas](../../assets/atlas/architecture-atlas-v1.0.0/03-event-processor/03-event-processor__01-architecture.png)
+
 | DA | Implementación observada en esta etapa | Estado del DA completo |
 |---|---|---|
 | 01 | Dominio independiente, contexto inmutable, puertos process/simulate, adaptador de contrato y transporte | PENDING: puertos administrativos y modelos de capacidades restantes |

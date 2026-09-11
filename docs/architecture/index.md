@@ -1,5 +1,7 @@
 # Arquitectura
 
+![Solución general del Architecture Atlas](../assets/atlas/architecture-atlas-v1.0.0/00-general-solution/00-general-solution__01-architecture.png)
+
 ## Vista de contexto
 
 La plataforma recibe eventos por `event-gateway`, procesa reglas y

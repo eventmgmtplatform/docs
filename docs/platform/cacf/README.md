@@ -10,10 +10,8 @@
 - [Decisiones de diseño](decisions-adr.md).
 - [Validación ejecutada](validation.md).
 - [Defect Prevention](defect-prevention.md).
-- [Arquitectura editable Draw.io](CACF-local-architecture.drawio).
-
-El diagrama editable corresponde a la topología local de CACF y complementa
-los diagramas Mermaid de arquitectura y flujo publicados en esta sección.
+La arquitectura visual de CACF se representa en los diagramas Mermaid de esta
+sección y en la vista correspondiente del catálogo visual.
 
 El diagrama editable corresponde a la topología local de CACF y complementa
 los diagramas Mermaid de arquitectura y flujo publicados en esta sección.

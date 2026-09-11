@@ -1,5 +1,7 @@
 # Desarrollo local con Docker Compose
 
+![Runtime de la plataforma](../assets/atlas/architecture-atlas-v1.0.0/12-runtime-platform-gcp-cicd/12-runtime-platform-gcp-cicd__01-architecture.png)
+
 La versión actual compartida usa `infrastructure/docker-compose.yml`.
 
 ```mermaid
