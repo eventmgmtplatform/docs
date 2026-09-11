@@ -10,13 +10,9 @@
       
       
       
-        <link rel="canonical" href="https://eventmgmtplatform.github.io/event-mgmt-docs/decisions/">
+        <link rel="canonical" href="https://eventmgmtplatform.github.io/event-mgmt-docs/carbon-preview/">
       
       
-        <link rel="prev" href="../development/releases/">
-      
-      
-        <link rel="next" href="adr-template/">
       
       
         
@@ -27,7 +23,7 @@
     
     
       
-        <title>Índice ADR - Event Management OpenSource</title>
+        <title>Carbon Design Preview - Event Management OpenSource</title>
       
     
     
@@ -69,6 +65,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#carbon-design-preview" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -101,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Índice ADR
+              Carbon Design Preview
             
           </span>
         </div>
@@ -1277,8 +1278,6 @@
       
   
   
-    
-  
   
   
     
@@ -1291,11 +1290,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
@@ -1316,7 +1315,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1331,17 +1330,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../decisions/" class="md-nav__link">
         
   
   
@@ -1357,7 +1349,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1370,7 +1361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="adr-template/" class="md-nav__link">
+      <a href="../decisions/adr-template/" class="md-nav__link">
         
   
   
@@ -1614,6 +1605,71 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#botones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Botones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avisos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Avisos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1630,9 +1686,125 @@
 
 
 
-  <h1>Índice ADR</h1>
-
-
+<h1 id="carbon-design-preview">Carbon Design Preview<a class="headerlink" href="#carbon-design-preview" title="Permanent link">&para;</a></h1>
+<p>Esta página permite validar los estilos principales.</p>
+<h2 id="estados">Estados<a class="headerlink" href="#estados" title="Permanent link">&para;</a></h2>
+<p><span class="status status--validated">VALIDATED</span></p>
+<p><span class="status status--pending">PENDING</span></p>
+<p><span class="status status--blocked">BLOCKED</span></p>
+<h2 id="botones">Botones<a class="headerlink" href="#botones" title="Permanent link">&para;</a></h2>
+<p><a class="md-button md-button--primary" href="../">Documentación</a></p>
+<p><a class="md-button" href="../architecture/">Arquitectura</a></p>
+<h2 id="tabla">Tabla<a class="headerlink" href="#tabla" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Estado</th>
+<th>Responsabilidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kafka</td>
+<td>Validado</td>
+<td>Backbone de eventos</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>Validado</td>
+<td>Estado transaccional</td>
+</tr>
+<tr>
+<td>OpenSearch</td>
+<td>Validado</td>
+<td>Proyección de consulta</td>
+</tr>
+<tr>
+<td>GCP Networking</td>
+<td>Pendiente</td>
+<td>Red cloud</td>
+</tr>
+</tbody>
+</table>
+<h2 id="avisos">Avisos<a class="headerlink" href="#avisos" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Información</p>
+<p>Este es un aviso informativo.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Pendiente</p>
+<p>Esta funcionalidad requiere validación.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Riesgo</p>
+<p>No publique secretos dentro de la documentación.</p>
+</div>
+<h2 id="codigo">Código<a class="headerlink" href="#codigo" title="Permanent link">&para;</a></h2>
+<p>```yaml
+site_name: Event Management OpenSource
+theme:
+  name: material
+cat &gt; docs/carbon-preview.md &lt;&lt;'EOF'</p>
+<h1 id="carbon-design-preview_1">Carbon Design Preview<a class="headerlink" href="#carbon-design-preview_1" title="Permanent link">&para;</a></h1>
+<p>Esta página permite validar los estilos principales.</p>
+<h2 id="estados_1">Estados<a class="headerlink" href="#estados_1" title="Permanent link">&para;</a></h2>
+<p><span class="status status--validated">VALIDATED</span></p>
+<p><span class="status status--pending">PENDING</span></p>
+<p><span class="status status--blocked">BLOCKED</span></p>
+<h2 id="botones_1">Botones<a class="headerlink" href="#botones_1" title="Permanent link">&para;</a></h2>
+<p><a class="md-button md-button--primary" href="../">Documentación</a></p>
+<p><a class="md-button" href="../architecture/">Arquitectura</a></p>
+<h2 id="tabla_1">Tabla<a class="headerlink" href="#tabla_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Estado</th>
+<th>Responsabilidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kafka</td>
+<td>Validado</td>
+<td>Backbone de eventos</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>Validado</td>
+<td>Estado transaccional</td>
+</tr>
+<tr>
+<td>OpenSearch</td>
+<td>Validado</td>
+<td>Proyección de consulta</td>
+</tr>
+<tr>
+<td>GCP Networking</td>
+<td>Pendiente</td>
+<td>Red cloud</td>
+</tr>
+</tbody>
+</table>
+<h2 id="avisos_1">Avisos<a class="headerlink" href="#avisos_1" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Información</p>
+<p>Este es un aviso informativo.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Pendiente</p>
+<p>Esta funcionalidad requiere validación.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Riesgo</p>
+<p>No publique secretos dentro de la documentación.</p>
+</div>
+<h2 id="codigo_1">Código<a class="headerlink" href="#codigo_1" title="Permanent link">&para;</a></h2>
+<p>```yaml
+site_name: Event Management OpenSource
+theme:
+  name: material</p>
 
 
 
@@ -1663,44 +1835,6 @@
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Pie" >
-        
-          
-          <a href="../development/releases/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Releases">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Anterior
-              </span>
-              <div class="md-ellipsis">
-                Releases
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="adr-template/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Plantilla ADR">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Siguiente
-              </span>
-              <div class="md-ellipsis">
-                Plantilla ADR
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">

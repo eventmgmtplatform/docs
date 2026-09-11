@@ -1,5 +1,6 @@
 site_name: Event Management OpenSource
 site_description: Documentación técnica de la plataforma Event Management OpenSource
+site_url: https://eventmgmtplatform.github.io/event-mgmt-docs/
 
 docs_dir: docs
 site_dir: site
@@ -7,6 +8,9 @@ site_dir: site
 theme:
   name: material
   language: es
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
   features:
     - navigation.sections
     - navigation.top
@@ -14,6 +18,9 @@ theme:
     - content.code.copy
     - search.suggest
     - search.highlight
+
+extra_css:
+  - assets/stylesheets/kyndryl.css
 
 plugins:
   - search
@@ -66,6 +73,7 @@ nav:
       - Plantilla ADR: decisions/adr-template.md
   - Proyecto:
       - Estado: project/status.md
+      - WebGUI administrativa: project/webgui.md
       - Roadmap: project/roadmap.md
       - Deuda técnica: project/technical-debt.md
       - Base de conocimiento: knowledge/index.md

@@ -10,28 +10,28 @@
       
       
       
-        <link rel="canonical" href="https://eventmgmtplatform.github.io/event-mgmt-docs/decisions/">
+        <link rel="canonical" href="https://eventmgmtplatform.github.io/event-mgmt-docs/project/webgui/">
       
       
-        <link rel="prev" href="../development/releases/">
+        <link rel="prev" href="../status/">
       
       
-        <link rel="next" href="adr-template/">
+        <link rel="next" href="../roadmap/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Índice ADR - Event Management OpenSource</title>
+        <title>WebGUI administrativa - Event Management OpenSource</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -50,9 +50,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/kyndryl.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/kyndryl.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -69,6 +69,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#webgui-administrativa" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -81,7 +86,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href=".." title="Event Management OpenSource" class="md-header__button md-logo" aria-label="Event Management OpenSource" data-md-component="logo">
+    <a href="../.." title="Event Management OpenSource" class="md-header__button md-logo" aria-label="Event Management OpenSource" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -101,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Índice ADR
+              WebGUI administrativa
             
           </span>
         </div>
@@ -181,7 +186,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Event Management OpenSource" class="md-nav__button md-logo" aria-label="Event Management OpenSource" data-md-component="logo">
+    <a href="../.." title="Event Management OpenSource" class="md-nav__button md-logo" aria-label="Event Management OpenSource" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -199,7 +204,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -278,7 +283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
+      <a href="../../getting-started/" class="md-nav__link">
         
   
   
@@ -306,7 +311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/local-development/" class="md-nav__link">
+      <a href="../../getting-started/local-development/" class="md-nav__link">
         
   
   
@@ -334,7 +339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/first-event/" class="md-nav__link">
+      <a href="../../getting-started/first-event/" class="md-nav__link">
         
   
   
@@ -421,7 +426,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/domain-model/" class="md-nav__link">
+      <a href="../../concepts/domain-model/" class="md-nav__link">
         
   
   
@@ -449,7 +454,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/event-flow/" class="md-nav__link">
+      <a href="../../concepts/event-flow/" class="md-nav__link">
         
   
   
@@ -477,7 +482,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/glossary/" class="md-nav__link">
+      <a href="../../concepts/glossary/" class="md-nav__link">
         
   
   
@@ -564,7 +569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
+      <a href="../../architecture/" class="md-nav__link">
         
   
   
@@ -592,7 +597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/containers/" class="md-nav__link">
+      <a href="../../architecture/containers/" class="md-nav__link">
         
   
   
@@ -620,7 +625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/components/" class="md-nav__link">
+      <a href="../../architecture/components/" class="md-nav__link">
         
   
   
@@ -648,7 +653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/data/" class="md-nav__link">
+      <a href="../../architecture/data/" class="md-nav__link">
         
   
   
@@ -676,7 +681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/security/" class="md-nav__link">
+      <a href="../../architecture/security/" class="md-nav__link">
         
   
   
@@ -704,7 +709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/deployment/" class="md-nav__link">
+      <a href="../../architecture/deployment/" class="md-nav__link">
         
   
   
@@ -732,7 +737,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture/gcp/" class="md-nav__link">
+      <a href="../../architecture/gcp/" class="md-nav__link">
         
   
   
@@ -819,7 +824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/api/" class="md-nav__link">
+      <a href="../../reference/api/" class="md-nav__link">
         
   
   
@@ -847,7 +852,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/events/" class="md-nav__link">
+      <a href="../../reference/events/" class="md-nav__link">
         
   
   
@@ -875,7 +880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/configuration/" class="md-nav__link">
+      <a href="../../reference/configuration/" class="md-nav__link">
         
   
   
@@ -903,7 +908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/terraform/" class="md-nav__link">
+      <a href="../../reference/terraform/" class="md-nav__link">
         
   
   
@@ -990,7 +995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../operations/local-runbook/" class="md-nav__link">
+      <a href="../../operations/local-runbook/" class="md-nav__link">
         
   
   
@@ -1018,7 +1023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../operations/observability/" class="md-nav__link">
+      <a href="../../operations/observability/" class="md-nav__link">
         
   
   
@@ -1046,7 +1051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../operations/incidents/" class="md-nav__link">
+      <a href="../../operations/incidents/" class="md-nav__link">
         
   
   
@@ -1074,7 +1079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../operations/disaster-recovery/" class="md-nav__link">
+      <a href="../../operations/disaster-recovery/" class="md-nav__link">
         
   
   
@@ -1161,7 +1166,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../development/contributing/" class="md-nav__link">
+      <a href="../../development/contributing/" class="md-nav__link">
         
   
   
@@ -1189,7 +1194,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../development/standards/" class="md-nav__link">
+      <a href="../../development/standards/" class="md-nav__link">
         
   
   
@@ -1217,7 +1222,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../development/testing/" class="md-nav__link">
+      <a href="../../development/testing/" class="md-nav__link">
         
   
   
@@ -1245,7 +1250,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../development/releases/" class="md-nav__link">
+      <a href="../../development/releases/" class="md-nav__link">
         
   
   
@@ -1253,6 +1258,121 @@
     
   
     Releases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisiones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisiones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice ADR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/adr-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plantilla ADR
   
 
     
@@ -1295,130 +1415,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Decisiones
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Decisiones
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Índice ADR
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="adr-template/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Plantilla ADR
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
           <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
@@ -1439,7 +1436,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1457,7 +1454,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../project/status/" class="md-nav__link">
+      <a href="../status/" class="md-nav__link">
         
   
   
@@ -1482,10 +1479,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../project/webgui/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WebGUI administrativa
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1501,6 +1525,70 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#capacidades-integradas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capacidades integradas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contratos-de-integracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contratos de integración
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identidad-visual-kyndryl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identidad visual Kyndryl
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-del-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias del código
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1513,7 +1601,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../project/roadmap/" class="md-nav__link">
+      <a href="../roadmap/" class="md-nav__link">
         
   
   
@@ -1541,7 +1629,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../project/technical-debt/" class="md-nav__link">
+      <a href="../technical-debt/" class="md-nav__link">
         
   
   
@@ -1569,7 +1657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../knowledge/" class="md-nav__link">
+      <a href="../../knowledge/" class="md-nav__link">
         
   
   
@@ -1614,6 +1702,60 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#capacidades-integradas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capacidades integradas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contratos-de-integracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contratos de integración
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identidad-visual-kyndryl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identidad visual Kyndryl
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-del-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias del código
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1630,9 +1772,41 @@
 
 
 
-  <h1>Índice ADR</h1>
-
-
+<h1 id="webgui-administrativa">WebGUI administrativa<a class="headerlink" href="#webgui-administrativa" title="Permanent link">&para;</a></h1>
+<p>La consola de Event Management es una aplicación React/TypeScript/Vite que
+reúne la administración operativa en una sola experiencia. El shell comparte
+navegación, encabezado, breadcrumbs, internacionalización ES/EN y estados
+explícitos de carga, vacío, error y conflicto.</p>
+<h2 id="capacidades-integradas">Capacidades integradas<a class="headerlink" href="#capacidades-integradas" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Dashboard y administración de servicios con estado, salud y acciones
+  controladas desde el CLI existente.</li>
+<li>Event Management, Correlation, Routing y Policies con lectura, simulación,
+  versionado, historial, ETag y protección contra conflictos.</li>
+<li>Inventory/Enrichment, Blackouts, AutoSuppression y AIOps Extensions con
+  consultas o escrituras según el contrato de cada módulo.</li>
+<li>ESS, Ticketing, Notifications, CACF, GLPI, Secrets/MockSecrets y
+  Middleware/Kafka como herramientas especializadas.</li>
+<li>Cliente e internacionalización persistente en español e inglés.</li>
+</ul>
+<h2 id="contratos-de-integracion">Contratos de integración<a class="headerlink" href="#contratos-de-integracion" title="Permanent link">&para;</a></h2>
+<p>La consola usa el modelo same-origin y proxies internos cuando necesita acceder
+a servicios o mocks. Las operaciones de escritura respetan revisión optimista,
+idempotencia y auditoría; los datos muestran su fuente y no se presentan como
+desplegados cuando solo han sido validados localmente.</p>
+<h2 id="identidad-visual-kyndryl">Identidad visual Kyndryl<a class="headerlink" href="#identidad-visual-kyndryl" title="Permanent link">&para;</a></h2>
+<p>El tema Kyndryl de la consola define superficies claras, barra superior negra,
+rojo de marca, bordes sobrios y densidad productiva. La wiki adopta el mismo
+lenguaje mediante <code>docs/assets/stylesheets/kyndryl.css</code>, sin alterar el
+contenido existente ni añadir una opción de cambio de tema.</p>
+<h2 id="referencias-del-codigo">Referencias del código<a class="headerlink" href="#referencias-del-codigo" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>services/event-management-console/src/layout/ConsoleLayout.tsx</code></li>
+<li><code>services/event-management-console/src/navigation/navigation.registry.ts</code></li>
+<li><code>services/event-management-console/src/shared/theme/appearance.css</code></li>
+<li><code>services/event-management-console/src/shared/theme/ThemeProvider.tsx</code></li>
+<li><code>services/event-management-console/CHANGELOG.md</code></li>
+</ul>
 
 
 
@@ -1668,7 +1842,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../development/releases/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Releases">
+          <a href="../status/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Estado">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1678,20 +1852,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Releases
+                Estado
               </div>
             </div>
           </a>
         
         
           
-          <a href="adr-template/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Plantilla ADR">
+          <a href="../roadmap/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Roadmap">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Plantilla ADR
+                Roadmap
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1728,10 +1902,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

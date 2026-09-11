@@ -10,11 +10,13 @@
       
       
       
+        <link rel="canonical" href="https://eventmgmtplatform.github.io/event-mgmt-docs/project/status/">
+      
       
         <link rel="prev" href="../../decisions/adr-template/">
       
       
-        <link rel="next" href="../roadmap/">
+        <link rel="next" href="../webgui/">
       
       
         
@@ -43,10 +45,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans";--md-code-font:"IBM Plex Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/kyndryl.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -64,6 +68,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#estado-actual-del-proyecto" class="md-skip">
+          Saltar a contenido
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -1451,6 +1460,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estado
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1469,6 +1498,97 @@
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-ejecutivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen ejecutivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entregado-en-el-corte-mas-reciente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entregado en el corte más reciente
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#temas-y-experiencia-visual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temas y experiencia visual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximas-comprobaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximas comprobaciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../webgui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WebGUI administrativa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1582,6 +1702,60 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-ejecutivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen ejecutivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entregado-en-el-corte-mas-reciente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entregado en el corte más reciente
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#temas-y-experiencia-visual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temas y experiencia visual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximas-comprobaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximas comprobaciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1598,9 +1772,78 @@
 
 
 
-  <h1>Estado</h1>
-
-
+<h1 id="estado-actual-del-proyecto">Estado actual del proyecto<a class="headerlink" href="#estado-actual-del-proyecto" title="Permanent link">&para;</a></h1>
+<p><strong>Corte documental:</strong> 10 de septiembre de 2026<br>
+<strong>Rama de referencia:</strong> <code>feature/os-13-01-webgui-mgmt</code><br>
+<strong>Commit de referencia:</strong> <code>fc9ab0e</code> — <code>docs: add centralized project documentation baseline</code></p>
+<h2 id="resumen-ejecutivo">Resumen ejecutivo<a class="headerlink" href="#resumen-ejecutivo" title="Permanent link">&para;</a></h2>
+<p>La plataforma tiene una base integrada para recibir, normalizar, procesar,
+enriquecer y consultar eventos operativos. El trabajo más reciente consolidó la
+WebGUI administrativa y la documentación central del proyecto. El código local
+está sincronizado con <code>origin</code> en la rama de trabajo.</p>
+<h2 id="entregado-en-el-corte-mas-reciente">Entregado en el corte más reciente<a class="headerlink" href="#entregado-en-el-corte-mas-reciente" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Área</th>
+<th>Estado</th>
+<th>Alcance comprobado en el código</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WebGUI administrativa</td>
+<td>Integrado</td>
+<td>Shell consolidado, navegación colapsable, ES/EN, persistencia de preferencias y dashboards operativos.</td>
+</tr>
+<tr>
+<td>Administración del Processor</td>
+<td>Integrado</td>
+<td>Policies, Routing, Correlation, Inventory/Enrichment, Blackouts, AutoSuppression y AIOps Extensions.</td>
+</tr>
+<tr>
+<td>Integraciones</td>
+<td>Integrado</td>
+<td>Ticketing, Notifications, CACF, GLPI, MockSecrets y Middleware/Kafka.</td>
+</tr>
+<tr>
+<td>ESS</td>
+<td>Integrado</td>
+<td>Consulta de eventos, búsqueda exacta, detalle/historial y cuarentena global mediante proxy allowlisted.</td>
+</tr>
+<tr>
+<td>Persistencia y contratos</td>
+<td>Integrado</td>
+<td>PostgreSQL, ETag/revisión optimista, reintentos idempotentes y contratos same-origin.</td>
+</tr>
+<tr>
+<td>Validación</td>
+<td>En curso continuo</td>
+<td>Validaciones de navegador, Node, HTTP y certificaciones del runtime disponibles junto a cada componente.</td>
+</tr>
+<tr>
+<td>Release productivo</td>
+<td>Pendiente de evidencia</td>
+<td>La documentación no afirma un despliegue; deben revisarse manifiestos, health checks y evidencias del ambiente objetivo.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="temas-y-experiencia-visual">Temas y experiencia visual<a class="headerlink" href="#temas-y-experiencia-visual" title="Permanent link">&para;</a></h2>
+<p>La WebGUI conserva los temas implementados en el producto —Actual, Kyndryl,
+IBM Carbon y LIVERPOOL— con preferencia persistente por navegador. Esta wiki
+usa exclusivamente la presentación Kyndryl: esquema claro fijo, barra superior
+negra, rojo de marca <code>#ff462d</code>, tipografía IBM Plex y controles de esquinas
+rectas. La wiki no ofrece selector de tema.</p>
+<h2 id="proximas-comprobaciones">Próximas comprobaciones<a class="headerlink" href="#proximas-comprobaciones" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Ejecutar <code>mkdocs build --strict</code> antes de cada publicación.</li>
+<li>Verificar los health checks y manifiestos del ambiente destino.</li>
+<li>Mantener los changelogs por componente y separar claramente código integrado,
+  validación local y despliegue real.</li>
+</ul>
+<p>La fuente de verdad para cambios funcionales sigue siendo el repositorio de
+plataforma; esta página resume su estado y no reemplaza las evidencias de
+ejecución.</p>
 
 
 
@@ -1653,13 +1896,13 @@
         
         
           
-          <a href="../roadmap/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Roadmap">
+          <a href="../webgui/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: WebGUI administrativa">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Roadmap
+                WebGUI administrativa
               </div>
             </div>
             <div class="md-footer__button md-icon">
