@@ -24,7 +24,7 @@ código; aquí se describe cómo encontrarla y cómo relacionarla.
 - [CACF](cacf/README.md)
 - [ESS](service-administration.md)
 - [Integraciones](architecture/system-integration-instances.md)
-- [Testing](../testing/README.md)
+- [Testing](../project/documentation-coverage.md)
 
 La documentación no afirma que un servicio esté desplegado en un ambiente:
 para ello se deben consultar los manifiestos, health checks y evidencias del

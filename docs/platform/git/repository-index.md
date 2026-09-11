@@ -121,8 +121,8 @@ sandbox terminó BUILD SUCCESS. No se ejecutó la prueba maestra que reinicia se
 
 ## Unidad de testing
 
-[Base centralizada](../../testing/README.md), [catálogo de casos](../../testing/cases/catalog.json)
-y [changelog de testing](../../testing/CHANGELOG.md). Las ejecuciones nuevas escriben
+[base documental](../../project/documentation-coverage.md), catálogo de casos
+y [changelog transversal](../CHANGELOG.md). Las ejecuciones nuevas escriben
 únicamente en `evidences/`, excluido de Git.
 
 ## Historial por componente — 2026-09-10

@@ -16,7 +16,7 @@ ruteo: esas decisiones son del Processor.
 Este checkpoint añade validación del contrato existente, bloqueo transaccional
 para altas concurrentes, protección contra colisión de tenant, rollback para
 excepciones SQL, cuarentena persistente de entradas inválidas y certificación repetible. No sustituye el diseño conceptual V1
-por una afirmación de implementación completa. Véase [gaps](gaps.md).
+por una afirmación de implementación completa. Véase [brechas conocidas](../platform/event-state-service/gaps.md).
 
 ## Ejecución repetible
 
@@ -106,9 +106,9 @@ sin releer logs completos.
 
 ## Incremento de ciclo de vida
 
-Solicitudes explícitas OPEN/CLOSE/reapertura: [contrato](lifecycle-contract.md).
+Solicitudes explícitas OPEN/CLOSE/reapertura: [contrato](../platform/event-state-service/lifecycle-contract.md).
 La adaptación se reanudó con plantilla 1.1.0 y checks obligatorios de lifecycle.
-OS_11 cuenta con certificación de laboratorio; véase [estado](lifecycle-status.md).
+OS_11 cuenta con certificación de laboratorio; véase [estado](../platform/event-state-service/lifecycle-status.md).
 Para repetir el flujo de negocio completo con proveedores simulados:
 
 ```bash
@@ -121,4 +121,4 @@ para comprobar idempotencia/cuarentena, por lo que complementa UC-001.
 
 ## API administrativa
 
-Consulta de estado e historial por tenant y diagnóstico de cuarentena: [contrato y CLI](admin-api.md).
+Consulta de estado e historial por tenant y diagnóstico de cuarentena: [contrato y API administrativa](../platform/event-state-service/admin-api.md).

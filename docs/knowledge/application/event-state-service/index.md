@@ -4,15 +4,15 @@ Servicio responsable de consolidar resultados de integración y mantener el esta
 
 ## Documentación
 
-- [Arquitectura](architecture.md)
-- [Runbook operacional](operational-runbook.md)
-- [Decisiones arquitectónicas](decisions.md)
-- [Cronología](timeline.md)
+- [Arquitectura](../../../platform/event-state-service/conceptual-architecture.md)
+- [Runbook operacional](../../../platform/service-administration.md)
+- [Decisiones arquitectónicas](../../../decisions/index.md)
+- [Cronología](../../../project/status.md)
 
 ## Datos estructurados
 
-- [Descargar knowledge-base.json](../../../assets/data/knowledge-base/event-state-service.json)
-- [Descargar timeline.json](../../../assets/data/timelines/event-state-service.json)
+- [Knowledge base](../../../project/documentation-coverage.md)
+- [Timeline](../../../project/documentation-coverage.md)
 
 ## Estado
 

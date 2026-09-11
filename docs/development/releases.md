@@ -15,4 +15,4 @@ partir de un commit. Los changelogs registran alcance y compatibilidad.
 5. Crear release/tag sólo con aprobación del proceso de gobierno.
 
 El runbook detallado de publicación está en
-[`docs/git/publication-runbook.md`](../git/publication-runbook.md).
+[`docs/platform/git/publication-runbook.md`](../platform/git/publication-runbook.md).

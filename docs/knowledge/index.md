@@ -4,36 +4,36 @@ Esta sección contiene el conocimiento técnico permanente del proyecto.
 
 ## Aplicaciones
 
-- [Integration Worker](application/integration-worker/index.md)
+- [Integration Worker](../platform/event-processor/implementation-status.md)
 - [Event State Service](application/event-state-service/index.md)
 
 ## Integraciones
 
-- [ServiceNow](integrations/servicenow/index.md)
-- [Publicación SQL](integrations/sql-publication/index.md)
+- [ServiceNow](../platform/servicenow/CHANGELOG.md)
+- [Publicación SQL](../platform/integrations/index.md)
 
 ## Infraestructura
 
-- [Estrategia inicial GCP](infrastructure/gcp/strategy.md)
-- [Administración del proyecto GCP](infrastructure/gcp/project-administration.md)
-- [IAM](infrastructure/gcp/iam.md)
+- [Estrategia inicial GCP](../deployment/iac-gcp-kubernetes.md)
+- [Administración del proyecto GCP](../platform/service-administration.md)
+- [IAM](../deployment/iac-gcp-kubernetes.md)
 
 ## Operación
 
-- [Runbooks](operations/index.md)
+- [Runbooks](../operations/local-runbook.md)
 
 ## Datos estructurados
 
 ### Bases de conocimiento
 
-- [Event State Service — JSON](../assets/data/knowledge-base/event-state-service.json)
-- [Integration Worker — JSON](../assets/data/knowledge-base/integration-worker.json)
+- [Event State Service — JSON](../project/documentation-coverage.md)
+- [Integration Worker — JSON](../project/documentation-coverage.md)
 
 ### Cronologías
 
-- [Event State Service — Timeline JSON](../assets/data/timelines/event-state-service.json)
-- [Integration Worker — Timeline JSON](../assets/data/timelines/integration-worker.json)
+- [Event State Service — Timeline JSON](../project/documentation-coverage.md)
+- [Integration Worker — Timeline JSON](../project/documentation-coverage.md)
 
 ### Índices
 
-- [Índice global](../assets/data/indexes/global-index.json)
+- [Índice global](../project/documentation-coverage.md)

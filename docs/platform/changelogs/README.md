@@ -8,37 +8,28 @@ Las fechas históricas son fechas de autor conservadas por Git, con su zona orig
 
 | Componente | Changelog |
 |---|---|
-| event-gateway | [Historial](../../services/event-gateway/CHANGELOG.md) |
-| event-processor | [Historial](../../services/event-processor/CHANGELOG.md) |
-| event-state-service | [Historial](../../services/event-state-service/CHANGELOG.md) |
-| integration-worker | [Historial](../../services/integration-worker/CHANGELOG.md) |
-| event-management-console | [Historial](../../services/event-management-console/CHANGELOG.md) |
-| itsm-ticketing-dashboard | [Historial](../../services/itsm-ticketing-dashboard/CHANGELOG.md) |
-| enrichment-engine | [Historial](../../services/enrichment-engine/CHANGELOG.md) |
+| event-gateway | [Historial transversal](../CHANGELOG.md) |
+| event-processor | [Historial](../event-processor/CHANGELOG.md) |
+| event-state-service | [Estado del servicio](../event-state-service/README.md) |
+| integration-worker | [Historial transversal](../CHANGELOG.md) |
+| event-management-console | [Historial transversal](../CHANGELOG.md) |
+| itsm-ticketing-dashboard | [Historial transversal](../CHANGELOG.md) |
+| enrichment-engine | [Historial transversal](../CHANGELOG.md) |
 | ServiceNow | [Historial](../servicenow/CHANGELOG.md) |
 | GNM / Everbridge | [Historial](../gnm/CHANGELOG.md) |
 | CACF / NEXT | [Historial](../cacf/CHANGELOG.md) |
-| Infraestructura local y cloud | [Historial](../../infrastructure/CHANGELOG.md) |
-| PostgreSQL / migraciones | [Historial](../../infrastructure/postgres/CHANGELOG.md) |
-| Kafka / topics | [Historial](../../infrastructure/kafka/CHANGELOG.md) |
-| Terraform / convenciones | [Historial](../../infrastructure/terraform/CHANGELOG.md) |
-| Terraform GCP | [Historial](../../infrastructure/gcp/terraform/CHANGELOG.md) |
-| GCP / artifact-registry | [Historial](../../infrastructure/gcp/terraform/modules/artifact-registry/CHANGELOG.md) |
-| GCP / cloud-build | [Historial](../../infrastructure/gcp/terraform/modules/cloud-build/CHANGELOG.md) |
-| GCP / cloud-storage | [Historial](../../infrastructure/gcp/terraform/modules/cloud-storage/CHANGELOG.md) |
-| GCP / continuous-delivery | [Historial](../../infrastructure/gcp/terraform/modules/continuous-delivery/CHANGELOG.md) |
-| GCP / iam | [Historial](../../infrastructure/gcp/terraform/modules/iam/CHANGELOG.md) |
-| GCP / networking | [Historial](../../infrastructure/gcp/terraform/modules/networking/CHANGELOG.md) |
-| GCP / secret-manager | [Historial](../../infrastructure/gcp/terraform/modules/secret-manager/CHANGELOG.md) |
-| GCP / bootstrap | [Historial](../../infrastructure/gcp/terraform/bootstrap/CHANGELOG.md) |
-| GCP / ambiente dev | [Historial](../../infrastructure/gcp/terraform/environments/dev/CHANGELOG.md) |
-| Terraform / project-common | [Historial](../../infrastructure/terraform/modules/common/project-common/CHANGELOG.md) |
-| Despliegue / CI-CD | [Historial](../../deploy/CHANGELOG.md) |
-| Operación / scripts | [Historial](../../scripts/CHANGELOG.md) |
-| Contratos compartidos | [Historial](../../config/CHANGELOG.md) |
+| Infraestructura local y cloud | [Despliegue GCP](../../deployment/iac-gcp-kubernetes.md) |
+| PostgreSQL / migraciones | [Arquitectura de datos](../../architecture/data.md) |
+| Kafka / topics | [Kafka](../kafka/README.md) |
+| Terraform / convenciones | [Terraform](../../reference/terraform.md) |
+| Terraform GCP | [Despliegue GCP](../../deployment/iac-gcp-kubernetes.md) |
+| Módulos cloud | [Despliegue GCP](../../deployment/iac-gcp-kubernetes.md) |
+| Despliegue / CI-CD | [Despliegue GCP](../../deployment/iac-gcp-kubernetes.md) |
+| Operación / scripts | [Runbook local](../../operations/local-runbook.md) |
+| Contratos compartidos | [Historial transversal](../CHANGELOG.md) |
 | Gobierno Git | [Historial](../git/CHANGELOG.md) |
 | Documentación transversal | [Historial](../CHANGELOG.md) |
-| Testing | [Historial](../../testing/CHANGELOG.md) |
+| Testing | [Cobertura documental](../../project/documentation-coverage.md) |
 
 ## Cómo mantenerlo
 
@@ -51,8 +42,8 @@ Las fechas históricas son fechas de autor conservadas por Git, con su zona orig
 
 ## Plantilla de entrada nueva
 
-OEM Dashboards: [UI](../../services/oem-dashboards/CHANGELOG.md) ·
-[API y CLI](../../services/oem-dashboards-api/CHANGELOG.md).
+OEM Dashboards: [UI](../dashboards/architecture.md) ·
+[API y CLI](../dashboards/api-management.md).
 
 ```markdown
 ## Unreleased — AAAA-MM-DD

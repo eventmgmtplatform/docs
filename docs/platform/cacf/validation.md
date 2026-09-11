@@ -1,6 +1,6 @@
 # Validación CACF
 
-La base canónica de pruebas está en [testing](../../testing/README.md).
+La base canónica de pruebas está en [cobertura documental](../../project/documentation-coverage.md).
 El éxito de automatización se ejecuta con `python3 testing/run.py cacf-remediated`.
 La certificación completa del componente se ejecuta con
 `python3 testing/run.py certification --name cacf-local-certification`.
@@ -8,7 +8,7 @@ La certificación completa del componente se ejecuta con
 Requiere el ambiente aislado de [operación CACF](operational-runbook.md).
 Cubre CREATE, ACK, asociación de ticket, duplicados, reinicio, timeout, escalamiento,
 callback desconocido, entrada Kafka y XML inválido. No certifica proveedores reales
-ni el encadenamiento completo [UC-001](../../testing/cases/UC-001-happy-path.md).
+ni el encadenamiento completo [UC-001](../../getting-started/first-event.md).
 
 Los resultados históricos se conservaron localmente en
 `evidences/testing/imported/cacf-validation-historical.md`; las ejecuciones nuevas

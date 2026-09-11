@@ -3,6 +3,8 @@ site_description: Documentación técnica de Open Event Management
 site_url: https://eventmgmtplatform.github.io/event-mgmt-docs/
 docs_dir: docs
 site_dir: site
+exclude_docs: |
+  platform/README.md
 theme:
   name: material
   language: es

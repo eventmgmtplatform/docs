@@ -1,6 +1,6 @@
 # APIs y contratos
 
-El contrato central de referencia es [`openapi.yaml`](openapi.yaml). Describe
+El contrato central de referencia es [`openapi.yaml`](../../platform/api/openapi.yaml). Describe
 las rutas administrativas y de consulta expuestas por el proxy same-origin de la
 consola y los contratos públicos relevantes del Processor. Las rutas internas
 de workers y callbacks se documentan en sus changelogs y contratos de dominio.

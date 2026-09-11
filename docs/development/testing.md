@@ -28,4 +28,4 @@ No se deben commitear `.env`, tokens, certificados, dumps, `node_modules`,
 - Mantener las evidencias fuera de Git.
 
 Los estándares de commits, ramas y publicación están en
-[`docs/git/`](../git/README.md).
+[`docs/platform/git/`](../platform/git/README.md).

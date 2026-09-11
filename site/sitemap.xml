@@ -17,6 +17,10 @@
          <lastmod>2026-09-11</lastmod>
     </url>
     <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/architecture/container-images/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
          <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/architecture/containers/</loc>
          <lastmod>2026-09-11</lastmod>
     </url>
@@ -33,7 +37,19 @@
          <lastmod>2026-09-11</lastmod>
     </url>
     <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/architecture/runtime-topology/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
          <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/architecture/security/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/architecture/solution-flows/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/architecture/v1-map/</loc>
          <lastmod>2026-09-11</lastmod>
     </url>
     <url>
@@ -57,6 +73,10 @@
          <lastmod>2026-09-11</lastmod>
     </url>
     <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/deployment/iac-gcp-kubernetes/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
          <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/development/contributing/</loc>
          <lastmod>2026-09-11</lastmod>
     </url>
@@ -70,6 +90,10 @@
     </url>
     <url>
          <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/development/testing/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/frontend/full-architecture/</loc>
          <lastmod>2026-09-11</lastmod>
     </url>
     <url>
@@ -170,6 +194,10 @@
     </url>
     <url>
          <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/platform/cacf/contracts/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/platform/cacf/core-foundation-overview/</loc>
          <lastmod>2026-09-11</lastmod>
     </url>
     <url>
@@ -345,6 +373,10 @@
          <lastmod>2026-09-11</lastmod>
     </url>
     <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/platform/event-state-service/conceptual-architecture/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
          <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/platform/event-state-service/decisions-adr/</loc>
          <lastmod>2026-09-11</lastmod>
     </url>
@@ -409,6 +441,14 @@
          <lastmod>2026-09-11</lastmod>
     </url>
     <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/platform/gnm/core-foundation/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/platform/integrations/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
          <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/platform/integrations/glpi/</loc>
          <lastmod>2026-09-11</lastmod>
     </url>
@@ -461,7 +501,23 @@
          <lastmod>2026-09-11</lastmod>
     </url>
     <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/platform/servicenow/core-foundation/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
          <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/platform/workstreams/OS_09_01_IMP-orquestacion-happy-path/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/project/defect-prevention-matrix-v1-v2/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/project/defect-prevention/</loc>
+         <lastmod>2026-09-11</lastmod>
+    </url>
+    <url>
+         <loc>https://eventmgmtplatform.github.io/event-mgmt-docs/project/documentation-coverage/</loc>
          <lastmod>2026-09-11</lastmod>
     </url>
     <url>

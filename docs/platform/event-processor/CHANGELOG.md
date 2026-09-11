@@ -1,4 +1,4 @@
 # Event Processor changelog
 
-El historial canónico completo está en [services/event-processor/CHANGELOG.md](../../services/event-processor/CHANGELOG.md).
+El historial canónico completo está en [estado de implementación](implementation-status.md).
 Se mantiene esta ruta para compatibilidad documental; actualizar únicamente el archivo canónico.

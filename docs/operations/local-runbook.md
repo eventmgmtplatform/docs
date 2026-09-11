@@ -20,8 +20,8 @@ un resultado exitoso.
 
 ## Recuperación
 
-Usar los runbooks de [Kafka](../kafka/installation-and-certification.md),
-[dashboards](../dashboards/operational-runbook.md),
-[ESS](../service-administration.md) y
-[Processor](../event-processor/defect-prevention.md). Respaldos y restauración
+Usar los runbooks de [Kafka](../platform/kafka/installation-and-certification.md),
+[dashboards](../platform/dashboards/operational-runbook.md),
+[ESS](../platform/service-administration.md) y
+[Processor](../platform/event-processor/defect-prevention.md). Respaldos y restauración
 deben probarse en un ambiente aislado antes de una operación productiva.

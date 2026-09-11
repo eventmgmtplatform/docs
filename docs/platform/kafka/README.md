@@ -7,7 +7,7 @@ una certificación de producción ni instala los demás servicios de Event Manag
 - [Comandos CLI aplicados al producto](cli.md)
 - [Configuración, conexiones y Web UI](configuration-and-webui.md)
 - [Instalación y camino a una versión certificada](installation-and-certification.md)
-- [Historial del componente](../../infrastructure/kafka/CHANGELOG.md)
+- [Historial del componente](../CHANGELOG.md)
 
 ## Fuentes de configuración
 

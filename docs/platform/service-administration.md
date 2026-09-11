@@ -83,7 +83,7 @@ No se eliminan volúmenes ni se administran contenedores de otros proyectos.
 
 OS_11 ya implementa ticket → GNM → CACF → cierres y tiene evidencia en su
 laboratorio aislado. Eso no acredita su promoción al runtime compartido. La especificación está en
-[UC-001](../testing/cases/UC-001-happy-path.md); esta prueba maestra histórica
+[UC-001](../getting-started/first-event.md); esta prueba maestra histórica
 certifica los recorridos Gateway/Processor y CACF separadamente.
 DP-22: la suite CACF existente no certifica proyección en event-state-service.
 Las consolas, PostgreSQL y OpenSearch reciben verificación de salud; el resultado
@@ -94,7 +94,7 @@ no equivale a certificar cada función de negocio ni integraciones productivas.
 Event Processor reemplaza enrichment-engine en 8082. El controlador administra
 `event-processor`; el grupo Kafka sigue siendo enrichment-engine para conservar
 offsets. Aplicar primero la migración aditiva 009 a bases existentes. Véase
-[runbook del processor](../services/event-processor/README.md). El contenedor
+[runbook del processor](event-processor/implementation-status.md). El contenedor
 anterior detenido puede aparecer como orphan mientras se conserva para rollback.
 
 ## Certificación recurrente de Event State Service
