@@ -15,6 +15,14 @@ flowchart TB
  K8S-->INIT[oem-init jobs]
  K8S-->TOOL[oem-toolbox on demand]
 ```
+## Diagramas de referencia
+
+![Arquitectura GCP para Gestión de Eventos](diagrams/Arquitectura%20GCP%20para%20Gesti%C3%B3n%20de%20Eventos.png)
+
+![Arquitectura Docker Compose](diagrams/Arquitectura%20Docker%20Compose%20para%20gesti%C3%B3n%20de%20eventos.png)
+
+![Diseño frente a estado actual](diagrams/Arquitectura%20Docker%20Compose%20-%20Dise%C3%B1o%20vs.%20Estado%20Actual.png)
+
 ## GCP foundation
 OS_08_13 documenta VPC/subredes management-workloads-data, firewall, Secret Manager, Artifact Registry, buckets application/backups/shared/logs, Cloud Build y service accounts de despliegue/entrega, tratada como baseline certificada sin drift en su checkpoint.
 

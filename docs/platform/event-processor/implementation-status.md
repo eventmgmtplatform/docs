@@ -5,6 +5,8 @@ Las secciones fechadas siguientes describen incrementos históricos; sus pendien
 Fuente: OS_02_EVENT_PROCESSOR_CODEX_MASTER_PROMPT_v1.0.0.md suministrado por el usuario.
 ADR-001 confirmado por el usuario el 2026-09-09. No es certificación de release v1.0.0.
 
+![Arquitectura del Event Processor](diagrams/Arquitectura%20del%20Procesador%20de%20Eventos%20Open%20Source.png)
+
 | DA | Implementación observada en esta etapa | Estado del DA completo |
 |---|---|---|
 | 01 | Dominio independiente, contexto inmutable, puertos process/simulate, adaptador de contrato y transporte | PENDING: puertos administrativos y modelos de capacidades restantes |

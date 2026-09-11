@@ -1,5 +1,7 @@
 # Event State Service — arquitectura conceptual
 ESS consolida el estado operacional; Processor decide, Worker ejecuta y ESS persiste/publica lifecycle.
+
+![Arquitectura V1 del Event State Service](diagrams/ESS_V1_Architecture.png)
 ```mermaid
 flowchart LR
  RES[(integration.results)]-->ESS[Event State Service]

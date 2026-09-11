@@ -1,6 +1,10 @@
 # Observabilidad del producto en OpenSearch
 
 Dashboard nativo: `http://localhost:5601/app/dashboards#/view/product-observability`.
+
+![Flujo operativo](diagrams/flow.svg)
+
+![Secuencia operativa](diagrams/sequence.svg)
 Administración → Herramientas especializadas → OpenSearch Dashboards abre esta vista.
 
 El servicio `product-observability` consulta cada 30 segundos las APIs internas
