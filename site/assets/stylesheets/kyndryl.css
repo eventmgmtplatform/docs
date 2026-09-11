@@ -83,6 +83,9 @@ code, kbd, pre { font-family: "IBM Plex Mono", Consolas, monospace; }
   .md-content { max-width: none; min-width: 0; }
   .md-typeset { max-width: 100%; }
   .md-sidebar--primary .md-sidebar__scrollwrap { scrollbar-color: var(--em-gray-70) var(--em-gray-10); }
+  .md-header__button[for="__drawer"] { display: flex !important; }
+  html.em-drawer-closed .md-sidebar--primary { display: none; }
+  html.em-drawer-closed .md-main__inner { grid-template-columns: minmax(0, 1fr) var(--md-sidebar-width); }
 }
 
 @media screen and (max-width: 76.24em) {

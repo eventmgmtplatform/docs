@@ -30,5 +30,11 @@
   }
 
   initAccordion();
+  var drawer = document.getElementById('__drawer');
+  if (drawer) {
+    drawer.addEventListener('change', function () {
+      document.documentElement.classList.toggle('em-drawer-closed', drawer.checked);
+    });
+  }
   if (window.document$) document$.subscribe(initAccordion);
 })();
