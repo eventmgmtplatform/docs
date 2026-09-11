@@ -35,3 +35,45 @@ code, kbd, pre { font-family: "IBM Plex Mono", Consolas, monospace; }
 .md-footer { background: var(--em-ink); }
 /* Fixed Kyndryl light presentation: no palette/theme selector. */
 .md-header__option, [data-md-component="palette"], label[for^="__palette"] { display: none !important; }
+
+/* Responsive, accordion-style navigation for the full documentation set. */
+.md-sidebar--primary .md-nav__item--section > .md-nav__link {
+  align-items: center;
+  border-left: 3px solid transparent;
+  color: var(--em-ink);
+  cursor: pointer;
+  display: flex;
+  font-weight: 700;
+  justify-content: space-between;
+  margin-top: .35rem;
+  padding: .55rem .65rem;
+}
+.md-sidebar--primary .md-nav__item--section > .md-nav__link:hover,
+.md-sidebar--primary .md-nav__item--section.md-nav__item--active > .md-nav__link {
+  background: var(--em-gray-10);
+  border-left-color: var(--em-red);
+}
+.md-sidebar--primary .md-nav__item--section > .md-nav__link .md-nav__icon {
+  transition: transform .2s ease;
+}
+.md-sidebar--primary .md-nav__item--section > input:checked + .md-nav__link .md-nav__icon {
+  transform: rotate(180deg);
+}
+
+@media screen and (min-width: 76.25em) {
+  :root {
+    --md-sidebar-width: clamp(17rem, 22vw, 25rem);
+    --md-content-width: minmax(0, 1fr);
+  }
+  .md-grid, .md-main__inner { max-width: 100%; }
+  .md-sidebar--primary { width: var(--md-sidebar-width); }
+  .md-content { max-width: none; min-width: 0; }
+  .md-typeset { max-width: 100%; }
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    scrollbar-color: var(--em-gray-70) var(--em-gray-10);
+  }
+}
+
+@media screen and (max-width: 76.24em) {
+  .md-sidebar--primary .md-nav__item--section > .md-nav__link { padding: .7rem .8rem; }
+}
