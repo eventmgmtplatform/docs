@@ -66,12 +66,20 @@ code, kbd, pre { font-family: "IBM Plex Mono", Consolas, monospace; }
     --md-content-width: minmax(0, 1fr);
   }
   .md-grid, .md-main__inner { max-width: 100%; }
-  .md-sidebar--primary { width: var(--md-sidebar-width); }
+  .md-sidebar--primary {
+    align-self: flex-start;
+    max-height: calc(100vh - 4rem);
+    width: var(--md-sidebar-width);
+  }
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    height: calc(100vh - 4rem);
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
   .md-content { max-width: none; min-width: 0; }
   .md-typeset { max-width: 100%; }
-  .md-sidebar--primary .md-sidebar__scrollwrap {
-    scrollbar-color: var(--em-gray-70) var(--em-gray-10);
-  }
+  .md-sidebar--primary .md-sidebar__scrollwrap { scrollbar-color: var(--em-gray-70) var(--em-gray-10); }
 }
 
 @media screen and (max-width: 76.24em) {

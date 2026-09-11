@@ -22,6 +22,7 @@ extra_css:
 - assets/stylesheets/kyndryl.css
 extra_javascript:
 - https://unpkg.com/mermaid@11/dist/mermaid.min.js
+- assets/javascripts/navigation.js
 plugins:
 - search
 markdown_extensions:
