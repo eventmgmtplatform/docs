@@ -1,4 +1,4 @@
-# Event Management OpenSource
+# Open Event Management
 
 Plataforma open source para la recepción, normalización, procesamiento, integración, consolidación y consulta de eventos operativos mediante una arquitectura orientada a eventos.
 
@@ -338,4 +338,3 @@ La documentación histórica no sustituye a la documentación canónica en `docs
 ## Licencia
 
 Este proyecto se distribuye bajo los términos definidos en [LICENSE](LICENSE).
-

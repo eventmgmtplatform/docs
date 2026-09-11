@@ -1,31 +1,19 @@
-# Desarrollo
+# Introducción
 
-## Inicio local
+Event Management es una plataforma open source para operar el ciclo completo de
+un evento: ingreso, normalización, procesamiento, integración, consolidación y
+consulta. Separa transporte, decisión, ejecución y estado para que cada frontera
+pueda auditarse y recuperarse.
 
-1. Copiar los ejemplos de configuración del servicio que se vaya a ejecutar.
-2. Levantar dependencias con los Compose de `infrastructure/`.
-3. Ejecutar `scripts/eventmanagement-services.sh` o el comando documentado por
-   el servicio.
-4. Abrir la consola en `http://localhost:8090` y verificar readiness antes de
-   probar mutaciones.
+## Capas del producto
 
-No se deben commitear `.env`, tokens, certificados, dumps, `node_modules`,
-`dist` ni evidencias generadas.
+1. **Gateway:** valida el envelope, conserva `originalEvent` y publica el evento.
+2. **Processor:** evalúa políticas, enrichment, correlación, supresión y routing.
+3. **Worker:** ejecuta intenciones durables contra las integraciones externas.
+4. **ESS:** consolida resultados y proyecta lifecycle en PostgreSQL/OpenSearch.
 
-## Estructura
+PostgreSQL es autoridad de estado y Kafka es transporte con retención finita. La
+consola React usa APIs same-origin y no accede directamente a bases de datos.
 
-- Servicios Java: Maven y `src/main`/`src/test`.
-- Frontends React: Vite, `src/` y pruebas bajo `testing/services/`.
-- APIs Python: servidor y pruebas junto al servicio.
-- Migraciones: `infrastructure/postgres/init`, aditivas y ordenadas.
-
-## Calidad
-
-- Ejecutar el build/test del componente modificado.
-- Ejecutar `git diff --check`.
-- Añadir o actualizar validación y changelog cuando cambie un contrato.
-- Verificar estados de carga, vacío, error, conflicto y tenant en interfaces.
-- Mantener las evidencias fuera de Git.
-
-Los estándares de commits, ramas y publicación están en
-[`docs/git/`](../git/README.md).
+Consulta [Desarrollo local](local-development.md) para levantar el producto o
+[Primer evento](first-event.md) para seguir un happy path E2E.

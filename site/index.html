@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentación técnica de la plataforma Event Management OpenSource">
+        <meta name="description" content="Documentación técnica de Open Event Management">
       
       
       
@@ -25,7 +25,7 @@
     
     
       
-        <title>Event Management OpenSource</title>
+        <title>Open Event Management</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#event-management-opensource" class="md-skip">
+        <a href="#open-event-management" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -84,7 +84,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="." title="Event Management OpenSource" class="md-header__button md-logo" aria-label="Event Management OpenSource" data-md-component="logo">
+    <a href="." title="Open Event Management" class="md-header__button md-logo" aria-label="Open Event Management" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -98,7 +98,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Event Management OpenSource
+            Open Event Management
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -184,13 +184,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Event Management OpenSource" class="md-nav__button md-logo" aria-label="Event Management OpenSource" data-md-component="logo">
+    <a href="." title="Open Event Management" class="md-nav__button md-logo" aria-label="Open Event Management" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Event Management OpenSource
+    Open Event Management
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -262,10 +262,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objetivo" class="md-nav__link">
+  <a href="#que-resuelve-el-producto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivo
+        Qué resuelve el producto
       
     </span>
   </a>
@@ -277,6 +277,17 @@
     <span class="md-ellipsis">
       
         Arquitectura principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#libreria-de-arquitectura-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Librería de arquitectura principal
       
     </span>
   </a>
@@ -2025,10 +2036,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objetivo" class="md-nav__link">
+  <a href="#que-resuelve-el-producto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivo
+        Qué resuelve el producto
       
     </span>
   </a>
@@ -2040,6 +2051,17 @@
     <span class="md-ellipsis">
       
         Arquitectura principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#libreria-de-arquitectura-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Librería de arquitectura principal
       
     </span>
   </a>
@@ -2063,40 +2085,62 @@
 
 
 
-<h1 id="event-management-opensource">Event Management OpenSource<a class="headerlink" href="#event-management-opensource" title="Permanent link">&para;</a></h1>
-<p>Documentación técnica de la plataforma <code>event-mgmt-opensource</code>.</p>
-<h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
-<p>Construir una plataforma open source para recibir, normalizar, procesar, integrar, consolidar y consultar eventos operativos.</p>
+<h1 id="open-event-management">Open Event Management<a class="headerlink" href="#open-event-management" title="Permanent link">&para;</a></h1>
+<p>Documentación de producto para la plataforma de gestión de eventos operativos.
+Este portal explica cómo se integra cada servicio, cómo ejecutar el entorno local
+y cómo seguir un evento desde su entrada hasta su estado final.</p>
+<h2 id="que-resuelve-el-producto">Qué resuelve el producto<a class="headerlink" href="#que-resuelve-el-producto" title="Permanent link">&para;</a></h2>
+<p>Event Management recibe señales de monitoreo, conserva el evento original,
+normaliza su contrato, aplica políticas y enriquecimiento, decide acciones de
+integración y proyecta el estado consultable. La consola WebGUI administra estas
+capacidades mediante APIs same-origin; no accede directamente a bases de datos.</p>
 <h2 id="arquitectura-principal">Arquitectura principal<a class="headerlink" href="#arquitectura-principal" title="Permanent link">&para;</a></h2>
-<p>```mermaid
-flowchart LR
-    A[Fuentes de eventos] --&gt; B[event-gateway]
-    B --&gt; C[(events.raw)]
-    C --&gt; D[event-processor]
-    D --&gt; E[(integration.commands)]
-    E --&gt; F[integration-worker]
-    F --&gt; G[Integraciones externas]
-    F --&gt; H[(integration.results)]
-    H --&gt; I[event-state-service]
-    I --&gt; J[(PostgreSQL)]
-    I --&gt; K[(OpenSearch)]
-Comenzar
-Introducción
-Desarrollo local
-Primer evento
-Arquitectura
-Visión general
-Componentes
-Arquitectura de datos
-Seguridad
-Operación
-Runbook local
-Observabilidad
-Gestión de incidentes
-Proyecto
-Estado actual
-Roadmap
-Deuda técnica</p>
+<div class="highlight"><pre><span></span><code>flowchart LR
+  S[Fuentes: Zabbix y otros productores] --&gt; G[event-gateway\n8081]
+  G --&gt; R[(events.raw)]
+  R --&gt; P[event-processor\n8082]
+  P --&gt; C[(PostgreSQL\nreglas, auditoría, outbox)]
+  P --&gt; I[integration.commands]
+  I --&gt; W[integration-worker\n8083]
+  W --&gt; X[ServiceNow / GLPI]
+  W --&gt; N[GNM / CACF / NEXT]
+  W --&gt; O[(integration.results)]
+  O --&gt; E[event-state-service\n8084]
+  E --&gt; Q[(PostgreSQL\nestado e historial)]
+  E --&gt; OS[(OpenSearch\neventos actuales)]
+  UI[Console React\n8090] --&gt; B[Nginx / BFF same-origin]
+  B --&gt; G
+  B --&gt; P
+  B --&gt; E
+  B --&gt; D[Dashboards operativos]
+  D --&gt; C
+</code></pre></div>
+<h2 id="libreria-de-arquitectura-principal">Librería de arquitectura principal<a class="headerlink" href="#libreria-de-arquitectura-principal" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>flowchart TB
+  subgraph Entrada
+    Envelope[Envelope del evento]
+    Normalize[Normalización e idempotencia]
+  end
+  subgraph Decisión
+    Snapshot[Snapshot versionado por tenant]
+    Policy[POLICY]
+    Enrich[ENRICHMENT / INVENTORY]
+    Correlation[CORRELATION]
+    Routing[ROUTING]
+  end
+  subgraph Ejecución
+    Commands[Command intent durable]
+    Worker[Adaptadores de integración]
+    Result[Resultado idempotente]
+  end
+  Envelope --&gt; Normalize --&gt; Snapshot
+  Snapshot --&gt; Policy --&gt; Enrich --&gt; Correlation --&gt; Routing
+  Routing --&gt; Commands --&gt; Worker --&gt; Result
+  Result --&gt; State[Estado y lifecycle]
+  State --&gt; Evidence[Auditoría, explain y observabilidad]
+</code></pre></div>
+<p>La documentación detallada está en <a href="architecture/">Arquitectura</a>,
+<a href="concepts/domain-model/">Modelo de dominio</a> y <a href="concepts/event-flow/">Flujo de eventos</a>.</p>
 
 
 

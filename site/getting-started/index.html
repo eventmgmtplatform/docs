@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentación técnica de la plataforma Event Management OpenSource">
+        <meta name="description" content="Documentación técnica de Open Event Management">
       
       
       
@@ -27,7 +27,7 @@
     
     
       
-        <title>Introducción - Event Management OpenSource</title>
+        <title>Introducción - Open Event Management</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#desarrollo" class="md-skip">
+        <a href="#introduccion" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -86,7 +86,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href=".." title="Event Management OpenSource" class="md-header__button md-logo" aria-label="Event Management OpenSource" data-md-component="logo">
+    <a href=".." title="Open Event Management" class="md-header__button md-logo" aria-label="Open Event Management" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -100,7 +100,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Event Management OpenSource
+            Open Event Management
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -186,13 +186,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Event Management OpenSource" class="md-nav__button md-logo" aria-label="Event Management OpenSource" data-md-component="logo">
+    <a href=".." title="Open Event Management" class="md-nav__button md-logo" aria-label="Open Event Management" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Event Management OpenSource
+    Open Event Management
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -345,32 +345,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#inicio-local" class="md-nav__link">
+  <a href="#capas-del-producto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Inicio local
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#estructura" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Estructura
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#calidad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Calidad
+        Capas del producto
       
     </span>
   </a>
@@ -2040,32 +2018,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#inicio-local" class="md-nav__link">
+  <a href="#capas-del-producto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Inicio local
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#estructura" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Estructura
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#calidad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Calidad
+        Capas del producto
       
     </span>
   </a>
@@ -2089,35 +2045,22 @@
 
 
 
-<h1 id="desarrollo">Desarrollo<a class="headerlink" href="#desarrollo" title="Permanent link">&para;</a></h1>
-<h2 id="inicio-local">Inicio local<a class="headerlink" href="#inicio-local" title="Permanent link">&para;</a></h2>
+<h1 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h1>
+<p>Event Management es una plataforma open source para operar el ciclo completo de
+un evento: ingreso, normalización, procesamiento, integración, consolidación y
+consulta. Separa transporte, decisión, ejecución y estado para que cada frontera
+pueda auditarse y recuperarse.</p>
+<h2 id="capas-del-producto">Capas del producto<a class="headerlink" href="#capas-del-producto" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Copiar los ejemplos de configuración del servicio que se vaya a ejecutar.</li>
-<li>Levantar dependencias con los Compose de <code>infrastructure/</code>.</li>
-<li>Ejecutar <code>scripts/eventmanagement-services.sh</code> o el comando documentado por
-   el servicio.</li>
-<li>Abrir la consola en <code>http://localhost:8090</code> y verificar readiness antes de
-   probar mutaciones.</li>
+<li><strong>Gateway:</strong> valida el envelope, conserva <code>originalEvent</code> y publica el evento.</li>
+<li><strong>Processor:</strong> evalúa políticas, enrichment, correlación, supresión y routing.</li>
+<li><strong>Worker:</strong> ejecuta intenciones durables contra las integraciones externas.</li>
+<li><strong>ESS:</strong> consolida resultados y proyecta lifecycle en PostgreSQL/OpenSearch.</li>
 </ol>
-<p>No se deben commitear <code>.env</code>, tokens, certificados, dumps, <code>node_modules</code>,
-<code>dist</code> ni evidencias generadas.</p>
-<h2 id="estructura">Estructura<a class="headerlink" href="#estructura" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Servicios Java: Maven y <code>src/main</code>/<code>src/test</code>.</li>
-<li>Frontends React: Vite, <code>src/</code> y pruebas bajo <code>testing/services/</code>.</li>
-<li>APIs Python: servidor y pruebas junto al servicio.</li>
-<li>Migraciones: <code>infrastructure/postgres/init</code>, aditivas y ordenadas.</li>
-</ul>
-<h2 id="calidad">Calidad<a class="headerlink" href="#calidad" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Ejecutar el build/test del componente modificado.</li>
-<li>Ejecutar <code>git diff --check</code>.</li>
-<li>Añadir o actualizar validación y changelog cuando cambie un contrato.</li>
-<li>Verificar estados de carga, vacío, error, conflicto y tenant en interfaces.</li>
-<li>Mantener las evidencias fuera de Git.</li>
-</ul>
-<p>Los estándares de commits, ramas y publicación están en
-<a href="../git/README.md"><code>docs/git/</code></a>.</p>
+<p>PostgreSQL es autoridad de estado y Kafka es transporte con retención finita. La
+consola React usa APIs same-origin y no accede directamente a bases de datos.</p>
+<p>Consulta <a href="local-development/">Desarrollo local</a> para levantar el producto o
+<a href="first-event/">Primer evento</a> para seguir un happy path E2E.</p>
 
 
 

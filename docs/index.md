@@ -1,39 +1,66 @@
-# Event Management OpenSource
+# Open Event Management
 
-Documentación técnica de la plataforma `event-mgmt-opensource`.
+Documentación de producto para la plataforma de gestión de eventos operativos.
+Este portal explica cómo se integra cada servicio, cómo ejecutar el entorno local
+y cómo seguir un evento desde su entrada hasta su estado final.
 
-## Objetivo
+## Qué resuelve el producto
 
-Construir una plataforma open source para recibir, normalizar, procesar, integrar, consolidar y consultar eventos operativos.
+Event Management recibe señales de monitoreo, conserva el evento original,
+normaliza su contrato, aplica políticas y enriquecimiento, decide acciones de
+integración y proyecta el estado consultable. La consola WebGUI administra estas
+capacidades mediante APIs same-origin; no accede directamente a bases de datos.
 
 ## Arquitectura principal
 
 ```mermaid
 flowchart LR
-    A[Fuentes de eventos] --> B[event-gateway]
-    B --> C[(events.raw)]
-    C --> D[event-processor]
-    D --> E[(integration.commands)]
-    E --> F[integration-worker]
-    F --> G[Integraciones externas]
-    F --> H[(integration.results)]
-    H --> I[event-state-service]
-    I --> J[(PostgreSQL)]
-    I --> K[(OpenSearch)]
-Comenzar
-Introducción
-Desarrollo local
-Primer evento
-Arquitectura
-Visión general
-Componentes
-Arquitectura de datos
-Seguridad
-Operación
-Runbook local
-Observabilidad
-Gestión de incidentes
-Proyecto
-Estado actual
-Roadmap
-Deuda técnica
+  S[Fuentes: Zabbix y otros productores] --> G[event-gateway\n8081]
+  G --> R[(events.raw)]
+  R --> P[event-processor\n8082]
+  P --> C[(PostgreSQL\nreglas, auditoría, outbox)]
+  P --> I[integration.commands]
+  I --> W[integration-worker\n8083]
+  W --> X[ServiceNow / GLPI]
+  W --> N[GNM / CACF / NEXT]
+  W --> O[(integration.results)]
+  O --> E[event-state-service\n8084]
+  E --> Q[(PostgreSQL\nestado e historial)]
+  E --> OS[(OpenSearch\neventos actuales)]
+  UI[Console React\n8090] --> B[Nginx / BFF same-origin]
+  B --> G
+  B --> P
+  B --> E
+  B --> D[Dashboards operativos]
+  D --> C
+```
+
+## Librería de arquitectura principal
+
+```mermaid
+flowchart TB
+  subgraph Entrada
+    Envelope[Envelope del evento]
+    Normalize[Normalización e idempotencia]
+  end
+  subgraph Decisión
+    Snapshot[Snapshot versionado por tenant]
+    Policy[POLICY]
+    Enrich[ENRICHMENT / INVENTORY]
+    Correlation[CORRELATION]
+    Routing[ROUTING]
+  end
+  subgraph Ejecución
+    Commands[Command intent durable]
+    Worker[Adaptadores de integración]
+    Result[Resultado idempotente]
+  end
+  Envelope --> Normalize --> Snapshot
+  Snapshot --> Policy --> Enrich --> Correlation --> Routing
+  Routing --> Commands --> Worker --> Result
+  Result --> State[Estado y lifecycle]
+  State --> Evidence[Auditoría, explain y observabilidad]
+```
+
+La documentación detallada está en [Arquitectura](architecture/index.md),
+[Modelo de dominio](concepts/domain-model.md) y [Flujo de eventos](concepts/event-flow.md).

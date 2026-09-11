@@ -1,27 +1,42 @@
-# Operaciones
+# Desarrollo local con Docker Compose
 
-## Instalación y despliegue
+La versión actual compartida usa `infrastructure/docker-compose.yml`.
 
-- Compose y servicios locales: `infrastructure/docker-compose*.yml`.
-- Scripts operativos: `scripts/`.
-- Manifiestos y validadores: `deploy/`.
-- Cloud Build/Terraform: `infrastructure/gcp/terraform/`.
+```mermaid
+flowchart LR
+  Compose[Docker Compose] --> Kafka[(Kafka)]
+  Compose --> PG[(PostgreSQL)]
+  Compose --> OS[(OpenSearch)]
+  Kafka --> G[event-gateway :8081]
+  Kafka --> P[event-processor :8082]
+  Kafka --> W[integration-worker :8083]
+  Kafka --> E[event-state-service :8084]
+  UI[Console :8090] --> BFF[Nginx / BFF]
+  BFF --> G
+  BFF --> P
+  BFF --> E
+  W --> M[Mocks locales :8181–8184]
+```
 
-Antes de desplegar, validar migraciones pendientes, readiness, imágenes y
-compatibilidad de contratos. Un rollback de binario no revierte migraciones:
-seguir el runbook del componente y drenar procesos cuando el contrato lo exija.
+```bash
+cp .env.example .env
+docker compose -f infrastructure/docker-compose.yml up -d --build
+bash scripts/eventmanagement-services.sh health
+bash scripts/eventmanagement-services.sh status
+```
 
-## Observabilidad
+La consola queda en `http://localhost:8090`; los mocks de ServiceNow, GNM,
+AIOps y NEXT son sintéticos. Para el E2E aislado se usa
+`testing/environments/lifecycle.compose.yml`, con puertos `28081–28084`:
 
-Revisar readiness/liveness, logs estructurados, Kafka consumer lag, outbox
-pendiente, errores de integración y salud de PostgreSQL/OpenSearch. La consola
-marca explícitamente datos no disponibles; no convertir un error de proveedor en
-un resultado exitoso.
+```bash
+python3 testing/run.py certification --name lifecycle-prepare
+python3 testing/run.py happy-path
+```
 
-## Recuperación
+No mezclar el laboratorio aislado con el Compose compartido ni usar bases
+productivas. Detener el entorno compartido con:
 
-Usar los runbooks de [Kafka](../kafka/installation-and-certification.md),
-[dashboards](../dashboards/operational-runbook.md),
-[ESS](../service-administration.md) y
-[Processor](../event-processor/defect-prevention.md). Respaldos y restauración
-deben probarse en un ambiente aislado antes de una operación productiva.
+```bash
+docker compose -f infrastructure/docker-compose.yml down
+```

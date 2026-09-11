@@ -1,5 +1,5 @@
-site_name: Event Management OpenSource
-site_description: Documentación técnica de la plataforma Event Management OpenSource
+site_name: Open Event Management
+site_description: Documentación técnica de Open Event Management
 site_url: https://eventmgmtplatform.github.io/event-mgmt-docs/
 
 docs_dir: docs
