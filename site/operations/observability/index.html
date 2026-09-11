@@ -69,6 +69,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#observabilidad-del-producto-en-opensearch" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1026,6 +1031,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observabilidad
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1043,6 +1068,36 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-reproducible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalación reproducible
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1684,146 +1739,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../platform/architecture/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/development/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Desarrollo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Operaciones
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/releases/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Releases
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../platform/changelogs/" class="md-nav__link">
         
   
@@ -2093,6 +2008,27 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-reproducible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalación reproducible
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2109,9 +2045,35 @@
 
 
 
-  <h1>Observabilidad</h1>
-
-
+<h1 id="observabilidad-del-producto-en-opensearch">Observabilidad del producto en OpenSearch<a class="headerlink" href="#observabilidad-del-producto-en-opensearch" title="Permanent link">&para;</a></h1>
+<p>Dashboard nativo: <code>http://localhost:5601/app/dashboards#/view/product-observability</code>.
+Administración → Herramientas especializadas → OpenSearch Dashboards abre esta vista.</p>
+<p>El servicio <code>product-observability</code> consulta cada 30 segundos las APIs internas
+<code>/api/administration/platform</code> y <code>/api/administration/apis</code>. Indexa únicamente campos
+permitidos: versiones, puertos, estado del runtime y healthcheck, reinicios, endpoint,
+HTTP y latencia de sondeo. No copia variables de entorno ni credenciales.</p>
+<p><code>UP</code> significa HTTP 2xx, no certificación funcional de dependencias. Los mocks
+conservan sus nombres. Kafka y PostgreSQL aparecen en inventario; no se inventan
+APIs HTTP para ellos. Las versiones y puertos faltantes se dejan vacíos.</p>
+<p>El índice <code>product-observability-current</code> conserva la última observación por ID.
+El dashboard abre una ventana de 2 minutos con refresco de 30 segundos; al fallar
+una fuente, sus observaciones previas caducan de la vista en hasta 2 minutos.
+El panel de fuentes informa <code>UNREACHABLE</code>. Si todo el recolector se detiene,
+los paneles quedan sin datos al vencer la ventana. Ampliar el filtro temporal
+puede mostrar observaciones antiguas: revisar siempre su fecha. No hay histórico.
+El índice usa un shard y cero réplicas para el laboratorio single-node existente.</p>
+<h2 id="instalacion-reproducible">Instalación reproducible<a class="headerlink" href="#instalacion-reproducible" title="Permanent link">&para;</a></h2>
+<p>Desde la raíz del repositorio:</p>
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>scripts/dashboards/build-product-observability.py
+docker<span class="w"> </span>compose<span class="w"> </span>--env-file<span class="w"> </span>.env<span class="w"> </span>-f<span class="w"> </span>infrastructure/docker-compose.yml<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--build<span class="w"> </span>--no-deps<span class="w"> </span>product-observability
+curl<span class="w"> </span>--fail-with-body<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s1">&#39;http://localhost:5601/api/saved_objects/_import?overwrite=true&#39;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;osd-xsrf: true&#39;</span><span class="w"> </span>--form<span class="w"> </span><span class="nv">file</span><span class="o">=</span>@infrastructure/opensearch/product-observability.ndjson
+</code></pre></div>
+<p>Los IDs <code>product-observability*</code> son estables. La importación reemplaza únicamente
+estos objetos. El dashboard también se puede importar desde Management → Saved
+objects. Para detener la recolección, usar <code>docker compose --env-file .env -f
+infrastructure/docker-compose.yml stop product-observability</code>.</p>
+<p>Validación: <code>python3 -m unittest discover -s testing/services/product-observability -v</code>.
+La implementación usa la <a href="https://opensearch-project.github.io/OpenSearch-Dashboards/docs/openapi/saved_objects/">API oficial de Saved Objects</a>.</p>
 
 
 

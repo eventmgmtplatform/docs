@@ -69,6 +69,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#architecture-decision-records" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1340,6 +1345,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1684,146 +1691,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../platform/architecture/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../platform/api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../platform/development/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Desarrollo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../platform/operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Operaciones
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../platform/releases/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Releases
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../platform/changelogs/" class="md-nav__link">
         
   
@@ -2093,6 +1960,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -2109,9 +1978,42 @@
 
 
 
-  <h1>Índice ADR</h1>
-
-
+<h1 id="architecture-decision-records">Architecture Decision Records<a class="headerlink" href="#architecture-decision-records" title="Permanent link">&para;</a></h1>
+<p>Las decisiones se conservan junto al dominio que las implementa para mantener
+el contexto. Este índice centraliza su localización.</p>
+<table>
+<thead>
+<tr>
+<th>Dominio</th>
+<th>Decisiones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event Processor</td>
+<td><a href="../event-processor/decisions-adr.md">decisions-adr.md</a></td>
+</tr>
+<tr>
+<td>Event State Service</td>
+<td><a href="../event-state-service/decisions-adr.md">decisions-adr.md</a></td>
+</tr>
+<tr>
+<td>CACF</td>
+<td><a href="../cacf/decisions-adr.md">decisions-adr.md</a></td>
+</tr>
+<tr>
+<td>Dashboards</td>
+<td><a href="../dashboards/architecture.md">architecture.md</a></td>
+</tr>
+<tr>
+<td>Git y publicación</td>
+<td><a href="../git/governance.md">governance.md</a></td>
+</tr>
+</tbody>
+</table>
+<p>Las nuevas decisiones deben incluir contexto, decisión, alternativas,
+consecuencias, compatibilidad y plan de reversión. No se debe reutilizar un ADR
+de otro dominio para justificar un contrato diferente.</p>
 
 
 

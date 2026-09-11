@@ -69,6 +69,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#desarrollo" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1225,6 +1230,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pruebas
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1242,6 +1267,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inicio-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicio local
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1684,146 +1761,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../platform/architecture/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/development/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Desarrollo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Operaciones
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/releases/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Releases
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../platform/changelogs/" class="md-nav__link">
         
   
@@ -2093,6 +2030,49 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inicio-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicio local
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2109,9 +2089,35 @@
 
 
 
-  <h1>Pruebas</h1>
-
-
+<h1 id="desarrollo">Desarrollo<a class="headerlink" href="#desarrollo" title="Permanent link">&para;</a></h1>
+<h2 id="inicio-local">Inicio local<a class="headerlink" href="#inicio-local" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Copiar los ejemplos de configuración del servicio que se vaya a ejecutar.</li>
+<li>Levantar dependencias con los Compose de <code>infrastructure/</code>.</li>
+<li>Ejecutar <code>scripts/eventmanagement-services.sh</code> o el comando documentado por
+   el servicio.</li>
+<li>Abrir la consola en <code>http://localhost:8090</code> y verificar readiness antes de
+   probar mutaciones.</li>
+</ol>
+<p>No se deben commitear <code>.env</code>, tokens, certificados, dumps, <code>node_modules</code>,
+<code>dist</code> ni evidencias generadas.</p>
+<h2 id="estructura">Estructura<a class="headerlink" href="#estructura" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Servicios Java: Maven y <code>src/main</code>/<code>src/test</code>.</li>
+<li>Frontends React: Vite, <code>src/</code> y pruebas bajo <code>testing/services/</code>.</li>
+<li>APIs Python: servidor y pruebas junto al servicio.</li>
+<li>Migraciones: <code>infrastructure/postgres/init</code>, aditivas y ordenadas.</li>
+</ul>
+<h2 id="calidad">Calidad<a class="headerlink" href="#calidad" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Ejecutar el build/test del componente modificado.</li>
+<li>Ejecutar <code>git diff --check</code>.</li>
+<li>Añadir o actualizar validación y changelog cuando cambie un contrato.</li>
+<li>Verificar estados de carga, vacío, error, conflicto y tenant en interfaces.</li>
+<li>Mantener las evidencias fuera de Git.</li>
+</ul>
+<p>Los estándares de commits, ramas y publicación están en
+<a href="../git/README.md"><code>docs/git/</code></a>.</p>
 
 
 

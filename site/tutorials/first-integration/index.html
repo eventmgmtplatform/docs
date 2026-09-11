@@ -23,7 +23,7 @@
     
     
       
-        <title>First integration - Event Management OpenSource</title>
+        <title>API de reglas de event-gateway - Event Management OpenSource</title>
       
     
     
@@ -65,6 +65,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#api-de-reglas-de-event-gateway" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -97,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              First integration
+              API de reglas de event-gateway
             
           </span>
         </div>
@@ -1670,146 +1675,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../platform/architecture/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/development/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Desarrollo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Operaciones
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/releases/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Releases
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../platform/changelogs/" class="md-nav__link">
         
   
@@ -2079,6 +1944,104 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definición
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-enriquecimiento-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo: enriquecimiento base
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simulacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-y-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración y despliegue
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pruebas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pruebas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activacion-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activación local
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Límites
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2095,9 +2058,200 @@
 
 
 
-  <h1>First integration</h1>
-
-
+<h1 id="api-de-reglas-de-event-gateway">API de reglas de event-gateway<a class="headerlink" href="#api-de-reglas-de-event-gateway" title="Permanent link">&para;</a></h1>
+<p>La administración y ejecución viven en el mismo servicio y puerto 8081. No dependen
+del catálogo de event-processor. Este catálogo aplica reglas de admisión, adaptación
+de campos, validación adicional y enriquecimiento base antes de publicar en <code>events.raw</code>.</p>
+<h2 id="endpoints">Endpoints<a class="headerlink" href="#endpoints" title="Permanent link">&para;</a></h2>
+<p>Todos requieren <code>X-Gateway-Admin-Key</code>. Sin clave configurada responden 503;
+con clave ausente o incorrecta, 401. La clave es administrativa global, no una
+identidad de cliente ni autenticación del endpoint de ingreso.</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Ruta</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/gateway/rules</code></td>
+<td>Catálogo, incluyendo reglas desactivadas</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/gateway/rules</code></td>
+<td>Crea una regla; 201 y ETag de revisión</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/gateway/rules/{id}</code></td>
+<td>Regla y ETag; 404 si no existe</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/api/v1/gateway/rules/{id}</code></td>
+<td>Reemplaza la definición completa; exige <code>If-Match</code></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/gateway/rules/{id}/history</code></td>
+<td>Últimas 100 versiones, de más reciente a más antigua</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/gateway/rules/validate</code></td>
+<td>Valida una definición sin guardarla</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/gateway/rules/simulate</code></td>
+<td>Ejecuta el flujo completo sin guardar recibos ni publicar en Kafka</td>
+</tr>
+</tbody>
+</table>
+<p>Para desactivar una regla se usa PUT con <code>enabled:false</code>. No hay eliminación física:
+se conserva su historial. POST sobre un ID existente y PUT con revisión obsoleta
+responden 409. PUT sin <code>If-Match</code> responde 428. La definición inválida devuelve 400;
+la indisponibilidad del catálogo devuelve 503 sin detalles internos de base de datos.</p>
+<h2 id="definicion">Definición<a class="headerlink" href="#definicion" title="Permanent link">&para;</a></h2>
+<p>Campos comunes obligatorios: <code>id</code>, <code>stage</code>, <code>priority</code>, <code>enabled</code>, <code>match</code>.
+El ID admite letras, números, guion y guion bajo, hasta 64 caracteres.
+<code>priority</code> es un entero 0–10000; menor valor se ejecuta primero, con desempate por ID.
+El catálogo admite como máximo 256 reglas, incluidas las desactivadas.</p>
+<p><code>match</code> es un objeto de igualdades exactas sobre campos del evento de entrada:
+todas deben cumplirse; <code>{}</code> aplica a todos los eventos. Los tipos importan:
+<code>"5"</code> y <code>5</code> son valores diferentes. No se admiten rutas anidadas, scripts o consultas remotas.</p>
+<table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>Operaciones</th>
+<th>Momento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INGESTION</code></td>
+<td><code>reject:true</code></td>
+<td>Rechaza eventos que coincidan, después de guardar el original</td>
+</tr>
+<tr>
+<td><code>NORMALIZATION</code></td>
+<td><code>copy</code>, <code>set</code></td>
+<td>Adapta campos antes del normalizador 1.0/1.1</td>
+</tr>
+<tr>
+<td><code>VALIDATION</code></td>
+<td><code>required</code></td>
+<td>Exige campos escalares presentes y no vacíos después de los mapeos</td>
+</tr>
+<tr>
+<td><code>ENRICHMENT</code></td>
+<td><code>copy</code>, <code>set</code></td>
+<td>Produce <code>enrichment.base</code> después de normalizar el contrato</td>
+</tr>
+</tbody>
+</table>
+<p><code>copy</code> usa <code>{ "destino": "campoOrigen" }</code>. Un origen ausente o no escalar rechaza
+el evento. <code>set</code> asigna constantes escalares no nulas. Ambos admiten hasta 64 campos;
+<code>required</code> admite hasta 64 nombres. Los nombres deben comenzar con letra y contener
+únicamente letras, números o guion bajo, hasta 64 caracteres. Dentro de una regla,
+<code>copy</code> lee una copia previa y <code>set</code> prevalece. Entre reglas, la última asignación gana.
+Las condiciones de reglas posteriores ven los cambios de normalización anteriores.
+El enriquecimiento lee el evento adaptado, pero no modifica ese evento ni alimenta
+las condiciones de otras reglas de enriquecimiento.</p>
+<p>La validación fija de los contratos 1.0/1.1 siempre se ejecuta. Las reglas adicionales
+no pueden omitirla. El enriquecimiento no sobrescribe el ID, la clave Kafka o el
+lifecycle: sus campos quedan exclusivamente dentro de <code>enrichment.base</code>.</p>
+<p>Se conserva <code>originalEvent</code> tal como entró y el recibo durable conserva los bytes.
+La salida añade <code>gatewayRules.applied</code> y <code>gatewayRules.revisions</code> para identificar
+las reglas ejecutadas y las versiones del catálogo utilizado. Se lee un único
+snapshot por evento; el cambio de reglas afecta solicitudes posteriores.</p>
+<h2 id="ejemplo-enriquecimiento-base">Ejemplo: enriquecimiento base<a class="headerlink" href="#ejemplo-enriquecimiento-base" title="Permanent link">&para;</a></h2>
+<p>Definición para POST, PUT o <code>/rules/validate</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sdc-base&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;stage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ENRICHMENT&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;priority&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;match&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;CustomerCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SDC&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;set&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;production&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MX&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;copy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;customerCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CustomerCode&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Otras acciones: normalización <code>"copy":{"resource":"hostname"}</code>;
+validación <code>"required":["CustomerCode"]</code>; admisión <code>"reject":true</code> con
+<code>"match":{"source":"blocked-source"}</code>.</p>
+<p>Ejemplo de edición: enviar la definición completa con <code>enabled:false</code> a
+<code>PUT /api/v1/gateway/rules/sdc-base</code>, incluyendo <code>If-Match: "1"</code> si esa es la revisión
+obtenida por GET. La respuesta lleva <code>ETag: "2"</code>.</p>
+<h2 id="simulacion">Simulación<a class="headerlink" href="#simulacion" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;host01&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CPU alta&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PROBLEM&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;rules&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;base&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;stage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ENRICHMENT&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;priority&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;match&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="nt">&quot;set&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MX&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>rules</code> es opcional: si falta se usa el catálogo persistido; si se envía reemplaza
+el conjunto completo para esa simulación. <code>rules:[]</code> prueba solamente el contrato
+fijo. Las candidatas tienen revisión 0 y no se guardan. La salida incluye
+<code>mode:SIMULATION</code> y <code>event</code> con el evento final. UUID y timestamps de simulación
+son nuevos en cada llamada. Las reglas que rechazan producen HTTP 400.</p>
+<h2 id="configuracion-y-despliegue">Configuración y despliegue<a class="headerlink" href="#configuracion-y-despliegue" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Aplicar <code>infrastructure/postgres/init/026-gateway-rules.sql</code> después de la 025
+   sobre la base del gateway. La migración es repetible y concede permisos al rol
+   <code>oem_gateway_collector</code>; el usuario JDBC debe tener ese rol.</li>
+<li>Configurar <code>GATEWAY_RULES_ADMIN_KEY</code> mediante secretos del entorno.</li>
+<li>Configurar <code>GATEWAY_RULES_ENABLED=true</code> y desplegar la nueva imagen.</li>
+</ol>
+<p>En el despliegue local, Compose carga ambas variables desde
+<code>.local/gateway-rules/runtime.env</code>, excluido de Git y con permisos 0600. El script
+<code>python3 scripts/gateway-rules-deploy.py</code> construye la imagen, aplica la migración,
+conserva o genera la clave y activa únicamente el gateway. Guarda la imagen anterior
+y el resultado de verificación en esa misma carpeta privada; si falla la activación,
+restaura la imagen y configuración previas. La migración aditiva permanece aplicada.
+No imprime credenciales ni modifica el catálogo existente.</p>
+<p>Sin configuración local, el valor predeterminado de ejecución es <code>false</code>
+para permitir aplicar la migración antes de activar el nuevo flujo. La administración
+es independiente de ese interruptor y está cerrada si no se configura una clave.
+Con ejecución habilitada, un fallo de lectura del catálogo impide publicar el evento;
+no se ejecuta silenciosamente sin reglas. Sin reglas activas se mantiene el contrato
+base y se añade la trazabilidad del catálogo.</p>
+<p>La migración no se aplica automáticamente a volúmenes existentes al iniciar Compose;
+la aplica el script de despliegue o el operador mediante el paso 1.</p>
+<h2 id="pruebas">Pruebas<a class="headerlink" href="#pruebas" title="Permanent link">&para;</a></h2>
+<p>Desde <code>services/event-gateway</code>: <code>mvn -B -ntp test -DargLine=</code>.
+Incluye normalizador, ejecución por etapas, preservación del original, autorización,
+simulación y control de revisión. Los reportes van a
+<code>evidences/testing/maven/event-gateway/surefire</code>.</p>
+<p>La prueba PostgreSQL se habilita con <code>GATEWAY_RULE_TEST_JDBC_URL</code> hacia una instancia
+desechable y aislada que permita el usuario <code>postgres</code>. Crea schema/rol y aplica la
+migración dos veces; verifica persistencia, historial, dos ediciones concurrentes
+y rollback si falla la escritura del historial. Nunca apuntarla a la base operativa.</p>
+<p>Después de <code>mvn package</code>, ejecutar desde la raíz
+<code>python3 testing/certifications/gateway-rules-http.py</code> con la misma variable JDBC.
+Levanta únicamente las rutas administrativas en <code>127.0.0.1:58091</code>, comprueba
+autorización, creación, consulta, edición, conflictos, historial y simulación,
+y detiene el proceso al terminar. El puerto puede cambiarse con
+<code>GATEWAY_RULE_TEST_HTTP_PORT</code>. No inicia rutas de recibos ni Kafka.</p>
+<p>Los resultados de ejecución se conservan localmente en <code>evidences/</code>, fuera de Git.</p>
+<h2 id="activacion-local">Activación local<a class="headerlink" href="#activacion-local" title="Permanent link">&para;</a></h2>
+<p>La API fue activada localmente el 2026-09-10 con la migración 026 y la ejecución
+de reglas habilitada. La activación conserva el catálogo y recrea sólo el gateway.
+Para consultar el estado actual, usar <code>/api/v1/gateway/ready</code> y la consulta
+autenticada <code>/api/v1/gateway/rules</code>. La credencial permanece exclusivamente en
+el archivo privado del entorno; no forma parte de la documentación ni del commit.</p>
+<h2 id="limites">Límites<a class="headerlink" href="#limites" title="Permanent link">&para;</a></h2>
+<p>No incorpora RBAC por usuario/tenant, aprobación de cambios, activación atómica de
+varias reglas, búsquedas de inventario, correlación ni reglas con código ejecutable.
+El historial registra definición, revisión y fecha, sin atribución individual:
+la autenticación actual es una clave administrativa compartida.</p>
 
 
 

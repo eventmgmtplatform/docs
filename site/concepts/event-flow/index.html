@@ -69,6 +69,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#correlacion-aceptacion-backend-local" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -456,6 +461,8 @@
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
+      
+        
       
       
       <a href="./" class="md-nav__link md-nav__link--active">
@@ -1684,146 +1691,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../platform/architecture/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/development/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Desarrollo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Operaciones
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/releases/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Releases
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../platform/changelogs/" class="md-nav__link">
         
   
@@ -2093,6 +1960,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -2109,9 +1978,38 @@
 
 
 
-  <h1>Flujo de eventos</h1>
-
-
+<h1 id="correlacion-aceptacion-backend-local">Correlación — aceptación backend local<a class="headerlink" href="#correlacion-aceptacion-backend-local" title="Permanent link">&para;</a></h1>
+<p>El motor ATTRIBUTE/GROUP ya tiene reglas versionadas por <code>/api/v1/rules</code> y estado
+durable en <code>event_processor.correlation_group</code>. No necesitó cambios de producción
+para este corte. La identidad del evento se conserva; pertenencia y ciclo del grupo
+son relaciones calculadas. Event State Service sigue siendo autoridad del evento.</p>
+<p>La certificación reproducible está en:</p>
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>testing/certifications/processor-correlation-certification.py
+</code></pre></div>
+<p>Requiere runtime local, Gateway 8081, Processor 8082 y Docker/PostgreSQL. Crea tenant
+único y reglas/eventos sintéticos; conserva auditoría y desactiva reglas propias ante
+fallos. No registra rutas de integración. Evidencia y hashes: <code>evidences/correlation/</code>.</p>
+<p>Comprueba API de alta/reintento, separación última/activa, revisión optimista,
+validación semántica, aislamiento de lectura por tenant, retiro e historial.
+La simulación sobre reglas activas verifica pertenencia, recuperación parcial/total,
+reapertura, eventos tardíos/empatados, huérfanos, scope, ventana inclusiva y capacidad.
+Verifica que simular no escriba grupos durables. En flujo real Gateway/Kafka verifica
+dos miembros, cambio equivalente v1/v2 conservando groupId, recuperación, nuevo ciclo,
+igualdad entre estado PostgreSQL y decisión, explain, publicación normalizada y
+que desactivar detenga mutaciones sin borrar el grupo.</p>
+<p>Además, CorrelationTest y CorrelationTransactionTest prueban semántica, concurrencia,
+replay, colisiones, rollback conjunto de relaciones/auditoría/outbox/comandos y
+retención del primer envelope. Las pruebas SQL requieren el laboratorio aislado
+<code>jdbc:postgresql://127.0.0.1:15439/cacf_test</code>; no ejecutar sin ese parámetro y contar
+omisiones como certificación. Usar copia de compilación si el runtime monta target.</p>
+<p>Límites vigentes: ATTRIBUTE/GROUP, 8 reglas activas/tenant, ventana 1..86400 segundos,
+1..4 campos String y hasta 32 miembros retenidos por ciclo. Expiración por llegada de
+eventos; no barrido autónomo. Desactivar no resuelve grupos. No hay API de edición de
+grupos ni endpoint especializado <code>/correlations</code>; administración mediante <code>/rules</code>.
+DP-EP-04/07/08 mantienen extensiones/escala pendientes, DP-EP-01 seguridad diferida.</p>
+<p><a href="correlation-suppression-commands.md">Contrato del motor</a> ·
+<a href="frontend-handoffs/correlation.md">Prompt para frontend</a>.
+La aceptación desde navegador sigue pendiente; esta certificación no la sustituye.</p>
 
 
 

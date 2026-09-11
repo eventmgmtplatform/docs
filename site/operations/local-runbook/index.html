@@ -69,6 +69,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#operaciones" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -998,6 +1003,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Runbook local
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1015,6 +1040,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-y-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalación y despliegue
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observabilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recuperacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recuperación
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1684,146 +1761,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../platform/architecture/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/development/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Desarrollo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Operaciones
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../platform/releases/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Releases
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../platform/changelogs/" class="md-nav__link">
         
   
@@ -2093,6 +2030,49 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-y-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalación y despliegue
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observabilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recuperacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recuperación
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2109,9 +2089,28 @@
 
 
 
-  <h1>Runbook local</h1>
-
-
+<h1 id="operaciones">Operaciones<a class="headerlink" href="#operaciones" title="Permanent link">&para;</a></h1>
+<h2 id="instalacion-y-despliegue">Instalación y despliegue<a class="headerlink" href="#instalacion-y-despliegue" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Compose y servicios locales: <code>infrastructure/docker-compose*.yml</code>.</li>
+<li>Scripts operativos: <code>scripts/</code>.</li>
+<li>Manifiestos y validadores: <code>deploy/</code>.</li>
+<li>Cloud Build/Terraform: <code>infrastructure/gcp/terraform/</code>.</li>
+</ul>
+<p>Antes de desplegar, validar migraciones pendientes, readiness, imágenes y
+compatibilidad de contratos. Un rollback de binario no revierte migraciones:
+seguir el runbook del componente y drenar procesos cuando el contrato lo exija.</p>
+<h2 id="observabilidad">Observabilidad<a class="headerlink" href="#observabilidad" title="Permanent link">&para;</a></h2>
+<p>Revisar readiness/liveness, logs estructurados, Kafka consumer lag, outbox
+pendiente, errores de integración y salud de PostgreSQL/OpenSearch. La consola
+marca explícitamente datos no disponibles; no convertir un error de proveedor en
+un resultado exitoso.</p>
+<h2 id="recuperacion">Recuperación<a class="headerlink" href="#recuperacion" title="Permanent link">&para;</a></h2>
+<p>Usar los runbooks de <a href="../kafka/installation-and-certification.md">Kafka</a>,
+<a href="../dashboards/operational-runbook.md">dashboards</a>,
+<a href="../service-administration.md">ESS</a> y
+<a href="../event-processor/defect-prevention.md">Processor</a>. Respaldos y restauración
+deben probarse en un ambiente aislado antes de una operación productiva.</p>
 
 
 
