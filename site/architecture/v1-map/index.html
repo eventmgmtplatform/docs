@@ -2550,7 +2550,7 @@
 
 
 <h1 id="mapa-completo-v100">Mapa completo V1.0.0<a class="headerlink" href="#mapa-completo-v100" title="Permanent link">&para;</a></h1>
-<div class="highlight"><pre><span></span><code>flowchart LR
+<pre class="mermaid"><code>flowchart LR
  SRC[Zabbix / Prometheus / Nagios / Webhooks]--&gt;GW[event-gateway]
  GW--&gt;RAW[(events.raw)]--&gt;EP[event-processor]
  EP--&gt;N[(events.normalized)]
@@ -2564,8 +2564,7 @@
  ESS--&gt;OS[(OpenSearch)]
  ESS--&gt;L[(events.lifecycle)]
  UI[Operations Console]--&gt;EP
- UI--&gt;ESS
-</code></pre></div>
+ UI--&gt;ESS</code></pre>
 <h2 id="linea-base">Línea base<a class="headerlink" href="#linea-base" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Gateway HTTP y Kafka para ingesta desacoplada.</li>
@@ -2680,6 +2679,8 @@
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

@@ -2508,7 +2508,7 @@
 
 
 <h1 id="iac-gcp-y-kubernetes">IaC, GCP y Kubernetes<a class="headerlink" href="#iac-gcp-y-kubernetes" title="Permanent link">&para;</a></h1>
-<div class="highlight"><pre><span></span><code>flowchart TB
+<pre class="mermaid"><code>flowchart TB
  GIT[Git]--&gt;CI[CI validation/build]--&gt;AR[Artifact Registry]
  TF[Terraform]--&gt;GCP[GCP Foundation]
  GCP--&gt;VPC[VPC / subnets / firewall]
@@ -2521,8 +2521,7 @@
  K8S--&gt;INT[oem-integrations]
  K8S--&gt;CON[oem-console]
  K8S--&gt;INIT[oem-init jobs]
- K8S--&gt;TOOL[oem-toolbox on demand]
-</code></pre></div>
+ K8S--&gt;TOOL[oem-toolbox on demand]</code></pre>
 <h2 id="gcp-foundation">GCP foundation<a class="headerlink" href="#gcp-foundation" title="Permanent link">&para;</a></h2>
 <p>OS_08_13 documenta VPC/subredes management-workloads-data, firewall, Secret Manager, Artifact Registry, buckets application/backups/shared/logs, Cloud Build y service accounts de despliegue/entrega, tratada como baseline certificada sin drift en su checkpoint.</p>
 <h2 id="kubernetes">Kubernetes<a class="headerlink" href="#kubernetes" title="Permanent link">&para;</a></h2>
@@ -2590,6 +2589,8 @@
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

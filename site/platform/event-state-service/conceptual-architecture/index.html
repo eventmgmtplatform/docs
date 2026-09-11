@@ -2484,17 +2484,16 @@
 
 <h1 id="event-state-service-arquitectura-conceptual">Event State Service — arquitectura conceptual<a class="headerlink" href="#event-state-service-arquitectura-conceptual" title="Permanent link">&para;</a></h1>
 <p>ESS consolida el estado operacional; Processor decide, Worker ejecuta y ESS persiste/publica lifecycle.
-<div class="highlight"><pre><span></span><code>flowchart LR
+<pre class="mermaid"><code>flowchart LR
  RES[(integration.results)]--&gt;ESS[Event State Service]
  N[(events.normalized)]--&gt;ESS
  ESS--&gt;ID[Idempotency / ledger]--&gt;AGG[Event aggregate]
  AGG--&gt;PG[(PostgreSQL)]
  AGG--&gt;OS[(OpenSearch)]
  AGG--&gt;L[(events.lifecycle)]
- API[Admin / Query API]--&gt;AGG
-</code></pre></div>
+ API[Admin / Query API]--&gt;AGG</code></pre>
 Responsabilidades: validación, correlación contractual, idempotencia, estado durable, historial, proyección, lifecycle y API. No debe duplicar reglas, routing ni clientes de proveedores.</p>
-<div class="highlight"><pre><span></span><code>sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
  participant K as Kafka
  participant E as ESS
  participant P as PostgreSQL
@@ -2504,8 +2503,7 @@ Responsabilidades: validación, correlación contractual, idempotencia, estado d
  E-&gt;&gt;E: validate + idempotency
  E-&gt;&gt;P: state/history
  E-&gt;&gt;O: projection
- E-&gt;&gt;L: lifecycle
-</code></pre></div>
+ E-&gt;&gt;L: lifecycle</code></pre>
 
 
 
@@ -2605,6 +2603,8 @@ Responsabilidades: validación, correlación contractual, idempotencia, estado d
     
     
       <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

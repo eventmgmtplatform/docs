@@ -2487,19 +2487,18 @@
 (<code>eventKey</code>). El envelope original se conserva para trazabilidad; la salida
 normalizada agrega estado, severidad, tenant, timestamps y decisiones sin
 alterar el original.</p>
-<div class="highlight"><pre><span></span><code>classDiagram
-  EventEnvelope &quot;1&quot; --&gt; &quot;1&quot; ProcessingRecord
-  ProcessingRecord --&gt; &quot;0..*&quot; Decision
-  Decision --&gt; &quot;0..*&quot; CommandIntent
-  CommandIntent --&gt; &quot;0..*&quot; IntegrationResult
+<pre class="mermaid"><code>classDiagram
+  EventEnvelope "1" --&gt; "1" ProcessingRecord
+  ProcessingRecord --&gt; "0..*" Decision
+  Decision --&gt; "0..*" CommandIntent
+  CommandIntent --&gt; "0..*" IntegrationResult
   IntegrationResult --&gt; EventState
   EventEnvelope : eventId
   EventEnvelope : eventKey
   EventEnvelope : tenant
   Decision : policyVersion
   CommandIntent : commandId
-  EventState : lifecycle
-</code></pre></div>
+  EventState : lifecycle</code></pre>
 <p>Las configuraciones <code>POLICY</code>, <code>ENRICHMENT</code> y <code>ROUTING</code> se versionan por tenant.
 Su activación usa revisión/ETag, checksum y auditoría inmutable. Un snapshot
 capturado no cambia durante el pipeline. Las decisiones son directivas; la
@@ -2603,6 +2602,8 @@ ejecución pertenece al Worker y el lifecycle al Event State Service.</p>
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

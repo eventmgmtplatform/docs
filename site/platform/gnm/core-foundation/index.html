@@ -2483,10 +2483,9 @@
 
 
 <h1 id="gnm-core-foundation-notification-router">GNM Core Foundation — Notification Router<a class="headerlink" href="#gnm-core-foundation-notification-router" title="Permanent link">&para;</a></h1>
-<p><div class="highlight"><pre><span></span><code>flowchart LR
+<p><pre class="mermaid"><code>flowchart LR
  EP[event-processor]--&gt;C[(integration.commands)]--&gt;IW[integration-worker]--&gt;A[GNM Adapter]--&gt;EB[Everbridge]
- EB--&gt;A--&gt;R[(integration.results)]--&gt;ESS[event-state-service]
-</code></pre></div>
+ EB--&gt;A--&gt;R[(integration.results)]--&gt;ESS[event-state-service]</code></pre>
 El contrato forense legado usa <code>ServerSerial</code> como correlación relevante y Launch mediante <code>POST /rest/incidents/{organizationId}</code>. El payload incluye acción, nombre, fases/broadcast template y <code>formVariableItems</code>; la respuesta aporta identificador/URI y el detalle expone estado.</p>
 <p>Casos CROWN y VITRO documentados sirven como fixtures/contract tests, sin conservar secretos.</p>
 <p>Principios: provider HTTP sólo en Worker/adapter; secrets externos; resultado normalizado; idempotencia; mock para desarrollo y certificación real separada.</p>
@@ -2589,6 +2588,8 @@ El contrato forense legado usa <code>ServerSerial</code> como correlación relev
     
     
       <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

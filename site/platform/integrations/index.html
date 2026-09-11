@@ -2520,7 +2520,7 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code>flowchart LR
+<pre class="mermaid"><code>flowchart LR
   EP[event-processor] --&gt; CMD[(integration.commands)]
   CMD --&gt; IW[integration-worker]
   IW --&gt; SN[ServiceNow]
@@ -2528,8 +2528,7 @@
   IW --&gt; GNM[GNM / Everbridge]
   IW --&gt; CACF[CACF / NEXT]
   IW --&gt; RES[(integration.results)]
-  RES --&gt; ESS[event-state-service]
-</code></pre></div>
+  RES --&gt; ESS[event-state-service]</code></pre>
 
 
 
@@ -2629,6 +2628,8 @@
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

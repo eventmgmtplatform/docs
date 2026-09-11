@@ -2692,7 +2692,7 @@ datos ni a hosts internos.</p>
 </tbody>
 </table>
 <h2 id="flujo-de-datos">Flujo de datos<a class="headerlink" href="#flujo-de-datos" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>flowchart LR
+<pre class="mermaid"><code>flowchart LR
   Sources[Fuentes] --&gt; Gateway[event-gateway]
   Gateway --&gt; Kafka[(Kafka)]
   Kafka --&gt; Processor[event-processor]
@@ -2705,8 +2705,7 @@ datos ni a hosts internos.</p>
   Console[Console React] --&gt; BFF[Nginx / BFF same-origin]
   BFF --&gt; Processor
   BFF --&gt; Catalog[Catálogo y dashboards]
-  Catalog --&gt; PG
-</code></pre></div>
+  Catalog --&gt; PG</code></pre>
 <h2 id="integraciones-y-limites">Integraciones y límites<a class="headerlink" href="#integraciones-y-limites" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Los secretos se consultan por referencia; no se devuelven valores sensibles
@@ -2825,6 +2824,8 @@ documentos de cada servicio.</p>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

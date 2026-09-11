@@ -2621,7 +2621,7 @@ normaliza su contrato, aplica políticas y enriquecimiento, decide acciones de
 integración y proyecta el estado consultable. La consola WebGUI administra estas
 capacidades mediante APIs same-origin; no accede directamente a bases de datos.</p>
 <h2 id="arquitectura-principal">Arquitectura principal<a class="headerlink" href="#arquitectura-principal" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>flowchart LR
+<pre class="mermaid"><code>flowchart LR
   S[Fuentes: Zabbix y otros productores] --&gt; G[event-gateway\n8081]
   G --&gt; R[(events.raw)]
   R --&gt; P[event-processor\n8082]
@@ -2639,10 +2639,9 @@ capacidades mediante APIs same-origin; no accede directamente a bases de datos.<
   B --&gt; P
   B --&gt; E
   B --&gt; D[Dashboards operativos]
-  D --&gt; C
-</code></pre></div>
+  D --&gt; C</code></pre>
 <h2 id="libreria-de-arquitectura-principal">Librería de arquitectura principal<a class="headerlink" href="#libreria-de-arquitectura-principal" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>flowchart TB
+<pre class="mermaid"><code>flowchart TB
   subgraph Entrada
     Envelope[Envelope del evento]
     Normalize[Normalización e idempotencia]
@@ -2663,8 +2662,7 @@ capacidades mediante APIs same-origin; no accede directamente a bases de datos.<
   Snapshot --&gt; Policy --&gt; Enrich --&gt; Correlation --&gt; Routing
   Routing --&gt; Commands --&gt; Worker --&gt; Result
   Result --&gt; State[Estado y lifecycle]
-  State --&gt; Evidence[Auditoría, explain y observabilidad]
-</code></pre></div>
+  State --&gt; Evidence[Auditoría, explain y observabilidad]</code></pre>
 <p>La documentación detallada está en <a href="architecture/">Arquitectura</a>,
 <a href="concepts/domain-model/">Modelo de dominio</a> y <a href="concepts/event-flow/">Flujo de eventos</a>.</p>
 <h2 id="documentacion-ampliada">Documentación ampliada<a class="headerlink" href="#documentacion-ampliada" title="Permanent link">&para;</a></h2>
@@ -2758,6 +2756,8 @@ capacidades mediante APIs same-origin; no accede directamente a bases de datos.<
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

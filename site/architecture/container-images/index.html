@@ -2638,7 +2638,7 @@
 
 
 <h1 id="arquitectura-de-las-cinco-imagenes">Arquitectura de las cinco imágenes<a class="headerlink" href="#arquitectura-de-las-cinco-imagenes" title="Permanent link">&para;</a></h1>
-<div class="highlight"><pre><span></span><code>flowchart TB
+<pre class="mermaid"><code>flowchart TB
  CORE[oem-core]--&gt;K[(Kafka)]
  CORE--&gt;PG[(PostgreSQL)]
  CORE--&gt;OS[(OpenSearch)]
@@ -2648,8 +2648,7 @@
  CON[oem-console]--&gt;CORE
  INIT[oem-init]--&gt;K
  INIT--&gt;PG
- TOOL[oem-toolbox]--&gt;CORE
-</code></pre></div>
+ TOOL[oem-toolbox]--&gt;CORE</code></pre>
 <h2 id="oem-core">oem-core<a class="headerlink" href="#oem-core" title="Permanent link">&para;</a></h2>
 <p>Familia del dominio central: Gateway, Event Processor y Event State Service. En Kubernetes los procesos deben seguir siendo desplegables y escalables independientemente.</p>
 <h2 id="oem-integrations">oem-integrations<a class="headerlink" href="#oem-integrations" title="Permanent link">&para;</a></h2>
@@ -2660,7 +2659,7 @@
 <p>Jobs one-shot idempotentes para topics, esquemas, migraciones, bootstrap y preflight.</p>
 <h2 id="oem-toolbox">oem-toolbox<a class="headerlink" href="#oem-toolbox" title="Permanent link">&para;</a></h2>
 <p>CLI, diagnóstico, readiness, smoke tests, evidencia y soporte; debe ejecutarse on-demand.</p>
-<div class="highlight"><pre><span></span><code>sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
  participant Z as Zabbix
  participant C as oem-core
  participant I as oem-integrations
@@ -2673,8 +2672,7 @@
  E--&gt;&gt;I: result
  I-&gt;&gt;C: integration.results
  C-&gt;&gt;C: ESS state + lifecycle
- U-&gt;&gt;C: query / admin
-</code></pre></div>
+ U-&gt;&gt;C: query / admin</code></pre>
 
 
 
@@ -2774,6 +2772,8 @@
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

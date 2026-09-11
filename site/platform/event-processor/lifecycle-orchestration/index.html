@@ -2580,7 +2580,7 @@ operaciones o credenciales arbitrarios. El schema está en
 La primera configuración del ciclo queda congelada; editar una regla no cambia
 comandos ya emitidos ni transforma un ciclo ticket-only en uno orquestado.</p>
 <h2 id="transiciones-y-confirmaciones">Transiciones y confirmaciones<a class="headerlink" href="#transiciones-y-confirmaciones" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
     participant Z as Monitoreo / Gateway
     participant P as Processor + SQL/outbox
     participant W as Worker + ledger
@@ -2611,8 +2611,7 @@ comandos ya emitidos ni transforma un ciclo ticket-only en uno orquestado.</p>
     P-&gt;&gt;W: RESOLVE_TICKET / sysId y política congelada
     W-&gt;&gt;S: GET, PATCH si procede, GET
     W--&gt;&gt;P: RESOLVED_CONFIRMED
-    W--&gt;&gt;E: Resultados con identidad completa
-</code></pre></div>
+    W--&gt;&gt;E: Resultados con identidad completa</code></pre>
 <p>Los estados durables incluyen TICKET_PENDING, OPEN_PENDING, AUTOMATION_PENDING,
 REMEDIATED_AWAITING_RECOVERY, RECOVERED_AUTOMATION_PENDING, CLOSE_PENDING,
 RESOLVE_PENDING, SUPPRESSED_PENDING, REVIEW y COMPLETED. <code>results</code> conserva el
@@ -2769,6 +2768,8 @@ reconciliación tardía; el harness desactiva únicamente sus reglas.</p>
     
     
       <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

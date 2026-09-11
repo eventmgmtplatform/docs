@@ -2467,7 +2467,7 @@
 
 
 <h1 id="frontend-experience-layer-v1">Frontend Experience Layer — V1<a class="headerlink" href="#frontend-experience-layer-v1" title="Permanent link">&para;</a></h1>
-<p><div class="highlight"><pre><span></span><code>flowchart TB
+<p><pre class="mermaid"><code>flowchart TB
  U[Operator]--&gt;OEM[Event Management Console]
  U--&gt;ITSM[ITSM Dashboard]
  U--&gt;OSD[OpenSearch Dashboards]
@@ -2480,8 +2480,7 @@
  D--&gt;PG[(PostgreSQL)]
  D--&gt;API[Internal APIs]
  OSD--&gt;OS[(OpenSearch)]
- KUI--&gt;K[(Kafka)]
-</code></pre></div>
+ KUI--&gt;K[(Kafka)]</code></pre>
 | Interfaz | Propósito |
 |---|---|
 | Event Management Console | Portal OEM, eventos y administración mínima |
@@ -2552,6 +2551,8 @@
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

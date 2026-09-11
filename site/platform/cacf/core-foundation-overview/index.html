@@ -2481,7 +2481,7 @@
 
 
 <h1 id="cacf-core-foundation-automation-router">CACF Core Foundation — Automation Router<a class="headerlink" href="#cacf-core-foundation-automation-router" title="Permanent link">&para;</a></h1>
-<p><div class="highlight"><pre><span></span><code>sequenceDiagram
+<p><pre class="mermaid"><code>sequenceDiagram
  participant EP as event-processor
  participant K as Kafka
  participant IW as integration-worker
@@ -2496,8 +2496,7 @@
  K-&gt;&gt;ESS: state update
  alt failure or SLA expiry
   IW-&gt;&gt;SN: escalation / tower reassignment
- end
-</code></pre></div>
+ end</code></pre>
 Requester Identifier documentado: <code>&lt;servername&gt;:&lt;serverserial&gt;:&lt;customercode&gt;</code>. El modelo contempla aceptación asíncrona, listener/callback, worknote, timeout parametrizable y escalación humana. Casos de referencia incluyen <code>NO ACTION/NO MATCHING HOST</code>, <code>ESCALATION/AUTO ESCALATION</code>, <code>REMEDIATION</code> y <code>TOWER TRANSFER</code>.</p>
 <p>La documentación detallada de contratos, estados, validación, runbook, ADR, DP y Draw.io se conserva en <code>platform/cacf/</code>.</p>
 
@@ -2583,6 +2582,8 @@ Requester Identifier documentado: <code>&lt;servername&gt;:&lt;serverserial&gt;:
     
     
       <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

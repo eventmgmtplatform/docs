@@ -2552,7 +2552,7 @@
 <h1 id="primer-evento-happy-path">Primer evento: happy path<a class="headerlink" href="#primer-evento-happy-path" title="Permanent link">&para;</a></h1>
 <p>Basado en <code>testing/cases/UC-001-happy-path.md</code>, este recorrido lleva un evento
 fatal hasta su resolución usando fixtures y proveedores sintéticos.</p>
-<div class="highlight"><pre><span></span><code>sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
   participant Z as Zabbix
   participant G as Gateway
   participant K as Kafka
@@ -2573,8 +2573,7 @@ fatal hasta su resolución usando fixtures y proveedores sintéticos.</p>
   G-&gt;&gt;P: nuevo eventId
   P-&gt;&gt;W: cierres idempotentes
   W-&gt;&gt;E: clear
-  E--&gt;&gt;Z: lifecycle RESOLVED
-</code></pre></div>
+  E--&gt;&gt;Z: lifecycle RESOLVED</code></pre>
 <h2 id="aceptacion">Aceptación<a class="headerlink" href="#aceptacion" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Enviar el fixture fatal: HTTP 202, <code>eventId</code>, <code>eventKey</code>, <code>processingId</code> y
@@ -2690,6 +2689,8 @@ inconsistentes o confirmaciones ausentes.</p>
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

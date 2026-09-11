@@ -2483,7 +2483,7 @@
 
 
 <h1 id="flujo-de-eventos">Flujo de eventos<a class="headerlink" href="#flujo-de-eventos" title="Permanent link">&para;</a></h1>
-<div class="highlight"><pre><span></span><code>flowchart TD
+<pre class="mermaid"><code>flowchart TD
   A[Evento recibido] --&gt; B[Guardar original]
   B --&gt; C[Normalizar y validar]
   C --&gt; D[Snapshot de reglas]
@@ -2496,8 +2496,7 @@
   J --&gt; K[Worker y proveedor]
   K --&gt; L[Resultado idempotente]
   L --&gt; M[ESS: estado, historial y explain]
-  I --&gt; M
-</code></pre></div>
+  I --&gt; M</code></pre>
 <p>El flujo normalizado publica en Kafka; PostgreSQL conserva configuración,
 auditoría, outbox y estado. El Worker no inventa comandos: ejecuta una intención
 durable y exige consistencia de <code>commandId</code>. Los reintentos reutilizan la misma
@@ -2603,6 +2602,8 @@ y el escenario completo en <a href="../../getting-started/first-event/">Primer e
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

@@ -2683,13 +2683,12 @@
 </tbody>
 </table>
 <h2 id="gate-global">Gate global<a class="headerlink" href="#gate-global" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>flowchart LR
+<pre class="mermaid"><code>flowchart LR
  C[Code]--&gt;T[Tests]--&gt;CT[Contracts]--&gt;E[E2E]--&gt;F[Failure/restart]
  F--&gt;BR[Backup/restore]--&gt;S[Security]--&gt;O[Observability]--&gt;EV[Evidence]
  EV--&gt;P{Promote?}
  P--&gt;|No|DP[Defect Prevention]
- P--&gt;|Sí|RC[Release candidate]
-</code></pre></div>
+ P--&gt;|Sí|RC[Release candidate]</code></pre>
 
 
 
@@ -2789,6 +2788,8 @@
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

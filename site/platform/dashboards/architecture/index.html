@@ -2639,7 +2639,7 @@ no a capacidad/seguridad de producción.</p>
 e <code>internal-api</code> (<code>api</code> como alias CLI). No fallback automático, OpenSearch ni llamadas
 directas a ServiceNow/Everbridge/NEXT. API significa API <strong>OEM</strong>, no API del proveedor.
 Una API interna futura debe implementar el contrato versionado de esta entrega.</p>
-<div class="highlight"><pre><span></span><code>flowchart LR
+<pre class="mermaid"><code>flowchart LR
   Console[Console · administración] --&gt; UI[OEM Dashboards · React / Nginx]
   UI --&gt; BFF[BFF de consulta]
   CLI[emctl ui oem-dashboards] --&gt; Config[Configuración de fuentes]
@@ -2649,8 +2649,7 @@ Una API interna futura debe implementar el contrato versionado de esta entrega.<
   PG --&gt; Views[dashboard_read · cuatro vistas]
   Views --&gt; ESS[event_state]
   Views --&gt; CACF[automation_execution]
-  API --&gt; OEM[Contrato OEM de consulta v1]
-</code></pre></div>
+  API --&gt; OEM[Contrato OEM de consulta v1]</code></pre>
 <p>ADR-DASH-004: <code>dashboard_read</code> es la frontera SQL estable. Se reutiliza la misma
 base PostgreSQL; <strong>no se crean cuatro bases ni copias de los datos</strong>. Migración 018
 aditiva después de 002, 008 y 017. Las vistas no son materializadas: muestran el
@@ -2823,6 +2822,8 @@ restaura las vistas canónicas sin demostración.</p>
     
     
       <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

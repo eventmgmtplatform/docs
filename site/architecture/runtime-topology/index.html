@@ -2484,7 +2484,7 @@
 
 <h1 id="topologia-del-runtime-local">Topología del runtime local<a class="headerlink" href="#topologia-del-runtime-local" title="Permanent link">&para;</a></h1>
 <p>Vista alineada con los servicios declarados en el <code>docker-compose.yml</code> entregado.</p>
-<div class="highlight"><pre><span></span><code>flowchart TB
+<pre class="mermaid"><code>flowchart TB
   subgraph UX[Experience Layer]
     CONSOLE[event-management-console 8090]
     FM[frontend-management-api 8091]
@@ -2525,8 +2525,7 @@
   K --&gt; ESS
   ESS --&gt; PG
   ESS --&gt; OS
-  OSD --&gt; OS
-</code></pre></div>
+  OSD --&gt; OS</code></pre>
 <p>Además del core, el árbol <code>services/</code> revisado contiene <code>console-catalog-api</code>, <code>e2e-tool-api</code>, <code>enrichment-engine</code>, <code>frontend-management-api</code>, <code>glpi-ticketing-api</code>, <code>itsm-ticketing-dashboard</code>, <code>mock-secrets</code>, <code>oem-dashboards</code>, <code>oem-dashboards-api</code> y <code>product-observability</code>.</p>
 <p>La presencia de un servicio o mock en el código no implica promoción productiva.</p>
 
@@ -2628,6 +2627,8 @@
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

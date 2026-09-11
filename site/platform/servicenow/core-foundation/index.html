@@ -2550,10 +2550,9 @@
 
 
 <h1 id="servicenow-core-foundation-ticketing-router">ServiceNow Core Foundation — Ticketing Router<a class="headerlink" href="#servicenow-core-foundation-ticketing-router" title="Permanent link">&para;</a></h1>
-<p><div class="highlight"><pre><span></span><code>flowchart LR
+<p><pre class="mermaid"><code>flowchart LR
  E[Evento]--&gt;EP[event-processor]--&gt;C[(integration.commands)]--&gt;IW[integration-worker]--&gt;SN[ServiceNow Adapter]--&gt;EXT[ServiceNow]
- EXT--&gt;SN--&gt;R[(integration.results)]--&gt;ESS[event-state-service]
-</code></pre></div>
+ EXT--&gt;SN--&gt;R[(integration.results)]--&gt;ESS[event-state-service]</code></pre>
 Processor decide <strong>si</strong> emitir el comando; Worker ejecuta el contrato ServiceNow; ESS consolida el resultado. El foundation cubre creación/reconciliación, ownership guards, normalización, evidencia y configuración mock/real.</p>
 <h2 id="cmdb-processor">CMDB Processor<a class="headerlink" href="#cmdb-processor" title="Permanent link">&para;</a></h2>
 <p>La evolución contempla un CI ServiceNow CMDB Processor para sustituir middleware legacy entre inventario/Lansweeper y ServiceNow CMDB. Debe mantenerse separado del ticketing transaccional y tener reconciliación, idempotencia y observabilidad propias.</p>
@@ -2656,6 +2655,8 @@ Processor decide <strong>si</strong> emitir el comando; Worker ejecuta el contra
     
     
       <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

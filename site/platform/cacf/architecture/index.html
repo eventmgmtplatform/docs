@@ -2516,7 +2516,7 @@
 PostgreSQL y los tópicos integration.commands, integration.results y events.dlq.
 La admisión propia separa el commit Kafka del consumidor histórico. ServiceNow
 conserva la propiedad de las mutaciones ITSM mediante su cliente y ledger existentes.</p>
-<div class="highlight"><pre><span></span><code>flowchart LR
+<pre class="mermaid"><code>flowchart LR
  REST[REST autenticado] --&gt; R[AutomationRepository]
  K[integration.commands] --&gt; A[CacfKafkaRoute / grupo cacf-admission]
  A --&gt; R
@@ -2530,8 +2530,7 @@ conserva la propiedad de las mutaciones ITSM mediante su cliente y ledger existe
  DB --&gt; O[CacfRuntime: outbox]
  O --&gt; RES[integration.results]
  O --&gt; K
- K --&gt; SN[Foundation ServiceNow / ledger / PATCH]
-</code></pre></div>
+ K --&gt; SN[Foundation ServiceNow / ledger / PATCH]</code></pre>
 <h2 id="secuencia-y-transacciones">Secuencia y transacciones<a class="headerlink" href="#secuencia-y-transacciones" title="Permanent link">&para;</a></h2>
 <ol>
 <li>REST o Kafka validan el contrato canónico. accept inserta ejecución, intención
@@ -2631,6 +2630,8 @@ por esta generación. Véanse validation.md y defect-prevention.md.</p>
     
     
       <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

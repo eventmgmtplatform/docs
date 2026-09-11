@@ -2484,7 +2484,7 @@
 
 <h1 id="desarrollo-local-con-docker-compose">Desarrollo local con Docker Compose<a class="headerlink" href="#desarrollo-local-con-docker-compose" title="Permanent link">&para;</a></h1>
 <p>La versión actual compartida usa <code>infrastructure/docker-compose.yml</code>.</p>
-<div class="highlight"><pre><span></span><code>flowchart LR
+<pre class="mermaid"><code>flowchart LR
   Compose[Docker Compose] --&gt; Kafka[(Kafka)]
   Compose --&gt; PG[(PostgreSQL)]
   Compose --&gt; OS[(OpenSearch)]
@@ -2496,8 +2496,7 @@
   BFF --&gt; G
   BFF --&gt; P
   BFF --&gt; E
-  W --&gt; M[Mocks locales :8181–8184]
-</code></pre></div>
+  W --&gt; M[Mocks locales :8181–8184]</code></pre>
 <div class="highlight"><pre><span></span><code>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
 docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>infrastructure/docker-compose.yml<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--build
 bash<span class="w"> </span>scripts/eventmanagement-services.sh<span class="w"> </span>health
@@ -2612,6 +2611,8 @@ productivas. Detener el entorno compartido con:</p>
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

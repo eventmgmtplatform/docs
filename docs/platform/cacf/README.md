@@ -12,6 +12,9 @@
 - [Defect Prevention](defect-prevention.md).
 - [Arquitectura editable Draw.io](CACF-local-architecture.drawio).
 
+El diagrama editable corresponde a la topología local de CACF y complementa
+los diagramas Mermaid de arquitectura y flujo publicados en esta sección.
+
 La documentación técnica se versiona junto al código. El PKC y sus materiales
 de library se conservan fuera de Git, conforme a la política global del proyecto.
 
