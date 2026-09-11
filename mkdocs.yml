@@ -77,3 +77,19 @@ nav:
       - Roadmap: project/roadmap.md
       - Deuda técnica: project/technical-debt.md
       - Base de conocimiento: knowledge/index.md
+  - Plataforma integrada:
+      - Índice: platform/index.md
+      - Arquitectura: platform/architecture/README.md
+      - API: platform/api/README.md
+      - Desarrollo: platform/development/README.md
+      - Operaciones: platform/operations/README.md
+      - Releases: platform/releases/README.md
+      - Changelogs: platform/changelogs/README.md
+      - Event Processor: platform/event-processor/implementation-status.md
+      - Event State Service: platform/event-state-service/README.md
+      - Dashboards: platform/dashboards/architecture.md
+      - Kafka: platform/kafka/README.md
+      - CACF: platform/cacf/README.md
+      - Integraciones: platform/integrations/glpi.md
+      - Administración de servicios: platform/service-administration.md
+      - Gobierno Git: platform/git/README.md
