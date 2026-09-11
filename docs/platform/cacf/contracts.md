@@ -80,8 +80,8 @@ assignmentGroup y workNote. El transporte del outbox usa acks=all y key=eventKey
 
 Namespace ServiceIncident: http://b2b.ibm.com/schema/IS_B2B_CDM/R2_2.
 Se declara schemaLocation, pero no se valida contra un XSD externo. HTTP Basic,
-text/xml UTF-8, POST CREATE a /tupix/api/v1/netcool/tickets y TKTUPDATE a
-/tupix/api/v1/netcool/incidents. No se siguen redirects ni se reintentan mutaciones.
+text/xml UTF-8, POST CREATE a /tupix/api/v1/tickets y TKTUPDATE a
+/tupix/api/v1/incidents. No se siguen redirects ni se reintentan mutaciones.
 RequesterID=sourceSystem:sourceSerial:customerCode. TransactionNumber de CREATE
 es executionId; TKTUPDATE usa executionId-ticket. TransactionType=2 y fecha Instant.
 CREATE envía RequesterSeverity, TradingPartnerID, TransactionRouting

@@ -34,8 +34,8 @@ de ServiceNow/GNM que no bloqueen CACF.
 
 ## Contrato conocido
 
-- NEXT CREATE: `POST /tupix/api/v1/netcool/tickets`, `text/xml`, HTTP Basic.
-- NEXT TKTUPDATE: `POST /tupix/api/v1/netcool/incidents`.
+- NEXT CREATE: `POST /tupix/api/v1/tickets`, `text/xml`, HTTP Basic.
+- NEXT TKTUPDATE: `POST /tupix/api/v1/incidents`.
 - Callback compatible: `POST /data`.
 - RequesterID: `sourceSystem:sourceSerial:customerCode`.
 - ProviderID: identificador generado por NEXT.
