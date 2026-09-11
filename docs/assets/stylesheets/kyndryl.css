@@ -68,14 +68,17 @@ code, kbd, pre { font-family: "IBM Plex Mono", Consolas, monospace; }
   .md-grid, .md-main__inner { max-width: 100%; }
   .md-sidebar--primary {
     align-self: flex-start;
-    max-height: calc(100vh - 4rem);
+    height: calc(100dvh - 9rem);
+    max-height: calc(100dvh - 9rem);
     width: var(--md-sidebar-width);
   }
   .md-sidebar--primary .md-sidebar__scrollwrap {
-    height: calc(100vh - 4rem);
-    max-height: calc(100vh - 4rem);
-    overflow-y: auto;
+    height: 100%;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
     overscroll-behavior: contain;
+    scrollbar-gutter: stable;
   }
   .md-content { max-width: none; min-width: 0; }
   .md-typeset { max-width: 100%; }
