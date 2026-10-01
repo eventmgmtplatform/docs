@@ -61,7 +61,7 @@ nav:
   - D6 — Environment Evolution & Deployment Model: architecture/d6-environment-evolution.md
   - Multi-Surface Interaction: architecture/multi-surface-interaction.md
   - AI-01 — AIOps / AI: architecture/ai-01-aiops-ai-architecture.md
-  - Autoridad de datos y replay: architecture/data-authority-replay.md
+  - Data Authority & Replay: architecture/data-authority-replay.md
   - Flujos ejecutados: architecture/solution-flows.md
   - Topología runtime: architecture/runtime-topology.md
   - Contenedores: architecture/containers.md

@@ -3,6 +3,23 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — ARCH-REDESIGN-13
+
+### Redesigned
+
+- Data Authority & Replay as a Golden cross-cutting architecture.
+- Formalized Kafka transport/replay, PostgreSQL operational authority and
+  OpenSearch search/analytics projection roles.
+- Clarified replay, backup/restore and projection-rebuild recovery semantics.
+- Documented replay safety and the external-side-effect boundary.
+
+### Preserved
+
+- Architecture semantics, service responsibilities, event contracts, data
+  authority, management governance and AI authority remain unchanged.
+- General reconciliation and transactional outbox remain outside certified
+  implementation evidence.
+
 ## 2026-10-01 — ARCH-REDESIGN-12
 
 ### Redesigned
