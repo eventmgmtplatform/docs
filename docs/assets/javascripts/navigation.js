@@ -29,12 +29,40 @@
     });
   }
 
+  function initPresentation() {
+    var path = window.location.pathname;
+    var article = document.querySelector('.md-content__inner');
+    if (!article) return;
+
+    article.classList.toggle('oem-architecture-page', path.indexOf('/architecture/') !== -1);
+    article.classList.toggle('oem-flagship-page', /\/architecture\/oem-architecture-definition\/?$/.test(path));
+    article.classList.toggle('oem-environment-page', /\/architecture\/d6-environment-evolution\/?$/.test(path));
+    article.classList.toggle('oem-cross-cutting-page', /\/(data-authority-replay|multi-surface-interaction|ai-01-aiops-ai-architecture)\/?$/.test(path));
+
+    article.querySelectorAll('.mermaid').forEach(function (diagram) {
+      diagram.classList.add('oem-diagram');
+      var heading = diagram.previousElementSibling;
+      while (heading && !/^H[1-4]$/.test(heading.tagName)) heading = heading.previousElementSibling;
+      var label = heading ? heading.textContent.toLowerCase() : '';
+      diagram.classList.toggle('oem-diagram--solution', label.indexOf('solution architecture') !== -1 || label.indexOf('architecture map') !== -1);
+      diagram.classList.toggle('oem-diagram--engineering', label.indexOf('engineering architecture') !== -1);
+    });
+  }
+
   initAccordion();
+  initPresentation();
+  window.addEventListener('load', function () {
+    window.setTimeout(initPresentation, 0);
+  });
   var drawer = document.getElementById('__drawer');
   if (drawer) {
     drawer.addEventListener('change', function () {
       document.documentElement.classList.toggle('em-drawer-closed', drawer.checked);
     });
   }
-  if (window.document$) document$.subscribe(initAccordion);
+  if (window.document$) document$.subscribe(function () {
+    initAccordion();
+    initPresentation();
+    window.setTimeout(initPresentation, 0);
+  });
 })();

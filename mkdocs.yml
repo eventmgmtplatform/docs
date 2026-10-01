@@ -1,5 +1,5 @@
-site_name: Open Event Management
-site_description: Documentación técnica de Open Event Management
+site_name: OPEN EVENT MANAGEMENT
+site_description: Architecture & Product Documentation
 site_url: https://eventmgmtplatform.github.io/event-mgmt-docs/
 docs_dir: docs
 site_dir: site
@@ -10,7 +10,10 @@ theme:
     text: IBM Plex Sans
     code: IBM Plex Mono
   features:
+  - navigation.tabs
+  - navigation.tabs.sticky
   - navigation.sections
+  - navigation.path
   - navigation.top
   - navigation.footer
   - content.code.copy
@@ -49,30 +52,33 @@ nav:
   - Glosario: concepts/glossary.md
 - Arquitectura:
   - Architecture Definition: architecture/oem-architecture-definition.md
-  - Visión general: architecture/index.md
-  - D0 — Arquitectura lógica: architecture/d0-logical-current.md
-  - D1 — Despliegue local: architecture/d1-local-current.md
-  - D3 — On-Premises RHEL Deployment: architecture/d3-rhel-current.md
-  - D2 — KVM + Kubernetes Deployment: architecture/d2-kvm-kubernetes-target.md
-  - D4 — QA GKE Minimum Deployment: architecture/d4-qa-gke-minimum-target.md
-  - GCP-01 — GCP Foundation: architecture/gcp-foundation-current.md
-  - GCP-02 — Build, Delivery & CI/CD: architecture/gcp-cicd-current.md
-  - D5A — Production GKE Runtime: architecture/d5a-prod-gke-runtime-target.md
-  - D5B — Production GKE + CI/CD Composition: architecture/d5b-prod-gke-cicd-target.md
   - D6 — Environment Evolution & Deployment Model: architecture/d6-environment-evolution.md
-  - Multi-Surface Interaction: architecture/multi-surface-interaction.md
-  - AI-01 — AIOps / AI: architecture/ai-01-aiops-ai-architecture.md
-  - Data Authority & Replay: architecture/data-authority-replay.md
-  - Flujos ejecutados: architecture/solution-flows.md
-  - Topología runtime: architecture/runtime-topology.md
-  - Contenedores: architecture/containers.md
-  - Componentes: architecture/components.md
-  - Datos: architecture/data.md
-  - Seguridad: architecture/security.md
-  - Despliegue: architecture/deployment.md
-  - GCP: architecture/gcp.md
-  - Mapa V1.0.0: architecture/v1-map.md
-  - Cinco imágenes OEM: architecture/container-images.md
+  - Golden Architectures:
+    - D0 — Logical Core: architecture/d0-logical-current.md
+    - D1 — Local Deployment: architecture/d1-local-current.md
+    - D3 — On-Premises RHEL: architecture/d3-rhel-current.md
+    - D2 — Portable Kubernetes: architecture/d2-kvm-kubernetes-target.md
+    - D4 — QA GKE: architecture/d4-qa-gke-minimum-target.md
+    - GCP-01 — GCP Foundation: architecture/gcp-foundation-current.md
+    - GCP-02 — Build / Delivery: architecture/gcp-cicd-current.md
+    - D5A — Production GKE Runtime: architecture/d5a-prod-gke-runtime-target.md
+    - D5B — Production Composition: architecture/d5b-prod-gke-cicd-target.md
+  - Cross-Cutting Architectures:
+    - Data Authority & Replay: architecture/data-authority-replay.md
+    - Multi-Surface Interaction: architecture/multi-surface-interaction.md
+    - AI-01 — AIOps / AI: architecture/ai-01-aiops-ai-architecture.md
+  - Architecture Reference:
+    - Visión general: architecture/index.md
+    - Flujos ejecutados: architecture/solution-flows.md
+    - Topología runtime: architecture/runtime-topology.md
+    - Contenedores: architecture/containers.md
+    - Componentes: architecture/components.md
+    - Datos: architecture/data.md
+    - Seguridad: architecture/security.md
+    - Despliegue: architecture/deployment.md
+    - GCP: architecture/gcp.md
+    - Mapa V1.0.0: architecture/v1-map.md
+    - Cinco imágenes OEM: architecture/container-images.md
   - Evolución de arquitectura:
     - Registro de evolución: architecture/evolution/index.md
     - Historia D3 RHEL: architecture/evolution/d3-rhel-history.md
