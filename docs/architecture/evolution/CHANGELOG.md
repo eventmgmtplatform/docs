@@ -3,6 +3,20 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — ARCH-REDESIGN-05
+
+### Redesigned
+
+- D4 using the approved OEM Golden Template.
+- Introduced a concise Solution Architecture and refined the Engineering Architecture for the minimum GKE QA runtime.
+- Clarified D2 → D4 portability and separated GCP Foundation capabilities from the GKE/OEM runtime.
+- Clarified QA/runtime, CI/CD, AI/AIOps, and D4 → D5A boundaries.
+
+### Preserved
+
+- D0 responsibilities, D2 workload contract, D4 workload model, Management Plane, canonical event flow, data authority, and deployment contract remain unchanged.
+- GCP Foundation, CI/CD, and AI architecture remain separate domains.
+
 ## 2026-10-01 — ARCH-REDESIGN-04
 
 ### Redesigned
