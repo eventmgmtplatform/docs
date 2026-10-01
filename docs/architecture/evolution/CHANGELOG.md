@@ -3,6 +3,20 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — ARCH-REDESIGN-03
+
+### Redesigned
+
+- D3 using the approved OEM Golden Template.
+- Introduced a concise Solution Architecture and a detailed Engineering Architecture with explicit distributed RHEL role containment.
+- Clarified the distinction between deployment/readiness dependency and event flow.
+- Expressed the Search / Analytics Projection tier as a modular capability in the D3 profile.
+
+### Preserved
+
+- D0 responsibilities, the four-role D3 model, service placement, data authority, Management Plane, event flow, readiness dependency, and deployment contract remain unchanged.
+- The canonical D0 event and management flow remains visible alongside the D3 distributed-role containment view.
+
 ## 2026-09-30 — ARCH-REDESIGN-02
 
 ### Redesigned

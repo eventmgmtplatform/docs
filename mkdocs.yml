@@ -51,7 +51,7 @@ nav:
   - Visión general: architecture/index.md
   - D0 — Arquitectura lógica: architecture/d0-logical-current.md
   - D1 — Despliegue local: architecture/d1-local-current.md
-  - D3 — DEV RHEL / On-Prem: architecture/d3-rhel-current.md
+  - D3 — On-Premises RHEL Deployment: architecture/d3-rhel-current.md
   - D2 — DEV KVM + Kubernetes: architecture/d2-kvm-kubernetes-target.md
   - D4 — QA GKE mínimo: architecture/d4-qa-gke-minimum-target.md
   - GCP-01 — Foundation: architecture/gcp-foundation-current.md

@@ -43,3 +43,17 @@ The project-provided `DEV-BOOT-01` report and offline bundle are registered in
 [D3 Current](../d3-rhel-current.md) with their evidence class. Any future
 repository recovery must update this history through the
 [Architecture Evolution Register](index.md), rather than rewriting this record.
+
+## D3-golden-01 — ARCH-REDESIGN-03
+
+On 2026-10-01, D3 adopted the OEM Golden Template with separate solution and
+engineering views, explicit distributed-role containment, and a direct visual
+distinction between deployment dependency and event flow.
+
+The redesign preserves the project-provided R79 evidence above and does not
+reclassify it. Architecture semantics, the four-role deployment contract,
+service placement, data authority, Management Plane, event flow, and readiness
+dependency remain unchanged. OpenSearch is expressed as an optional modular
+Search / Analytics Projection capability rather than as implementation status.
+The canonical D0 event and management flow remains visible alongside the
+distributed-role view.
