@@ -4,7 +4,7 @@ Servicio responsable de consolidar resultados de integración y mantener el esta
 
 ## Documentación
 
-- [Arquitectura](../../../platform/event-state-service/conceptual-architecture.md)
+- [Arquitectura](../../../platform/event-state-service/README.md)
 - [Runbook operacional](../../../platform/service-administration.md)
 - [Decisiones arquitectónicas](../../../decisions/index.md)
 - [Cronología](../../../project/status.md)

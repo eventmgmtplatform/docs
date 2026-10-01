@@ -10,7 +10,7 @@ Esta sección contiene el conocimiento técnico permanente del proyecto.
 ## Integraciones
 
 - [ServiceNow](../platform/servicenow/CHANGELOG.md)
-- [Publicación SQL](../platform/integrations/index.md)
+- [Publicación SQL y administración](../platform/service-administration.md)
 
 ## Infraestructura
 

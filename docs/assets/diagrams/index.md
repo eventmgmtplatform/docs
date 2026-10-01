@@ -5,7 +5,7 @@ paquete EventManagement OpenSource Visual Resources v1.0.0.
 
 ## Arquitectura y despliegue
 
-![Arquitecturas de servicios](../../platform/architecture/diagrams/Event%20Management%20Service%20Architectures.png)
+![Arquitecturas de servicios](../atlas/architecture-atlas-v1.0.0/00-general-solution/00-general-solution__01-architecture.png)
 
 ![Arquitectura Docker Compose](../../deployment/diagrams/Arquitectura%20Docker%20Compose%20para%20gesti%C3%B3n%20de%20eventos.png)
 
@@ -15,9 +15,9 @@ paquete EventManagement OpenSource Visual Resources v1.0.0.
 
 ## Servicios
 
-![Arquitectura del Event Processor](../../platform/event-processor/diagrams/Arquitectura%20del%20Procesador%20de%20Eventos%20Open%20Source.png)
+![Arquitectura del Event Processor](../atlas/architecture-atlas-v1.0.0/03-event-processor/03-event-processor__01-architecture.png)
 
-![Arquitectura del Event State Service](../../platform/event-state-service/diagrams/ESS_V1_Architecture.png)
+![Arquitectura del Event State Service](../atlas/architecture-atlas-v1.0.0/08-event-state-service/08-event-state-service__01-architecture.png)
 
 ## Operación
 

@@ -72,4 +72,4 @@ La documentación detallada está en [Arquitectura](architecture/index.md),
 - [Topología del runtime local](architecture/runtime-topology.md)
 - [Defect Prevention global](project/defect-prevention.md)
 - [Cobertura documental](project/documentation-coverage.md)
-- [Integraciones de plataforma](platform/integrations/index.md)
+- [Administración e integraciones de plataforma](platform/service-administration.md)

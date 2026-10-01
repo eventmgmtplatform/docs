@@ -3,8 +3,6 @@ site_description: Documentación técnica de Open Event Management
 site_url: https://eventmgmtplatform.github.io/event-mgmt-docs/
 docs_dir: docs
 site_dir: site
-exclude_docs: |
-  platform/README.md
 theme:
   name: material
   language: es
@@ -111,8 +109,8 @@ nav:
   - Defect Prevention: project/defect-prevention.md
   - Cobertura documental: project/documentation-coverage.md
   - DP Matrix V1 → V2: project/defect-prevention-matrix-v1-v2.md
-- Plataforma integrada:
-  - Índice: platform/index.md
+- Plataforma:
+  - Índice: platform/README.md
   - Arquitectura integrada: platform/architecture/README.md
   - Event Processor: platform/event-processor/implementation-status.md
   - Processor — Defect Prevention: platform/event-processor/defect-prevention.md
@@ -120,7 +118,6 @@ nav:
   - ESS — Defect Prevention: platform/event-state-service/defect-prevention.md
   - Dashboards: platform/dashboards/architecture.md
   - Kafka: platform/kafka/README.md
-  - Integraciones: platform/integrations/index.md
   - GLPI: platform/integrations/glpi.md
   - CACF / NEXT: platform/cacf/README.md
   - CACF — Defect Prevention: platform/cacf/defect-prevention.md
@@ -129,7 +126,7 @@ nav:
   - Administración: platform/service-administration.md
   - Gobierno Git: platform/git/README.md
   - Changelogs: platform/changelogs/README.md
-  - ESS conceptual: platform/event-state-service/conceptual-architecture.md
-  - ServiceNow Core Foundation: platform/servicenow/core-foundation.md
-  - GNM Core Foundation: platform/gnm/core-foundation.md
-  - CACF Core Foundation: platform/cacf/core-foundation-overview.md
+  - ESS conceptual: platform/event-state-service/README.md
+  - ServiceNow: platform/servicenow/CHANGELOG.md
+  - GNM: platform/gnm/CHANGELOG.md
+  - CACF Core Foundation: platform/cacf/README.md
