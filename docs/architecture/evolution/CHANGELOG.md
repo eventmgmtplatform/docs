@@ -3,6 +3,25 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — ARCH-REDESIGN-08
+
+### Redesigned
+
+- D5A using the approved OEM Golden Template.
+- Refined the Production Runtime Architecture and clarified the D4-to-D5A
+  operating-quality evolution.
+- Separated HA from DR and made authority-aware recovery responsibilities
+  visible.
+- Preserved the runtime/CI-CD boundary and prepared the D5B composition.
+
+### Preserved
+
+- D0 responsibilities, the D4 workload contract, production service ownership,
+  Management Plane, data authority, recovery semantics and AI independence
+  remain unchanged.
+- D5A remains the production runtime architecture; GCP-02 remains the separate
+  build and delivery architecture.
+
 ## 2026-10-01 — ARCH-REDESIGN-07
 
 ### Redesigned
