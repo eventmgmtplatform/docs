@@ -3,6 +3,19 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-09-30 — ARCH-REDESIGN-01
+
+### Redesigned
+
+- D0 editorial and visual presentation using the OEM Architecture Golden Template.
+- Added a concise Solution Architecture view for committee, customer, and executive technical audiences.
+- Retained and clarified the Engineering Architecture view and its plane, event, management, and authority contracts.
+
+### Established
+
+- Reusable architecture-page structure and Mermaid visual grammar for D1 through AI-01.
+- Architecture semantics, responsibilities, authority model, event contracts, and management boundary remain unchanged.
+
 ## 2026-09-28 — WRITE-09
 
 ### Added

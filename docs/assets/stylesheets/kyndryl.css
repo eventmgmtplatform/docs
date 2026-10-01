@@ -33,6 +33,24 @@ code, kbd, pre { font-family: "IBM Plex Mono", Consolas, monospace; }
 .md-typeset blockquote { border-left-color: var(--em-red); }
 .md-typeset .admonition, .md-typeset details { border-radius: 0; box-shadow: none; }
 .md-footer { background: var(--em-ink); }
+.md-typeset .mermaid {
+  background: #fff;
+  border: 1px solid var(--em-gray-20);
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  padding: 1rem;
+  text-align: center;
+}
+.md-typeset .mermaid svg {
+  height: auto;
+  max-width: 100%;
+}
+@media print {
+  .md-typeset .mermaid {
+    break-inside: avoid;
+    overflow: visible;
+  }
+}
 /* Fixed Kyndryl light presentation: no palette/theme selector. */
 .md-header__option, [data-md-component="palette"], label[for^="__palette"] { display: none !important; }
 
