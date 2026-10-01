@@ -48,6 +48,7 @@ nav:
   - Flujo de eventos: concepts/event-flow.md
   - Glosario: concepts/glossary.md
 - Arquitectura:
+  - Architecture Definition: architecture/oem-architecture-definition.md
   - Visión general: architecture/index.md
   - D0 — Arquitectura lógica: architecture/d0-logical-current.md
   - D1 — Despliegue local: architecture/d1-local-current.md

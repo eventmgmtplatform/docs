@@ -5,6 +5,8 @@ application feature backlog.
 
 ## DONE
 
+- MASTER-ARCH-01 assembled the approved Golden Architecture Set into the
+  canonical product-wide Architecture Definition without redesigning it.
 - Architecture Evolution Register established.
 - D0 logical architecture canonicalized as documented architecture.
 - D1 local deployment architecture canonicalized as documented architecture.
@@ -26,6 +28,14 @@ application feature backlog.
 
 - Reconcile predecessor diagrams against the new visual grammar without
   deleting historical material.
+
+## MASTER DELIVERY REMAINING
+
+- Generate the separately authorized standalone HTML, DOCX and PDF artifacts.
+- Complete final repository integration and any separately approved CI/Pages
+  publication.
+- Keep operating-system/runtime certification and future ADR work outside the
+  completed Master assembly.
 
 ## NEXT
 

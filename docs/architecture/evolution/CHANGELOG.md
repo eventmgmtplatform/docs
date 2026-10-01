@@ -3,6 +3,27 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — MASTER-ARCH-01
+
+### Assembled
+
+- Created the canonical Open Event Management Architecture Definition from the
+  thirteen approved Golden architectures.
+- Added product, logical, event, data, interaction, AI, deployment, cloud,
+  delivery, security, operability and architecture-catalog synthesis.
+- Created compact Master Solution and Master Engineering architectures,
+  deployment and Golden
+  architecture matrices, and source cross-references.
+
+### Preserved
+
+- All Golden source semantics, lifecycle distinctions and detailed pages remain
+  authoritative and are not superseded.
+- No source architecture is superseded and no semantic architecture change is
+  introduced.
+- Architecture definition remains distinct from runtime and implementation
+  evidence, including the AI-01 evidence boundary.
+
 ## 2026-10-01 — ARCH-REDESIGN-13
 
 ### Redesigned
