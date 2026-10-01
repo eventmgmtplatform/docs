@@ -3,6 +3,24 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — ARCH-REDESIGN-06
+
+### Redesigned
+
+- GCP-01 using the approved OEM Golden Template.
+- Introduced a concise Solution Architecture for D4, D5A and GCP-02 consumers
+  and a detailed Engineering Architecture for the shared GCP foundation.
+- Clarified environment isolation and the network, identity, Terraform, secret,
+  artifact and object-storage responsibility boundaries.
+
+### Preserved
+
+- The custom VPC, management/workloads/data subnet model, firewall boundaries,
+  Private Google Access, purpose-specific identities, Secret Manager, Artifact
+  Registry and Cloud Storage purposes remain unchanged.
+- GCP-01 remains a foundation architecture, not runtime, delivery or evidence of
+  deployed cloud resources.
+
 ## 2026-10-01 — ARCH-REDESIGN-05
 
 ### Redesigned

@@ -30,3 +30,12 @@ Initial logical/GCP diagrams
 
 Architecture evolution preserves predecessor diagrams and links successors;
 classification does not delete history.
+
+## GCP-01 presentation evolution
+
+`GCP-01-golden-01` (ARCH-REDESIGN-06, 2026-10-01) applies the OEM Golden
+Template to the foundation view. It separates a concise consumer-oriented
+solution view from the engineering containment view and clarifies the network,
+identity, Terraform, secret, artifact and object-storage responsibility
+boundaries. The foundation capabilities, consumers and separation from runtime
+and delivery architectures are unchanged.

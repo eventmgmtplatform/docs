@@ -1,105 +1,214 @@
 # GCP-01 — OEM GCP Foundation Architecture
 
-| Architecture lifecycle | Evidence status | Scope |
+## Architecture Overview
+
+GCP-01 defines the shared Google Cloud foundation consumed by OEM runtime and delivery architectures. It establishes network, identity, secret, artifact and object-storage capabilities without turning those capabilities into an OEM runtime, a build pipeline or evidence that cloud resources are deployed.
+
+The environment model uses separate `event-management-dev`, `event-management-qa` and `event-management-prod` project boundaries. Each environment applies the same foundation responsibilities through its own authorized identities and environment-specific configuration.
+
+## Solution Architecture
+
+```mermaid
+flowchart LR
+  subgraph FOUNDATION[Shared GCP Foundation]
+    NET[Networking]
+    IAM[IAM & Service Identities]
+    SM[Secret Manager]
+    AR[Artifact Registry]
+    CS[Cloud Storage]
+  end
+
+  D4[D4 — QA GKE Runtime]
+  D5A[D5A — PROD GKE Runtime]
+  GCP02[GCP-02 — Build, Delivery & CI/CD]
+
+  FOUNDATION --> D4
+  FOUNDATION --> D5A
+  FOUNDATION --> GCP02
+```
+
+The foundation is a shared architectural dependency, not a shared runtime. D4 and D5A attach their environment-specific GKE runtimes to foundation capabilities. GCP-02 consumes identities and artifact storage to define delivery contracts. None of those consumers transfers its responsibilities into GCP-01.
+
+## Foundation Consumers
+
+| Consumer | Foundation capabilities consumed | Responsibility retained by consumer |
 |---|---|---|
-| `CURRENT` | `CURRENTLY DOCUMENTED` infrastructure definition | GCP foundation, not runtime |
+| D4 QA GKE | QA network attachment, approved identities and secret references, image and object-storage capabilities | Minimum QA GKE topology and OEM workload runtime |
+| D5A PROD GKE | Production network attachment and production-scoped foundation capabilities | Production runtime, availability, scaling, recovery and workload controls |
+| GCP-02 | Terraform, Cloud Build and Continuous Delivery identity boundaries plus Artifact Registry | Build, immutable artifact, promotion and delivery contracts |
 
-GCP-01 answers where OEM cloud infrastructure capabilities are defined. It does
-not assert that Terraform definitions prove cloud resources currently exist, nor
-that QA, production, GKE workloads, HA or DR are running.
-
-**Predecessor:** preserved [combined GCP material](evolution/gcp-architecture-history.md).  
-**Successor/extension:** [GCP-02 Build, Delivery & CI/CD](gcp-cicd-current.md).  
-**Runtime relationship:** [D4 QA GKE](d4-qa-gke-minimum-target.md) remains a
-separate target runtime architecture.
-
-## Foundation containment
+## Engineering Architecture
 
 ```mermaid
 flowchart TB
-  subgraph PROJECT[GCP Project / Environment — CURRENTLY DOCUMENTED foundation]
-    subgraph NET[Networking]
+  subgraph PROJECT[GCP Project / Environment Boundary]
+    subgraph NETWORK[Network Foundation]
       VPC[Custom VPC]
-      MGMT[Management subnet]
-      WORK[Workloads subnet]
-      DATA[Data subnet]
-      FW[Internal and management firewall boundaries]
+      MGMT[Management Subnet]
+      WORK[Workloads Subnet]
+      DATA[Data Subnet]
+      IFW[Internal Firewall Controls]
+      MFW[Management Firewall Controls]
       PGA[Private Google Access]
       VPC --> MGMT
       VPC --> WORK
       VPC --> DATA
-      VPC --> FW
+      VPC --> IFW
+      VPC --> MFW
       VPC --> PGA
     end
 
-    subgraph ID[Identity & Security]
+    subgraph IDENTITY[Identity Foundation]
       IAM[IAM]
-      TFID[Terraform deployment identity]
-      BUILDID[Cloud Build identity]
-      CDID[Continuous Delivery executor]
-      SM[Secret Manager\nsecret storage / reference boundary]
+      TFID[Terraform Deployment Identity]
+      BUILDID[Cloud Build Identity]
+      CDID[Continuous Delivery Executor Identity]
+      RUNTIMEID[Runtime Workload Identity Boundary]
       IAM --> TFID
       IAM --> BUILDID
       IAM --> CDID
-      IAM --> SM
+      IAM --> RUNTIMEID
     end
 
-    subgraph ART[Artifact Foundation]
-      AR[Artifact Registry\ncontainer repository capability]
+    SM[Secret Manager]
+    AR[Artifact Registry]
+
+    subgraph STORAGE[Cloud Storage Purposes]
+      APP[Application]
+      BACKUP[Backups]
+      SHARED[Shared]
+      LOGS[Logs]
     end
 
-    subgraph STORAGE[Object Storage Foundation]
-      APP[Application bucket]
-      BACKUP[Backups bucket]
-      SHARED[Shared bucket]
-      LOGS[Logs bucket]
+    subgraph ATTACH[Runtime Attachment]
+      D4[D4 — QA GKE]
+      D5A[D5A — PROD GKE]
     end
-
-    ATTACH[Future runtime attachment point\nGKE/workloads: TARGET]
   end
 
-  WORK -. future workload network .-> ATTACH
-  DATA -. future data network .-> ATTACH
+  WORK --> ATTACH
+  DATA --> ATTACH
+  RUNTIMEID -. authorized workload identity .-> ATTACH
   SM -. approved secret references .-> ATTACH
-  AR -. future image consumption .-> ATTACH
+  AR -. approved image consumption .-> ATTACH
+  STORAGE -. purpose-specific object access .-> ATTACH
+  TFID --> NETWORK
+  TFID --> IDENTITY
+  TFID --> SM
+  TFID --> AR
+  TFID --> STORAGE
 ```
 
-## Networking
+This view expresses containment and authorized attachment. It does not imply an event flow, a deployed GKE cluster or a particular application deployment.
 
-The repository documents a custom VPC, regional management/workloads/data
-subnets, Private Google Access, internal ingress firewall and management-to-SSH
-firewall boundaries. It explicitly does not include Cloud Router, NAT, Private
-Service Access, private DNS, VPC peering, VPN/Interconnect, load balancers or
-public ingress rules in the initial module. Those are `PLANNED` or `UNKNOWN`
-until an environment decision and evidence exist.
+## GCP Environment Boundary
 
-## Identity and secrets
+Each project/environment is an isolation boundary for its network, identities, secrets, artifacts and object storage. The documented project model is `event-management-dev`, `event-management-qa` and `event-management-prod`. Promotion across environments must preserve this separation; a shared architectural pattern does not imply shared credentials, secrets or runtime state.
 
-Identity is represented by purpose: Terraform deployment, Cloud Build and
-Continuous Delivery execution identities. Secret Manager is the secure storage
-and integration boundary; applications should consume approved references or
-injected values. Credentials, service-account keys and secret payloads do not
-belong in Git, committed Terraform variables, release manifests or diagrams.
+## Network Foundation
 
-Runtime workload identity and secret injection are future runtime decisions.
+The network foundation contains a custom VPC with regional management, workloads and data subnets. Internal and management firewall controls separate traffic purposes, while Private Google Access supports private access to eligible Google APIs and services.
 
-## Artifact and storage foundations
+The management subnet supports administrative and platform traffic, the workloads subnet supports runtime and application workloads, and the data subnet provides the boundary for stateful and data-oriented connectivity. Operational CIDRs remain infrastructure configuration rather than architecture-page policy.
 
-Artifact Registry is a foundation capability that stores container artifacts.
-Its build, immutable-digest and promotion lifecycle belongs to GCP-02. Cloud
-Storage supports documented application, backups, shared and logs purposes; it
-is object storage and must not be confused with Kubernetes Persistent Volumes
-or application database storage.
+Cloud Router, Cloud NAT, Private Service Access, private DNS, VPC peering, VPN/Interconnect, load balancers, public ingress and runtime NetworkPolicy are not defined by this foundation view. They require an explicit environment or runtime decision.
 
-## Runtime attachment boundary
+## Identity and Access Model
 
-GCP-01 deliberately stops before a runtime. D4 defines the QA GKE target;
-D5A will compose GCP-01 with a production GKE runtime. Kafka, PostgreSQL,
-OpenSearch and OEM workloads are not represented as deployed GCP resources in
-this view.
+Identity is purpose-specific and least-privileged:
 
-## Evidence and gaps
+- the Terraform deployment identity provisions the documented foundation;
+- the Cloud Build identity supports the GCP-02 build boundary;
+- the Continuous Delivery executor identity supports the GCP-02 delivery boundary; and
+- the runtime workload identity boundary is consumed and completed by D4 or D5A.
 
-The current repository supplies Terraform definitions and documentation, not a
-cloud inventory. GKE topology, workload identity, ingress/load balancing,
-runtime storage, HA/DR, backup/recovery and observability remain pending.
+Human administration, automation and workloads must not collapse into a single identity. Runtime RBAC, workload-to-service mapping and secret injection remain runtime responsibilities.
+
+## Terraform Provisioning Boundary
+
+Terraform is the infrastructure-as-code mechanism for provisioning the documented GCP foundation through its authorized deployment identity. It does not build application images, operate the runtime, authorize application deployments or own secret payloads. Terraform definitions describe intended infrastructure; they are not cloud-inventory evidence.
+
+`Terraform → authorized deployment identity → GCP APIs → foundation resources`
+
+## Secret Management
+
+Secret Manager is the secure storage and reference boundary. Consumers use approved references or injected values through their own authorized identities. Credentials, service-account keys and secret payloads must not be committed to Git, Terraform variables, container images, release manifests or architecture documentation.
+
+Secret producers or administrators manage values through approved controls; authorized runtime and automation integrations consume only the references or injected values they require.
+
+## Artifact Foundation
+
+Artifact Registry provides repository storage for approved container artifacts. It does not build images, select deployable versions, promote releases, execute deployments, authorize a runtime or serve as source control. Those lifecycle contracts belong to GCP-02 and its consumers.
+
+## Object Storage Foundation
+
+Cloud Storage supplies purpose-specific object-storage capabilities for application, backups, shared and logs use cases. Access is environment-scoped and identity-controlled; retention, lifecycle and recovery requirements must be defined by the consuming service or environment.
+
+## Storage Responsibility Model
+
+| Storage capability | Responsibility | Not represented as |
+|---|---|---|
+| Artifact Registry | Container artifact repository | Build controller, deployment controller or runtime |
+| Application bucket | Application-owned objects | PostgreSQL or Kubernetes Persistent Volume |
+| Backups bucket | Approved backup objects | A complete backup/recovery architecture |
+| Shared bucket | Governed shared objects | Shared database or event bus |
+| Logs bucket | Log objects where explicitly used | OpenSearch analytics projection or observability platform |
+
+Cloud Storage does not replace PostgreSQL, Kafka, OpenSearch or Kubernetes Persistent Volumes. Those data responsibilities remain with the runtime and the owning OEM service.
+
+## Security Principles
+
+| Principle | Foundation rule |
+|---|---|
+| Least Privilege | Grant only the permissions required for each responsibility. |
+| Identity Separation | Keep Terraform, build, delivery, runtime and human administration identities distinct. |
+| No Static Credentials | Use approved identity integration; do not embed credentials in workloads or automation. |
+| Secret Externalization | Keep secret payloads in Secret Manager and outside source, images, manifests and plain configuration. |
+| Controlled Network Boundaries | Separate management, workloads and data traffic through explicit network and firewall boundaries. |
+| Private/Internal Service Access | Use Private Google Access where defined; other private connectivity requires a separate decision. |
+| Auditability | Make identity use and foundation changes attributable through controlled execution. |
+| Environment Separation | Isolate dev, QA and production through distinct project/environment boundaries. |
+
+## Architectural Principles
+
+| Principle | Architectural consequence |
+|---|---|
+| Foundation / Runtime Separation | GCP capabilities support but do not define OEM workloads. |
+| Infrastructure as Code | Foundation resources are expressed and provisioned through controlled Terraform execution. |
+| Identity Purpose Separation | Terraform, build, delivery and runtime use distinct authorization boundaries. |
+| Secret Externalization | Secret Manager holds payloads; consumers receive approved references or injected values. |
+| Artifact Immutability Readiness | Artifact Registry supplies repository capability for the governed lifecycle defined by GCP-02. |
+| Network Segmentation | Management, workloads and data connectivity remain distinct responsibilities. |
+| Storage Responsibility Separation | Object and artifact storage do not replace runtime persistence. |
+| Environment Isolation | Each environment retains its own project-scoped capabilities and access. |
+| Reusable Cloud Foundation | D4, D5A and GCP-02 consume the same foundation contract without duplicating it. |
+| Least Privilege | Every consumer receives only the access required for its role. |
+
+The foundation consumption flow is: **Define** infrastructure as code;
+**Authorize** the dedicated deployment identity; **Provision** through GCP APIs;
+**Establish** the network, identity, secret, artifact and storage foundations;
+then **Consume** them from the separate runtime and delivery architectures.
+
+## Foundation Boundary
+
+GCP-01 stops before OEM application behavior, GKE workload topology, ingress, load balancing, runtime storage, event processing, observability, production HA/DR, CI/CD workflow and AI/AIOps. These are separate architecture domains. The page also makes no claim that a GCP project or any depicted resource is deployed; the diagrams define architectural capabilities and boundaries.
+
+## Relationship to D4
+
+[D4](d4-qa-gke-minimum-target.md) consumes the QA-scoped foundation and defines the minimum QA GKE runtime. GCP-01 does not absorb the cluster, Kubernetes or OEM workload responsibilities represented by D4.
+
+## Relationship to D5A
+
+[D5A](d5a-prod-gke-runtime-target.md) composes the production-scoped foundation with production GKE runtime requirements. Availability, scaling, recovery and runtime controls remain D5A concerns.
+
+## Relationship to GCP-02
+
+[GCP-02](gcp-cicd-current.md) consumes foundation identities and Artifact Registry while defining infrastructure delivery, application build, promotion and runtime-delivery contracts. GCP-01 provides capabilities; GCP-02 defines how delivery uses them.
+
+## Related Architectures
+
+- [D4 — QA GKE Minimum Deployment Architecture](d4-qa-gke-minimum-target.md)
+- [D5A — PROD GKE Runtime Architecture](d5a-prod-gke-runtime-target.md)
+- [GCP-02 — OEM GCP Build, Delivery & CI/CD](gcp-cicd-current.md)
+- [GCP architecture evolution history](evolution/gcp-architecture-history.md)
+- [Architecture Evolution Register](evolution/index.md)
