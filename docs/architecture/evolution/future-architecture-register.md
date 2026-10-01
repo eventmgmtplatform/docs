@@ -7,7 +7,7 @@ or implemented by the current baseline.
 
 | Lifecycle | Scope | Required discovery |
 |---|---|---|
-| `PLANNED` (`DOCUMENTED`) | AIOps / AI architecture | [AI-01](../ai-01-aiops-ai-architecture.md) defines the future boundary while preserving partial AIOps evidence; recover LLM/OLLM, RAG/retrieval, agents/tools, orchestration, models, policy/governance, observability and OpenSearch integration evidence. |
+| `PLANNED` (`DOCUMENTED`, `AI-01-golden-01`) | AIOps / AI architecture | [AI-01](../ai-01-aiops-ai-architecture.md) defines the planned runtime boundary while preserving partial AIOps evidence; recover LLM/OLLM, RAG/retrieval, agents/tools, orchestration, models, policy/governance, observability and OpenSearch integration evidence. |
 
 OpenSearch is a Search / Analytics Projection capability; it is not AIOps by
 itself. Future AI read/context access must use governed OEM search, history and
@@ -15,6 +15,10 @@ approved context interfaces. Operational actions must pass through governed OEM
 APIs or approved tools with authorization, audit and policy controls. AI must
 not directly mutate PostgreSQL authoritative state, Kafka internal state or
 OpenSearch system state unless a future ADR defines a controlled mechanism.
+
+ARCH-REDESIGN-12 normalizes AI-01 responsibilities, governance and evidence
+boundaries without asserting implementation beyond the minimum independent
+AIOps Engine. AI-02 remains a separate lifecycle architecture.
 
 ## OEM Multi-Surface Interaction Architecture
 

@@ -3,6 +3,28 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — ARCH-REDESIGN-12
+
+### Redesigned
+
+- AI-01 using the OEM Golden visual grammar as an optional, cross-cutting and
+  vendor-neutral AI runtime architecture.
+- Separated interaction, orchestration, retrieval/context, model, workflow,
+  agent, tool, governance, observability and evaluation responsibilities.
+- Clarified governed read/action tools, policy-driven approval, context
+  provenance, provider boundaries and graceful degradation.
+- Formalized the distinction between AI-01 runtime architecture and AI-02
+  delivery/governance lifecycle.
+
+### Preserved
+
+- D0 Core, Multi-Surface governance, data authority, deployment and AIOps
+  interaction contracts remain unchanged.
+- Certified implementation evidence remains limited to persistent AIOps
+  configuration, REST CRUD, audit and a mock provider; no LLM/OLLM, RAG,
+  vector retrieval, production agent, model gateway, tool execution or AI
+  memory implementation is asserted.
+
 ## 2026-10-01 — ARCH-REDESIGN-11
 
 ### Redesigned

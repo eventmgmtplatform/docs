@@ -19,6 +19,8 @@ application feature backlog.
 - D5A production GKE runtime architecture defined as a target model.
 - D5B production GKE plus CI/CD composition defined as a target delivery model.
 - D6 environment evolution and environment-aware installation/deployment documentation view defined.
+- AI-01 planned runtime architecture normalized with explicit model, retrieval,
+  agent, tool, governance and implementation-evidence boundaries.
 
 ## IN PROGRESS
 
