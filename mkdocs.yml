@@ -58,7 +58,7 @@ nav:
   - GCP-02 — Build, Delivery & CI/CD: architecture/gcp-cicd-current.md
   - D5A — Production GKE Runtime: architecture/d5a-prod-gke-runtime-target.md
   - D5B — Production GKE + CI/CD Composition: architecture/d5b-prod-gke-cicd-target.md
-  - D6 — Evolución de ambientes: architecture/d6-environment-evolution.md
+  - D6 — Environment Evolution & Deployment Model: architecture/d6-environment-evolution.md
   - Interacción Multi-Surface: architecture/multi-surface-interaction.md
   - AI-01 — AIOps / AI: architecture/ai-01-aiops-ai-architecture.md
   - Autoridad de datos y replay: architecture/data-authority-replay.md

@@ -3,6 +3,24 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — ARCH-REDESIGN-10
+
+### Redesigned
+
+- D6 as the OEM Architecture Map and Environment-Aware Deployment Model.
+- Normalized Local, RHEL, portable Kubernetes, QA GKE, Production GKE and
+  Production GKE + CI/CD profiles around one D0 logical invariant.
+- Clarified Installer, Terraform, Kubernetes packaging and CI/CD
+  responsibilities.
+- Separated Multi-Surface, AI-01 and Data Authority & Replay from environment
+  progression.
+
+### Preserved
+
+- D0, D1, D3, D2, D4, GCP-01, GCP-02, D5A and D5B contracts remain unchanged.
+- Environment profiles remain alternatives or specializations rather than a
+  mandatory migration sequence.
+
 ## 2026-10-01 — ARCH-REDESIGN-09
 
 ### Redesigned

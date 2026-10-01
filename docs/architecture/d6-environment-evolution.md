@@ -1,123 +1,273 @@
-# D6 — Environment Evolution and Deployment Model
+# D6 — Environment Evolution & Deployment Model
 
-| Architecture lifecycle | Documentation status | Scope |
-|---|---|---|
-| `CURRENT` | Documentation view of current baselines and target architectures | Cross-environment |
+## Architecture Overview
 
-D6 is the architecture-committee navigation hub for the same Open Event Management responsibilities across environments. It is a documentation view, not a runtime. The sequence below is an evolution and presentation flow; it does not imply that each environment is deployed.
+D6 is the navigation and environment-composition view for Open Event Management. It maps one invariant OEM logical architecture across Local, On-Premises RHEL, portable Kubernetes, QA GKE and Production GKE profiles, and explains how deployment mechanisms adapt to each operating context.
 
-## D6-1 — Environment evolution
+D6 is not another runtime architecture and does not prescribe a mandatory migration sequence. D1, D3 and D2 are alternative deployment profiles; D4 and D5A specialize the Kubernetes model for QA and production GKE; D5B composes the production runtime with governed delivery.
 
-```mermaid
-flowchart LR
-  L[LOCAL\nCURRENT / OPERATIONAL BASELINE\nUbuntu/Linux + Docker Compose] --> R[DEV RHEL\nPROJECT-PROVIDED BASELINE\nDistributed RHEL VM deployment]
-  R --> K[DEV KVM/Kubernetes\nTARGET ARCHITECTURE\nPortable Kubernetes]
-  K --> Q[QA GKE\nTARGET\nGKE minimum]
-  Q --> P[PROD-A GKE Runtime\nTARGET\nD5A]
-  P --> C[PROD-B GKE + CI/CD\nTARGET\nD5B]
-```
-
-### Status legend
-
-| Status | Meaning in this page |
-|---|---|
-| `CURRENT / OPERATIONAL BASELINE` | Documented local operating baseline; individual current process state is not asserted without runtime inspection. |
-| `PROJECT-PROVIDED BASELINE` | Supplied project evidence, preserved without upgrading it to repository-verified or live-runtime evidence. |
-| `CURRENTLY DOCUMENTED` | A defined documentation or foundation contract, not proof of a running target. |
-| `TARGET` | Intended architecture, not deployment evidence. |
-| `PLANNED` | Identified future architecture or capability without target implementation detail. |
-
-## D6-2 — What We Have Today
+## OEM Architecture Map
 
 ```mermaid
 flowchart TB
-  subgraph LOCAL[LOCAL — CURRENT / OPERATIONAL BASELINE]
-    LH[Ubuntu/Linux Host] --> DE[Docker Engine] --> DC[Docker Compose]
-    DC --> LM[Management Plane\nConsole + Management BFF/API]
-    DC --> LA[Application Plane\nGateway + Processor + Worker + ESS]
-    DC --> LD[Event/Data Plane\nKafka + PostgreSQL + OpenSearch]
-  end
+  D0[D0<br/>OEM LOGICAL CORE]
 
-  subgraph RHEL[DEV RHEL — PROJECT-PROVIDED BASELINE]
-    RK[KVM / VM Infrastructure] --> DB[Database\nPostgreSQL]
-    RK --> CORE[Core\nKafka + Processor + Worker + ESS]
-    RK --> GW[Gateway\nEvent Gateway]
-    RK --> GUI[GUI\nConsole + Management BFF/API]
-    OS[OpenSearch\nNot deployed in D3 profile]
-  end
+  D1[D1<br/>LOCAL COMPOSE]
+  D3[D3<br/>RHEL / VM]
+  D2[D2<br/>PORTABLE KUBERNETES]
+  D4[D4<br/>QA GKE]
+  D5A[D5A<br/>PRODUCTION GKE RUNTIME]
+  GCP01[GCP-01<br/>GCP FOUNDATION]
+  GCP02[GCP-02<br/>BUILD / DELIVERY]
+  D5B[D5B<br/>PRODUCTION GKE + CI/CD]
 
-  subgraph K8S[DEV KVM/K8S — TARGET ARCHITECTURE]
-    KV[KVM] --> VM[Linux VMs] --> KC[Kubernetes]
-    KC --> KM[Management Plane]
-    KC --> KA[Application Plane]
-    KC --> KD[Event/Data Plane]
-  end
+  D0 -->|deployment profile| D1
+  D0 -->|deployment profile| D3
+  D0 -->|deployment profile| D2
+  D2 -->|cloud-managed validation| D4
+  D4 -->|production qualities| D5A
+  GCP01 -. supports .-> D4
+  GCP01 -. supports .-> D5A
+  GCP01 -. supports .-> GCP02
+  D5A -->|runtime| D5B
+  GCP02 -->|delivery| D5B
 ```
 
-The local profile is the documented current baseline from [D1](d1-local-current.md). The RHEL profile is the [D3 project-provided baseline](d3-rhel-current.md), including its explicit absence of OpenSearch. The KVM/Kubernetes profile is [D2](d2-kvm-kubernetes-target.md), a target architecture rather than a running environment. Development tooling may exist beside the local stack but is not part of the OEM runtime contract.
+D0 is the invariant product contract. The branches from D0 express deployment alternatives, not a required D1 → D3 → D2 migration. D2 provides the portable Kubernetes contract consumed by D4; D5A adds production runtime qualities; D5B composes D5A with GCP-02 on GCP-01 capabilities.
 
-## Environment invariants matrix
+## Environment Profiles
 
-| Capability | Local | DEV RHEL | DEV K8s | QA GKE | PROD GKE | PROD + CI/CD |
+| Profile | Architecture | Containment / composition | Operating purpose |
+|---|---|---|---|
+| Local | D1 | Linux Host → Docker Engine → Docker Compose → OEM | Local development, functional validation and self-contained execution |
+| On-Premises RHEL | D3 | Enterprise Virtualization → RHEL VMs → Database/Core/Gateway/GUI roles | Distributed enterprise deployment |
+| Portable Kubernetes | D2 | KVM → Linux VMs → Kubernetes → OEM workloads | Provider-neutral orchestration model |
+| QA GKE | D4 | GCP Foundation → GKE → OEM workloads | Managed-Kubernetes validation of the portable workload contract |
+| Production GKE | D5A | GCP Foundation → GKE Production Runtime → OEM | Production availability, resilience, security, recovery and operability |
+| Production GKE + CI/CD | D5B | GCP-01 + GCP-02 + D5A | Production runtime plus governed build and delivery |
+
+Each profile serves a distinct operating context. Selection depends on environment requirements rather than an assumed ranking among profiles.
+
+## Environment Invariants Matrix
+
+| Concern | D1 | D3 | D2 | D4 | D5A | D5B |
 |---|---|---|---|---|---|---|
-| Management Plane | Current baseline | Project baseline | Target | Target | Target | Target |
-| Gateway | Current baseline | Project baseline | Target | Target | Target | Target |
-| Processor | Current baseline | Project baseline | Target | Target | Target | Target |
-| Worker | Current baseline | Project baseline | Target | Target | Target | Target |
-| ESS | Current baseline | Project baseline | Target | Target | Target | Target |
-| Kafka | Current baseline | Project baseline | Target | Target | Target | Target |
-| PostgreSQL | Current baseline; authoritative | Project baseline; authoritative | Target; authoritative | Target; authoritative | Target; authoritative | Target; authoritative |
-| OpenSearch | Current baseline projection | Not deployed in D3 profile | Target projection | Outside minimum | Target projection | Target projection |
-| Container runtime / orchestration | Docker Engine + Compose | VM service profile | Kubernetes target | GKE target | GKE target | GKE target |
-| Persistent storage | Local documented baseline | Database VM baseline | Pending architecture decisions | Pending target decisions | Pending target decisions | Pending target decisions |
-| Secrets | Local configuration boundary | Project-provided boundary | Pending integration | Pending integration | Pending integration | Logical references; provider pending |
-| HA | Not a local baseline claim | Not established | Target decision | Outside minimum | Target requirement | Target requirement |
-| CI/CD | Not asserted | Not asserted | Pending | Not part of D4 minimum | Separate from D5A | D5B target composition |
-| AIOps | Only where independently evidenced | Not part of D3 minimum | Future-capable through OpenSearch | Outside minimum | Optional AI-01 attachment | Optional AI-01 attachment |
+| OEM Logical Core | D0 | D0 | D0 | D0 | D0 | D0 |
+| Management Plane | Compose | GUI role | Kubernetes workloads | GKE workloads | Production GKE | D5A runtime |
+| Application Plane | Compose | Distributed roles | Kubernetes workloads | GKE workloads | Production GKE | D5A runtime |
+| Kafka | Local transport/replay | Core role | Stateful workload | Stateful workload | Production stateful | D5A runtime |
+| PostgreSQL | Local authority | Database role | Authoritative state | Authoritative state | Production authority | D5A runtime |
+| OpenSearch | Local projection | Modular capability | Projection workload | Projection workload | Production projection | D5A runtime |
+| Orchestration | Docker Compose | VM/service lifecycle | Kubernetes | GKE | Production GKE | D5A + delivery |
+| Infrastructure | Linux host | Enterprise VMs | KVM/Linux VMs | GCP/GKE | GCP/GKE | GCP-01 |
+| Secrets | Externalized local boundary | Enterprise boundary | Kubernetes integration | GCP-compatible integration | GCP-01 integration | References across delivery/runtime |
+| Persistent Storage | Local/container | Enterprise VM | Kubernetes abstraction | GKE abstraction | Production GKE abstraction | D5A runtime |
+| Production Qualities | Local scope | Profile-specific operations | Portable contract | QA validation | Required | Required through D5A |
+| CI/CD | External | External | External | External | Separate GCP-02 | Composed GCP-02 |
+| AI Dependency | None | None | None | None | None | None |
 
-## What stays the same
+## What Stays the Same
 
-Across profiles, OEM preserves the Management Plane contract, application responsibilities, event schemas and contracts, Kafka topic contracts, PostgreSQL authority, Kafka transport and replay semantics, API-first interaction, and governed interaction surfaces. PostgreSQL remains the operational source of truth; Kafka remains the decoupled transport and replay boundary; OpenSearch remains a projection rather than an authority.
+The portable product contract consists of:
 
-Regardless of environment, OEM Core is intended to support governed GUI, CLI/API and future AIOps interaction. The full design remains outside D6; see [Multi-Surface Interaction](multi-surface-interaction.md), [AI-01](ai-01-aiops-ai-architecture.md) and the [Future Architecture Register](evolution/future-architecture-register.md).
+- OEM service responsibilities and the Management, Application and Event / Data planes;
+- canonical event contracts and the external integration boundary;
+- PostgreSQL as Operational Source of Truth;
+- Kafka as decoupled transport and replay boundary;
+- OpenSearch as Search / Analytics Projection;
+- API-first management through governed interfaces; and
+- a vendor-neutral OEM Core independent from deployment infrastructure.
 
-## What changes by environment
+## What Changes by Environment
 
-Host/runtime, orchestration, networking, storage, secret integration, availability, recovery, delivery mechanism, automation and optional AIOps capability vary by environment. Those differences do not move product ownership between Gateway, Processor, Worker, ESS, PostgreSQL, Kafka or the Management Plane.
+Environment implementation changes the host/runtime containment, orchestrator, networking, persistent-storage integration, secret and identity integration, availability and recovery strategies, deployment mechanism, operational controls and delivery automation.
 
-## D6-3 — OEM Environment-Aware Installation & Deployment Model
+Product semantics remain stable while environment implementation varies. A platform choice does not reassign Gateway, Processor, Worker, ESS, Kafka, PostgreSQL, OpenSearch or Management Plane responsibilities.
+
+## Environment-Aware Deployment Model
 
 ```mermaid
 flowchart TB
-  EP[OEM Deployment Entry Point\nTARGET CONCEPT] --> PF[Conceptual deployment profile]
-  PF --> LPR[local / rhel-onprem]
-  PF --> KPR[kvm-kubernetes]
-  PF --> GPR[gke-qa / gke-prod / gke-prod-cicd]
-  LPR --> IR[Install / runtime configuration\nlocal or on-prem host preparation]
-  IR --> HR[Host runtime]
-  KPR --> KP[Kubernetes packaging / deployment mechanism\nPending ADR]
-  KP --> KR[Kubernetes runtime]
-  GPR --> TF[Terraform\nGCP foundation provisioning]
-  TF --> GF[GCP-01 Foundation]
-  GF --> GKE[GKE runtime target]
-  GPR --> RD[Runtime delivery contract]
-  RD --> GKE
+  ENTRY[OEM Deployment Entry Point<br/>Conceptual]
+  PROFILE[Environment Profile]
+  ENTRY --> PROFILE
+
+  PROFILE --> LOCAL[LOCAL]
+  PROFILE --> RHEL[ON-PREMISES RHEL]
+  PROFILE --> K8S[PORTABLE KUBERNETES]
+  PROFILE --> GKE[GKE]
+
+  LOCAL --> HOST[Existing Host / Prerequisites]
+  HOST --> COMPOSE[Docker Compose]
+
+  RHEL --> VM[Enterprise VM Infrastructure]
+  VM --> PACKAGE[Enterprise / Offline Package]
+
+  K8S --> KVM[KVM / Linux VMs]
+  KVM --> KPACKAGE[Kubernetes Deployment Package]
+
+  GKE --> TF[Terraform]
+  TF --> FOUNDATION[GCP-01 Foundation]
+  FOUNDATION --> GKERT[GKE Runtime]
+  KPACKAGE --> GKERT
+  GKE --> DELIVERY[GCP-02 Authorized Release Delivery]
+  DELIVERY --> GKERT
 ```
 
-The profile names are conceptual deployment profiles, not asserted CLI flags. Current installation capability is limited to documented local/Docker Compose behavior and isolated existing CLI concepts such as Kafka administration. A universal installer or `oemctl` entry point is a target architectural direction, not an implemented universal capability.
+The entry point and profile selection are an implementation-neutral control-plane concept, not an assertion that one universal installer exists. Each branch delegates infrastructure and application responsibilities to the mechanism appropriate for its profile.
 
-### Install and runtime configuration responsibility
+## Deployment Control Plane
 
-An installer or runtime configuration mechanism is responsible conceptually for application/runtime installation, configuration, readiness and local or on-prem preparation. It does not replace cloud infrastructure infrastructure-as-code.
+```text
+Deployment Request
+  → Environment Profile
+  → Deployment Adapter
+  → Environment Mechanism
+```
 
-### Terraform responsibility
+The conceptual OEM Deployment Entry Point selects a local, RHEL, Kubernetes or GKE profile and delegates to an adapter. It does not replace the adapter, Terraform, packaging or runtime. A concrete `oemctl` implementation requires a separate approved contract.
 
-Terraform is responsible for cloud infrastructure provisioning: networking, IAM, storage foundation, registry, secret foundation and cloud runtime infrastructure where later implemented. Terraform does not replace application runtime configuration or act as an application installer.
+## Deployment Adapter Model
 
-### Kubernetes and GCP boundary
+| Profile | Infrastructure mechanism | Application mechanism |
+|---|---|---|
+| Local | Existing host and prerequisites | Docker Compose |
+| RHEL | Enterprise VM infrastructure | Enterprise/offline installation package |
+| Kubernetes | KVM / VM infrastructure | Kubernetes deployment package |
+| GKE | Terraform and GCP-01 foundation | Kubernetes deployment package |
+| Production + CI/CD | Terraform plus GCP-01/GCP-02 capabilities | Authorized immutable release delivery to D5A |
 
-Kubernetes packaging and deployment mechanism remain a pending ADR: Helm, Kustomize, operators and GitOps are possible future directions, not selected implementations. For `gke-prod-cicd`, the intended composition is Terraform plus [GCP-02](gcp-cicd-current.md) build/delivery contracts plus [D5A](d5a-prod-gke-runtime-target.md) runtime, as specified by [D5B](d5b-prod-gke-cicd-target.md). This page intentionally does not duplicate D5B.
+This table expresses architectural delegation, not installation commands.
 
-## Architecture references
+## Installer Responsibility
 
-D6 connects the canonical logical and environment views: [D0](d0-logical-current.md), [D1 Local](d1-local-current.md), [D3 RHEL](d3-rhel-current.md), [D2 KVM/Kubernetes](d2-kvm-kubernetes-target.md), [D4 QA GKE](d4-qa-gke-minimum-target.md), [GCP-01](gcp-foundation-current.md), [GCP-02](gcp-cicd-current.md), [D5A](d5a-prod-gke-runtime-target.md) and [D5B](d5b-prod-gke-cicd-target.md). The [Evolution Register](evolution/index.md) preserves their lifecycle meanings.
+Installer or deployment tooling can validate prerequisites, prepare runtime configuration, install application components, initialize the environment-specific runtime, validate readiness and support uninstall/rollback contracts. It does not replace cloud infrastructure-as-code, become OEM business logic or own authoritative operational state.
+
+## Terraform Responsibility
+
+Terraform provisions infrastructure such as networking, IAM, storage, artifact and secret foundations, and cloud runtime prerequisites. It does not replace the application installer or Kubernetes package, build OEM images or execute OEM business logic.
+
+## Kubernetes Packaging Responsibility
+
+A Kubernetes package is the declarative OEM workload definition for Kubernetes environments. Helm, Kustomize, raw manifests and operators remain ADR-controlled implementation choices; D6 selects none of them.
+
+Terraform provisions infrastructure. Installer/package tooling deploys and configures OEM. CI/CD moves validated immutable releases. Kubernetes orchestrates workloads. These responsibilities are complementary, not interchangeable.
+
+## Deployment Flow
+
+1. **Select Environment:** choose the applicable deployment profile.
+2. **Validate Profile:** check required inputs, prerequisites and policy.
+3. **Provision Infrastructure:** create infrastructure where the profile requires it.
+4. **Prepare Runtime:** establish the host, VM, Kubernetes or GKE runtime.
+5. **Deploy OEM:** apply the profile-specific application mechanism.
+6. **Configure Environment:** supply externalized product and environment inputs.
+7. **Validate Health:** evaluate workload and stateful-service readiness.
+8. **Expose Governed Interfaces:** enable only approved management, ingestion and integration paths.
+9. **Operate:** use the profile's operational controls.
+10. **Upgrade / Roll Back:** follow profile-specific compatibility and recovery contracts.
+
+## Configuration Model
+
+```text
+OEM Product Configuration
+  + Environment Profile
+  + Secret References
+  + Runtime Policy
+  = Environment Configuration
+```
+
+Environment-specific configuration remains external to immutable application artifacts and deployment packages.
+
+## Secret Model
+
+Secrets remain externalized in every profile. Local environments use a development-safe mechanism, enterprise deployments use an approved enterprise integration, and GCP environments consume the Secret Manager boundary defined by GCP-01. D6 does not select an implementation where a source architecture leaves it open.
+
+## Storage Model
+
+Kafka transport/replay, PostgreSQL authority and OpenSearch projection semantics remain invariant. Their storage integrations vary:
+
+| Profile | Storage integration |
+|---|---|
+| D1 | Local/container persistence |
+| D3 | Enterprise VM storage |
+| D2 | Kubernetes persistent-storage abstraction |
+| D4 / D5A / D5B | GKE-integrated persistent-storage abstraction |
+
+D6 does not select storage classes, products or vendors.
+
+## Network Model
+
+| Profile | Network implementation |
+|---|---|
+| D1 | Docker networking and controlled host exposure |
+| D3 | Enterprise VM/network segmentation |
+| D2 | Kubernetes networking, Services and policy capability |
+| D4 / D5A / D5B | GCP and GKE networking integration |
+
+The external ingestion, management, internal-service and controlled-egress contracts remain stable.
+
+## Management Invariant
+
+```text
+Operator
+  → Event Management Console
+  → Management BFF / API
+  → Governed OEM APIs
+  → OEM Core
+```
+
+No deployment profile grants the GUI direct authority over Kafka, PostgreSQL, OpenSearch, VM hosts or Kubernetes nodes.
+
+## Environment Promotion
+
+GCP-02 defines **build once, promote the same immutable artifact**. Local/development and D4 QA validation can precede a production authorization for D5A/D5B without rebuilding application content for each environment. Environment configuration, secret references and runtime policy remain separate from artifact identity.
+
+## Cross-Cutting Architectures
+
+| Architecture | Cross-environment concern |
+|---|---|
+| Multi-Surface | Governed GUI, CLI/API and AIOps interaction alternatives |
+| AI-01 | Optional AI/AIOps attachment through governed interfaces |
+| Data Authority & Replay | PostgreSQL authority, Kafka transport/replay and OpenSearch projection |
+
+These are transverse product architectures, not deployment profiles or stages in a Local-to-Production progression. OEM remains operational without an AI dependency.
+
+## Architectural Principles
+
+| Principle | Architectural consequence |
+|---|---|
+| One OEM Logical Core | D0 responsibilities remain invariant across profiles. |
+| Environment Portability | Product contracts survive changes in containment and infrastructure. |
+| Deployment Profile Separation | Local, RHEL and Kubernetes are alternatives, not mandatory sequential stages. |
+| Infrastructure / Application Separation | Provisioning and application deployment retain distinct tools and ownership. |
+| Declarative Deployment | Runtime intent is expressed through profile-appropriate controlled definitions. |
+| Externalized Configuration | Environment values remain separate from product artifacts. |
+| Externalized Secrets | Profiles consume approved secret references or injection. |
+| Immutable Artifact Promotion | QA and production can consume the same digest. |
+| Stable Management Contract | Operators use Console, BFF and governed APIs in every profile. |
+| Stable Data Authority | PostgreSQL, Kafka and OpenSearch retain distinct semantics. |
+| Environment-Specific Infrastructure | Networks, storage, identity and runtime mechanisms adapt by profile. |
+| Vendor-Neutral Product Core | OEM semantics do not depend on a deployment provider. |
+| Cross-Cutting AI Independence | AI remains optional and outside environment progression. |
+
+## Architecture Boundaries
+
+D6 defines no new runtime and does not replace D1, D3, D2, D4, D5A, D5B, GCP-01 or GCP-02. It maps their relationships and deployment responsibilities.
+
+D6 does not select Helm, Kustomize, a GitOps controller, stateful operators, storage classes or a universal installer implementation. Those decisions require their own approved architecture or ADR.
+
+## Related Architectures
+
+- [D0 — OEM Logical Architecture](d0-logical-current.md)
+- [D1 — Local Deployment Architecture](d1-local-current.md)
+- [D3 — On-Premises RHEL Deployment Architecture](d3-rhel-current.md)
+- [D2 — KVM + Kubernetes Deployment Architecture](d2-kvm-kubernetes-target.md)
+- [D4 — QA GKE Minimum Deployment Architecture](d4-qa-gke-minimum-target.md)
+- [GCP-01 — OEM GCP Foundation Architecture](gcp-foundation-current.md)
+- [GCP-02 — Build, Delivery & CI/CD Architecture](gcp-cicd-current.md)
+- [D5A — Production GKE Runtime Architecture](d5a-prod-gke-runtime-target.md)
+- [D5B — Production GKE + CI/CD Composition Architecture](d5b-prod-gke-cicd-target.md)
+- [Multi-Surface Interaction Architecture](multi-surface-interaction.md)
+- [AI-01 — OEM AIOps / AI Architecture](ai-01-aiops-ai-architecture.md)
+- [Data Authority & Replay Boundary](data-authority-replay.md)
+- [Architecture Evolution Register](evolution/index.md)
