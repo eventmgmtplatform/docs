@@ -3,6 +3,24 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — ARCH-REDESIGN-09
+
+### Redesigned
+
+- D5B as the OEM Production GKE + CI/CD composition architecture.
+- Formalized the GCP-01 + GCP-02 + D5A composition in Solution and Engineering
+  views.
+- Clarified the Delivery-to-Runtime boundary and end-to-end release lineage.
+- Clarified how controlled change and rollback compose existing delivery and
+  runtime contracts.
+
+### Preserved
+
+- GCP-01 foundation, GCP-02 delivery and D5A runtime contracts remain
+  independently governed and unchanged.
+- Artifact identity, Release Manifest, authorization, promotion, rollback,
+  stateful-service and AI-independence semantics remain unchanged.
+
 ## 2026-10-01 — ARCH-REDESIGN-08
 
 ### Redesigned

@@ -24,3 +24,11 @@ operating-quality evolution, separates HA from DR, makes authority-aware
 recovery visible and reinforces the runtime/delivery boundary. D0
 responsibilities, the D4 workload model and the production runtime contract are
 unchanged.
+
+## D5B presentation evolution
+
+`D5B-golden-01` (ARCH-REDESIGN-09, 2026-10-01) applies the OEM Golden
+Template to the production composition view. It normalizes the GCP-01 +
+GCP-02 + D5A relationship, clarifies the Delivery-to-Runtime contract and makes
+end-to-end release lineage visible. The source architecture contracts and D5B
+composition semantics are unchanged.
