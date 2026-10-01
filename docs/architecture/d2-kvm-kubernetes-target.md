@@ -1,164 +1,399 @@
-# D2 — DEV KVM + Kubernetes Deployment Architecture
+# D2 — KVM + Kubernetes Deployment Architecture
 
 | Architecture lifecycle | Documentation status | Environment |
 |---|---|---|
-| `TARGET` | Architecture definition | DEV KVM + Linux VMs + Kubernetes |
+| `TARGET` | `DOCUMENTED` | KVM + Linux virtual machines + Kubernetes |
 
-D2 defines a portable Kubernetes deployment model for OEM. It changes where and
-how OEM executes, not what OEM is. This is not evidence of a deployed,
-validated, certified or operational Kubernetes environment.
+D2 maps the canonical OEM product architecture to a portable Kubernetes
+orchestration layer. KVM provides virtualization, Linux virtual machines host
+the Kubernetes cluster, and Kubernetes orchestrates OEM workloads without
+changing product responsibilities, event contracts, or data authority.
 
 **Predecessors:** [D0 logical architecture](d0-logical-current.md),
-[D1 local deployment](d1-local-current.md), and [D3 RHEL/on-prem](d3-rhel-current.md)
-as alternative deployment experience.  
-**Consumer:** future D4 QA GKE target.  
+[D1 local deployment](d1-local-current.md), and
+[D3 RHEL/on-prem](d3-rhel-current.md) as an alternative deployment profile.
+
+**Consumer:** [D4 QA GKE](d4-qa-gke-minimum-target.md).
+
 **Evolution record:** [Architecture Evolution Register](evolution/index.md).
 
-## Deployment containment
+## Architecture Overview
+
+The deployment defines four distinct containment layers:
+
+```text
+Physical / Virtualization Infrastructure
+  → KVM
+  → Linux Virtual Machines
+  → Kubernetes Cluster
+  → OEM Workloads
+```
+
+Kubernetes is the workload orchestration abstraction, not the OEM product.
+OEM preserves its Management, Application, and Event / Data planes inside the
+cluster while Event Sources and External Systems remain outside its boundary.
+
+## Solution Architecture
 
 ```mermaid
 flowchart TB
-  KVM[KVM virtualization infrastructure]
-  NODES[Linux virtual machines\nKubernetes nodes]
-  KVM --> NODES
+  SOURCES[Event Sources]
+
+  subgraph FOUNDATION[Portable Infrastructure Foundation]
+    direction LR
+    KVM[KVM] --> VMS[Linux VMs] --> K8S[Kubernetes]
+  end
 
   subgraph CLUSTER[Kubernetes Cluster]
     direction TB
-    subgraph PLATFORM[Platform capabilities — target]
-      INGRESS[Ingress / external exposure]
-      SVC[Kubernetes Services]
-      CFG[ConfigMaps\nnon-sensitive configuration]
-      SECRET[Secret integration\nprovider decision pending]
-      PV[Persistent Volumes\nStorageClass / KVM storage dependency]
-      RBAC[RBAC]
-      NP[NetworkPolicy]
-      OBS[Logs, metrics, health probes]
-    end
-
-    subgraph MGMT[Management Plane — Minimum Deployable OEM]
-      CONSOLE[Event Management Console workload/service]
-      BFF[Management BFF/API workload/service]
-      CONSOLE --> BFF
-    end
-
-    subgraph APP[Application Plane — independently deployable/scalable]
-      GW[Event Gateway]
-      EP[Event Processor]
-      IW[Integration Worker]
-      ESS[Event State Service]
-    end
-
-    subgraph DATA[Event / Data Plane — stateful workloads]
-      K[Kafka\nDecoupled Event Transport\nand Replay Boundary]
-      PG[(PostgreSQL\nOperational Source of Truth)]
-      OS[(OpenSearch\nSearch / Analytics Projection)]
+    subgraph OEM[OPEN EVENT MANAGEMENT]
+      direction LR
+      MANAGEMENT[Management Plane]
+      APPLICATION[Application Plane]
+      EVENTDATA[Event / Data Plane]
+      MANAGEMENT --> APPLICATION --> EVENTDATA
     end
   end
 
-  NODES --> CLUSTER
-  INGRESS --> CONSOLE
-  INGRESS --> GW
-  BFF --> GW
-  BFF --> EP
-  BFF --> ESS
-  SVC --> GW
-  SVC --> EP
-  SVC --> IW
-  SVC --> ESS
-  CFG --> APP
-  SECRET --> APP
-  PV --> K
-  PV --> PG
-  PV --> OS
-  OBS --> APP
-  OBS --> DATA
+  EXTERNAL[External Systems]
+
+  FOUNDATION --> CLUSTER
+  SOURCES --> APPLICATION
+  APPLICATION --> EXTERNAL
+
+  classDef external fill:#f4f4f4,stroke:#525252,color:#161616,stroke-width:1px;
+  classDef management fill:#fff1ef,stroke:#b72c1a,color:#161616,stroke-width:2px;
+  classDef application fill:#e8f1ff,stroke:#0043ce,color:#161616,stroke-width:1.5px;
+  classDef data fill:#e5f6ec,stroke:#198038,color:#161616,stroke-width:1.5px;
+  classDef integration fill:#fff4e6,stroke:#b28600,color:#161616,stroke-width:1.5px;
+  classDef infrastructure fill:#eef0f2,stroke:#393939,color:#161616,stroke-width:1.5px;
+
+  class SOURCES external;
+  class MANAGEMENT management;
+  class APPLICATION application;
+  class EVENTDATA data;
+  class EXTERNAL integration;
+  class FOUNDATION,KVM,VMS,K8S,CLUSTER,OEM infrastructure;
 ```
 
-The containment diagram expresses the target platform boundary. It does not
-define manifests, node count, ingress controller, storage technology, CIDRs,
-ports, replicas, autoscaling or firewall policy.
+The infrastructure foundation remains visible but secondary to OEM. The same
+workload and plane contract can be realized on another conforming Kubernetes
+environment without coupling OEM to a specific cloud provider.
 
-## Canonical event and management flow
+## Solution Flow
+
+1. **Enter:** Event Sources reach the controlled cluster exposure boundary.
+2. **Ingest:** Event Gateway validates, normalizes, and admits events.
+3. **Transport:** Kafka carries canonical event contracts and provides replay boundaries.
+4. **Process:** Event Processor applies policy, enrichment, correlation, suppression, and routing.
+5. **Command:** Processor emits controlled integration intent.
+6. **Execute:** Integration Worker invokes approved external adapters.
+7. **Consolidate:** Event State Service assembles lifecycle, history, results, and state.
+8. **Persist:** PostgreSQL records authoritative operational state.
+9. **Project:** OpenSearch materializes search and analytics projections.
+10. **Operate:** Operators use the Console and governed OEM APIs.
+
+Kubernetes orchestrates workload placement and lifecycle. OEM services execute
+the product behavior defined by D0.
+
+## Engineering Architecture
+
+```mermaid
+flowchart TB
+  SOURCES[Event Sources]
+  OPERATOR[Operator]
+
+  subgraph VIRTUALIZATION[Physical / Virtualization Infrastructure]
+    subgraph KVM[KVM Infrastructure]
+      subgraph VMS[Linux Virtual Machines]
+        subgraph CLUSTER[Kubernetes Cluster]
+          direction TB
+
+          subgraph PLATFORM[Kubernetes Platform Capabilities]
+            CAPABILITIES[Controlled Exposure · Services / Discovery<br/>Configuration · Secret Integration · Persistent Storage<br/>RBAC / Identity · Network Policy · Health / Readiness]
+          end
+
+          subgraph MANAGEMENT[Management Plane]
+            CONSOLE[Event Management Console]
+            BFF[Management BFF / API]
+            APIS[Governed OEM APIs]
+            CONSOLE --> BFF --> APIS
+          end
+
+          subgraph APPLICATION[Application Plane]
+            GATEWAY[Event Gateway]
+            PROCESSOR[Event Processor]
+            WORKER[Integration Worker]
+            ESS[Event State Service]
+          end
+
+          subgraph EVENTDATA[Event / Data Plane]
+            KAFKA[Kafka<br/>Transport · Retention · Replay]
+            POSTGRES[(PostgreSQL<br/>Operational Source of Truth)]
+            OPENSEARCH[(OpenSearch<br/>Search / Analytics Projection)]
+          end
+        end
+      end
+    end
+  end
+
+  ACTIONS[External Action Boundary<br/>ITSM · Notifications · Automation · Webhooks / APIs]
+
+  SOURCES --> CAPABILITIES --> GATEWAY
+  OPERATOR --> CAPABILITIES --> CONSOLE
+  CAPABILITIES --> MANAGEMENT
+  CAPABILITIES --> APPLICATION
+  CAPABILITIES --> EVENTDATA
+  APIS --> GATEWAY
+  APIS --> PROCESSOR
+  APIS --> ESS
+  GATEWAY --> KAFKA --> PROCESSOR
+  PROCESSOR --> KAFKA --> WORKER
+  WORKER --> ACTIONS
+  WORKER --> KAFKA --> ESS --> POSTGRES --> OPENSEARCH
+
+  classDef external fill:#f4f4f4,stroke:#525252,color:#161616,stroke-width:1px;
+  classDef management fill:#fff1ef,stroke:#b72c1a,color:#161616,stroke-width:2px;
+  classDef application fill:#e8f1ff,stroke:#0043ce,color:#161616,stroke-width:1.5px;
+  classDef messaging fill:#f6f2ff,stroke:#6929c4,color:#161616,stroke-width:1.5px;
+  classDef data fill:#e5f6ec,stroke:#198038,color:#161616,stroke-width:1.5px;
+  classDef integration fill:#fff4e6,stroke:#b28600,color:#161616,stroke-width:1.5px;
+  classDef infrastructure fill:#eef0f2,stroke:#393939,color:#161616,stroke-width:1.5px;
+
+  class SOURCES,OPERATOR external;
+  class CONSOLE,BFF,APIS management;
+  class GATEWAY,PROCESSOR,WORKER,ESS application;
+  class KAFKA messaging;
+  class POSTGRES,OPENSEARCH data;
+  class ACTIONS integration;
+  class VIRTUALIZATION,KVM,VMS,CLUSTER,PLATFORM,CAPABILITIES infrastructure;
+```
+
+The Engineering Architecture preserves KVM, Linux VM, Kubernetes, and OEM
+workload layers as distinct containment boundaries. It expresses architecture
+capabilities rather than manifest objects, replica counts, ports, or node roles.
+
+## Infrastructure Layers
+
+| Layer | Responsibility |
+|---|---|
+| Physical / Virtualization Infrastructure | Provides the enterprise compute and virtualization boundary. |
+| KVM | Provides virtual machine isolation and lifecycle. |
+| Linux Virtual Machines | Host the Kubernetes node runtime. |
+| Kubernetes Cluster | Provides portable orchestration for OEM workloads and stateful services. |
+| OEM Workloads | Execute the D0 Management, Application, and Event / Data responsibilities. |
+
+These layers remain explicit. Kubernetes nodes are not assigned the Database,
+Core, Gateway, or GUI roles defined by D3.
+
+## OEM Workload Model
+
+Event Gateway, Event Processor, Integration Worker, Event State Service, Event
+Management Console, and Management BFF / API become independently managed
+Kubernetes workload responsibilities. Kubernetes schedules and reconciles them;
+their business behavior and ownership remain defined by D0.
+
+D2 does not prescribe Deployment versus StatefulSet, replica counts, resource
+limits, pod names, affinity rules, or scheduling topology. Those decisions
+belong to implementation manifests and environment-specific design.
+
+## Kubernetes Platform Capabilities
+
+| Capability | Architecture contract |
+|---|---|
+| Workload scheduling | Places OEM workloads on eligible Linux VM nodes. |
+| Service discovery | Provides stable internal discovery through platform services. |
+| Desired-state reconciliation | Restores declared workload state through Kubernetes control loops. |
+| Health-based management | Uses health and readiness signals to manage workload availability. |
+| Configuration distribution | Supplies non-sensitive configuration through Kubernetes mechanisms. |
+| Secret integration | Delivers approved secret references and values without defining the enterprise authority. |
+| Persistent-storage attachment | Attaches persistent storage to stateful OEM services. |
+| Network-policy enforcement | Restricts service connectivity according to approved policy. |
+| Controlled exposure | Exposes only required event-ingestion and management interfaces. |
+
+## Stateful Services
+
+Kafka, PostgreSQL, and OpenSearch are stateful platform capabilities. Each
+requires persistent storage, availability, backup and recovery, upgrade,
+capacity-management, health, and observability strategies.
+
+The architecture supports operator-managed stateful services. Operator
+selection is an implementation decision behind the platform contract. Strimzi,
+CloudNativePG, and OpenSearch Operator are implementation options rather than
+required OEM architecture.
+
+## Event Processing Flow
+
+The canonical D0 event and management flow remains visible independently from
+Kubernetes placement:
 
 ```mermaid
 flowchart LR
-  OP[Operator] --> IN[Ingress / exposed service] --> CON[Event Management Console] --> BFF[Management BFF/API]
-  SRC[External Event Sources] --> GATE[Event Gateway] --> RAW[(events.raw)] --> K[Kafka]
-  K --> EP[Event Processor]
-  EP --> CMD[(integration.commands)] --> K
-  K --> IW[Integration Worker] --> EXT[External integrations]
-  IW --> RES[(integration.results)] --> K
-  K --> ESS[Event State Service] --> PG[(PostgreSQL\nOperational Source of Truth)]
-  PG -. projection .-> OS[(OpenSearch\nSearch / Analytics Projection)]
-  BFF --> GATE
-  BFF --> EP
-  BFF --> ESS
+  OP[Operator] --> ENTRY[Controlled Entry] --> CON[Event Management Console] --> BFF[Management BFF / API] --> APIS[Governed OEM APIs]
+  SRC[Event Sources] --> ENTRY --> GATE[Event Gateway] -->|events.raw| K[Kafka]
+  K -->|events.raw| EP[Event Processor]
+  EP -->|integration.commands| K
+  K -->|integration.commands| IW[Integration Worker] --> EXT[External Systems]
+  IW -->|integration.results| K
+  K -->|integration.results| ESS[Event State Service]
+  ESS --> PG[(PostgreSQL<br/>Operational Source of Truth)]
+  PG -->|authoritative projection| OS[(OpenSearch<br/>Search / Analytics Projection)]
+  APIS --> GATE
+  APIS --> EP
+  APIS --> ESS
+
+  classDef external fill:#f4f4f4,stroke:#525252,color:#161616,stroke-width:1px;
+  classDef management fill:#fff1ef,stroke:#b72c1a,color:#161616,stroke-width:2px;
+  classDef application fill:#e8f1ff,stroke:#0043ce,color:#161616,stroke-width:1.5px;
+  classDef messaging fill:#f6f2ff,stroke:#6929c4,color:#161616,stroke-width:1.5px;
+  classDef data fill:#e5f6ec,stroke:#198038,color:#161616,stroke-width:1.5px;
+  classDef integration fill:#fff4e6,stroke:#b28600,color:#161616,stroke-width:1.5px;
+  classDef infrastructure fill:#eef0f2,stroke:#393939,color:#161616,stroke-width:1.5px;
+
+  class OP,SRC external;
+  class CON,BFF,APIS management;
+  class GATE,EP,IW,ESS application;
+  class K messaging;
+  class PG,OS data;
+  class EXT integration;
+  class ENTRY infrastructure;
 ```
 
-The Console reaches supported OEM APIs through Management BFF/API only. It has
-no direct connection to Kafka, PostgreSQL, OpenSearch or Kubernetes nodes.
+Gateway ingests, Kafka transports, Processor decides, Worker executes, and ESS
+consolidates lifecycle and state. Kubernetes placement does not obscure or
+redefine that separation.
 
-## Minimum deployable D2
+## Data Authority Model
 
-| Plane | Required target components |
+| Service | Data responsibility |
 |---|---|
-| Management | Event Management Console, Management BFF/API |
-| Application | Event Gateway, Event Processor, Integration Worker, Event State Service |
-| Event/Data | Kafka, PostgreSQL, OpenSearch |
-| Runtime | Kubernetes, Linux VMs, KVM |
+| Kafka | Decoupled Event Transport and Replay Boundary; not authoritative state. |
+| PostgreSQL | Operational Source of Truth for state, history, audit, and operational evidence. |
+| OpenSearch | Search / Analytics Projection derived from authoritative state. |
 
-Development-only mocks, Kafka UI, OpenSearch Dashboards, Open WebUI and E2E
-utilities are not part of the minimum D2 deployment.
+Kubernetes storage mechanisms do not change these semantics. See
+[Data Authority & Replay](data-authority-replay.md).
 
-## Stateful workload considerations
+## Persistent Storage Model
 
-Kafka, PostgreSQL and OpenSearch are stateful infrastructure/workloads. Each
-requires persistent storage, recovery, backup, availability and upgrade
-strategy before an implementation can be considered operational. StorageClass,
-underlying KVM storage, capacity, IOPS, replication and RPO/RTO remain pending
-infrastructure decisions.
+Kubernetes Persistent Storage attaches durable capacity to Kafka, PostgreSQL,
+and OpenSearch through conceptual Persistent Volume and Storage Class
+abstractions. Persistent data lifecycle remains separate from workload-process
+lifecycle.
 
-Strimzi, CloudNativePG and OpenSearch Operator are `CANDIDATE / TARGET`
-implementation approaches only; none is selected by D2.
+D2 does not prescribe a storage vendor, disk class, volume size, filesystem, or
+cloud-specific storage service. Environment architectures provide those
+implementation details behind the portable storage contract.
 
-## Networking, security, configuration and observability
+## Management Model
 
-- External sources reach Event Gateway through the Kubernetes exposure boundary.
-- Operators reach Console/BFF through ingress or an exposed service.
-- Internal workload communication uses Kubernetes Services; stateful workloads
-  are not unnecessarily exposed externally.
-- NetworkPolicy and RBAC are target security boundaries, not implemented claims.
-- ConfigMaps hold non-sensitive configuration. Sensitive values require a
-  vendor-neutral secret integration; plain Kubernetes Secrets are not selected
-  as the final secret-management architecture.
-- Logs, metrics and health/probe hooks are required capabilities. The monitoring
-  implementation remains pending.
+```text
+Operator
+  → Controlled Entry / Ingress
+  → Event Management Console
+  → Management BFF / API
+  → Governed OEM APIs
+  → OEM Core
+```
 
-## Relationship to D1, D3 and D4
+Operators do not manage OEM through direct access to Kafka, PostgreSQL,
+OpenSearch, or Kubernetes nodes. Kubernetes operator access is controlled
+separately through RBAC, workload and service identity boundaries, least
+privilege, and approved administrative paths.
 
-D1 uses Docker Compose on a Linux development host. D2 uses Kubernetes on Linux
-VMs hosted by KVM; it does not claim that Compose definitions are directly
-deployable to Kubernetes.
+## Networking and Security
 
-D3 remains an alternative RHEL/on-prem four-role VM architecture. D2 must not
-schedule workloads to mimic Database/Core/Gateway/GUI roles.
+Controlled exposure routes event-ingestion traffic to Event Gateway and
+management traffic to Console/BFF. Kubernetes Services provide internal service
+discovery. NetworkPolicy capability constrains service-to-service connectivity,
+and controlled egress permits approved integration actions.
 
-D2 is intended to establish the portable Kubernetes model that D4 QA GKE will
-consume: OEM workloads and logical planes remain invariant while infrastructure
-implementation changes from KVM-hosted nodes to GKE-managed Kubernetes.
+Kafka, PostgreSQL, and OpenSearch remain internal stateful services. D2 does not
+publish them to external networks or prescribe ports, CIDRs, ingress products,
+or concrete network-policy rules.
 
-## Preserved conceptual material
+## Configuration and Secrets
 
-The existing [IaC, GCP and Kubernetes](../deployment/iac-gcp-kubernetes.md)
-page remains preserved as `HISTORICAL` conceptual material. It combines GCP,
-CI/CD and Kubernetes concerns and is not the canonical D2 definition. D2 keeps
-the KVM/Kubernetes target separate from GCP and from any implemented runtime
-claim.
+Non-sensitive configuration is distributed through Kubernetes configuration
+mechanisms. Sensitive values reach workloads through an approved secret
+integration and least-privilege identity boundary.
 
-## Pending architecture decisions
+Kubernetes Secrets are not defined as the final enterprise secret-management
+authority. The contract remains compatible with Vault, cloud secret managers,
+and external secret integrations without requiring a specific provider.
 
-- Kubernetes distribution/version, control-plane and worker topology.
-- Storage, ingress, PKI/TLS and secret provider.
-- Stateful operators, HA, backup/recovery and observability implementation.
-- Deployment packaging mechanism: pending ADR; candidates include Helm,
-  Kustomize, raw manifests and operator-managed resources.
+## Observability
+
+The platform exposes health, readiness, metrics, and logs for OEM workloads and
+stateful services. These signals support orchestration, diagnosis, capacity
+management, and operational review. D2 defines the capability contract without
+selecting a monitoring or telemetry stack.
+
+## Deployment Packaging
+
+```text
+OEM Release
+  → Kubernetes Deployment Package
+  → Kubernetes API
+  → OEM Workloads
+```
+
+The deployment is declarative and versioned. Packaging can be implemented with
+Helm, Kustomize, raw manifests, or operator-managed resources, but D2 does not
+select one. **Packaging and release tooling is defined through a separate
+architecture decision.**
+
+## Architectural Principles
+
+| Principle | Deployment rule |
+|---|---|
+| D0 Preservation | Kubernetes placement does not change product responsibilities or contracts. |
+| Portable Orchestration | OEM workloads depend on Kubernetes capabilities rather than a specific cloud provider. |
+| Declarative Runtime | Desired workload and platform state is expressed declaratively. |
+| Workload Independence | Logical services remain independently managed workload responsibilities. |
+| Service Discovery | Workloads communicate through stable platform service identities. |
+| Stateful Persistence Separation | Persistent data lifecycle remains separate from workload-process lifecycle. |
+| Controlled Exposure | Only required ingestion and management interfaces cross the cluster boundary. |
+| Least Privilege | RBAC, workload identity, and network boundaries restrict access. |
+| Environment Portability | Infrastructure implementations can change while OEM planes remain invariant. |
+| Operator Neutrality | Stateful-service operator selection remains behind the platform contract. |
+
+## Deployment Boundary
+
+D2 defines KVM, Linux virtual machines, Kubernetes, and OEM workloads. It does
+not define a GCP-specific foundation, a GKE-managed control plane, production
+HA/DR topology, or CI/CD pipeline architecture. Those concerns belong to D4,
+GCP, and D5 architectures.
+
+## Relationship to D0
+
+[D0](d0-logical-current.md) defines OEM logical behavior. D2 maps D0
+responsibilities to Kubernetes-managed workloads without changing product
+semantics, event contracts, management boundaries, or data authority.
+
+## Relationship to D1 / D3
+
+[D1](d1-local-current.md) uses Docker Compose for local orchestration on a
+single Linux host. D2 uses Kubernetes for portable workload orchestration
+across Linux virtual machines. Both preserve D0.
+
+[D3](d3-rhel-current.md) assigns application responsibilities to explicit
+enterprise VM roles. D2 uses Kubernetes as the workload-placement abstraction;
+it does not impose D3 Database, Core, Gateway, or GUI roles on Kubernetes nodes.
+
+## Relationship to D4
+
+D2 defines the portable Kubernetes contract through KVM → Linux VMs →
+Kubernetes → OEM. [D4](d4-qa-gke-minimum-target.md) consumes that contract
+through GCP → GKE → OEM. OEM workloads and logical planes remain invariant;
+the infrastructure implementation changes.
+
+## Related Architectures
+
+- [D0 — OEM Logical Architecture](d0-logical-current.md)
+- [D1 — Local Deployment Architecture](d1-local-current.md)
+- [D3 — On-Premises RHEL Deployment Architecture](d3-rhel-current.md)
+- [D4 — QA GKE Minimum Deployment Architecture](d4-qa-gke-minimum-target.md)
+- [Data Authority & Replay Boundary](data-authority-replay.md)
+- [D2 KVM + Kubernetes Decision Context](evolution/d2-kvm-kubernetes-history.md)
+- [Architecture Evolution Register](evolution/index.md)

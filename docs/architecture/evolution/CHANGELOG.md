@@ -3,6 +3,20 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — ARCH-REDESIGN-04
+
+### Redesigned
+
+- D2 using the approved OEM Golden Template.
+- Introduced a concise Solution Architecture and refined the Engineering Architecture for explicit KVM, Linux VM, Kubernetes, and OEM workload containment.
+- Separated D3 role placement from Kubernetes workload placement.
+- Clarified D2 portability into D4 GKE while preserving invariant OEM workloads and logical planes.
+
+### Preserved
+
+- D0 responsibilities, D2 containment, Kubernetes responsibility, Management Plane, canonical event flow, data authority, and D2 → D4 portability remain unchanged.
+- Packaging technology remains controlled by a separate ADR; Helm and stateful-service operators are not implicit architecture requirements.
+
 ## 2026-10-01 — ARCH-REDESIGN-03
 
 ### Redesigned
