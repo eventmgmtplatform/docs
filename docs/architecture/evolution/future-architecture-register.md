@@ -20,7 +20,7 @@ OpenSearch system state unless a future ADR defines a controlled mechanism.
 
 | Lifecycle | Scope | Principle |
 |---|---|---|
-| `PLANNED` (`DOCUMENTED`) | GUI, CLI/API and AIOps interaction surfaces | [Documented multi-surface architecture](../multi-surface-interaction.md): alternative interactions over the same OEM Core, not separate OEM products. |
+| `PLANNED` (`DOCUMENTED`, `MULTI-SURFACE-golden-01`) | GUI, CLI/API and AIOps interaction surfaces | [Documented multi-surface architecture](../multi-surface-interaction.md): alternative governed interactions over the same OEM Core, not separate OEM products. |
 
 ```text
 GUI       CLI/API       AIOps / AI
@@ -37,6 +37,10 @@ Customers may use GUI-centric, API/CLI-centric, AIOps-centric or combined
 interaction patterns. The architectural requirement is stable backend contracts:
 GUI, CLI and AIOps must consume governed interfaces rather than independent
 backdoors into the platform.
+
+ARCH-REDESIGN-11 normalized the documented interaction surfaces, governance
+boundary, read/action distinction and capability equivalence without changing
+the planned lifecycle or interaction contract.
 
 ## AI-02 — AI Delivery & Governance Lifecycle
 

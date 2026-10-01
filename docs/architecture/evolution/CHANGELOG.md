@@ -3,6 +3,24 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — ARCH-REDESIGN-11
+
+### Redesigned
+
+- Multi-Surface Interaction Architecture using the OEM Golden visual grammar.
+- Formalized GUI, CLI / API and AIOps / AI as governed surfaces over one OEM
+  Core.
+- Clarified the Governed Interface Layer and the read-versus-action boundary.
+- Formalized surface equivalence, surface independence and policy-driven action
+  governance.
+
+### Preserved
+
+- D0 Core, GUI, CLI / API, AIOps interaction, data authority, management and
+  deployment contracts remain unchanged.
+- AI-01 retains ownership of model, retrieval, agent and tool-orchestration
+  internals; Multi-Surface remains `PLANNED` (`DOCUMENTED`).
+
 ## 2026-10-01 — ARCH-REDESIGN-10
 
 ### Redesigned
