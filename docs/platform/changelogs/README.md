@@ -8,28 +8,37 @@ Las fechas históricas son fechas de autor conservadas por Git, con su zona orig
 
 | Componente | Changelog |
 |---|---|
-| event-gateway | [Historial transversal](../CHANGELOG.md) |
-| event-processor | [Historial](../event-processor/CHANGELOG.md) |
-| event-state-service | [Estado del servicio](../event-state-service/README.md) |
-| integration-worker | [Historial transversal](../CHANGELOG.md) |
-| event-management-console | [Historial transversal](../CHANGELOG.md) |
-| itsm-ticketing-dashboard | [Historial transversal](../CHANGELOG.md) |
-| enrichment-engine | [Historial transversal](../CHANGELOG.md) |
+| event-gateway | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/services/event-gateway/CHANGELOG.md) |
+| event-processor | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/services/event-processor/CHANGELOG.md) |
+| event-state-service | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/services/event-state-service/CHANGELOG.md) |
+| integration-worker | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/services/integration-worker/CHANGELOG.md) |
+| event-management-console | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/services/event-management-console/CHANGELOG.md) |
+| itsm-ticketing-dashboard | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/services/itsm-ticketing-dashboard/CHANGELOG.md) |
+| enrichment-engine | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/services/enrichment-engine/CHANGELOG.md) |
 | ServiceNow | [Historial](../servicenow/CHANGELOG.md) |
 | GNM / Everbridge | [Historial](../gnm/CHANGELOG.md) |
 | CACF / NEXT | [Historial](../cacf/CHANGELOG.md) |
-| Infraestructura local y cloud | [Despliegue GCP](../../deployment/iac-gcp-kubernetes.md) |
-| PostgreSQL / migraciones | [Arquitectura de datos](../../architecture/data.md) |
-| Kafka / topics | [Kafka](../kafka/README.md) |
-| Terraform / convenciones | [Terraform](../../reference/terraform.md) |
-| Terraform GCP | [Despliegue GCP](../../deployment/iac-gcp-kubernetes.md) |
-| Módulos cloud | [Despliegue GCP](../../deployment/iac-gcp-kubernetes.md) |
-| Despliegue / CI-CD | [Despliegue GCP](../../deployment/iac-gcp-kubernetes.md) |
-| Operación / scripts | [Runbook local](../../operations/local-runbook.md) |
-| Contratos compartidos | [Historial transversal](../CHANGELOG.md) |
+| Infraestructura local y cloud | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/CHANGELOG.md) |
+| PostgreSQL / migraciones | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/postgres/CHANGELOG.md) |
+| Kafka / topics | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/kafka/CHANGELOG.md) |
+| Terraform / convenciones | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/terraform/CHANGELOG.md) |
+| Terraform GCP | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/gcp/terraform/CHANGELOG.md) |
+| GCP / artifact-registry | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/gcp/terraform/modules/artifact-registry/CHANGELOG.md) |
+| GCP / cloud-build | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/gcp/terraform/modules/cloud-build/CHANGELOG.md) |
+| GCP / cloud-storage | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/gcp/terraform/modules/cloud-storage/CHANGELOG.md) |
+| GCP / continuous-delivery | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/gcp/terraform/modules/continuous-delivery/CHANGELOG.md) |
+| GCP / iam | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/gcp/terraform/modules/iam/CHANGELOG.md) |
+| GCP / networking | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/gcp/terraform/modules/networking/CHANGELOG.md) |
+| GCP / secret-manager | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/gcp/terraform/modules/secret-manager/CHANGELOG.md) |
+| GCP / bootstrap | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/gcp/terraform/bootstrap/CHANGELOG.md) |
+| GCP / ambiente dev | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/gcp/terraform/environments/dev/CHANGELOG.md) |
+| Terraform / project-common | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/terraform/modules/common/project-common/CHANGELOG.md) |
+| Despliegue / CI-CD | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/deploy/CHANGELOG.md) |
+| Operación / scripts | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/scripts/CHANGELOG.md) |
+| Contratos compartidos | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/config/CHANGELOG.md) |
 | Gobierno Git | [Historial](../git/CHANGELOG.md) |
 | Documentación transversal | [Historial](../CHANGELOG.md) |
-| Testing | [Cobertura documental](../../project/documentation-coverage.md) |
+| Testing | [Historial](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/testing/CHANGELOG.md) |
 
 ## Cómo mantenerlo
 
@@ -42,8 +51,8 @@ Las fechas históricas son fechas de autor conservadas por Git, con su zona orig
 
 ## Plantilla de entrada nueva
 
-OEM Dashboards: [UI](../dashboards/architecture.md) ·
-[API y CLI](../dashboards/api-management.md).
+OEM Dashboards: [UI](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/services/oem-dashboards/CHANGELOG.md) ·
+[API y CLI](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/services/oem-dashboards-api/CHANGELOG.md).
 
 ```markdown
 ## Unreleased — AAAA-MM-DD

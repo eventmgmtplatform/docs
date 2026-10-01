@@ -121,8 +121,8 @@ sandbox terminó BUILD SUCCESS. No se ejecutó la prueba maestra que reinicia se
 
 ## Unidad de testing
 
-[base documental](../../project/documentation-coverage.md), catálogo de casos
-y [changelog transversal](../CHANGELOG.md). Las ejecuciones nuevas escriben
+[Base centralizada](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/testing/README.md), [catálogo de casos](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/testing/cases/catalog.json)
+y [changelog de testing](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/testing/CHANGELOG.md). Las ejecuciones nuevas escriben
 únicamente en `evidences/`, excluido de Git.
 
 ## Historial por componente — 2026-09-10

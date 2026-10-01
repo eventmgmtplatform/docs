@@ -4,16 +4,20 @@
 from __future__ import annotations
 
 import argparse
+import filecmp
 import json
 import os
 from pathlib import Path
+import re
 import signal
+import shutil
 import subprocess
 import sys
 import tempfile
 import time
 from typing import Sequence
 from urllib.error import URLError
+from urllib.parse import quote
 from urllib.request import urlopen
 
 
@@ -24,6 +28,17 @@ CONFIG = ROOT / "mkdocs.yml"
 SITE = ROOT / "site"
 STATE = ROOT / ".docs-runtime.json"
 LOG = ROOT / ".docs-runtime.log"
+PLATFORM = ROOT / "docs" / "platform"
+SYNC_TOOL_VERSION = 1
+SYNC_EXCLUDED_NAMES = {
+    ".git",
+    ".venv",
+    "site",
+    "cache",
+    "__pycache__",
+    ".DS_Store",
+    "Thumbs.db",
+}
 
 ARCHITECTURE_SOURCES = (
     "docs/architecture/d0-logical-current.md",
@@ -66,6 +81,133 @@ def run(command: Sequence[str], *, check: bool = True) -> subprocess.CompletedPr
         check=check,
         text=True,
     )
+
+
+def git_output(repository: Path, *arguments: str) -> str:
+    result = subprocess.run(
+        ["git", "-C", str(repository), *arguments],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        detail = result.stderr.strip() or result.stdout.strip()
+        raise RuntimeError(f"Invalid product repository {repository}: {detail}")
+    return result.stdout.strip()
+
+
+def source_repository(source: Path) -> tuple[Path, Path, str, str]:
+    repository = Path(git_output(source, "rev-parse", "--show-toplevel")).resolve()
+    if repository != source:
+        raise RuntimeError(f"Product source must be the repository root: {repository}")
+    docs = repository / "docs"
+    if not docs.is_dir():
+        raise RuntimeError(f"Product documentation directory not found: {docs}")
+    commit = git_output(repository, "rev-parse", "HEAD")
+    remote = git_output(repository, "config", "--get", "remote.origin.url")
+    if "@" in remote and "://" in remote:
+        remote = remote.split("://", 1)[0] + "://" + remote.rsplit("@", 1)[1]
+    return repository, docs, commit, remote
+
+
+def excluded_sync_path(path: Path) -> bool:
+    return any(part in SYNC_EXCLUDED_NAMES for part in path.parts) or path.suffix == ".pyc"
+
+
+def rewrite_repository_links(
+    content: str, source_file: Path, repository: Path, docs: Path, remote: str, commit: str
+) -> str:
+    browser_remote = remote.removesuffix(".git")
+
+    def replace(match: re.Match[str]) -> str:
+        target = match.group(2)
+        if target.startswith(("#", "/", "http://", "https://", "mailto:")):
+            return match.group(0)
+        path_text, separator, fragment = target.partition("#")
+        candidate = (source_file.parent / path_text).resolve()
+        try:
+            candidate.relative_to(docs)
+            return match.group(0)
+        except ValueError:
+            pass
+        try:
+            repository_path = candidate.relative_to(repository)
+        except ValueError:
+            return match.group(0)
+        rewritten = f"{browser_remote}/blob/{commit}/{quote(repository_path.as_posix())}"
+        if separator:
+            rewritten += f"#{fragment}"
+        return f"{match.group(1)}{rewritten}{match.group(3)}"
+
+    return re.sub(r"(!?\[[^\]]*\]\()([^\s)]+)(\))", replace, content)
+
+
+def build_platform_snapshot(destination: Path, source: Path) -> None:
+    repository, docs, commit, remote = source_repository(source)
+    destination.mkdir(parents=True)
+    for entry in sorted(docs.rglob("*"), key=lambda path: path.relative_to(docs).as_posix()):
+        relative = entry.relative_to(docs)
+        if excluded_sync_path(relative):
+            continue
+        if entry.is_symlink():
+            raise RuntimeError(f"Symbolic links are not allowed in synchronized docs: {relative}")
+        target = destination / relative
+        if entry.is_dir():
+            target.mkdir(parents=True, exist_ok=True)
+        elif entry.is_file():
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if entry.suffix.lower() == ".md":
+                content = entry.read_text(encoding="utf-8")
+                target.write_text(
+                    rewrite_repository_links(content, entry, repository, docs, remote, commit),
+                    encoding="utf-8",
+                )
+            else:
+                shutil.copyfile(entry, target)
+
+    marker = (
+        "# Synchronized product documentation\n\n"
+        "GENERATED / SYNCHRONIZED FROM PRODUCT REPOSITORY. DO NOT EDIT MANUALLY.\n\n"
+        "Source ownership: `event-management-platform/docs`.\n"
+    )
+    (destination / ".generated.md").write_text(marker, encoding="utf-8")
+    metadata = {
+        "source_commit": commit,
+        "source_path": "docs",
+        "source_repository": remote,
+        "sync_tool_version": SYNC_TOOL_VERSION,
+    }
+    (destination / ".source.json").write_text(
+        json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+
+
+def directories_equal(left: Path, right: Path) -> bool:
+    comparison = filecmp.dircmp(left, right)
+    if comparison.left_only or comparison.right_only or comparison.funny_files:
+        return False
+    if comparison.diff_files:
+        return False
+    return all(directories_equal(left / name, right / name) for name in comparison.common_dirs)
+
+
+def cmd_sync_platform(args: argparse.Namespace) -> int:
+    source = Path(args.source).expanduser().resolve()
+    with tempfile.TemporaryDirectory(prefix="oem-platform-sync-") as temporary:
+        snapshot = Path(temporary) / "platform"
+        build_platform_snapshot(snapshot, source)
+        in_sync = PLATFORM.is_dir() and directories_equal(PLATFORM, snapshot)
+        if args.check:
+            print("IN SYNC" if in_sync else "DRIFT DETECTED")
+            return 0 if in_sync else 3
+        if in_sync:
+            print("Platform documentation already in sync.")
+            return 0
+        if PLATFORM.exists():
+            shutil.rmtree(PLATFORM)
+        shutil.copytree(snapshot, PLATFORM)
+    print(f"Platform documentation synchronized from {source}.")
+    return 0
 
 
 def require_runtime() -> Path:
@@ -324,6 +466,10 @@ def parser() -> argparse.ArgumentParser:
     build.set_defaults(func=cmd_build)
 
     commands.add_parser("validate", help="Run strict build and architecture integrity checks.").set_defaults(func=cmd_validate)
+    sync = commands.add_parser("sync-platform", help="Synchronize product-owned docs into docs/platform.")
+    sync.add_argument("--source", required=True, help="Path to the event-management-platform repository root.")
+    sync.add_argument("--check", action="store_true", help="Detect drift without modifying files.")
+    sync.set_defaults(func=cmd_sync_platform)
     for name, function in (("start", cmd_start), ("restart", cmd_restart)):
         command = commands.add_parser(name, help=f"{name.title()} the local documentation server.")
         command.add_argument("--host", default="127.0.0.1")

@@ -105,4 +105,4 @@ y `evidences/testing/`; consultar el informe de este corte en
 
 ## Integración frontend, 2026-09-10
 
-El corte frontend posterior implementa `/blackouts` y el proxy de mismo origen en la consola. Ver [validación frontend](../../project/webgui.md) y `evidences/blackouts/frontend-20260910/`. La certificación anterior sigue siendo evidencia de backend; el informe nuevo distingue escrituras reales desde navegador, fallo inyectado y fixture explícita del catálogo anterior.
+El corte frontend posterior implementa `/blackouts` y el proxy de mismo origen en la consola. Ver [validación frontend](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/services/event-management-console/validation-blackouts.md) y `evidences/blackouts/frontend-20260910/`. La certificación anterior sigue siendo evidencia de backend; el informe nuevo distingue escrituras reales desde navegador, fallo inyectado y fixture explícita del catálogo anterior.

@@ -10,11 +10,7 @@
 - [Decisiones de diseño](decisions-adr.md).
 - [Validación ejecutada](validation.md).
 - [Defect Prevention](defect-prevention.md).
-La arquitectura visual de CACF se representa en los diagramas Mermaid de esta
-sección y en la vista correspondiente del catálogo visual.
-
-El diagrama editable corresponde a la topología local de CACF y complementa
-los diagramas Mermaid de arquitectura y flujo publicados en esta sección.
+- [Arquitectura editable Draw.io](CACF-local-architecture.drawio).
 
 La documentación técnica se versiona junto al código. El PKC y sus materiales
 de library se conservan fuera de Git, conforme a la política global del proyecto.
@@ -34,8 +30,8 @@ de ServiceNow/GNM que no bloqueen CACF.
 
 ## Contrato conocido
 
-- NEXT CREATE: `POST /tupix/api/v1/tickets`, `text/xml`, HTTP Basic.
-- NEXT TKTUPDATE: `POST /tupix/api/v1/incidents`.
+- NEXT CREATE: `POST /tupix/api/v1/netcool/tickets`, `text/xml`, HTTP Basic.
+- NEXT TKTUPDATE: `POST /tupix/api/v1/netcool/incidents`.
 - Callback compatible: `POST /data`.
 - RequesterID: `sourceSystem:sourceSerial:customerCode`.
 - ProviderID: identificador generado por NEXT.

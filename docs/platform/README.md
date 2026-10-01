@@ -24,7 +24,7 @@ código; aquí se describe cómo encontrarla y cómo relacionarla.
 - [CACF](cacf/README.md)
 - [ESS](service-administration.md)
 - [Integraciones](architecture/system-integration-instances.md)
-- [Testing](../project/documentation-coverage.md)
+- [Testing](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/testing/README.md)
 
 La documentación no afirma que un servicio esté desplegado en un ambiente:
 para ello se deben consultar los manifiestos, health checks y evidencias del

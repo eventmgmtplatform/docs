@@ -178,6 +178,25 @@ En Windows PowerShell:
 ./docs.ps1 start
 ```
 
+La documentación bajo `docs/platform/` pertenece al repositorio del producto
+y no se edita manualmente en esta Wiki. Para sincronizarla desde cualquier clon
+local del producto:
+
+```bash
+./scripts/docs sync-platform --source /ruta/event-management-platform
+./scripts/docs sync-platform --check --source /ruta/event-management-platform
+```
+
+En Windows PowerShell se usan los mismos argumentos:
+
+```powershell
+.\docs.ps1 sync-platform --source C:\ruta\event-management-platform
+.\docs.ps1 sync-platform --check --source C:\ruta\event-management-platform
+```
+
+El modo `--check` no modifica archivos: devuelve `IN SYNC` o
+`DRIFT DETECTED` y un código de salida distinto de cero cuando detecta deriva.
+
 El servidor escucha por defecto únicamente en localhost:
 
 ```text

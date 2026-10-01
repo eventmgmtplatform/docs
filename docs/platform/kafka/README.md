@@ -1,10 +1,5 @@
 # Kafka de OPEN EVENT MANAGEMENT
 
-![Apache Kafka](../../assets/images/apache-kafka.png)
-
-El módulo de administración utiliza Kafka como backbone de mensajería para
-los tópicos de eventos, comandos y resultados descritos en esta sección.
-
 Administración del bus local y preparación reproducible de un candidato de producto.
 El paquete conserva el broker KRaft de un nodo y los nueve topics actuales. **No es
 una certificación de producción ni instala los demás servicios de Event Management.**
@@ -12,7 +7,7 @@ una certificación de producción ni instala los demás servicios de Event Manag
 - [Comandos CLI aplicados al producto](cli.md)
 - [Configuración, conexiones y Web UI](configuration-and-webui.md)
 - [Instalación y camino a una versión certificada](installation-and-certification.md)
-- [Historial del componente](../CHANGELOG.md)
+- [Historial del componente](https://github.com/eventmgmtplatform/event-management-platform/blob/abd899c2c852828f3e0cbbdcfc63a6f1793f21cc/infrastructure/kafka/CHANGELOG.md)
 
 ## Fuentes de configuración
 
