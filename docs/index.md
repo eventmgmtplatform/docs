@@ -1,8 +1,25 @@
+<div class="oem-home-intro" markdown>
+
+<span class="oem-home-intro__eyebrow">Documentation</span>
+
 # Open Event Management
 
 Documentación de producto para la plataforma de gestión de eventos operativos.
 Este portal explica cómo se integra cada servicio, cómo ejecutar el entorno local
 y cómo seguir un evento desde su entrada hasta su estado final.
+
+</div>
+
+## Explore la documentación
+
+<div class="oem-quick-links">
+  <a class="oem-quick-link" href="architecture/oem-architecture-definition/"><strong>Architecture</strong><span>Definición maestra, arquitecturas Golden y vistas cross-cutting.</span></a>
+  <a class="oem-quick-link" href="platform/"><strong>Platform</strong><span>Servicios, integraciones y evidencia de implementación.</span></a>
+  <a class="oem-quick-link" href="operations/local-runbook/"><strong>Operations</strong><span>Runbooks, observabilidad, incidentes y recuperación.</span></a>
+  <a class="oem-quick-link" href="development/contributing/"><strong>Development</strong><span>Contribución, estándares, pruebas y releases.</span></a>
+  <a class="oem-quick-link" href="reference/api/"><strong>Reference</strong><span>APIs, eventos, configuración y Terraform.</span></a>
+  <a class="oem-quick-link" href="architecture/d6-environment-evolution/"><strong>Deployment</strong><span>Mapa de ambientes y perfiles de despliegue OEM.</span></a>
+</div>
 
 ## Qué resuelve el producto
 
@@ -64,7 +81,6 @@ flowchart TB
 
 La documentación detallada está en [Arquitectura](architecture/index.md),
 [Modelo de dominio](concepts/domain-model.md) y [Flujo de eventos](concepts/event-flow.md).
-
 
 ## Documentación ampliada
 

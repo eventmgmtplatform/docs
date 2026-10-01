@@ -10,9 +10,6 @@ theme:
     text: IBM Plex Sans
     code: IBM Plex Mono
   features:
-  - navigation.tabs
-  - navigation.tabs.sticky
-  - navigation.sections
   - navigation.path
   - navigation.top
   - navigation.footer
@@ -29,6 +26,7 @@ plugins:
 markdown_extensions:
 - admonition
 - attr_list
+- md_in_html
 - tables
 - toc:
     permalink: true
