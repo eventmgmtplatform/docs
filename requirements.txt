@@ -1,0 +1,8 @@
+# MkDocs provides the documentation build and local development server.
+mkdocs==1.6.1
+
+# Material is the theme selected by mkdocs.yml.
+mkdocs-material==9.7.7
+
+# mkdocs.yml directly configures details, highlight, and superfences.
+pymdown-extensions==11.0.1
