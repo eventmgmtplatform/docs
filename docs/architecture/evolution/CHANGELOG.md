@@ -3,6 +3,18 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-09-30 — ARCH-REDESIGN-02
+
+### Redesigned
+
+- D1 using the approved D0 Architecture Golden Template.
+- Added a concise Solution Deployment Architecture and refined the Engineering Runtime Architecture.
+- Formalized the Minimum Deployable OEM and Local Development Tooling as separate containment boundaries.
+
+### Preserved
+
+- D0 responsibilities, D1 containment, service ownership, data authority, Management Plane, and local runtime contract remain unchanged.
+
 ## 2026-09-30 — ARCH-REDESIGN-01
 
 ### Redesigned
