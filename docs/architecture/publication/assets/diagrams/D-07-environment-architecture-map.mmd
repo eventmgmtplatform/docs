@@ -1,0 +1,7 @@
+flowchart TB
+ D0[D0<br/>OEM LOGICAL CORE] --> D1[D1<br/>LOCAL COMPOSE]
+ D0 --> D3[D3<br/>RHEL / VM]
+ D0 --> D2[D2<br/>PORTABLE KUBERNETES] --> D4[D4<br/>QA GKE] --> D5A[D5A<br/>PRODUCTION GKE RUNTIME] --> D5B[D5B<br/>PRODUCTION GKE + CI/CD]
+ G1[GCP-01<br/>GCP FOUNDATION] -. supports .-> D4
+ G1 -. supports .-> D5A
+ G1 -. supports .-> G2[GCP-02<br/>BUILD / DELIVERY] --> D5B

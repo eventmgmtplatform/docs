@@ -1,0 +1,2 @@
+flowchart LR
+ ES[Event Stream] --> K[Kafka<br/>Transport + Replay] --> OEM[OEM Processing] --> PG[(PostgreSQL<br/>Operational Source of Truth)] -->|Projection| OS[(OpenSearch<br/>Search / Analytics)]

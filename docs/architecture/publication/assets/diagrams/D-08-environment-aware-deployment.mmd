@@ -1,0 +1,8 @@
+flowchart TB
+ ENTRY[Conceptual Deployment Entry Point] --> P[Environment Profile]
+ P --> L[LOCAL] --> H[Existing Host] --> C[Docker Compose]
+ P --> R[RHEL] --> VM[Enterprise VM Infrastructure] --> PKG[Enterprise / Offline Package]
+ P --> K[PORTABLE KUBERNETES] --> KVM[KVM / Linux VMs] --> KP[Kubernetes Package]
+ P --> G[GKE] --> TF[Terraform] --> F[GCP-01 Foundation] --> RT[GKE Runtime]
+ KP --> RT
+ G --> DEL[GCP-02 Authorized Delivery] --> RT

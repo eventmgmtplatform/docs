@@ -1,0 +1,4 @@
+flowchart LR
+ SURFACE[User or Designed Event Trigger<br/>AIOps / AI Surface] --> ORCH[AI Orchestration<br/>Context · Model Abstraction · Workflow] --> GOV[Governed Tools and OEM APIs<br/>Authorization · Policy · Approval] --> OEM[Authoritative OEM Core]
+ ASSURE[Governance · Security · Audit<br/>Observability · Evaluation] -. applies across .-> ORCH
+ ASSURE -. governs .-> GOV

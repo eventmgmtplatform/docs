@@ -1,0 +1,11 @@
+flowchart LR
+ subgraph F[Shared GCP Foundation]
+  NET[Networking]
+  IAM[IAM & Service Identities]
+  SM[Secret Manager]
+  AR[Artifact Registry]
+  CS[Cloud Storage]
+ end
+ F --> D4[D4 — QA GKE Runtime]
+ F --> D5A[D5A — PROD GKE Runtime]
+ F --> G2[GCP-02 — Build, Delivery & CI/CD]

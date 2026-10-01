@@ -1,0 +1,11 @@
+flowchart LR
+ SRC[Event Sources]
+ subgraph OEM[OPEN EVENT MANAGEMENT]
+  SURF[GUI · CLI / API · AIOps / AI] --> GOV[Governed Interface Layer] --> CORE[Ingestion · Processing · Integration · Lifecycle] --> DATA[Kafka · PostgreSQL · OpenSearch]
+ end
+ OUT[ITSM · Notifications · Automation · APIs]
+ subgraph REALIZE[Architecture Realization]
+  ENABLE[Cloud Foundation + Delivery] -. supports .-> PROFILES[Local · RHEL · Kubernetes · GKE]
+ end
+ SRC --> CORE --> OUT
+ PROFILES -. realizes .-> OEM

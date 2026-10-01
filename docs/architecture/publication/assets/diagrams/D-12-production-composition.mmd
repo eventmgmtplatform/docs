@@ -1,0 +1,10 @@
+flowchart LR
+ F[GCP-01 FOUNDATION<br/>Network · Identity · Secrets · Artifacts · Storage]
+ D[GCP-02 BUILD / DELIVERY<br/>Immutable Release · Delivery Contract]
+ R[D5A PRODUCTION RUNTIME<br/>OEM on GKE · Production Controls]
+ B[D5B<br/>PRODUCTION GKE + CI/CD]
+ F -->|supports| D
+ F -->|supports| R
+ D -->|authorized release| R
+ D --> B
+ R --> B

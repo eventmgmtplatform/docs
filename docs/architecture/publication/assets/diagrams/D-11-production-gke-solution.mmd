@@ -1,0 +1,19 @@
+flowchart TB
+ SRC[Event Sources] --> EXP[Controlled Exposure]
+ OP[Operators] --> EXP
+ subgraph GCP[GCP Production Environment]
+  F[GCP-01 Foundation]
+  subgraph GKE[GKE Production Runtime]
+   subgraph OEM[OPEN EVENT MANAGEMENT]
+    M[Management Plane]
+    A[Application Plane]
+    D[Event / Data Plane]
+   end
+   Q[Availability · Security · Recovery<br/>Observability · Operability]
+  end
+  F --> GKE
+  EXP --> M
+  EXP --> A
+  Q --> OEM
+ end
+ A --> E[Controlled Egress] --> EXT[External Systems]

@@ -1,0 +1,5 @@
+flowchart LR
+ SRC[Event Sources] --> GW[Event Gateway] --> RAW[events.raw] --> K[Kafka] --> EP[Event Processor]
+ EP --> CMD[integration.commands] --> K --> IW[Integration Worker] --> EXT[External Systems]
+ EXT --> RES[integration.results] --> K --> ESS[Event State Service] --> PG[(PostgreSQL)] -->|Projection| OS[(OpenSearch)]
+ OP[Operator] --> CON[Console] --> BFF[Management BFF / API] --> ESS

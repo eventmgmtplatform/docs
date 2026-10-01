@@ -1,0 +1,11 @@
+flowchart LR
+ subgraph INFRA[Infrastructure Delivery]
+  IS[Infrastructure Source] --> TF[Terraform] --> TI[Authorized Terraform Identity] --> F[GCP-01 Foundation]
+ end
+ subgraph APP[Application Delivery]
+  AS[Application Source] --> CB[Cloud Build] --> AR[Artifact Registry] --> REL[Immutable Release] --> DC[Delivery Contract] --> RUN[Runtime Consumer]
+ end
+ IAM[IAM / Identity] -. authorizes .-> TI
+ IAM -. authorizes .-> CB
+ IAM -. authorizes .-> DC
+ AUDIT[Audit / Traceability] -. spans .-> APP

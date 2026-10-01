@@ -1,0 +1,9 @@
+flowchart TB
+ SRC[External Sources] --> GW[Event Gateway]
+ SURF[GUI · CLI / API · AIOps / AI] --> GOV[Governed Interface Layer]
+ GOV --> CON[Console] --> BFF[Management BFF / API]
+ GOV --> GW
+ GW --> K[Kafka] --> EP[Event Processor] --> K --> IW[Integration Worker] --> EXT[External Systems]
+ EXT --> K --> ESS[Event State Service] --> PG[(PostgreSQL<br/>Operational Authority)] --> OS[(OpenSearch<br/>Projection)]
+ DEPLOY[Local · RHEL · Kubernetes · GKE] -. realizes .-> GOV
+ DEPLOY -. realizes .-> K

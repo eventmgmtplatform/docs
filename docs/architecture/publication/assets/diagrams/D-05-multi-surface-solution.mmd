@@ -1,0 +1,10 @@
+flowchart TB
+ subgraph S[OEM INTERACTION SURFACES]
+  GUI[GUI]
+  CLI[CLI / API]
+  AI[AIOps / AI]
+ end
+ GUI --> GOV[Governed Interface Layer<br/>APIs · authorization · policy · validation · audit]
+ CLI --> GOV
+ AI --> GOV
+ GOV --> CORE[ONE OEM CORE]
