@@ -55,7 +55,7 @@ nav:
   - D2 — KVM + Kubernetes Deployment: architecture/d2-kvm-kubernetes-target.md
   - D4 — QA GKE Minimum Deployment: architecture/d4-qa-gke-minimum-target.md
   - GCP-01 — GCP Foundation: architecture/gcp-foundation-current.md
-  - GCP-02 — Build y Delivery: architecture/gcp-cicd-current.md
+  - GCP-02 — Build, Delivery & CI/CD: architecture/gcp-cicd-current.md
   - D5A — PROD GKE Runtime: architecture/d5a-prod-gke-runtime-target.md
   - D5B — PROD GKE + CI/CD: architecture/d5b-prod-gke-cicd-target.md
   - D6 — Evolución de ambientes: architecture/d6-environment-evolution.md

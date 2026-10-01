@@ -3,6 +3,23 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-01 — ARCH-REDESIGN-07
+
+### Redesigned
+
+- GCP-02 using the approved OEM Golden Template.
+- Separated infrastructure delivery from the application build and delivery
+  lane in the Solution and Engineering Architecture views.
+- Made immutable artifact identity, Release Manifest, authorization, promotion,
+  rollback and D5B composition boundaries explicit.
+
+### Preserved
+
+- Terraform, Cloud Build, Artifact Registry, SHA-256 digest, Release Manifest,
+  identity, secret and promotion responsibilities remain unchanged.
+- GCP-02 remains delivery architecture, separate from the GCP-01 foundation and
+  D4/D5A runtimes.
+
 ## 2026-10-01 — ARCH-REDESIGN-06
 
 ### Redesigned

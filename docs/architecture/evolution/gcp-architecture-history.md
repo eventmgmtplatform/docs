@@ -39,3 +39,12 @@ solution view from the engineering containment view and clarifies the network,
 identity, Terraform, secret, artifact and object-storage responsibility
 boundaries. The foundation capabilities, consumers and separation from runtime
 and delivery architectures are unchanged.
+
+## GCP-02 presentation evolution
+
+`GCP-02-golden-01` (ARCH-REDESIGN-07, 2026-10-01) applies the OEM Golden
+Template to the delivery view. It separates infrastructure and application
+lanes and clarifies immutable artifact identity, Release Manifest,
+authorization, promotion, rollback and runtime-consumption boundaries. The
+delivery contract and its separation from foundation and runtime architectures
+are unchanged.
