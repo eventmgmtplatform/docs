@@ -126,8 +126,8 @@ Para construir la documentación:
 Clone el repositorio:
 
 ```bash
-git clone https://github.com/GITHUB_OWNER/event-mgmt-opensource.git
-cd event-mgmt-opensource
+git clone https://github.com/eventmgmtplatform/event-mgmt-docs.git
+cd event-mgmt-docs
 ```
 
 Prepare la configuración local:
@@ -160,37 +160,56 @@ Consulte la [guía de desarrollo local](docs/getting-started/local-development.m
 
 La documentación se mantiene en `docs/` y se publica mediante MkDocs y GitHub Pages.
 
-Instale las dependencias:
+El runtime documental no requiere activar manualmente el entorno virtual. En
+Linux y macOS, el wrapper vive bajo `scripts/` porque `docs/` es el directorio
+de fuentes:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements-docs.txt
+./scripts/docs install
+./scripts/docs validate
+./scripts/docs start
 ```
 
-Inicie el servidor local:
+En Windows PowerShell:
 
-```bash
-mkdocs serve
+```powershell
+./docs.ps1 install
+./docs.ps1 validate
+./docs.ps1 start
 ```
 
-Abra:
+El servidor escucha por defecto únicamente en localhost:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-Valide la compilación:
+Para una presentación en la red local, habilite explícitamente el bind LAN:
 
 ```bash
-mkdocs build --strict
+./scripts/docs start --host 0.0.0.0 --port 8000
 ```
 
-Documentación publicada:
+Comandos disponibles:
 
-```text
-https://GITHUB_OWNER.github.io/event-mgmt-opensource/
+```bash
+./scripts/docs build       # build estricto en site/
+./scripts/docs validate    # build temporal y validación de D0–AI-01
+./scripts/docs status      # proceso y disponibilidad HTTP
+./scripts/docs health      # health check HTTP
+./scripts/docs restart
+./scripts/docs stop
 ```
+
+`publish` está reservado para un flujo controlado y no publica contenido. La
+documentación oficial está en
+<https://eventmgmtplatform.github.io/event-mgmt-docs/>.
+
+El build de MkDocs funciona sin CDN una vez instaladas sus dependencias. En el
+navegador, los diagramas Mermaid requieren actualmente `unpkg.com`; las fuentes
+IBM Plex también pueden requerir red y degradan a fuentes de respaldo si no
+están disponibles. Por ello el renderizado web no está certificado como
+completamente offline.
 
 ## Infraestructura como código
 
