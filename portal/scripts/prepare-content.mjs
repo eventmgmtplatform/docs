@@ -323,6 +323,20 @@ await write('quality/index.md', landing('Quality', [
   ['Certification Labs', '../platform/labs/os-01-01/acceptance-checklist/']
 ]))
 
+await write('quality/_meta.js', `export default {
+  index: 'Quality',
+  'certification-lab': {
+    title: 'Certification Lab',
+    type: 'menu',
+    items: {
+      keep: {
+        title: 'Keep',
+        href: '/architecture/reference-architectures/keep/'
+      }
+    }
+  }
+}\n`)
+
 await write('devops-iac/index.md', landing('DevOps & IaC', [
   ['Terraform reference', '../reference/terraform/'],
   ['GCP and Kubernetes IaC', '../deployment/iac-gcp-kubernetes/'],
