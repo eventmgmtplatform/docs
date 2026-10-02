@@ -350,6 +350,11 @@ await write('quality/_meta.js', `export default {
     title: 'Certification Lab',
     type: 'menu',
     items: {
+      'os-01-01-acceptance-checklist': { title: 'OS_01_01 — Acceptance Checklist', href: '/platform/labs/os-01-01/acceptance-checklist/' },
+      'os-01-01-operational-runbook': { title: 'OS_01_01 — Operational Runbook', href: '/platform/labs/os-01-01/operational-runbook/' },
+      'os-01-01-contract': { title: 'OS_01_01 — Contract', href: '/platform/labs/os-01-01/contract/' },
+      'os-01-01-field-mapping': { title: 'OS_01_01 — Field Mapping', href: '/platform/labs/os-01-01/field-mapping/' },
+      'os-01-01-decisions-adr': { title: 'OS_01_01 — Decisions ADR', href: '/platform/labs/os-01-01/decisions-adr/' },
       keep: {
         title: 'Keep',
         href: '/architecture/reference-architectures/keep/'
