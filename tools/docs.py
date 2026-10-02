@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import io
 import filecmp
 import json
 import os
@@ -14,6 +15,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import tarfile
 import time
 from typing import Sequence
 from urllib.error import URLError
@@ -30,6 +32,7 @@ STATE = ROOT / ".docs-runtime.json"
 LOG = ROOT / ".docs-runtime.log"
 PLATFORM = ROOT / "docs" / "platform"
 SYNC_TOOL_VERSION = 1
+AUTHORITY_FILE = ROOT / ".product-docs-authority.json"
 SYNC_EXCLUDED_NAMES = {
     ".git",
     ".venv",
@@ -100,14 +103,28 @@ def source_repository(source: Path) -> tuple[Path, Path, str, str]:
     repository = Path(git_output(source, "rev-parse", "--show-toplevel")).resolve()
     if repository != source:
         raise RuntimeError(f"Product source must be the repository root: {repository}")
-    docs = repository / "docs"
+    authority = json.loads(AUTHORITY_FILE.read_text(encoding="utf-8")) if AUTHORITY_FILE.is_file() else {}
+    commit = authority.get("certified_commit") or git_output(repository, "rev-parse", "HEAD")
+    docs = repository / authority.get("source_path", "docs")
     if not docs.is_dir():
         raise RuntimeError(f"Product documentation directory not found: {docs}")
-    commit = git_output(repository, "rev-parse", "HEAD")
-    remote = git_output(repository, "config", "--get", "remote.origin.url")
+    remote = authority.get("product_repository") or git_output(repository, "config", "--get", "remote.origin.url")
     if "@" in remote and "://" in remote:
         remote = remote.split("://", 1)[0] + "://" + remote.rsplit("@", 1)[1]
     return repository, docs, commit, remote
+
+
+def immutable_source(source: Path) -> tuple[tempfile.TemporaryDirectory[str] | None, Path]:
+    """Return an immutable source tree when authority is pinned."""
+    if not AUTHORITY_FILE.is_file():
+        return None, source
+    authority = json.loads(AUTHORITY_FILE.read_text(encoding="utf-8"))
+    commit = authority["certified_commit"]
+    temporary = tempfile.TemporaryDirectory(prefix="oem-certified-source-")
+    archive = subprocess.check_output(["git", "-C", str(source), "archive", commit, authority["source_path"]])
+    with tarfile.open(fileobj=io.BytesIO(archive), mode="r:") as bundle:
+        bundle.extractall(temporary.name)
+    return temporary, Path(temporary.name)
 
 
 def excluded_sync_path(path: Path) -> bool:
@@ -143,27 +160,39 @@ def rewrite_repository_links(
 
 
 def build_platform_snapshot(destination: Path, source: Path) -> None:
-    repository, docs, commit, remote = source_repository(source)
-    destination.mkdir(parents=True)
-    for entry in sorted(docs.rglob("*"), key=lambda path: path.relative_to(docs).as_posix()):
-        relative = entry.relative_to(docs)
-        if excluded_sync_path(relative):
-            continue
-        if entry.is_symlink():
-            raise RuntimeError(f"Symbolic links are not allowed in synchronized docs: {relative}")
-        target = destination / relative
-        if entry.is_dir():
-            target.mkdir(parents=True, exist_ok=True)
-        elif entry.is_file():
-            target.parent.mkdir(parents=True, exist_ok=True)
-            if entry.suffix.lower() == ".md":
-                content = entry.read_text(encoding="utf-8")
-                target.write_text(
-                    rewrite_repository_links(content, entry, repository, docs, remote, commit),
-                    encoding="utf-8",
-                )
-            else:
-                shutil.copyfile(entry, target)
+    temporary, immutable_root = immutable_source(source)
+    try:
+        source_root = immutable_root / "docs" if temporary else immutable_root / "docs"
+        if temporary:
+            authority = json.loads(AUTHORITY_FILE.read_text(encoding="utf-8"))
+            repository, docs = immutable_root, source_root
+            commit = authority["certified_commit"]
+            remote = authority["product_repository"]
+        else:
+            repository, docs, commit, remote = source_repository(source_root.parent)
+        destination.mkdir(parents=True)
+        for entry in sorted(docs.rglob("*"), key=lambda path: path.relative_to(docs).as_posix()):
+            relative = entry.relative_to(docs)
+            if excluded_sync_path(relative):
+                continue
+            if entry.is_symlink():
+                raise RuntimeError(f"Symbolic links are not allowed in synchronized docs: {relative}")
+            target = destination / relative
+            if entry.is_dir():
+                target.mkdir(parents=True, exist_ok=True)
+            elif entry.is_file():
+                target.parent.mkdir(parents=True, exist_ok=True)
+                if entry.suffix.lower() == ".md":
+                    content = entry.read_text(encoding="utf-8")
+                    target.write_text(
+                        rewrite_repository_links(content, entry, repository, docs, remote, commit),
+                        encoding="utf-8",
+                    )
+                else:
+                    shutil.copyfile(entry, target)
+    finally:
+        if temporary:
+            temporary.cleanup()
 
     marker = (
         "# Synchronized product documentation\n\n"

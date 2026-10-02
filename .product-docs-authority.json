@@ -1,0 +1,7 @@
+{
+  "product_repository": "https://github.com/eventmgmtplatform/event-management-platform.git",
+  "certified_commit": "abd899c2c852828f3e0cbbdcfc63a6f1793f21cc",
+  "source_path": "docs",
+  "target_path": "docs/platform",
+  "sync_tool_version": 1
+}
