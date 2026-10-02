@@ -1901,7 +1901,7 @@ await write('quality/index.md', landing('Quality', [
   ['Status Dashboard', 'quality/status/'],
   ['Testing', 'quality/testing/'],
   ['Defect Prevention', '../project/defect-prevention/'],
-  ['Certification Labs', '../platform/labs/os-01-01/acceptance-checklist/']
+  ['Certification Labs', '../platform/labs/']
 ]))
 
 await write('quality/_meta.js', `export default {
