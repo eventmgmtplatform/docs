@@ -261,6 +261,32 @@ OEM pages remain the source of truth for OEM architecture and implementation.
 const platformReadme = await readFile(resolve(destination, 'platform/README.md'), 'utf8')
 await write('platform/index.md', platformReadme)
 await write('platform/operations/_meta.js', `export default { README: 'Platform Operations' }\n`)
+await write('platform/labs/index.md', '# Certification Labs\n\nReference and validation labs for the Event Management platform.\n')
+await write('platform/labs/_meta.js', `export default {
+  index: 'Certification Labs',
+  'os-01-01': {
+    title: 'OS 01 01',
+    type: 'menu',
+    items: {
+      'acceptance-checklist': { title: 'OS_01_01 — Checklist de aceptación', href: '/platform/labs/os-01-01/acceptance-checklist/' },
+      contract: { title: 'OS_01_01 — Contrato Zabbix Message Bus', href: '/platform/labs/os-01-01/contract/' },
+      'decisions-adr': { title: 'OS_01_01 — Decisiones arquitectónicas', href: '/platform/labs/os-01-01/decisions-adr/' },
+      'field-mapping': { title: 'OS_01_01 — Mapeo de campos Zabbix', href: '/platform/labs/os-01-01/field-mapping/' },
+      'operational-runbook': { title: 'OS_01_01 — Runbook operativo', href: '/platform/labs/os-01-01/operational-runbook/' }
+    }
+  },
+  keep: {
+    title: 'Keep',
+    type: 'menu',
+    items: {
+      overview: { title: 'Overview', href: '/architecture/reference-architectures/keep/' },
+      architecture: { title: 'Architecture', href: '/architecture/reference-architectures/keep/architecture/' },
+      'ai-llm': { title: 'AI / LLM', href: '/architecture/reference-architectures/keep/ai-llm/' },
+      'oem-comparison': { title: 'OEM Comparison', href: '/architecture/reference-architectures/keep/oem-comparison/' },
+      references: { title: 'References', href: '/architecture/reference-architectures/keep/references/' }
+    }
+  }
+}\n`)
 await write('platform/_meta.js', `export default {
   index: 'Engineering Overview',
   architecture: 'Integrated Architecture',
