@@ -1125,7 +1125,98 @@ await write('integrations/_meta.js', `export default {
   'integration-architecture': 'Integration Architecture — Instances'
 }\n`)
 
-await write('integrations/custom-api.md', `# Custom API Integration
+await write('integrations/custom-api.md', `# Custom API
+
+## Solution Architecture
+
+Custom API is the provider-neutral, API-first, adapter-based and governed OEM
+integration model. It extends integrations without embedding vendor behavior in
+OEM Core.
+
+External System -> Custom API / Provider Interface -> Governed Integration Contract
+-> Adapter / Provider Implementation -> OEM Integration Boundary -> OEM Core.
+
+The event path remains Gateway -> Kafka -> Processor -> integration intent ->
+Worker/Adapter -> external system -> integration result -> ESS. Processor decides;
+Worker/Adapter executes; ESS consolidates.
+
+## Integration Model
+
+Provider catalog metadata, installed configuration, provider instance identity,
+credential/secret references, scopes, supported methods, capabilities,
+execution behavior, health validation, and audit provenance remain separate
+concepts. Provider identity is explicit through providerId and providerType;
+existing AlertDto source and fingerprint relationships are preserved.
+
+## Provider Model
+
+The documented extension point is compatible with separate incident/ticketing,
+notification and other provider categories where an existing adapter supports
+them. Existing ServiceNow, GNM, GLPI and CACF material remains authoritative;
+Custom API does not replace those providers.
+
+## Provider Lifecycle
+
+Where supported by the provider contract, lifecycle stages are configuration,
+validate_config, initialization, execution, health/availability and dispose.
+
+## Capabilities
+
+Capabilities, methods, authentication metadata, scopes and supported operations
+must be discovered explicitly. Credentials are represented by governed secret
+references, never by payloads or catalog metadata.
+
+## API Contracts
+
+The governed [OEM API Catalog](/platform/api/oem-api-catalog/) is the API
+boundary. Existing evidence identifies provider discovery through GET /providers;
+no additional Custom API endpoint is asserted here.
+
+## Endpoint Contract Matrix
+
+| Contractual Endpoint | Real Endpoint | Status | Required Change | Owner Repository |
+| --- | --- | --- | --- | --- |
+| GET /providers | GET /providers | MATCH | None evidenced | event-management-platform |
+
+## Security and Secrets
+
+State-changing operations remain behind identity, authorization, policy,
+validation and audit controls. Secret payloads must not appear in Git,
+documentation, provider metadata, event payloads or logs.
+
+## Execution and Error Handling
+
+Adapters own bounded external execution, including provider-specific timeout,
+retry and error classification where documented. No universal exactly-once
+external execution is claimed, and replay does not automatically repeat external
+side effects.
+
+## Data Authority
+
+Kafka remains the transport/replay boundary, PostgreSQL the Operational Source
+of Truth, and OpenSearch a derived search/analytics projection. External
+providers are not operational authority.
+
+## Extensibility
+
+The extension point allows ServiceNow, GNM, GLPI, Custom API and future
+providers to implement governed contracts without modifying OEM Core.
+
+## Implementation Status
+
+The Custom API architecture is **DESIGNED**. Provider discovery is evidenced;
+a complete Custom API adapter, production credentials, and production
+certification are not claimed.
+
+## Related Architectures
+
+See [D0 Logical Architecture](/architecture/d0-logical-current/),
+[Data Authority & Replay](/architecture/data-authority-replay/),
+[Multi-Surface](/architecture/multi-surface-interaction/),
+[AI-01](/architecture/ai-01-aiops-ai-architecture/), and [Integration
+Instances](/integrations/integration-architecture/).
+
+## Customer Documentation Template
 
 This page is the customer-facing template for implementable integration
 solutions. It is written for administrators, operators, and integration users;
