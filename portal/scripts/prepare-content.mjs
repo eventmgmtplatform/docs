@@ -110,6 +110,7 @@ await write('_meta.js', `export default {
   'ai-automation': { title: 'AI & Automation', type: 'page' },
   quality: { title: 'Quality', type: 'page' },
   'devops-iac': { title: 'DevOps & IaC', type: 'page' },
+  research: { title: 'Research', type: 'page' },
   project: { title: 'Project', type: 'page' },
   'getting-started': { display: 'hidden' },
   concepts: { display: 'hidden' },
@@ -257,6 +258,42 @@ Inspected sources:
 These files are evidence references, not copied portal content. The canonical
 OEM pages remain the source of truth for OEM architecture and implementation.
 `)
+
+await write('research/index.md', `# Research
+
+Research material is separated from the OEM product definition. External
+references are evidence and decision input only; they do not redefine OEM
+architecture or implementation.
+
+- [Keep — External Reference](/research/keep/)
+`)
+await write('research/_meta.js', `export default {
+  index: 'Research',
+  keep: {
+    title: 'Keep',
+    type: 'menu',
+    items: {
+      overview: { title: 'Overview', href: '/architecture/reference-architectures/keep/' },
+      architecture: { title: 'Architecture', href: '/architecture/reference-architectures/keep/architecture/' },
+      'ai-llm': { title: 'AI / LLM', href: '/architecture/reference-architectures/keep/ai-llm/' },
+      'oem-comparison': { title: 'OEM Comparison', href: '/architecture/reference-architectures/keep/oem-comparison/' },
+      references: { title: 'References', href: '/architecture/reference-architectures/keep/references/' }
+    }
+  }
+}
+`)
+await write('research/keep/index.md', `# Keep — External Reference
+
+This is the Research navigation entry for the canonical Keep reference pages.
+The pages are maintained once under Architecture → Reference Architectures.
+
+- [Overview](/architecture/reference-architectures/keep/)
+- [Architecture](/architecture/reference-architectures/keep/architecture/)
+- [AI / LLM](/architecture/reference-architectures/keep/ai-llm/)
+- [OEM Comparison](/architecture/reference-architectures/keep/oem-comparison/)
+- [References](/architecture/reference-architectures/keep/references/)
+`)
+await write('research/keep/_meta.js', `export default { index: 'Keep — External Reference' }\n`)
 
 const platformReadme = await readFile(resolve(destination, 'platform/README.md'), 'utf8')
 await write('platform/index.md', platformReadme)
