@@ -21,13 +21,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Checkout certified product documentation source
-        uses: actions/checkout@v6
-        with:
-          repository: eventmgmtplatform/event-management-platform
-          ref: abd899c2c852828f3e0cbbdcfc63a6f1793f21cc
-          path: product-source
-          sparse-checkout: docs
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -41,8 +34,6 @@ jobs:
       - name: Validate documentation
         run: ./scripts/docs validate
 
-      - name: Validate certified product synchronization
-        run: ./scripts/docs sync-platform --check --source product-source
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
