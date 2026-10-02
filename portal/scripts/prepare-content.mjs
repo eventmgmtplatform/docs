@@ -110,7 +110,6 @@ await write('_meta.js', `export default {
   'ai-automation': { title: 'AI & Automation', type: 'page' },
   quality: { title: 'Quality', type: 'page' },
   'devops-iac': { title: 'DevOps & IaC', type: 'page' },
-  research: { title: 'Research', type: 'page' },
   project: { title: 'Project', type: 'page' },
   'getting-started': { display: 'hidden' },
   concepts: { display: 'hidden' },
@@ -141,16 +140,11 @@ await write('architecture/_meta.js', `export default {
   'gcp-foundation-current': 'Cloud Architecture — GCP-01',
   'gcp-cicd-current': 'Cloud Architecture — GCP-02',
   evolution: 'Architecture Evolution',
-  'reference-architectures': 'Reference Architectures',
   index: { display: 'hidden' },
   publication: { display: 'hidden' }
 }\n`)
 
-await write('architecture/reference-architectures/_meta.js', `export default {
-  keep: 'Keep'
-}\n`)
-
-await write('architecture/reference-architectures/keep/_meta.js', `export default {
+await write('platform/labs/keep/_meta.js', `export default {
   index: 'Overview',
   architecture: 'Architecture',
   'ai-llm': 'AI / LLM',
@@ -158,7 +152,7 @@ await write('architecture/reference-architectures/keep/_meta.js', `export defaul
   references: 'References'
 }\n`)
 
-await write('architecture/reference-architectures/keep/index.md', `# Keep Overview
+await write('platform/labs/keep/index.md', `# Keep Overview
 
 > **External Reference — Keep**
 
@@ -176,7 +170,7 @@ relational alert/incident state model, correlation and deduplication findings,
 and the Keep-versus-OEM comparison package.
 `)
 
-await write('architecture/reference-architectures/keep/architecture.md', `# Keep Architecture
+await write('platform/labs/keep/architecture.md', `# Keep Architecture
 
 > **External Reference — Keep**
 
@@ -199,7 +193,7 @@ SQLite or relational SQL persistence. These observations are not an OEM target
 deployment recommendation.
 `)
 
-await write('architecture/reference-architectures/keep/ai-llm.md', `# Keep AI / LLM
+await write('platform/labs/keep/ai-llm.md', `# Keep AI / LLM
 
 > **External Reference — Keep**
 
@@ -218,7 +212,7 @@ For the authoritative OEM position, see [AI-01 — OEM AIOps / AI Architecture](
 Keep evidence is comparative input only; it does not modify AI-01.
 `)
 
-await write('architecture/reference-architectures/keep/oem-comparison.md', `# Keep vs OEM Comparison
+await write('platform/labs/keep/oem-comparison.md', `# Keep vs OEM Comparison
 
 > **External Reference — Keep**
 
@@ -242,7 +236,7 @@ The resulting lessons are decision inputs, not a replacement for the OEM
 Golden Architectures.
 `)
 
-await write('architecture/reference-architectures/keep/references.md', `# Keep References
+await write('platform/labs/keep/references.md', `# Keep References
 
 > **External Reference — Keep**
 
@@ -258,42 +252,6 @@ Inspected sources:
 These files are evidence references, not copied portal content. The canonical
 OEM pages remain the source of truth for OEM architecture and implementation.
 `)
-
-await write('research/index.md', `# Research
-
-Research material is separated from the OEM product definition. External
-references are evidence and decision input only; they do not redefine OEM
-architecture or implementation.
-
-- [Keep — External Reference](/research/keep/)
-`)
-await write('research/_meta.js', `export default {
-  index: 'Research',
-  keep: {
-    title: 'Keep',
-    type: 'menu',
-    items: {
-      overview: { title: 'Overview', href: '/architecture/reference-architectures/keep/' },
-      architecture: { title: 'Architecture', href: '/architecture/reference-architectures/keep/architecture/' },
-      'ai-llm': { title: 'AI / LLM', href: '/architecture/reference-architectures/keep/ai-llm/' },
-      'oem-comparison': { title: 'OEM Comparison', href: '/architecture/reference-architectures/keep/oem-comparison/' },
-      references: { title: 'References', href: '/architecture/reference-architectures/keep/references/' }
-    }
-  }
-}
-`)
-await write('research/keep/index.md', `# Keep — External Reference
-
-This is the Research navigation entry for the canonical Keep reference pages.
-The pages are maintained once under Architecture → Reference Architectures.
-
-- [Overview](/architecture/reference-architectures/keep/)
-- [Architecture](/architecture/reference-architectures/keep/architecture/)
-- [AI / LLM](/architecture/reference-architectures/keep/ai-llm/)
-- [OEM Comparison](/architecture/reference-architectures/keep/oem-comparison/)
-- [References](/architecture/reference-architectures/keep/references/)
-`)
-await write('research/keep/_meta.js', `export default { index: 'Keep — External Reference' }\n`)
 
 const platformReadme = await readFile(resolve(destination, 'platform/README.md'), 'utf8')
 await write('platform/index.md', platformReadme)
@@ -430,7 +388,7 @@ not create certifications; each status is owned by its linked evidence.
 | Lab | Status | Evidence | Date |
 | --- | --- | --- | --- |
 | OS_01_01 | Certified/validated evidence | [Acceptance Checklist](\/platform\/labs\/os-01-01\/acceptance-checklist\/) | Recorded in lab evidence |
-| Keep | External Reference | [Keep overview](\/architecture\/reference-architectures\/keep\/) | Reference material |
+| Keep | External Reference | [Keep overview](\/platform\/labs\/keep\/) | Reference material |
 `)
 await write('platform/labs/_meta.js', `export default {
   index: 'Certification Labs',
@@ -449,11 +407,11 @@ await write('platform/labs/_meta.js', `export default {
     title: 'Keep',
     type: 'menu',
     items: {
-      overview: { title: 'Overview', href: '/architecture/reference-architectures/keep/' },
-      architecture: { title: 'Architecture', href: '/architecture/reference-architectures/keep/architecture/' },
-      'ai-llm': { title: 'AI / LLM', href: '/architecture/reference-architectures/keep/ai-llm/' },
-      'oem-comparison': { title: 'OEM Comparison', href: '/architecture/reference-architectures/keep/oem-comparison/' },
-      references: { title: 'References', href: '/architecture/reference-architectures/keep/references/' }
+      overview: { title: 'Overview', href: '/platform/labs/keep/' },
+      architecture: { title: 'Architecture', href: '/platform/labs/keep/architecture/' },
+      'ai-llm': { title: 'AI / LLM', href: '/platform/labs/keep/ai-llm/' },
+      'oem-comparison': { title: 'OEM Comparison', href: '/platform/labs/keep/oem-comparison/' },
+      references: { title: 'References', href: '/platform/labs/keep/references/' }
     }
   }
 }\n`)
@@ -653,7 +611,6 @@ await write('architecture/_meta.js', `export default {
   'gcp-foundation-current': 'Cloud Architecture — GCP-01',
   'gcp-cicd-current': 'Cloud Architecture — GCP-02',
   evolution: 'Architecture Evolution',
-  'reference-architectures': 'Reference Architectures',
   index: { display: 'hidden' },
   publication: { display: 'hidden' }
 }\n`)
@@ -749,7 +706,7 @@ The historical [Correlación — aceptación backend local](/platform/event-proc
 
 ## Keep Reference
 
-[Keep Manual Correlation Rules](/architecture/reference-architectures/keep/) is an external reference for documentation patterns only. Keep semantics and dynamic naming syntax are not OEM claims.
+[Keep Manual Correlation Rules](/platform/labs/keep/) is an external reference for documentation patterns only. Keep semantics and dynamic naming syntax are not OEM claims.
 
 ## Related Documentation
 
@@ -1411,7 +1368,7 @@ Release identity remains governed by repository commit and approved publication 
 ## Certification Summary
 
 - [OS_01_01 Certification Lab](/platform/labs/os-01-01/acceptance-checklist/)
-- [Keep External Reference](/architecture/reference-architectures/keep/)
+- [Keep External Reference](/platform/labs/keep/)
 - [Correlation backend evidence](/platform/event-processor/correlation-backend/)
 
 These links reference existing canonical pages; this dashboard does not duplicate lab content.
@@ -1512,7 +1469,7 @@ await write('quality/_meta.js', `export default {
       'os-01-01-contract': { title: 'OS_01_01 — Contract', href: '/platform/labs/os-01-01/contract/' },
       'os-01-01-field-mapping': { title: 'OS_01_01 — Field Mapping', href: '/platform/labs/os-01-01/field-mapping/' },
       'os-01-01-decisions-adr': { title: 'OS_01_01 — Decisions ADR', href: '/platform/labs/os-01-01/decisions-adr/' },
-      keep: { title: 'Keep', href: '/architecture/reference-architectures/keep/' }
+      keep: { title: 'Keep', href: '/platform/labs/keep/' }
     }
   }
 }\n`)
@@ -1547,7 +1504,7 @@ await write('quality/_meta.js', `export default {
       'os-01-01-decisions-adr': { title: 'OS_01_01 — Decisions ADR', href: '/platform/labs/os-01-01/decisions-adr/' },
       keep: {
         title: 'Keep',
-        href: '/architecture/reference-architectures/keep/'
+        href: '/platform/labs/keep/'
       }
     }
   }
@@ -2152,7 +2109,7 @@ The following are internal product documentation and evidence:
 
 External references include Keep, open-source projects, and external standards.
 They are references for comparison or design context, not OEM implementation
-claims. [Keep](/architecture/reference-architectures/keep/) remains explicitly
+claims. [Keep](/platform/labs/keep/) remains explicitly
 classified as external reference material.
 
 ## External Reference Boundary
