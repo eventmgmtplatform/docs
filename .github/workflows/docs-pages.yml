@@ -48,6 +48,10 @@ jobs:
         working-directory: portal
         run: npm run build
 
+      - name: Audit portal links
+        working-directory: portal
+        run: npm run audit:links
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 

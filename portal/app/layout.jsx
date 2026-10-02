@@ -6,10 +6,10 @@ import '../theme/oem.css'
 
 export const metadata = {
   title: {
-    default: 'Open Event Management Documentation',
-    template: '%s — Open Event Management'
+    default: 'Event Management Docs',
+    template: '%s — Docs'
   },
-  description: 'Open Event Management architecture and product documentation'
+  description: 'Event Management architecture and product documentation'
 }
 
 const navbar = (
@@ -17,7 +17,7 @@ const navbar = (
     logo={
       <span className="oem-brand">
         <span className="oem-brand__mark" aria-hidden="true">O</span>
-        <span><strong>Open Event Management</strong><small>Documentation</small></span>
+        <span><strong>Event Management</strong><small>Docs</small></span>
       </span>
     }
   />
@@ -25,7 +25,7 @@ const navbar = (
 
 const footer = (
   <Footer>
-    <span>Open Event Management · Documentation</span>
+    <span>Event Management · Docs</span>
   </Footer>
 )
 

@@ -8,5 +8,6 @@ Thumbs.db
 .docs-runtime.log
 portal/.next/
 portal/out/
+portal/public/downloads/
 portal/content/
 portal/node_modules/

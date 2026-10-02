@@ -1,11 +1,12 @@
 import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises'
-import { dirname, extname, resolve } from 'node:path'
+import { dirname, extname, posix, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const portalRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const repositoryRoot = resolve(portalRoot, '..')
 const source = resolve(repositoryRoot, 'docs')
 const destination = resolve(portalRoot, 'content')
+const publicDownloads = resolve(portalRoot, 'public/downloads')
 
 await rm(destination, { recursive: true, force: true })
 await cp(source, destination, { recursive: true })
@@ -25,24 +26,66 @@ const removeNonContentSources = async directory => {
 }
 await removeNonContentSources(destination)
 
+await rm(publicDownloads, { recursive: true, force: true })
+for (const asset of [
+  'platform/api/openapi.yaml',
+  'platform/cacf/CACF-local-architecture.drawio'
+]) {
+  const target = resolve(publicDownloads, asset)
+  await mkdir(dirname(target), { recursive: true })
+  await cp(resolve(source, asset), target)
+}
+
 // MkDocs accepts repository-relative image targets without a './' prefix;
 // MDX resolves those as package names. Normalize images only in the generated
 // mirror so the authoritative Markdown remains byte-for-byte unchanged.
-const normalizeMarkdownImages = async directory => {
+const normalizeMarkdown = async directory => {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = resolve(directory, entry.name)
-    if (entry.isDirectory()) await normalizeMarkdownImages(path)
+    if (entry.isDirectory()) await normalizeMarkdown(path)
     else if (entry.name.endsWith('.md') || entry.name.endsWith('.mdx')) {
       const markdown = await readFile(path, 'utf8')
-      const normalized = markdown.replace(
+      const imageNormalized = markdown.replace(
         /(!\[[^\]]*\]\()(?!\.?\.?\/|\/|#|https?:|data:|<)/g,
         '$1./'
+      )
+      const sourcePath = relative(destination, path).split('\\').join('/')
+      const normalized = imageNormalized.replace(
+        /(\[[^\]]*\]\()([^\s)]+)(\))/g,
+        (match, prefix, target, suffix) => {
+          if (/^(?:https?:|mailto:|tel:|data:|javascript:|#)/i.test(target)) return match
+          const [pathAndQuery, fragment = ''] = target.split('#', 2)
+          const [targetPath, query = ''] = pathAndQuery.split('?', 2)
+          const sourceDirectory = posix.dirname(sourcePath)
+          const repositoryRelative = targetPath.startsWith('docs/')
+            ? targetPath.slice('docs/'.length)
+            : posix.normalize(posix.join(sourceDirectory, targetPath))
+          if (/\.(?:ya?ml|drawio)$/i.test(targetPath)) {
+            return `${prefix}/downloads/${repositoryRelative}${fragment ? `#${fragment}` : ''}${suffix}`
+          }
+          if (!/\.mdx?$/i.test(targetPath)) return match
+          let route = repositoryRelative.replace(/\.mdx?$/i, '')
+          if (posix.basename(route) === 'index') route = posix.dirname(route)
+          const href = `/${route === '.' ? '' : route}/`
+            .replace(/\/+/g, '/')
+          return `${prefix}${href}${query ? `?${query}` : ''}${fragment ? `#${fragment}` : ''}${suffix}`
+        }
       )
       if (normalized !== markdown) await writeFile(path, normalized, 'utf8')
     }
   }
 }
-await normalizeMarkdownImages(destination)
+await normalizeMarkdown(destination)
+
+// The public home is a concise portal entry point. Keep this presentation-only
+// adjustment in the disposable Nextra mirror; docs/index.md remains canonical.
+const homePath = resolve(destination, 'index.md')
+const home = await readFile(homePath, 'utf8')
+const portalHome = home
+  .replace('<span class="oem-home-intro__eyebrow">Documentation</span>', '<span class="oem-home-intro__eyebrow">Docs</span>')
+  .replace('# Open Event Management', '# Event Management')
+  .replace(/\n## Explore la documentación\n[\s\S]*?\n<\/div>\n/, '\n')
+await writeFile(homePath, portalHome, 'utf8')
 
 const write = async (path, content) => {
   const target = resolve(destination, path)
@@ -50,10 +93,11 @@ const write = async (path, content) => {
   await writeFile(target, content, 'utf8')
 }
 
+const portalHref = route => `/${route.replace(/^\.\.\//, '').replace(/^\.\//, '')}`.replace(/\/+/g, '/')
 const landing = (title, links) => [
   `# ${title}`,
   '',
-  ...links.map(([label, href]) => `- [${label}](${href})`),
+  ...links.map(([label, href]) => `- [${label}](${portalHref(href)})`),
   ''
 ].join('\n')
 
@@ -132,10 +176,10 @@ await write('deployment/index.md', landing('Deployment', [
 ]))
 
 await write('operations/index.md', landing('Operations', [
-  ['Local runbook', './local-runbook/'],
-  ['Observability', './observability/'],
-  ['Incidents', './incidents/'],
-  ['Disaster recovery', './disaster-recovery/']
+  ['Local runbook', 'operations/local-runbook/'],
+  ['Observability', 'operations/observability/'],
+  ['Incidents', 'operations/incidents/'],
+  ['Disaster recovery', 'operations/disaster-recovery/']
 ]))
 
 await write('integrations/index.md', landing('Integrations', [
@@ -147,7 +191,7 @@ await write('integrations/index.md', landing('Integrations', [
 await write('ai-automation/index.md', landing('AI & Automation', [
   ['AI-01 Architecture', '../architecture/ai-01-aiops-ai-architecture/'],
   ['AIOps implementation', '../platform/event-processor/aiops-engine/'],
-  ['CACF / Automation', '../platform/cacf/']
+  ['CACF / Automation', '../platform/cacf/README/']
 ]))
 
 await write('quality/index.md', landing('Quality', [
@@ -159,16 +203,16 @@ await write('quality/index.md', landing('Quality', [
 await write('devops-iac/index.md', landing('DevOps & IaC', [
   ['Terraform reference', '../reference/terraform/'],
   ['GCP and Kubernetes IaC', '../deployment/iac-gcp-kubernetes/'],
-  ['Git governance', '../platform/git/'],
+  ['Git governance', '../platform/git/README/'],
   ['Releases', '../development/releases/']
 ]))
 
 await write('research/index.md', '# Research\n\n- Keep *(content integration deferred)*\n')
 
 await write('project/index.md', landing('Project', [
-  ['Status', './status/'],
-  ['Roadmap', './roadmap/'],
-  ['Technical debt', './technical-debt/'],
+  ['Status', 'project/status/'],
+  ['Roadmap', 'project/roadmap/'],
+  ['Technical debt', 'project/technical-debt/'],
   ['Architecture decisions', '../decisions/']
 ]))
 

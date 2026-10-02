@@ -6,7 +6,8 @@
     "prepare:content": "node scripts/prepare-content.mjs",
     "dev": "npm run prepare:content && next dev",
     "build": "npm run prepare:content && next build",
-    "postbuild": "pagefind --site out --output-path out/_pagefind"
+    "postbuild": "pagefind --site out --output-path out/_pagefind",
+    "audit:links": "node scripts/audit-links.mjs"
   },
   "dependencies": {
     "next": "15.5.27",
