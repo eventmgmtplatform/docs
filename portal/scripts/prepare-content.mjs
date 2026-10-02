@@ -327,11 +327,10 @@ await write('operations/_meta.js', `export default {
       automation: { title: 'Automation', href: '/platform/cacf/README/' }
     }
   },
-  runbooks: { title: 'Runbooks', href: '/operations/local-runbook/' },
-  observability: { title: 'Observability', href: '/operations/observability/' },
-  incidents: { title: 'Incidents', href: '/operations/incidents/' },
-  recovery: { title: 'Recovery', href: '/operations/disaster-recovery/' },
-  security: { title: 'Security', href: '/security/secrets-management/' }
+  'local-runbook': 'Runbooks',
+  observability: 'Observability',
+  incidents: 'Incidents',
+  'disaster-recovery': 'Recovery'
 }\n`)
 
 await write('integrations/index.md', landing('Integrations', [
