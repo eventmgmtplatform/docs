@@ -391,9 +391,9 @@ not create certifications; each status is owned by its linked evidence.
 | Keep | External Reference | [Keep overview](\/platform\/labs\/keep\/) | Reference material |
 `)
 await write('platform/labs/_meta.js', `export default {
-  index: 'Certification Labs',
+  index: { title: 'Labs Overview', href: '/platform/labs/' },
   'os-01-01': {
-    title: 'OS 01 01',
+    title: 'OS_01_01',
     type: 'menu',
     items: {
       'acceptance-checklist': { title: 'OS_01_01 — Checklist de aceptación', href: '/platform/labs/os-01-01/acceptance-checklist/' },
@@ -1887,6 +1887,7 @@ await write('quality/_meta.js', `export default {
     title: 'Certification Lab',
     type: 'menu',
     items: {
+      overview: { title: 'Labs Overview', href: '/platform/labs/' },
       'os-01-01-acceptance-checklist': { title: 'OS_01_01 — Acceptance Checklist', href: '/platform/labs/os-01-01/acceptance-checklist/' },
       'os-01-01-operational-runbook': { title: 'OS_01_01 — Operational Runbook', href: '/platform/labs/os-01-01/operational-runbook/' },
       'os-01-01-contract': { title: 'OS_01_01 — Contract', href: '/platform/labs/os-01-01/contract/' },
