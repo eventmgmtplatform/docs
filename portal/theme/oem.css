@@ -101,6 +101,12 @@ article .mermaid {
   background: #fff;
 }
 
+/* Keep the framework's system theme behavior while removing its visible
+   selector from the sidebar. */
+.nextra-sidebar-footer > :first-child {
+  display: none;
+}
+
 @media (max-width: 767px) {
   .nextra-sidebar-container { margin: 0; border: 0; border-radius: 0; }
   article { min-width: 0; }
