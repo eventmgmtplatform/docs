@@ -9,6 +9,7 @@ Defect Prevention (DP) registra lo que **no debe darse por terminado**, separa i
 | Event State Service | [DP ESS](../platform/event-state-service/defect-prevention.md) | Estado, consistencia, lifecycle y recuperación. |
 | CACF / Automation | [DP CACF](../platform/cacf/defect-prevention.md) | Contratos, callbacks, timeouts, escalación e idempotencia. |
 | Proyecto | [Deuda técnica](technical-debt.md) | Pendientes transversales. |
+| Publicación documental | DP-DOCS-001 — Canonical `/docs/` Cutover Blocked by GitHub Authentication | DOCS-CUTOVER-01 fue diferido; restaurar autenticación GitHub válida y reanudar el cutover. |
 
 ## Principios
 

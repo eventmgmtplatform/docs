@@ -140,9 +140,123 @@ await write('architecture/_meta.js', `export default {
   'gcp-foundation-current': 'Cloud Architecture — GCP-01',
   'gcp-cicd-current': 'Cloud Architecture — GCP-02',
   evolution: 'Architecture Evolution',
+  'reference-architectures': 'Reference Architectures',
   index: { display: 'hidden' },
   publication: { display: 'hidden' }
 }\n`)
+
+await write('architecture/reference-architectures/_meta.js', `export default {
+  keep: 'Keep'
+}\n`)
+
+await write('architecture/reference-architectures/keep/_meta.js', `export default {
+  index: 'Overview',
+  architecture: 'Architecture',
+  'ai-llm': 'AI / LLM',
+  'oem-comparison': 'OEM Comparison',
+  references: 'References'
+}\n`)
+
+await write('architecture/reference-architectures/keep/index.md', `# Keep Overview
+
+> **External Reference — Keep**
+
+Keep is an external event-management and AIOps reference examined through the
+local Keep evidence package. It is not part of the OEM implementation or its
+authoritative architecture.
+
+OEM studies Keep for bounded decision input around provider-oriented event
+ingestion, alert identity and deduplication, declarative workflows, operator
+explainability, and AI-assisted enrichment. The evidence classifies these as
+reference patterns and lessons, not as OEM capabilities.
+
+Relevant evidence includes the Keep provider catalog, workflow execution model,
+relational alert/incident state model, correlation and deduplication findings,
+and the Keep-versus-OEM comparison package.
+`)
+
+await write('architecture/reference-architectures/keep/architecture.md', `# Keep Architecture
+
+> **External Reference — Keep**
+
+The inspected evidence describes a tenant-oriented relational model for alerts,
+incidents, alert identity, workflow definitions and executions. Providers
+normalize inbound monitoring data and expose provider-specific queries or
+actions. Correlation and deduplication operate on alert identity and incident
+membership; the evidence explicitly distinguishes current state from historical
+records.
+
+Workflows are defined through YAML or a visual editor, parsed into steps and
+actions, selected by triggers, and executed through an in-process queue and
+worker pool. Scheduler and manual execution paths persist execution records,
+but the evidence does not establish a durable queue or an exactly-once
+distributed guarantee. Provider side effects, relational commits, search
+indexing, and workflow execution are separate boundaries.
+
+Observed deployment evidence includes a backend/frontend development shape and
+SQLite or relational SQL persistence. These observations are not an OEM target
+deployment recommendation.
+`)
+
+await write('architecture/reference-architectures/keep/ai-llm.md', `# Keep AI / LLM
+
+> **External Reference — Keep**
+
+Inspected evidence identifies separate AI paths: incident suggestions and
+reports using an OpenAI client, workflow providers for OpenAI, Anthropic,
+LiteLLM and vLLM endpoints, a frontend copilot runtime, and an external
+transformers plugin. Workflow context can include incidents, alerts, provider
+identifiers and workflow metadata; provider outputs may be persisted when
+configured.
+
+The evidence also records explicit limits: no uniform model abstraction across
+all paths, no demonstrated production RAG implementation, and no certification
+of every external model path. Some GET paths can initiate AI-related work.
+
+For the authoritative OEM position, see [AI-01 — OEM AIOps / AI Architecture](/architecture/ai-01-aiops-ai-architecture/).
+Keep evidence is comparative input only; it does not modify AI-01.
+`)
+
+await write('architecture/reference-architectures/keep/oem-comparison.md', `# Keep vs OEM Comparison
+
+> **External Reference — Keep**
+
+This is a factual comparison from the inspected Keep-versus-OEM evidence. It
+contains no score, ranking, or winner.
+
+| Dimension | Keep evidence | OEM decision input |
+|---|---|---|
+| Event ingestion | Provider-specific normalization and queries | Preserve explicit gateway and event identity boundaries |
+| Event processing | Alert identity, deduplication and incident membership | Keep Processor, ESS and policy ownership explicit |
+| Correlation / deduplication | Fingerprint and current-membership patterns | Do not copy Keep filtering or mutable-policy gaps |
+| Integrations | Provider catalog with query and action surfaces | Keep governed integration contracts and worker ownership |
+| Automation / workflows | Declarative steps, triggers, scheduler and execution logs | Prefer visible contracts; do not assume durable queue semantics |
+| AI / LLM | Multiple model/provider paths and copilot flows | Preserve AI optionality and AI-01 authorization boundaries |
+| Data / state | Relational alert/incident state plus optional search projection | Preserve authoritative PostgreSQL and rebuildable projections |
+| Deployment | Development-oriented backend/frontend and SQL/SQLite evidence | Do not infer an OEM production profile from Keep evidence |
+| Extensibility | Provider and workflow extension points | Reuse patterns only where OEM contracts remain authoritative |
+| Governance | Evidence notes heterogeneous auth and side-effect boundaries | Require explicit authorization, audit and operational evidence |
+
+The resulting lessons are decision inputs, not a replacement for the OEM
+Golden Architectures.
+`)
+
+await write('architecture/reference-architectures/keep/references.md', `# Keep References
+
+> **External Reference — Keep**
+
+Inspected sources:
+
+- /opt/keep-aiops/evidence/KEEP-LAB-13-workflows-automation/architecture.md
+- /opt/keep-aiops/evidence/KEEP-LAB-15-data-persistence/architecture.md
+- /opt/keep-aiops/evidence/KEEP-LAB-12-correlation-aiops/discovery/ai-llm-dependency-model.md
+- /opt/keep-aiops/evidence/KEEP-LAB-11-providers-integrations/discovery/representative-providers.md
+- /opt/keep-aiops/evidence/KEEP-LAB-20-keep-vs-oem/architecture-matrix.md
+- /opt/keep-aiops/evidence/KEEP-LAB-21-lessons-for-oem/README.md
+
+These files are evidence references, not copied portal content. The canonical
+OEM pages remain the source of truth for OEM architecture and implementation.
+`)
 
 const platformReadme = await readFile(resolve(destination, 'platform/README.md'), 'utf8')
 await write('platform/index.md', platformReadme)
