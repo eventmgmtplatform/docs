@@ -1,5 +1,11 @@
 # Operaciones
 
+## Solution Architecture
+
+Terraform / GCP Infrastructure Foundation
+
+![Terraform / GCP Infrastructure Foundation](../assets/diagrams/terraform-gcp-solution-architecture.png)
+
 ## Instalación y despliegue
 
 - Compose y servicios locales: `infrastructure/docker-compose*.yml`.

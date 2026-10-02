@@ -1889,6 +1889,12 @@ await write('reference/terraform.md', `# Terraform Architecture
 Terraform provisions documented infrastructure capabilities; it does not change
 OEM application behavior or data authority.
 
+## Solution Architecture
+
+Terraform / GCP Infrastructure Foundation
+
+![Terraform / GCP Infrastructure Foundation](/diagrams/terraform-gcp-solution-architecture.png)
+
 \`\`\`mermaid
 flowchart TD
   G[Git Repository] --> C[Cloud Build]
