@@ -260,6 +260,7 @@ OEM pages remain the source of truth for OEM architecture and implementation.
 
 const platformReadme = await readFile(resolve(destination, 'platform/README.md'), 'utf8')
 await write('platform/index.md', platformReadme)
+await write('platform/operations/_meta.js', `export default { README: 'Platform Operations' }\n`)
 await write('platform/_meta.js', `export default {
   index: 'Engineering Overview',
   architecture: 'Integrated Architecture',
@@ -286,6 +287,28 @@ await write('deployment/index.md', landing('Deployment', [
   ['D5A Production GKE', '../architecture/d5a-prod-gke-runtime-target/'],
   ['D5B Production Composition', '../architecture/d5b-prod-gke-cicd-target/']
 ]))
+
+await write('architecture/_meta.js', `export default {
+  'oem-architecture-definition': 'Architecture Definition',
+  'd0-logical-current': 'Logical Architecture — D0',
+  'data-authority-replay': 'Data Architecture',
+  'multi-surface-interaction': 'Interaction Architecture',
+  'ai-01-aiops-ai-architecture': 'AI Architecture — AI-01',
+  deployment: 'Deployment Operations',
+  'd1-local-current': 'Deployment — D1 Local',
+  'd2-kvm-kubernetes-target': 'Deployment — D2 Kubernetes',
+  'd3-rhel-current': 'Deployment — D3 RHEL',
+  'd4-qa-gke-minimum-target': 'Deployment — D4 QA GKE',
+  'd5a-prod-gke-runtime-target': 'Deployment — D5A Production',
+  'd5b-prod-gke-cicd-target': 'Deployment — D5B Composition',
+  'd6-environment-evolution': 'Deployment — D6 Environment Map',
+  'gcp-foundation-current': 'Cloud Architecture — GCP-01',
+  'gcp-cicd-current': 'Cloud Architecture — GCP-02',
+  evolution: 'Architecture Evolution',
+  'reference-architectures': 'Reference Architectures',
+  index: { display: 'hidden' },
+  publication: { display: 'hidden' }
+}\n`)
 
 await write('operations/index.md', [
   '# Operations', '',
