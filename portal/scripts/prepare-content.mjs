@@ -1129,6 +1129,8 @@ await write('integrations/custom-api.md', `# Custom API
 
 ## Solution Architecture
 
+![OEM Custom API Integration Architecture](/diagrams/oem-custom-api-integration-architecture.png)
+
 Custom API is the provider-neutral, API-first, adapter-based and governed OEM
 integration model. It extends integrations without embedding vendor behavior in
 OEM Core.
@@ -1216,6 +1218,98 @@ See [D0 Logical Architecture](/architecture/d0-logical-current/),
 [AI-01](/architecture/ai-01-aiops-ai-architecture/), and [Integration
 Instances](/integrations/integration-architecture/).
 
+## Installation
+
+### CLI
+
+The canonical registration command family is:
+
+    oem integration custom-api register
+
+Supported logical parameters are --provider-id, --tenant, --base-url,
+--method, --input-schema, repeatable --required-header, --secret-ref,
+and repeatable --capability. Registration creates configuration; it does not
+execute the external integration. Secret values are never CLI arguments.
+
+### Registration Input
+
+| Field | Required | Purpose | Validation |
+| --- | --- | --- | --- |
+| providerId | Yes | Unique provider identity | Unique within governed scope |
+| providerType | Yes | Provider category | Must be custom-api |
+| tenantId | Yes | Tenant scope | Valid governed tenant |
+| baseUrl / endpoint | Yes | External endpoint definition | Valid URL |
+| HTTP method | Yes | Allowed request method | Supported method |
+| required headers | As defined | Contract headers | Header definition is valid |
+| input schema | Yes | Request validation contract | Schema is valid |
+| secret reference | As required | Authentication reference | Governed reference, not payload |
+| capabilities | Yes | Supported operations | Explicit declarations |
+| timeout/retry policy | Yes | Bounded execution | Within configured bounds |
+| contract version | Yes | Compatibility identity | Supported version |
+
+### Registration Validation
+
+Registration validates identity, tenant context, URL and method, schema,
+headers, secret reference, capabilities, timeout/retry bounds and contract
+version. Successful registration does not imply external execution success.
+
+### Registration Output
+
+| Field | Meaning |
+| --- | --- |
+| status | REGISTERED |
+| providerId | Registered provider identity |
+| providerType | custom-api |
+| tenantId | Governed tenant scope |
+| contractVersion | Registered contract version |
+| configurationVersion | Configuration revision |
+| validationStatus | VALID |
+
+No secret material or raw credentials are returned.
+
+## Runtime Input Data
+
+Runtime requests contain provider identity, tenant identity, operation or
+capability, command/correlation identity, registered required headers, payload
+validated against the input schema, and governed execution metadata. The
+Worker/Adapter validates the registered contract before authorizing the call;
+arbitrary headers or payload shapes cannot redefine it.
+
+| Field | Source | Validation |
+| --- | --- | --- |
+| providerId / tenantId | Registered configuration and command | Scope and identity match |
+| operation/capability | Integration command | Declared capability |
+| command/correlation identity | OEM command lifecycle | Required identity present |
+| headers/payload | Registered contract | Header and schema validation |
+| execution metadata | OEM governed context | Policy and bounds |
+
+## Runtime Processing
+
+OEM Integration Command → Provider Resolution → Tenant/Policy Validation →
+Header Validation → Input Schema Validation → Worker/Custom API Adapter →
+External API → Provider Response Capture → OEM Result Normalization →
+integration.results → ESS → PostgreSQL.
+
+Processor decides, Worker/Adapter executes, and ESS consolidates.
+
+## Runtime Output Data
+
+The provider response is execution evidence, not authoritative OEM state. The
+adapter captures it and emits a normalized result using the existing integration
+lifecycle contract.
+
+| Field | Authority / Purpose |
+| --- | --- |
+| providerId / providerType / tenantId | Provider and tenant identity |
+| command/correlation identity | Link to governed OEM command |
+| execution status | Normalized execution outcome |
+| HTTP status | Provider response status where applicable |
+| provider response reference | Governed captured evidence reference |
+| normalized result | OEM integration result |
+| error classification | Retryable/permanent classification where supported |
+| timestamps/duration | Execution timing where supported |
+| contractVersion/configurationVersion | Compatibility and configuration provenance |
+
 ## Customer Documentation Template
 
 This page is the customer-facing template for implementable integration
@@ -1225,9 +1319,9 @@ excluded.
 
 ## 1. Overview
 
-Custom API is a planned integration pattern for connecting an approved external
-system through governed OEM interfaces. Provider-specific behavior, credentials,
-and production certification are not yet specified here.
+Custom API is the defined integration pattern for connecting an approved
+external system through governed OEM interfaces. Provider implementation and
+production certification remain separate status dimensions.
 
 ## 2. Architecture
 
@@ -1246,8 +1340,8 @@ scope. The required provider-specific checklist is **Designed / Pending**.
 
 ## 4. Installation
 
-CLI installation is **Designed / Pending**. No supported installation command
-is currently evidenced, so this page does not invent one.
+CLI registration is **DESIGNED** through the command family documented above;
+implementation and certification status remain separate.
 
 ## 5. Configuration
 
@@ -1270,15 +1364,14 @@ and access without exposing frontend implementation details.
 
 ## 8. Input Data
 
-Input fields, required headers, tenant context, and validation rules are
-provider-specific and remain **Pending** a governed contract. Inputs must be
-validated before an integration action is authorized.
+Input fields, required headers, tenant context, and validation rules follow the
+registration contract above and are validated before an integration action is
+authorized.
 
 ## 9. Output Data
 
-Output payloads, status, error behavior, and correlation references are
-provider-specific and remain **Pending** evidence. Output must remain within
-the governed integration and audit contracts.
+Output payloads, status, error behavior, and correlation references follow the
+normalized runtime output contract above and remain within governed contracts.
 
 ## 10. Testing
 
