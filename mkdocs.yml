@@ -19,7 +19,8 @@ theme:
 extra_css:
 - assets/stylesheets/kyndryl.css
 extra_javascript:
-- https://unpkg.com/mermaid@11/dist/mermaid.min.js
+- assets/javascripts/vendor/mermaid-11.17.2.min.js
+- assets/javascripts/mermaid-init.js
 - assets/javascripts/navigation.js
 plugins:
 - search

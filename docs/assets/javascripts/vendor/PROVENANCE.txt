@@ -1,0 +1,14 @@
+# Vendored browser runtimes
+
+`mermaid-11.17.2.min.js` is the unmodified browser bundle published by the
+Mermaid project at:
+
+`https://unpkg.com/mermaid@11.17.2/dist/mermaid.min.js`
+
+SHA-256:
+
+`581ed7d74bd9048d0e3a91363927d72ef22942d7722546b27f7cc29e35390eb8`
+
+The local, versioned copy makes documentation rendering independent of a
+third-party CDN at runtime. Update the version, source URL, checksum, and
+`mkdocs.yml` reference together.
