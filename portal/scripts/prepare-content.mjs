@@ -1417,9 +1417,7 @@ await write('integrations/servicenow.md', `# ServiceNow
 
 ## Solution Architecture
 
-The canonical ServiceNow solution diagram is intentionally reserved for an
-approved user-supplied asset. This page documents the connector model and
-existing evidence without inventing a diagram.
+![OEM ServiceNow Integration — Solution Architecture](/diagrams/oem-servicenow-integration-solution-architecture.png)
 
 ## Connector Model
 
