@@ -1122,6 +1122,7 @@ secret integration, or production certification.
 await write('integrations/_meta.js', `export default {
   index: 'Integrations',
   'custom-api': 'Custom API',
+  servicenow: 'ServiceNow',
   'integration-architecture': 'Integration Architecture — Instances'
 }\n`)
 
@@ -1412,12 +1413,158 @@ Helix, and ELK Pull Data documentation. Existing integration pages remain
 canonical and are not rewritten by this template.
 `)
 
+await write('integrations/servicenow.md', `# ServiceNow
+
+## Solution Architecture
+
+The canonical ServiceNow solution diagram is intentionally reserved for an
+approved user-supplied asset. This page documents the connector model and
+existing evidence without inventing a diagram.
+
+## Connector Model
+
+ServiceNow is a governed OEM connector/provider. It supports capability-specific
+operations through the Integration Worker and adapter boundary; it is not an
+OEM operational state authority.
+
+## Capabilities
+
+### Incident / Auto-Ticketing
+
+Existing evidence covers ticket creation, updates, lookup/status confirmation,
+bounded retries, durable command identity, error classification and lifecycle
+reconciliation. Resolution requires explicit ServiceNow status/code confirmation.
+
+### CMDB
+
+CMDB capability is retained as a governed integration domain. A complete
+certified CMDB contract was not found in the inspected source and is therefore
+classified DESIGNED.
+
+### Configuration Items
+
+CI identification, reconciliation, create/update and query are exposed only
+where a corresponding ServiceNow/IRE contract is evidenced. No unsupported CI
+operation is claimed.
+
+## Installation
+
+### CLI
+
+The connector registration concept is **DESIGNED**. No canonical ServiceNow
+registration command was found in the inspected OEM CLI evidence; no competing
+syntax is introduced.
+
+### API
+
+Registration through the governed OEM API is **DESIGNED** unless a concrete
+ServiceNow registration endpoint is separately evidenced.
+
+## Registration Input
+
+| Field | Required | Purpose | Validation |
+| --- | --- | --- | --- |
+| provider/connector identity | Yes | Explicit ServiceNow identity | Governed scope |
+| tenantId | Yes | Tenant isolation | Valid tenant context |
+| ServiceNow base URL | Yes | Instance endpoint | Valid configured endpoint |
+| secret reference | As required | Authentication reference | Governed secret reference |
+| enabled capabilities | Yes | Allowed operations | Capability declaration |
+| configuration version | Yes | Configuration revision | Compatibility check |
+| contract version | Where supported | Contract identity | Supported version |
+
+Secret payloads are never registration input.
+
+## Registration Output
+
+Registration output is an OEM configuration result containing status, connector
+identity, provider type, tenant, enabled capabilities, configurationVersion,
+contractVersion where supported, and validationStatus. Credentials are never
+returned.
+
+## Runtime Model
+
+Processor → integration command → Worker / ServiceNow Adapter → ServiceNow →
+integration result → ESS → PostgreSQL. Processor decides, Worker/Adapter
+executes, and ESS consolidates.
+
+## Incident Input / Output
+
+| Input | Source | Purpose |
+| --- | --- | --- |
+| event identity and correlation identity | OEM event/command | Link external action to OEM lifecycle |
+| tenant/customer context | Governed command | Isolation and routing |
+| severity, node/resource, summary/description | Normalized event | Incident fields |
+| assignment and ticket group | Policy/configuration | ServiceNow routing |
+| mapped attributes | Integration contract | Provider-specific fields |
+
+| Output | Meaning / Authority |
+| --- | --- |
+| ticket number / sysId | External ServiceNow identifier |
+| external status and result | Provider evidence |
+| execution status and error classification | Normalized OEM result |
+| correlation/command identity | OEM lifecycle linkage |
+| timestamps | Execution evidence |
+
+The normalized result continues through integration.results, ESS and PostgreSQL.
+
+## CMDB Input / Output
+
+CMDB operations are **DESIGNED** unless a concrete certified contract is
+identified. Inputs and outputs must use governed CI/resource identity and mapped
+attributes; ServiceNow CMDB does not become OEM operational authority.
+
+## CI Input / Output
+
+Where IRE evidence exists, CI contracts include identity keys, canonical
+attributes, reconciliation inputs, tenant/context and operation. Outputs may
+include ServiceNow CI identifier/sys_id, IRE result and normalized OEM execution
+status. Unsupported fields remain unclaimed.
+
+## Security and Secrets
+
+Tenant isolation, identity, authorization, policy, validation, audit and
+bounded retries/timeouts apply. Raw ServiceNow credentials must not appear in
+Git, documentation, events, logs or CLI arguments.
+
+## Data Authority
+
+Kafka remains transport/replay, PostgreSQL remains the OEM Operational Source
+of Truth, and OpenSearch remains a derived projection. ServiceNow-owned records
+retain external identifiers without redefining OEM authority.
+
+## API / Endpoint Contracts
+
+| Contractual Endpoint | Real Endpoint | Status | Required Change | Owner Repository |
+| --- | --- | --- | --- | --- |
+| ServiceNow connector registration | Not evidenced | MISSING | Define governed endpoint before implementation | event-management-platform |
+| ServiceNow ticket execution | Worker adapter contract | PARTIAL | Preserve existing command/result contract | event-management-platform |
+
+## Implementation Status
+
+| Capability | Status |
+| --- | --- |
+| Incident / auto-ticketing | IMPLEMENTED / validated evidence in generated changelog |
+| CMDB | DESIGNED |
+| CI / IRE | DESIGNED or evidence-dependent |
+| Connector registration CLI/API | DESIGNED |
+
+## ServiceNow Changelog
+
+See the supporting [ServiceNow Changelog](/platform/servicenow/CHANGELOG/).
+
+## Related Architectures
+
+See [Integration Instances](/integrations/integration-architecture/),
+[Data Authority & Replay](/architecture/data-authority-replay/),
+[OEM API Catalog](/platform/api/oem-api-catalog/), and [Custom API](/integrations/custom-api/).
+`)
+
 await write('integrations/index.md', landing('Integrations', [
   ['Custom API', 'integrations/custom-api/'],
   ['Integration Architecture — Instances', 'integrations/integration-architecture/'],
   ['CACF', '../platform/cacf/README/'],
   ['GLPI', '../platform/integrations/glpi/'],
-  ['ServiceNow', '../platform/servicenow/CHANGELOG/'],
+  ['ServiceNow', 'integrations/servicenow/'],
   ['GNM', '../platform/gnm/CHANGELOG/'],
   ['ChatOps', 'integrations/chatops/'],
   ['Bridge Extensions', 'integrations/bridge-extensions/'],
