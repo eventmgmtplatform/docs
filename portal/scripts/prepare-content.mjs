@@ -295,6 +295,27 @@ await write('operations/index.md', landing('Operations', [
   ['Security', 'security/secrets-management/']
 ]))
 
+await write('operations/_meta.js', `export default {
+  index: 'Operations',
+  configuration: {
+    title: 'Configuration',
+    type: 'menu',
+    items: {
+      correlation: { title: 'Correlation', href: '/platform/event-processor/correlation-backend/' },
+      deduplication: { title: 'Deduplication', href: '/platform/event-processor/correlation-suppression-commands/' },
+      suppression: { title: 'Suppression', href: '/platform/event-processor/correlation-suppression-commands/' },
+      'auto-suppression': { title: 'Auto-Suppression', href: '/platform/event-processor/auto-suppression/' },
+      'blackouts-maintenance': { title: 'Blackouts & Maintenance', href: '/platform/event-processor/rest-and-blackouts/' },
+      enrichment: { title: 'Enrichment', href: '/platform/event-processor/enrichment-and-inventory/' },
+      routing: { title: 'Routing', href: '/platform/event-processor/routing-backend/' },
+      'filters-criteria': { title: 'Filters & Criteria', href: '/platform/event-processor/policy-backend/' },
+      ticketing: { title: 'Ticketing', href: '/platform/event-processor/routing-backend/' },
+      notifications: { title: 'Notifications', href: '/platform/gnm/CHANGELOG/' },
+      automation: { title: 'Automation', href: '/platform/cacf/README/' }
+    }
+  }
+}\n`)
+
 await write('integrations/index.md', landing('Integrations', [
   ['CACF', '../platform/cacf/README/'],
   ['GLPI', '../platform/integrations/glpi/'],
