@@ -580,8 +580,7 @@ await write('platform/_meta.js', `export default {
   cacf: 'CACF Automation',
   integrations: 'Integrations',
   operations: 'Operations',
-  git: 'Git Governance',
-  labs: 'Certification Labs'
+  git: 'Git Governance'
 }\n`)
 
 await write('deployment/index.md', landing('Deployment', [
