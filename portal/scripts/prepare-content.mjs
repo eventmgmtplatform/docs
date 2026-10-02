@@ -393,20 +393,16 @@ not create certifications; each status is owned by its linked evidence.
 await write('platform/labs/_meta.js', `export default {
   index: { title: 'Labs Overview', href: '/platform/labs/' },
   'os-01-01': {
-    title: 'OS_01_01',
-    type: 'menu',
-    items: {
-      'acceptance-checklist': { title: 'OS_01_01 — Checklist de aceptación', href: '/platform/labs/os-01-01/acceptance-checklist/' },
-      contract: { title: 'OS_01_01 — Contrato Zabbix Message Bus', href: '/platform/labs/os-01-01/contract/' },
-      'decisions-adr': { title: 'OS_01_01 — Decisiones arquitectónicas', href: '/platform/labs/os-01-01/decisions-adr/' },
-      'field-mapping': { title: 'OS_01_01 — Mapeo de campos Zabbix', href: '/platform/labs/os-01-01/field-mapping/' },
-      'operational-runbook': { title: 'OS_01_01 — Runbook operativo', href: '/platform/labs/os-01-01/operational-runbook/' }
+    title: 'OS_01_01', items: {
+      'acceptance-checklist': { title: 'Acceptance Checklist', href: '/platform/labs/os-01-01/acceptance-checklist/' },
+      contract: { title: 'Contract', href: '/platform/labs/os-01-01/contract/' },
+      'decisions-adr': { title: 'Decisions ADR', href: '/platform/labs/os-01-01/decisions-adr/' },
+      'field-mapping': { title: 'Field Mapping', href: '/platform/labs/os-01-01/field-mapping/' },
+      'operational-runbook': { title: 'Operational Runbook', href: '/platform/labs/os-01-01/operational-runbook/' }
     }
   },
   keep: {
-    title: 'Keep',
-    type: 'menu',
-    items: {
+    title: 'Keep', items: {
       overview: { title: 'Overview', href: '/platform/labs/keep/' },
       architecture: { title: 'Architecture', href: '/platform/labs/keep/architecture/' },
       'ai-llm': { title: 'AI / LLM', href: '/platform/labs/keep/ai-llm/' },
@@ -415,6 +411,7 @@ await write('platform/labs/_meta.js', `export default {
     }
   }
 }\n`)
+
 await write('platform/components/oem-component-catalog.md', `# OEM Component Catalog
 
 This engineering catalog is the single reference inventory for the documented
@@ -580,7 +577,8 @@ await write('platform/_meta.js', `export default {
   cacf: 'CACF Automation',
   integrations: 'Integrations',
   operations: 'Operations',
-  git: 'Git Governance'
+  git: 'Git Governance',
+  labs: 'Certification Labs'
 }\n`)
 
 await write('deployment/index.md', landing('Deployment', [
