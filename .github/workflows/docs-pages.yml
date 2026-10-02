@@ -33,8 +33,20 @@ jobs:
       - name: Validate documentation
         run: ./scripts/docs validate
 
-      - name: Build strict MkDocs site
-        run: .venv/bin/python -m mkdocs build --strict --site-dir _site
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: portal/package-lock.json
+
+      - name: Install portal dependencies
+        working-directory: portal
+        run: npm ci
+
+      - name: Build Nextra portal
+        working-directory: portal
+        run: npm run build
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -42,7 +54,7 @@ jobs:
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: _site
+          path: portal/out
 
   deploy:
     name: Deploy documentation
