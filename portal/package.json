@@ -1,0 +1,25 @@
+{
+  "name": "oem-documentation-portal",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "prepare:content": "node scripts/prepare-content.mjs",
+    "dev": "npm run prepare:content && next dev",
+    "build": "npm run prepare:content && next build",
+    "postbuild": "pagefind --site out --output-path out/_pagefind"
+  },
+  "dependencies": {
+    "next": "15.5.27",
+    "nextra": "4.5.1",
+    "nextra-theme-docs": "4.5.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "sharp": "0.34.5"
+  },
+  "devDependencies": {
+    "pagefind": "1.5.2"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  }
+}

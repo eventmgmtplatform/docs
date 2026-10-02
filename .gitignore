@@ -6,3 +6,7 @@ __pycache__/
 Thumbs.db
 .docs-runtime.json
 .docs-runtime.log
+portal/.next/
+portal/out/
+portal/content/
+portal/node_modules/

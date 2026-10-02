@@ -1,0 +1,114 @@
+:root {
+  --oem-blue: #2f6fed;
+  --oem-red: #da1e28;
+  --oem-ink: #161616;
+  --oem-muted: #6f6f6f;
+  --oem-panel: #f6f7f9;
+  --oem-border: #e2e5ea;
+}
+
+html, body {
+  color: var(--oem-ink);
+  background: #fff;
+  overflow-x: clip;
+}
+
+.oem-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  letter-spacing: -.01em;
+}
+
+.oem-brand__mark {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid #c9d8fb;
+  border-radius: .5rem;
+  color: var(--oem-blue);
+  background: #eef4ff;
+  font-weight: 700;
+}
+
+.oem-brand small {
+  display: block;
+  color: var(--oem-muted);
+  font-size: .67rem;
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+header.nextra-navbar,
+.nextra-navbar {
+  background: rgba(255,255,255,.97) !important;
+  border-bottom: 1px solid var(--oem-border);
+  box-shadow: none !important;
+}
+
+.nextra-navbar .nextra-scrollbar {
+  min-width: 0;
+  scrollbar-width: none;
+}
+
+.nextra-navbar .nextra-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.nextra-sidebar-container {
+  margin: 1rem 0 1rem 1rem;
+  border: 1px solid var(--oem-border);
+  border-radius: 1rem;
+  background: var(--oem-panel) !important;
+}
+
+.nextra-sidebar-container a[aria-current="page"] {
+  color: var(--oem-blue) !important;
+  font-weight: 650;
+}
+
+.nextra-sidebar-container a[aria-current="page"]::before {
+  background: var(--oem-blue) !important;
+}
+
+.nextra-breadcrumb {
+  color: var(--oem-blue);
+  font-size: .78rem;
+}
+
+article {
+  max-width: 54rem;
+}
+
+article h1 {
+  color: #111;
+  font-size: clamp(2.25rem, 4vw, 3.65rem);
+  letter-spacing: -.045em;
+  line-height: 1.03;
+}
+
+article h2 {
+  letter-spacing: -.025em;
+}
+
+article table {
+  display: table;
+  width: 100%;
+}
+
+article .mermaid {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--oem-border);
+  border-radius: .85rem;
+  padding: 1rem;
+  background: #fff;
+}
+
+@media (max-width: 767px) {
+  .oem-brand small { display: none; }
+  .nextra-sidebar-container { margin: 0; border: 0; border-radius: 0; }
+  article { min-width: 0; }
+  article table { display: block; overflow-x: auto; }
+}
