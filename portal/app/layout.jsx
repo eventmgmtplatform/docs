@@ -11,9 +11,9 @@ export const metadata = {
   },
   description: 'Event Management architecture and product documentation',
   icons: {
-    icon: '/event-mgmt-docs/brand/kyndryl/kyndryl-favicon.png',
-    shortcut: '/event-mgmt-docs/brand/kyndryl/kyndryl-favicon.png',
-    apple: '/event-mgmt-docs/brand/kyndryl/kyndryl-favicon.png'
+    icon: '/docs/brand/kyndryl/kyndryl-favicon.png',
+    shortcut: '/docs/brand/kyndryl/kyndryl-favicon.png',
+    apple: '/docs/brand/kyndryl/kyndryl-favicon.png'
   }
 }
 
@@ -21,7 +21,7 @@ const navbar = (
   <Navbar
     logo={
       <span className="oem-brand">
-        <img className="oem-brand__logo" src="/event-mgmt-docs/brand/kyndryl/kyndryl-logo.svg" alt="Kyndryl" />
+        <img className="oem-brand__logo" src="/docs/brand/kyndryl/kyndryl-logo.svg" alt="Kyndryl" />
         <span><strong>Event Management</strong><small>Docs</small></span>
       </span>
     }
@@ -42,7 +42,7 @@ export default async function RootLayout({ children }) {
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/eventmgmtplatform/event-mgmt-docs/tree/main/docs"
+          docsRepositoryBase="https://github.com/eventmgmtplatform/docs/tree/main/docs"
           footer={footer}
           sidebar={{ autoCollapse: true, defaultMenuCollapseLevel: 1 }}
           toc={{ backToTop: true }}

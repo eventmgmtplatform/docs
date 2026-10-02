@@ -1,6 +1,6 @@
 import nextra from 'nextra'
 
-const repositoryPath = process.env.OEM_DOCS_BASE_PATH ?? '/event-mgmt-docs'
+const repositoryPath = process.env.OEM_DOCS_BASE_PATH ?? '/docs'
 const basePath = repositoryPath === '/' ? '' : repositoryPath.replace(/\/$/, '')
 
 const withNextra = nextra({

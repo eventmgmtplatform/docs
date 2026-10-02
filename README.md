@@ -126,8 +126,8 @@ Para construir la documentación:
 Clone el repositorio:
 
 ```bash
-git clone https://github.com/eventmgmtplatform/event-mgmt-docs.git
-cd event-mgmt-docs
+git clone https://github.com/eventmgmtplatform/docs.git
+cd docs
 ```
 
 Prepare la configuración local:
@@ -222,7 +222,7 @@ Comandos disponibles:
 
 `publish` está reservado para un flujo controlado y no publica contenido. La
 documentación oficial está en
-<https://eventmgmtplatform.github.io/event-mgmt-docs/>.
+<https://eventmgmtplatform.github.io/docs/>.
 
 El build de MkDocs funciona sin CDN una vez instaladas sus dependencias. En el
 navegador, los diagramas Mermaid requieren actualmente `unpkg.com`; las fuentes

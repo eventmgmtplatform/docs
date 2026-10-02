@@ -8,7 +8,7 @@ const publicIndex = args.indexOf('--url')
 const publicUrl = publicIndex === -1 ? null : args[publicIndex + 1]
 const siteArgument = args.find((argument, index) => index !== publicIndex && index !== publicIndex + 1 && !argument.startsWith('--'))
 const siteRoot = resolve(portalRoot, siteArgument || 'out')
-const basePath = (process.env.OEM_DOCS_BASE_PATH || '/event-mgmt-docs').replace(/\/$/, '')
+const basePath = (process.env.OEM_DOCS_BASE_PATH || '/docs').replace(/\/$/, '')
 const origin = 'https://audit.invalid'
 
 const files = []

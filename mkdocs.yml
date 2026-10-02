@@ -1,6 +1,6 @@
 site_name: OPEN EVENT MANAGEMENT
 site_description: Architecture & Product Documentation
-site_url: https://eventmgmtplatform.github.io/event-mgmt-docs/
+site_url: https://eventmgmtplatform.github.io/docs/
 docs_dir: docs
 site_dir: site
 theme:
