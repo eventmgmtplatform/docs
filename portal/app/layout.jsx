@@ -30,7 +30,7 @@ const navbar = (
 
 const footer = (
   <Footer>
-    <span>Event Management · Docs</span>
+    <span>Event Management · Docs · © Kyndryl. All rights reserved.</span>
   </Footer>
 )
 

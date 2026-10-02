@@ -385,7 +385,16 @@ same governed interfaces. AI may consume governed APIs, but it cannot directly
 mutate databases, Kafka, or state. These are compatibility directions, not
 claims of current implementation.
 `)
-await write('platform/labs/index.md', '# Certification Labs\n\nReference and validation labs for the Event Management platform.\n')
+await write('platform/labs/index.md', `# Certification Labs
+
+Reference and validation evidence for Event Management. This landing page does
+not create certifications; each status is owned by its linked evidence.
+
+| Lab | Status | Evidence | Date |
+| --- | --- | --- | --- |
+| OS_01_01 | Certified/validated evidence | [Acceptance Checklist](\/platform\/labs\/os-01-01\/acceptance-checklist\/) | Recorded in lab evidence |
+| Keep | External Reference | [Keep overview](\/architecture\/reference-architectures\/keep\/) | Reference material |
+`)
 await write('platform/labs/_meta.js', `export default {
   index: 'Certification Labs',
   'os-01-01': {
@@ -1696,6 +1705,15 @@ Integration productization, evidence-backed local model certification, and
 additional environment promotion evidence remain future work. They require
 separate approved scopes.
 
+## Product Release History
+
+| Release | Branch | Commit/Hash | Scope | Evidence |
+| --- | --- | --- | --- | --- |
+| Documentation Foundation Release | main | \`a9dc50517bd35793490aa141a7fb95d60d0005a7\` | Foundation portal, governance views, and documentation standard | [Foundation validation](/project/status/) |
+
+The table records only the release evidence currently available in the
+repository. No deployment ID or environment promotion is inferred here.
+
 ## Versioning
 
 The current documentation corpus does not assign a formal semantic product
@@ -1871,6 +1889,23 @@ await write('devops-iac/index.md', landing('DevOps & IaC', [
   ['Release Management', 'devops-iac/release-management/'],
   ['Historical releases', '../development/releases/']
 ]))
+
+await write('reference/terraform.md', `# Terraform Architecture
+
+Terraform provisions documented infrastructure capabilities; it does not change
+OEM application behavior or data authority.
+
+\`\`\`mermaid
+flowchart TD
+  G[Git Repository] --> C[Cloud Build]
+  C --> T[Terraform]
+  T --> F[GCP Foundation]
+  F --> K[GKE Runtime]
+\`\`\`
+
+The view is conceptual and intentionally does not invent modules, providers,
+variables, state backends, or deployment commands.
+`)
 
 
 await write('project/defect-prevention-global-index.md', `# Defect Prevention Global Index
