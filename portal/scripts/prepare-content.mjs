@@ -1122,6 +1122,7 @@ secret integration, or production certification.
 await write('integrations/_meta.js', `export default {
   index: 'Integrations',
   'custom-api': 'Custom API',
+  cacf: 'CACF',
   servicenow: 'ServiceNow',
   'integration-architecture': 'Integration Architecture — Instances'
 }\n`)
@@ -1413,6 +1414,99 @@ Helix, and ELK Pull Data documentation. Existing integration pages remain
 canonical and are not rewritten by this template.
 `)
 
+await write('integrations/cacf.md', `# CACF
+
+## Solution Architecture
+
+![OEM CACF Integration — Solution Architecture](/diagrams/oem-cacf-integration-solution-architecture.png)
+
+CACF is an external automation execution system connected through the governed
+OEM Integration Worker and CACF Adapter.
+
+## Integration Model
+
+OEM follows the existing event path: Event Gateway → Kafka → Event Processor.
+The Processor decides the automation intent and emits a CACF command. The
+Integration Worker executes the provider action, receives the result, and
+normalizes it for the OEM state and integration-result flows.
+
+## Two-Phase Execution Model
+
+### Phase 1 — Request and immediate acknowledgement
+
+OEM sends an automation request to CACF. The immediate acknowledgement means
+the request was accepted and registered; it does **not** mean that automation
+execution has completed. The acknowledgement carries the execution identity
+used to correlate the later result.
+
+### Phase 2 — Completion notification
+
+CACF reports completion through the configured callback mechanism (WebSocket,
+HTTP/API callback, or JDBC where configured). OEM validates and normalizes the
+completion before publishing the integration result. Late or duplicate
+notifications remain auditable and do not create a second terminal result.
+
+## Input Data
+
+The evidenced command carries the event and tenant context, execution/idempotency
+identity, provider CACF, operation AUTOMATION_REQUESTED, automation or
+runbook/action identity, and provider parameters. NEXT-specific contracts also
+define RequesterID and ProviderID; those fields apply only to that provider
+contract.
+
+## Immediate ACK
+
+An ACK establishes that the request is accepted/registered and records the
+execution identity and deadline. It is not a success result and does not close
+the automation lifecycle.
+
+## Completion Result
+
+Completion data is correlated by execution and event/correlation identity and
+contains the provider status/outcome, result or output, completion timestamp,
+and an exit code where the provider supplies one. Unknown but valid responses
+are retained with outcome=UNKNOWN and requiresReview=true; no destructive
+automation is inferred from uncertain evidence.
+
+## Data Authority and Recovery
+
+- **Kafka** is the transport and replay boundary.
+- **PostgreSQL** is the OEM Operational Source of Truth for state and results.
+- **OpenSearch** is a derived, rebuildable search and analytics projection.
+- **CACF** remains the external execution system; OEM records its acknowledged
+  and normalized outcomes.
+
+The Event Processor decides and enriches, the Integration Worker executes, and
+ESS consolidates integration state before authoritative persistence.
+
+## Implementation Status
+
+The local CACF foundation and its local end-to-end evidence are implemented and
+validated in the certification corpus. Production CACF/NEXT/ServiceNow
+certification and cloud production operation are not claimed by this page.
+
+## Documentation Reference
+
+| Topic | Canonical documentation |
+| --- | --- |
+| Architecture | [CACF architecture](/platform/cacf/architecture/) |
+| Contracts | [CACF contracts](/platform/cacf/contracts/) |
+| Data and states | [CACF data and states](/platform/cacf/data-and-states/) |
+| Operations | [CACF operational runbook](/platform/cacf/operational-runbook/) |
+| Decisions | [CACF decisions](/platform/cacf/decisions-adr/) |
+| Validation | [CACF validation](/platform/cacf/validation/) |
+| Defect prevention | [CACF defect prevention](/platform/cacf/defect-prevention/) |
+| Changelog | [CACF changelog](/platform/cacf/CHANGELOG/) |
+| Technical reference | [CACF README](/platform/cacf/README/) |
+
+## Related Architectures
+
+See [Data Authority & Replay](/architecture/data-authority-replay/),
+[Event Processing](/platform/event-processor/correlation-engine-service/),
+[Integration Instances](/integrations/integration-architecture/), and
+[ServiceNow](/integrations/servicenow/).
+`)
+
 await write('integrations/servicenow.md', `# ServiceNow
 
 ## Solution Architecture
@@ -1560,7 +1654,7 @@ See [Integration Instances](/integrations/integration-architecture/),
 await write('integrations/index.md', landing('Integrations', [
   ['Custom API', 'integrations/custom-api/'],
   ['Integration Architecture — Instances', 'integrations/integration-architecture/'],
-  ['CACF', '../platform/cacf/README/'],
+  ['CACF', 'integrations/cacf/'],
   ['GLPI', '../platform/integrations/glpi/'],
   ['ServiceNow', 'integrations/servicenow/'],
   ['GNM', '../platform/gnm/CHANGELOG/'],
