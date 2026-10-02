@@ -102,7 +102,6 @@ const landing = (title, links) => [
 ].join('\n')
 
 await write('_meta.js', `export default {
-  index: { title: 'Overview', type: 'page', theme: { sidebar: false } },
   architecture: { title: 'Architecture', type: 'page' },
   platform: { title: 'Engineering', type: 'page' },
   deployment: { title: 'Deployment', type: 'page' },
@@ -111,7 +110,6 @@ await write('_meta.js', `export default {
   'ai-automation': { title: 'AI & Automation', type: 'page' },
   quality: { title: 'Quality', type: 'page' },
   'devops-iac': { title: 'DevOps & IaC', type: 'page' },
-  research: { title: 'Research', type: 'page' },
   project: { title: 'Project', type: 'page' },
   'getting-started': { display: 'hidden' },
   concepts: { display: 'hidden' },
@@ -176,17 +174,28 @@ await write('deployment/index.md', landing('Deployment', [
 ]))
 
 await write('operations/index.md', landing('Operations', [
-  ['Local runbook', 'operations/local-runbook/'],
+  ['Runbooks', 'operations/local-runbook/'],
   ['Observability', 'operations/observability/'],
   ['Incidents', 'operations/incidents/'],
-  ['Disaster recovery', 'operations/disaster-recovery/']
+  ['Recovery', 'operations/disaster-recovery/'],
+  ['Security', 'security/secrets-management/']
 ]))
 
 await write('integrations/index.md', landing('Integrations', [
+  ['CACF', '../platform/cacf/README/'],
   ['GLPI', '../platform/integrations/glpi/'],
   ['ServiceNow', '../platform/servicenow/CHANGELOG/'],
-  ['GNM', '../platform/gnm/CHANGELOG/']
+  ['GNM', '../platform/gnm/CHANGELOG/'],
+  ['ChatOps', 'integrations/chatops/'],
+  ['Bridge Extensions', 'integrations/bridge-extensions/'],
+  ['BMC Helix', 'integrations/bmc-helix/'],
+  ['ELK Pull Data', 'integrations/elk-pull-data/']
 ]))
+
+await write('integrations/chatops.md', '# ChatOps\n\nIntegration documentation pending.\n')
+await write('integrations/bridge-extensions.md', '# Bridge Extensions\n\nIntegration documentation pending.\n')
+await write('integrations/bmc-helix.md', '# BMC Helix\n\nIntegration documentation pending.\n')
+await write('integrations/elk-pull-data.md', '# ELK Pull Data\n\nIntegration documentation pending.\n')
 
 await write('ai-automation/index.md', landing('AI & Automation', [
   ['AI-01 Architecture', '../architecture/ai-01-aiops-ai-architecture/'],
@@ -207,7 +216,6 @@ await write('devops-iac/index.md', landing('DevOps & IaC', [
   ['Releases', '../development/releases/']
 ]))
 
-await write('research/index.md', '# Research\n\n- Keep *(content integration deferred)*\n')
 
 await write('project/index.md', landing('Project', [
   ['Status', 'project/status/'],

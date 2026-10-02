@@ -1,6 +1,6 @@
 :root {
   --oem-blue: #2f6fed;
-  --oem-red: #da1e28;
+  --oem-red: #ff462d;
   --oem-ink: #161616;
   --oem-muted: #6f6f6f;
   --oem-panel: #f6f7f9;
@@ -20,16 +20,11 @@ html, body {
   letter-spacing: -.01em;
 }
 
-.oem-brand__mark {
-  display: grid;
-  width: 2rem;
-  height: 2rem;
-  place-items: center;
-  border: 1px solid #c9d8fb;
-  border-radius: .5rem;
-  color: var(--oem-blue);
-  background: #eef4ff;
-  font-weight: 700;
+.oem-brand__logo {
+  display: block;
+  width: 6.2rem;
+  height: auto;
+  flex: 0 0 auto;
 }
 
 .oem-brand small {
@@ -107,7 +102,6 @@ article .mermaid {
 }
 
 @media (max-width: 767px) {
-  .oem-brand small { display: none; }
   .nextra-sidebar-container { margin: 0; border: 0; border-radius: 0; }
   article { min-width: 0; }
   article table { display: block; overflow-x: auto; }

@@ -9,14 +9,19 @@ export const metadata = {
     default: 'Event Management Docs',
     template: '%s — Docs'
   },
-  description: 'Event Management architecture and product documentation'
+  description: 'Event Management architecture and product documentation',
+  icons: {
+    icon: '/event-mgmt-docs/brand/kyndryl/kyndryl-favicon.png',
+    shortcut: '/event-mgmt-docs/brand/kyndryl/kyndryl-favicon.png',
+    apple: '/event-mgmt-docs/brand/kyndryl/kyndryl-favicon.png'
+  }
 }
 
 const navbar = (
   <Navbar
     logo={
       <span className="oem-brand">
-        <span className="oem-brand__mark" aria-hidden="true">O</span>
+        <img className="oem-brand__logo" src="/event-mgmt-docs/brand/kyndryl/kyndryl-logo.svg" alt="Kyndryl" />
         <span><strong>Event Management</strong><small>Docs</small></span>
       </span>
     }
