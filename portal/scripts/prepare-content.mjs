@@ -2164,6 +2164,7 @@ await write('project/_meta.js', `export default {
   status: 'Status',
   roadmap: 'Roadmap',
   'technical-debt': 'Technical Debt',
+  'product-changelog': 'Product Changelog',
   governance: 'Documentation Governance',
   'defect-prevention-global-index': 'Defect Prevention — Global Index',
   'defect-prevention': 'Defect Prevention — Existing Framework',
@@ -2174,6 +2175,7 @@ await write('project/index.md', landing('Project', [
   ['Status', 'project/status/'],
   ['Roadmap', 'project/roadmap/'],
   ['Technical debt', 'project/technical-debt/'],
+  ['Product Changelog', 'project/product-changelog/'],
   ['Documentation Governance', 'project/governance/'],
   ['Defect Prevention — Global Index', 'project/defect-prevention-global-index/'],
   ['Architecture decisions', '../decisions/']
