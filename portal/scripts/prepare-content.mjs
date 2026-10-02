@@ -336,10 +336,110 @@ await write('architecture/_meta.js', `export default {
   publication: { display: 'hidden' }
 }\n`)
 
+await write('platform/event-processor/correlation-service-manual-rules.md', `# Correlation Service — Manual Correlation Rules
+
+## Overview
+
+The Correlation Service is the Event Processor capability that evaluates normalized events against deterministic, manually configured rules. A match assigns an event to an existing correlation group or creates a new group, then records membership and lifecycle state through the authoritative Event State Service and PostgreSQL contract.
+
+Correlation v1 is **CURRENT / DETERMINISTIC**. It is the reliable foundation for event lifecycle processing.
+
+## What Correlation Does
+
+Correlation evaluates normalized event attributes and tenant-scoped rule state after the Event Processor has the required policy and enrichment inputs. It derives a grouping decision, updates membership and lifecycle state, and leaves OpenSearch as a derived projection rather than operational authority.
+
+## Core Concepts
+
+- **Correlation rule** — a versioned rule in the shared \`/rules\` administration surface.
+- **Event attributes** — normalized and evidenced enrichment fields used by evaluation.
+- **Grouping key** — selected values that identify group membership.
+- **Correlation group** — durable group identity and membership for a tenant and lifecycle cycle.
+- **Scope and lifecycle** — decisions and state changes remain tenant-scoped and follow the event lifecycle contract.
+
+## Rule Model
+
+The implemented contract uses the shared \`/rules\` registry. Evidence supports rule identity/version, enabled state, priority/order, match/condition data, action parameters, tenant scope, and audit/checksum metadata where returned by the administration contract. The exact schemas remain defined by the API and implementation evidence; this page does not invent a replacement JSON schema.
+
+## Conditions and Matching
+
+Correlation uses the deterministic condition and attribute/group evaluation implemented by Event Processor. Supported operators are exactly those accepted by the shared rule validator. Keep's condition-builder semantics are not OEM claims.
+
+## Grouping Strategy and Lifecycle
+
+The documented baseline uses deterministic keys such as node, node plus component, service name, CI identity, and assignment group plus site. A normalized event is evaluated, a matching rule yields a key, the event joins an existing group or starts a new one, and membership/lifecycle state is persisted authoritatively.
+
+## Rule Evaluation Flow
+
+\`\`\`mermaid
+flowchart LR
+ E[Normalized event] --> R[Correlation rules]
+ R --> C[Condition and attribute match]
+ C --> K[Grouping key]
+ K --> G[Existing or new group]
+ G --> L[Lifecycle and membership]
+ L --> P[(PostgreSQL authoritative state)]
+\`\`\`
+
+## Configuration and API / Administration
+
+Rules are administered through the governed management API and shared \`/rules\` namespace. There is no dedicated \`/correlations\` endpoint in the current contract. Authorization, validation, versioning, and audit remain backend responsibilities.
+
+## Examples
+
+| Pattern | Input attributes | Grouping behavior |
+| --- | --- | --- |
+| Server | \`resource.node\` | Same node within the configured window. |
+| Component | \`resource.node\`, \`resource.component\` | Same node and component. |
+| Service | \`enrichment.service.name\` | Same service identity. |
+| Dependency | \`enrichment.resource.ciId\` | Same CI identity. |
+| Operational cause | \`enrichment.assignment.group\`, \`enrichment.location.site\` | Same assignment group and site. |
+
+## Frontend Contract
+
+The frontend may list and view rules and, only where authorized by the backend, create, edit, enable/disable, or delete them. It may represent evidenced identity, scope, grouping attributes, conditions, windows, limits, validation, version, and audit metadata. Simulation/preview is not claimed as currently implemented.
+
+\`Frontend → Governed Management API/BFF → Correlation Service\`
+
+Never connect the frontend directly to PostgreSQL or Kafka or implement correlation logic in the browser. See the [Correlation frontend handoff](/platform/event-processor/frontend-handoffs/correlation/).
+
+## Deterministic Correlation vs AI-Assisted Correlation
+
+Current correlation has no statistical similarity, ML, LLM, or AI dependency. It is deterministic rule evaluation over input, relevant state, and configuration.
+
+### AI-Assisted Correlation — V2
+
+**Status: DESIGN** · **Target release: V2**
+
+AI-assisted correlation is currently in design and is planned for the V2 evolution of the Correlation Service. Candidate rule suggestions, pattern discovery, relationship recommendations, explanations, and tuning assistance remain governed recommendations; AI must not mutate stores, Kafka, or lifecycle state directly. See [AI-01](/architecture/ai-01-aiops-ai-architecture/).
+
+| Capability | V1 Manual Correlation | V2 AI-Assisted |
+| --- | --- | --- |
+| Deterministic rules | Current | Preserved |
+| Attribute grouping | Current | Preserved |
+| Time windows | Current where configured | Preserved |
+| Manual rule configuration | Current | Preserved |
+| AI suggestions, discovery, explanations | Not current | Design |
+| Governed approval | Current principle | Required |
+
+## Implementation Evidence
+
+The historical [Correlación — aceptación backend local](/platform/event-processor/correlation-backend/) page remains preserved as implementation/certification evidence, not the primary product title. See also the [rule contract](/platform/event-processor/correlation-suppression-commands/).
+
+## Keep Reference
+
+[Keep Manual Correlation Rules](/architecture/reference-architectures/keep/) is an external reference for documentation patterns only. Keep semantics and dynamic naming syntax are not OEM claims.
+
+## Related Documentation
+
+- [Data Authority & Replay](/architecture/data-authority-replay/)
+- [D0 Logical Architecture](/architecture/d0-logical-current/)
+- [Historical certification evidence](/platform/event-processor/correlation-backend/)
+`)
+
 await write('operations/index.md', [
   '# Operations', '',
   '## Configuration', '',
-  ['Correlation', '/platform/event-processor/correlation-backend/'],
+  ['Correlation', '/platform/event-processor/correlation-service-manual-rules/'],
   ['Deduplication', '/platform/event-processor/correlation-suppression-commands/'],
   ['Suppression', '/platform/event-processor/correlation-suppression-commands/'],
   ['Auto-Suppression', '/platform/event-processor/auto-suppression/'],
@@ -363,7 +463,7 @@ await write('operations/_meta.js', `export default {
     title: 'Configuration',
     type: 'menu',
     items: {
-      correlation: { title: 'Correlation', href: '/platform/event-processor/correlation-backend/' },
+      correlation: { title: 'Correlation', href: '/platform/event-processor/correlation-service-manual-rules/' },
       deduplication: { title: 'Deduplication', href: '/platform/event-processor/correlation-suppression-commands/' },
       suppression: { title: 'Suppression', href: '/platform/event-processor/correlation-suppression-commands/' },
       'auto-suppression': { title: 'Auto-Suppression', href: '/platform/event-processor/auto-suppression/' },
