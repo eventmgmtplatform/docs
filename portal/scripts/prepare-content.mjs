@@ -287,13 +287,26 @@ await write('deployment/index.md', landing('Deployment', [
   ['D5B Production Composition', '../architecture/d5b-prod-gke-cicd-target/']
 ]))
 
-await write('operations/index.md', landing('Operations', [
+await write('operations/index.md', [
+  '# Operations', '',
+  '## Configuration', '',
+  ['Correlation', '/platform/event-processor/correlation-backend/'],
+  ['Deduplication', '/platform/event-processor/correlation-suppression-commands/'],
+  ['Suppression', '/platform/event-processor/correlation-suppression-commands/'],
+  ['Auto-Suppression', '/platform/event-processor/auto-suppression/'],
+  ['Blackouts & Maintenance', '/platform/event-processor/rest-and-blackouts/'],
+  ['Enrichment', '/platform/event-processor/enrichment-and-inventory/'],
+  ['Routing', '/platform/event-processor/routing-backend/'],
+  ['Filters & Criteria', '/platform/event-processor/policy-backend/'],
+  ['Ticketing', '/platform/event-processor/routing-backend/'],
+  ['Notifications', '/platform/gnm/CHANGELOG/'],
+  ['Automation', '/platform/cacf/README/'],
   ['Runbooks', 'operations/local-runbook/'],
   ['Observability', 'operations/observability/'],
   ['Incidents', 'operations/incidents/'],
   ['Recovery', 'operations/disaster-recovery/'],
   ['Security', 'security/secrets-management/']
-]))
+].map((line) => Array.isArray(line) ? `- [${line[0]}](${portalHref(line[1])})` : line).join('\n') + '\n')
 
 await write('operations/_meta.js', `export default {
   index: 'Operations',
@@ -313,7 +326,12 @@ await write('operations/_meta.js', `export default {
       notifications: { title: 'Notifications', href: '/platform/gnm/CHANGELOG/' },
       automation: { title: 'Automation', href: '/platform/cacf/README/' }
     }
-  }
+  },
+  runbooks: { title: 'Runbooks', href: '/operations/local-runbook/' },
+  observability: { title: 'Observability', href: '/operations/observability/' },
+  incidents: { title: 'Incidents', href: '/operations/incidents/' },
+  recovery: { title: 'Recovery', href: '/operations/disaster-recovery/' },
+  security: { title: 'Security', href: '/security/secrets-management/' }
 }\n`)
 
 await write('integrations/index.md', landing('Integrations', [
