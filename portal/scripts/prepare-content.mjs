@@ -1663,7 +1663,50 @@ The record links evidence rather than copying it. A release is not promoted or
 called certified without evidence for the relevant environment and approval
 gate.
 
-## Documentation Foundation Release
+## Product Release State
+
+The product release state below is derived from the certified product
+repository metadata, not from the documentation repository.
+
+### Certified Baseline
+
+| Source | Commit | Meaning |
+| --- | --- | --- |
+| \`event-management-platform\` | \`abd899c2c852828f3e0cbbdcfc63a6f1793f21cc\` | Certified product documentation source used by synchronization |
+
+### Releases
+
+No formal product releases are recorded in the inspected certified evidence.
+Changelog milestones are not promoted to releases here.
+
+### Tags
+
+| Tag | Commit | Purpose |
+| --- | --- | --- |
+| \`terraform-project-common-v0.1.0\` | \`7c0e54dce5fc\` | Existing product repository tag; purpose not explicitly documented |
+
+### Branches
+
+| Branch | Type / Purpose | HEAD | Relationship / Status |
+| --- | --- | --- | --- |
+| \`main\` | Canonical product branch | \`11715a4e\` | Existing product branch |
+| \`develop\` | Existing product branch | \`8e508809\` | Purpose not explicitly documented |
+| \`release/os-06-d06-gnm-core-v1.0.0\` | Release-named branch | \`909f3b37\` | Existing branch; promotion semantics not formally documented |
+| \`remediation/os-12-03-webgui-integrations\` | Remediation branch | \`7ece6cbb\` | Existing branch; not a formal release claim |
+
+### Branching / Promotion Model
+
+The inspected repository contains main, develop, feature, release, and
+remediation branches, but the certified evidence does not define one formal
+branching or promotion policy. This page records observed state only.
+
+## Product Changelog
+
+See the [canonical Product Changelog](/project/product-changelog/) for
+recorded functional/product evolution. Release Management records release,
+tag, branch, and repository-state evidence; it does not duplicate that history.
+
+## Documentation Foundation Release (documentation-only)
 
 ### Scope
 
