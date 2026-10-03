@@ -3,6 +3,23 @@
 This changelog is limited to the Architecture Evolution workstream. It is not a
 product, service or release changelog.
 
+## 2026-10-03 — UMC-01
+
+### Added
+
+- Defined the OEM Universal Management Contract as a new cross-cutting,
+  designed/documented resource and action contract across CLI, Management API,
+  Web Console, and governed PostgreSQL scripting.
+- Registered UMC-CLI-01, UMC-API-01, UMC-WEB-01, and UMC-DATA-01 as the first
+  convergence inventories, with additional UMC BAU areas recorded in the
+  Architecture Evolution BAU board.
+
+### Boundary
+
+- This is a semantic architecture change, not a runtime implementation claim.
+- D0, Multi-Surface, Data Authority & Replay, AI-01, and deployment Golden
+  architectures remain authoritative and unchanged.
+
 ## 2026-10-01 — MASTER-ARCH-01
 
 ### Assembled

@@ -28,6 +28,20 @@ application feature backlog.
 
 - Reconcile predecessor diagrams against the new visual grammar without
   deleting historical material.
+- Register UMC-01 convergence work without beginning implementation.
+
+### UMC-01 CONVERGENCE AREAS
+
+- UMC-CLI — inventory and reconcile the current CLI.
+- UMC-API — inventory management APIs against the common contract.
+- UMC-WEB — inventory Web Console, BFF, and controlled data-access paths.
+- UMC-DATA — inventory administrative, migration, and bootstrap scripts.
+- UMC-RESOURCE-MODEL — map existing resources to the designed envelope.
+- UMC-SECURITY — define identity, authorization, secret-reference, and tenant boundaries.
+- UMC-AUDIT — define result and audit-event conformance.
+- UMC-CONFORMANCE — define cross-surface equivalence tests.
+- UMC-BOOTSTRAP — define idempotent initialization conformance.
+- UMC-INTEROPERABILITY — define the configurable BFF/data-access mode.
 
 ## MASTER DELIVERY REMAINING
 
@@ -38,6 +52,8 @@ application feature backlog.
   completed Master assembly.
 
 ## NEXT
+
+- Execute UMC-CLI-01, UMC-API-01, UMC-WEB-01, and UMC-DATA-01 inventories.
 
 - Record a reviewed decision for the runtime destination and Helm.
 - Recover the RHEL bundle or equivalent attributable evidence for independent

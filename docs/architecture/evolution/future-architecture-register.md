@@ -51,3 +51,13 @@ the planned lifecycle or interaction contract.
 | Lifecycle | Scope | Required discovery |
 |---|---|---|
 | `PLANNED` | Model, prompt, agent and tool delivery/governance lifecycle | Define identity/versioning, evaluation gates, promotion, rollback, audit and policy lifecycle separately from D5B container CI/CD. |
+
+## UMC-01 — OEM Universal Management Contract
+
+| Lifecycle | Scope | Required discovery |
+|---|---|---|
+| `DESIGNED` (`DOCUMENTED`) | Cross-cutting management resource/action contract | [UMC-01](../universal-management-contract.md) defines the target contract. Inventory current CLI, APIs, Web/BFF access, PostgreSQL scripts, resource models, and conformance gaps before implementation. |
+
+UMC-01 is a semantic architecture addition. It does not claim that the
+universal grammar, management API, interoperability switch, or governed
+PostgreSQL scripting boundary is implemented.

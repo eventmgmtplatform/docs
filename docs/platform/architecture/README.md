@@ -53,3 +53,16 @@ flowchart LR
 Para el detalle por integración, consultar
 [system-integration-instances.md](system-integration-instances.md) y los
 documentos de cada servicio.
+
+## Universal Management Contract
+
+**UMC-01 — OEM Universal Management Contract** is a new cross-cutting,
+designed/documented architecture contract. It defines one governed resource
+and action model across CLI, Management API, Web Console, and governed
+PostgreSQL scripting. It complements, and does not replace, D0, Multi-Surface,
+or Data Authority & Replay.
+
+The approved solution view is available in the detailed
+[OEM Universal Management Contract](../../architecture/universal-management-contract.md)
+definition. UMC-01 preserves PostgreSQL as Operational Source of Truth, Kafka
+as transport/replay, and OpenSearch as derived projection.
