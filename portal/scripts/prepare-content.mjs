@@ -1183,7 +1183,7 @@ certification.
 | ServiceNow | Incident / auto-ticketing; CMDB and CI/IRE boundaries | Incident capability implemented/evidenced; CMDB and CI/IRE designed | [ServiceNow](/integrations/servicenow/) |
 | CACF | Asynchronous automation execution and callback result handling | Local foundation implemented and validated; production certification not claimed | [CACF](/integrations/cacf/) |
 | Custom API | Provider-neutral registration and governed provider execution model | Governed provider model documented; implementation capabilities remain evidence-dependent | [Custom API](/integrations/custom-api/) |
-| GLPI | Ticket creation, solution, closure and follow-up through the GLPI adapter | Implemented in the documented integration baseline | [GLPI reference](/platform/integrations/glpi/) |
+| GLPI | Ticket creation, solution, closure and follow-up through the GLPI adapter | Implemented in the documented integration baseline | [GLPI](/integrations/glpi/) |
 | GNM / Everbridge | Notification lifecycle, lookup and confirmed close processing | Implemented/evidenced in the GNM changelog; broader chaining remains future scope | [GNM / Everbridge](/platform/gnm/CHANGELOG/) |
 | ChatOps | Integration surface placeholder | Documentation pending; implementation not claimed | [ChatOps](/integrations/chatops/) |
 | Bridge Extensions | Integration surface placeholder | Documentation pending; implementation not claimed | [Bridge Extensions](/integrations/bridge-extensions/) |
@@ -1722,11 +1722,129 @@ See [Integration Instances](/integrations/integration-architecture/),
 [OEM API Catalog](/platform/api/oem-api-catalog/), and [Custom API](/integrations/custom-api/).
 `)
 
+await write('integrations/glpi.md', `# GLPI
+
+## Solution Architecture
+
+The approved GLPI solution diagram is intentionally reserved for a later
+ChatGPT/user-supplied asset. This section records the evidenced boundaries only;
+no solution artwork or Mermaid interpretation is added here.
+
+## Connector Model
+
+GLPI is an OEM ticketing provider using the canonical \`integration.commands\` /
+\`integration.results\` contract, provider routing, and the durable
+Integration Worker ledger. The Event Processor creates a provider-specific
+command; the Integration Worker executes the GLPI adapter; and the Event State
+Service validates, deduplicates, and consolidates the result.
+
+## Capabilities
+
+| Capability | Status | Evidence |
+| --- | --- | --- |
+| Ticket creation through routing | IMPLEMENTED | GLPI routing with \`CREATE_TICKET\` is documented in the certified GLPI baseline. |
+| Ticket solution / resolution | IMPLEMENTED | \`RESOLVE_TICKET\` creates and confirms the GLPI solution. |
+| Ticket closure | IMPLEMENTED | \`CLOSE_TICKET\` confirms status 6 and is idempotent when already closed. |
+| Ticket follow-up | IMPLEMENTED | \`APPLY_AUTOMATION_RESULT\` creates a private GLPI follow-up. |
+| Ticket lookup and lifecycle status | IMPLEMENTED | Native status lookup and bounded pagination are documented. |
+| ServiceNow-to-GLPI lifecycle chaining | DESIGNED | The existing advanced lifecycle profile remains ServiceNow-specific. |
+
+## Installation
+
+### CLI and API
+
+No canonical GLPI connector-registration CLI or public registration API is
+evidenced. Registration through those surfaces is therefore **DESIGNED**, not
+claimed as implemented.
+
+### Configuration
+
+The documented backend configuration uses \`GLPI_BASE_URL\` (including
+\`/apirest.php\`), \`GLPI_APP_TOKEN\`, \`GLPI_USER_TOKEN\`,
+\`GLPI_TIMEOUT_MS\`, and \`GLPI_TIMEZONE\`. Credentials are configured
+server-side and are not exposed in documentation, Git, or client payloads.
+
+## Registration Input / Output
+
+No separate OEM registration contract is evidenced for GLPI. The provider is
+selected through the existing routing/configuration model; no speculative
+registration fields or response are introduced.
+
+## Runtime Model
+
+Event Gateway → Kafka → Event Processor → Integration Worker / GLPI Adapter →
+GLPI → integration result → Event State Service → PostgreSQL.
+
+The Processor decides and emits the command. The Worker/Adapter performs the
+external call and preserves command identity. ESS consolidates lifecycle state.
+
+## Input Data
+
+The documented GLPI command uses the existing provider command contract,
+including provider identity, event/correlation identity, tenant context,
+operation, and provider parameters. Ticket operations use the native numeric
+GLPI ticket identifier where an existing command supplies one.
+
+## Output Data
+
+Results retain the provider outcome, ticket identifier, status, execution or
+command identity, and normalized lifecycle evidence where supplied by GLPI.
+External GLPI status remains external-system evidence associated with the OEM
+lifecycle; it does not replace OEM authoritative state.
+
+## Security and Secrets
+
+GLPI uses server-side credentials and the existing governed secret boundary.
+The documented implementation uses REST V1 session handling with App-Token and
+User-Token inputs. Raw credentials are never returned, logged, or placed in
+client configuration. Tenant/entity scope follows the configured GLPI account
+permissions; no new multi-user authorization model is claimed.
+
+## Data Authority
+
+- **Kafka** is the transport and replay boundary.
+- **PostgreSQL** is the OEM Operational Source of Truth.
+- **OpenSearch** is a derived search and analytics projection.
+- **GLPI** remains the external ticketing system.
+
+## API / Endpoint Contracts
+
+| Contractual Endpoint | Real Endpoint | Status | Required Change | Owner Repository |
+| --- | --- | --- | --- | --- |
+| GLPI REST V1 session | \`/initSession\`, \`/killSession\` | MATCH | None evidenced | event-management-platform |
+| GLPI ticket creation | \`POST /Ticket\` | MATCH | None evidenced | event-management-platform |
+| GLPI ticket lookup | Native ticket GET/query | MATCH | None evidenced | event-management-platform |
+| GLPI ticket update/closure | \`PUT /Ticket/{id}\` with confirmed status | MATCH | None evidenced | event-management-platform |
+
+## Implementation Status
+
+| Area | Status |
+| --- | --- |
+| GLPI adapter and ticket lifecycle baseline | IMPLEMENTED |
+| Local mock/test evidence | DOCUMENTED / validated in the existing evidence corpus |
+| Production GLPI certification | NOT CLAIMED |
+| OEM connector registration CLI/API | DESIGNED |
+
+## Documentation
+
+| Document | Area | Purpose |
+| --- | --- | --- |
+| [GLPI technical baseline](/platform/integrations/glpi/) | Integration implementation | Detailed provider, API, recovery, configuration, and deployment evidence |
+| [Integration Architecture — Instances](/integrations/integration-architecture/) | Governance | Instance, secret-reference, lifecycle, and audit boundaries |
+| [OEM API Catalog](/platform/api/oem-api-catalog/) | API governance | Governed API inventory and consumer boundary |
+
+## Related Architectures
+
+See [Data Authority & Replay](/architecture/data-authority-replay/),
+[Operations Platform Guide](/operations/platform-operations-guide/), and the
+[Integration catalog](/integrations/integration-architecture/#existing-integrations).
+`)
+
 await write('integrations/index.md', landing('Integrations', [
   ['Custom API', 'integrations/custom-api/'],
   ['Integration Architecture — Instances', 'integrations/integration-architecture/'],
   ['CACF', 'integrations/cacf/'],
-  ['GLPI', '../platform/integrations/glpi/'],
+  ['GLPI', 'integrations/glpi/'],
   ['ServiceNow', 'integrations/servicenow/'],
   ['GNM', '../platform/gnm/CHANGELOG/'],
   ['ChatOps', 'integrations/chatops/'],
