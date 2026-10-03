@@ -1173,16 +1173,22 @@ Integration Worker and provider adapters that execute approved commands.
 
 ## Existing Integrations
 
-Existing integration documentation remains canonical and is not rewritten here:
+Existing integration documentation remains canonical and is not rewritten here.
+The catalog records the documented capability boundary; a Designed or
+Documented status is not a claim of a completed adapter or production
+certification.
 
-- [ServiceNow](/platform/servicenow/CHANGELOG/)
-- [GNM](/platform/gnm/CHANGELOG/)
-- [ChatOps](/integrations/chatops/)
-- [BMC Helix](/integrations/bmc-helix/)
-- [ELK Pull Data](/integrations/elk-pull-data/)
-
-The presence of a documentation placeholder does not claim a completed adapter,
-secret integration, or production certification.
+| Integration | Capability | Status | Documentation |
+| --- | --- | --- | --- |
+| ServiceNow | Incident / auto-ticketing; CMDB and CI/IRE boundaries | Incident capability implemented/evidenced; CMDB and CI/IRE designed | [ServiceNow](/integrations/servicenow/) |
+| CACF | Asynchronous automation execution and callback result handling | Local foundation implemented and validated; production certification not claimed | [CACF](/integrations/cacf/) |
+| Custom API | Provider-neutral registration and governed provider execution model | Governed provider model documented; implementation capabilities remain evidence-dependent | [Custom API](/integrations/custom-api/) |
+| GLPI | Ticket creation, solution, closure and follow-up through the GLPI adapter | Implemented in the documented integration baseline | [GLPI reference](/platform/integrations/glpi/) |
+| GNM / Everbridge | Notification lifecycle, lookup and confirmed close processing | Implemented/evidenced in the GNM changelog; broader chaining remains future scope | [GNM / Everbridge](/platform/gnm/CHANGELOG/) |
+| ChatOps | Integration surface placeholder | Documentation pending; implementation not claimed | [ChatOps](/integrations/chatops/) |
+| Bridge Extensions | Integration surface placeholder | Documentation pending; implementation not claimed | [Bridge Extensions](/integrations/bridge-extensions/) |
+| BMC Helix | Integration surface placeholder | Documentation pending; implementation not claimed | [BMC Helix](/integrations/bmc-helix/) |
+| ELK Pull Data | Integration surface placeholder | Documentation pending; implementation not claimed | [ELK Pull Data](/integrations/elk-pull-data/) |
 `)
 await write('integrations/_meta.js', `export default {
   index: 'Integrations',
