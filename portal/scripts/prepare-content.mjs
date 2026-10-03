@@ -1726,9 +1726,13 @@ await write('integrations/glpi.md', `# GLPI
 
 ## Solution Architecture
 
-The approved GLPI solution diagram is intentionally reserved for a later
-ChatGPT/user-supplied asset. This section records the evidenced boundaries only;
-no solution artwork or Mermaid interpretation is added here.
+![OEM–GLPI Integration Architecture](/diagrams/oem-glpi-integration-solution-architecture.png)
+
+The approved diagram shows the evidenced path: Event Gateway → Kafka → Event
+Processor → Integration Worker / GLPI Adapter → GLPI REST API → normalized
+integration result → ESS → PostgreSQL, with OpenSearch as the derived
+projection. Processor decides, Worker/Adapter executes, ESS consolidates, and
+PostgreSQL remains OEM operational authority.
 
 ## Connector Model
 
@@ -1751,11 +1755,46 @@ Service validates, deduplicates, and consolidates the result.
 
 ## Installation
 
-### CLI and API
+### CLI
 
-No canonical GLPI connector-registration CLI or public registration API is
-evidenced. Registration through those surfaces is therefore **DESIGNED**, not
-claimed as implemented.
+Connector registration is a **DESIGNED** target contract, not an implemented
+command. Registration is separate from runtime ticket execution.
+
+~~~~text
+oem integration glpi register \
+  --provider-id glpi-prod \
+  --tenant <tenant-id> \
+  --base-url https://glpi.example.com \
+  --app-token-ref secret://oem/glpi/app-token \
+  --user-token-ref secret://oem/glpi/user-token \
+  --timeout-ms 30000 \
+  --timezone America/Mexico_City \
+  --capability ticket-create \
+  --capability ticket-update \
+  --capability ticket-followup \
+  --capability ticket-close \
+  --capability ticket-status
+~~~~
+
+| Parameter | Required | Purpose |
+| --- | --- | --- |
+| \`--provider-id\` | Yes | Unique governed connector identity |
+| \`--tenant\` | Yes | Governed tenant scope |
+| \`--base-url\` | Yes | GLPI endpoint URL |
+| \`--app-token-ref\` | Yes | Governed application-token reference |
+| \`--user-token-ref\` | Yes | Governed user-token reference |
+| \`--timeout-ms\` | Yes | Bounded request timeout |
+| \`--timezone\` | Yes | Configured GLPI timezone |
+| \`--capability\` | Yes, repeatable | Supported GLPI capability identifier |
+
+Raw \`GLPI_APP_TOKEN\` and \`GLPI_USER_TOKEN\` values are not accepted as CLI
+arguments.
+
+### API
+
+GLPI registration API is **DESIGNED**. It will expose the same logical
+registration model as the CLI; no concrete REST registration endpoint is
+invented here.
 
 ### Configuration
 
@@ -1764,11 +1803,69 @@ The documented backend configuration uses \`GLPI_BASE_URL\` (including
 \`GLPI_TIMEOUT_MS\`, and \`GLPI_TIMEZONE\`. Credentials are configured
 server-side and are not exposed in documentation, Git, or client payloads.
 
-## Registration Input / Output
+| CLI contract | Existing runtime configuration |
+| --- | --- |
+| \`--base-url\` | \`GLPI_BASE_URL\` |
+| \`--app-token-ref\` | Governed reference resolving \`GLPI_APP_TOKEN\` |
+| \`--user-token-ref\` | Governed reference resolving \`GLPI_USER_TOKEN\` |
+| \`--timeout-ms\` | \`GLPI_TIMEOUT_MS\` |
+| \`--timezone\` | \`GLPI_TIMEZONE\` |
 
-No separate OEM registration contract is evidenced for GLPI. The provider is
-selected through the existing routing/configuration model; no speculative
-registration fields or response are introduced.
+The current runtime consumes resolved environment values; the secret-reference
+CLI is a future registration contract, not a claim about current configuration
+mechanics.
+
+## Registration Input
+
+| Field | Required | Purpose | Validation |
+| --- | --- | --- | --- |
+| \`providerId\` | Yes | Unique connector identity | Unique in governed scope |
+| \`providerType\` | Yes | Must be \`glpi\` | Supported provider type |
+| \`tenantId\` | Yes | Governed tenant | Valid tenant context |
+| \`baseUrl\` | Yes | GLPI endpoint | Valid endpoint URL |
+| \`appTokenRef\` | Yes | Application-token reference | Governed secret reference |
+| \`userTokenRef\` | Yes | User-token reference | Governed secret reference |
+| \`timeoutMs\` | Yes | Request timeout | Bounded value |
+| \`timezone\` | Yes | GLPI timezone | Valid configured timezone |
+| \`capabilities\` | Yes | Enabled GLPI capabilities | Supported identifiers |
+| \`contractVersion\` | Yes | Registration contract version | Supported version |
+
+## Registration Validation
+
+The validation rules above are **DESIGNED** target behavior. Registration must
+validate identity uniqueness, provider type, tenant scope, endpoint URL,
+governed secret references, bounded timeout, timezone, supported capabilities,
+and contract version before accepting a connector.
+
+## Registration Output
+
+The designed successful result is:
+
+\`\`\`json
+{
+  "status": "REGISTERED",
+  "providerId": "glpi-prod",
+  "providerType": "glpi",
+  "tenantId": "<tenant-id>",
+  "contractVersion": "v1",
+  "configurationVersion": "<version>",
+  "validationStatus": "VALID"
+}
+\`\`\`
+
+\`REGISTERED\` means connector configuration was accepted. It does not mean a
+ticket was created, production connectivity was certified, or runtime execution
+completed. Credential material is never returned.
+
+| Field | Meaning |
+| --- | --- |
+| \`status\` | Registration outcome |
+| \`providerId\` | Registered connector identity |
+| \`providerType\` | \`glpi\` provider type |
+| \`tenantId\` | Governed tenant |
+| \`contractVersion\` | Registration contract version |
+| \`configurationVersion\` | Accepted configuration revision |
+| \`validationStatus\` | Registration validation result |
 
 ## Runtime Model
 
@@ -1791,6 +1888,9 @@ Results retain the provider outcome, ticket identifier, status, execution or
 command identity, and normalized lifecycle evidence where supplied by GLPI.
 External GLPI status remains external-system evidence associated with the OEM
 lifecycle; it does not replace OEM authoritative state.
+
+Connector registration occurs first. Runtime ticket execution occurs later:
+OEM event → integration command → Worker / GLPI Adapter → GLPI ticket operation.
 
 ## Security and Secrets
 
@@ -1823,7 +1923,8 @@ permissions; no new multi-user authorization model is claimed.
 | GLPI adapter and ticket lifecycle baseline | IMPLEMENTED |
 | Local mock/test evidence | DOCUMENTED / validated in the existing evidence corpus |
 | Production GLPI certification | NOT CLAIMED |
-| OEM connector registration CLI/API | DESIGNED |
+| CLI registration contract | DESIGNED |
+| API registration contract | DESIGNED |
 
 ## Documentation
 
