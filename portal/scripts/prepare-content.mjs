@@ -149,7 +149,8 @@ await write('platform/labs/keep/_meta.js', `export default {
   architecture: 'Architecture',
   'ai-llm': 'AI / LLM',
   'oem-comparison': 'OEM Comparison',
-  references: 'References'
+  documentation: 'Documentation',
+  references: { display: 'hidden' }
 }\n`)
 
 await write('platform/labs/keep/index.md', `# Keep Overview
@@ -251,6 +252,34 @@ Inspected sources:
 
 These files are evidence references, not copied portal content. The canonical
 OEM pages remain the source of truth for OEM architecture and implementation.
+`)
+
+await write('platform/labs/keep/documentation.md', `# Keep Documentation
+
+> **External Reference — Keep**
+
+This is the active documentation set associated with the Keep external-reference
+Lab. It preserves source traceability without presenting Keep as an OEM
+implementation.
+
+| Document | Area | Purpose |
+| --- | --- | --- |
+| [Keep evidence architecture](/platform/labs/keep/architecture/) | Local Lab documentation | Architecture, providers, workflows, state, and deployment observations |
+| [Keep AI / LLM evidence](/platform/labs/keep/ai-llm/) | Local Lab documentation | Model, provider, workflow, and context findings |
+| [Keep vs OEM comparison](/platform/labs/keep/oem-comparison/) | Local Lab documentation | Factual comparison and OEM decision inputs |
+| [Workflow evidence](/platform/labs/keep/documentation/#workflow-evidence) | External source reference | KEEP-LAB-13 workflows and automation |
+| [Persistence evidence](/platform/labs/keep/documentation/#persistence-evidence) | External source reference | KEEP-LAB-15 data persistence |
+
+## Workflow Evidence
+
+Source: /opt/keep-aiops/evidence/KEEP-LAB-13-workflows-automation/architecture.md
+
+## Persistence Evidence
+
+Source: /opt/keep-aiops/evidence/KEEP-LAB-15-data-persistence/architecture.md
+
+Additional source traceability remains recorded in the compatibility page at
+[Keep References](/platform/labs/keep/references/).
 `)
 
 const platformReadme = await readFile(resolve(destination, 'platform/README.md'), 'utf8')
@@ -411,7 +440,7 @@ await write('platform/labs/_meta.js', `export default {
       architecture: { title: 'Architecture', href: '/platform/labs/keep/architecture/' },
       'ai-llm': { title: 'AI / LLM', href: '/platform/labs/keep/ai-llm/' },
       'oem-comparison': { title: 'OEM Comparison', href: '/platform/labs/keep/oem-comparison/' },
-      references: { title: 'References', href: '/platform/labs/keep/references/' }
+      documentation: { title: 'Documentation', href: '/platform/labs/keep/documentation/' }
     }
   }
 }\n`)
