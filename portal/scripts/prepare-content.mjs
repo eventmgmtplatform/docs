@@ -665,6 +665,7 @@ await write('architecture/_meta.js', `export default {
   'data-authority-replay': 'Data Architecture',
   'multi-surface-interaction': 'Interaction Architecture',
   'ai-01-aiops-ai-architecture': 'AI Architecture — AI-01',
+  'universal-management-contract': 'Universal Management Contract — UMC-01',
   deployment: 'Deployment Operations',
   'd1-local-current': 'Deployment — D1 Local',
   'd2-kvm-kubernetes-target': 'Deployment — D2 Kubernetes',
