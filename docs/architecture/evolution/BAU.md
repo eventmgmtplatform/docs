@@ -29,10 +29,15 @@ application feature backlog.
 - Reconcile predecessor diagrams against the new visual grammar without
   deleting historical material.
 - Register UMC-01 convergence work without beginning implementation.
+- UMC-CLI-01 inventory completed: current operational, installer, deployment and
+  test surfaces were classified against the UMC target; no product remediation
+  was started.
 
 ### UMC-01 CONVERGENCE AREAS
 
 - UMC-CLI — inventory and reconcile the current CLI.
+- UMC-CLI-01 — current CLI inventory and UMC conformance matrix completed; gaps
+  remain for future BAU convergence.
 - UMC-API — inventory management APIs against the common contract.
 - UMC-WEB — inventory Web Console, BFF, and controlled data-access paths.
 - UMC-DATA — inventory administrative, migration, and bootstrap scripts.

@@ -67,6 +67,11 @@ oem config interoperability set
 Provider-specific designs such as `oem integration register --type glpi` or
 `--type custom-api` are specializations that require later conformance work.
 
+## Conformance
+
+The current CLI baseline is documented in [CLI Conformance — UMC-CLI-01](umc/cli-conformance.md).
+It is a discovery record, not an implementation claim or a start of remediation.
+
 ## Management API
 
 The Management API is another surface over UMC; it must not define separate
