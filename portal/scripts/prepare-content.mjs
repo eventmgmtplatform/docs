@@ -169,6 +169,11 @@ reference patterns and lessons, not as OEM capabilities.
 Relevant evidence includes the Keep provider catalog, workflow execution model,
 relational alert/incident state model, correlation and deduplication findings,
 and the Keep-versus-OEM comparison package.
+
+## Documentation
+
+The six first-class [Keep Lab documentation pages](/platform/labs/keep/documentation/)
+are directly available from the canonical Documentation catalog.
 `)
 
 await write('platform/labs/keep/architecture.md', `# Keep Architecture
@@ -252,6 +257,38 @@ Inspected sources:
 
 These files are evidence references, not copied portal content. The canonical
 OEM pages remain the source of truth for OEM architecture and implementation.
+`)
+
+const keepDocuments = [
+  ['workflows-automation', 'Workflows & Automation Architecture', 'KEEP-LAB-13', 'keep-lab-13-workflows-automation.md'],
+  ['data-persistence', 'Data Persistence Architecture', 'KEEP-LAB-15', 'keep-lab-15-data-persistence.md'],
+  ['ai-llm-dependency-model', 'AI / LLM Dependency Model', 'KEEP-LAB-12', 'keep-lab-12-ai-llm-dependency-model.md'],
+  ['providers-integrations', 'Representative Providers & Integrations', 'KEEP-LAB-11', 'keep-lab-11-providers-integrations.md'],
+  ['keep-vs-oem', 'Keep vs OEM Architecture Matrix', 'KEEP-LAB-20', 'keep-lab-20-keep-vs-oem.md'],
+  ['lessons-for-oem', 'Lessons for OEM', 'KEEP-LAB-21', 'keep-lab-21-lessons-for-oem.md']
+]
+for (const [slug, title, labId, sourceFile] of keepDocuments) {
+  const source = await readFile(resolve(repositoryRoot, 'portal/keep-sources', sourceFile), 'utf8')
+  await write(`platform/labs/keep/documentation/${slug}.md`, `${source}\n\n---\n\n**Source Lab:** ${labId}  \n**Source artifact:** ${sourceFile}  \n**Source repository:** keep-aiops evidence package\n`)
+}
+await write('platform/labs/keep/documentation/_meta.js', `export default {
+  index: 'Documentation',
+  'workflows-automation': 'Workflows & Automation Architecture',
+  'data-persistence': 'Data Persistence Architecture',
+  'ai-llm-dependency-model': 'AI / LLM Dependency Model',
+  'providers-integrations': 'Representative Providers & Integrations',
+  'keep-vs-oem': 'Keep vs OEM Architecture Matrix',
+  'lessons-for-oem': 'Lessons for OEM'
+}\n`)
+await write('platform/labs/keep/documentation/index.md', `# Keep Documentation
+
+> **External Reference — Keep**
+
+First-class documentation pages for the Keep external-reference Lab.
+
+| Document | Keep Lab / Area | Description |
+| --- | --- | --- |
+${keepDocuments.map(([slug, title, labId]) => `| [${title}](/platform/labs/keep/documentation/${slug}/) | ${labId} | Published Keep Lab documentation |`).join('\n')}
 `)
 
 await write('platform/labs/keep/documentation.md', `# Keep Documentation
