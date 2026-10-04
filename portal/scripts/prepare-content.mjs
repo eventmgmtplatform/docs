@@ -320,12 +320,84 @@ Additional source traceability remains recorded in the compatibility page at
 `)
 
 const platformReadme = await readFile(resolve(destination, 'platform/README.md'), 'utf8')
-await write('platform/index.md', platformReadme)
-await write('platform/operations/_meta.js', `export default { README: 'Platform Operations' }\n`)
-await write('platform/api/_meta.js', `export default {
-  README: 'API Overview',
-  'oem-api-catalog': 'API Catalog'
-}\n`)
+await write('platform/index.md', `# Engineering Event Management
+
+This is the engineering and product-side documentation domain for Open Event
+Management. It organizes implementation-facing architecture, APIs, CLI
+interoperability, state services, and operations without replacing the
+canonical [OEM Architecture Definition](/architecture/oem-architecture-definition/).
+
+## Canonical engineering homes
+
+- [Architecture](/platform/architecture/)
+- [API](/platform/api/)
+- [CLI Interoperability](/platform/cli-interoperability/)
+- [Event State Service](/platform/event-state-service/)
+- [Operations](/platform/operations/)
+- [Components](/platform/components/)
+- [Kafka](/platform/kafka/)
+- [Frontend and Dashboards](/platform/dashboards/)
+
+The original [Engineering Platform technical README](/platform/README/) remains
+available as a deep reference.
+`)
+await write('platform/architecture/index.md', `# Engineering Event Management Architecture
+
+Implementation-facing architecture and service ownership references for the engineering domain.
+
+| Area | Reference |
+| --- | --- |
+| Integrated architecture | [Technical Reference README](/platform/architecture/README/) |
+| Event processing | [Event Processor](/platform/event-processor/) |
+| Components | [OEM Component Catalog](/platform/components/oem-component-catalog/) |
+| UMC | [Universal Management Contract](/architecture/universal-management-contract/) |
+
+The [OEM Architecture Definition](/architecture/) is the canonical target architecture. This Engineering Event Management view documents product-side implementation references and does not replace the synchronized product README.
+`)
+await write('platform/api/index.md', `# APIs & Contracts
+
+The API home organizes existing implementation and contract references; it does not invent endpoints.
+
+| Area | Reference |
+| --- | --- |
+| API inventory | [OEM API Catalog](/platform/api/oem-api-catalog/) |
+| Technical reference | [API README](/platform/api/README/) |
+| OpenAPI source | [OpenAPI reference](/downloads/platform/api/openapi.yaml) |
+| Administration inventory | [Administration API Inventory](/platform/administration-api-inventory/) |
+| UMC relationship | [Universal Management Contract](/architecture/universal-management-contract/) |
+
+Current API documentation describes evidenced implementation surfaces. The UMC Management API is an approved target contract; UMC-API-01 remains future inventory work.
+`)
+await write('platform/event-state-service/index.md', `# Event State Service
+
+Event State Service (ESS) owns documented event lifecycle, history and quarantine state.
+
+| Area | Reference |
+| --- | --- |
+| Role and lifecycle | [Technical README](/platform/event-state-service/README/) |
+| Administration API | [ESS administration API](/platform/event-state-service/admin-api/) |
+| Validation | [Validation](/platform/event-state-service/validation/) |
+| Lifecycle contract | [Lifecycle contract](/platform/event-state-service/lifecycle-contract/) |
+| CLI | \`emctl event-state-service admin|test\`; [UMC CLI Conformance](/architecture/universal-management-contract/umc/cli-conformance/) |
+| Recovery and gaps | [Recovery/gaps](/platform/event-state-service/gaps/) |
+`)
+await write('platform/operations/index.md', `# Operations
+
+Operational entry points for the documented local Event Management runtime.
+
+| Area | Reference |
+| --- | --- |
+| Technical reference | [Operations README](/platform/operations/README/) |
+| CLI / command-line administration | [CLI Interoperability](/platform/cli-interoperability/); [Kafka CLI](/platform/kafka/cli/); [ESS administration](/platform/event-state-service/admin-api/) |
+| Installation and bootstrap | [Deployment](/deployment/); [Kafka installation](/platform/kafka/installation-and-certification/) |
+| Recovery and validation | [Data Authority & Replay](/architecture/data-authority-replay/); [Certification Labs](/platform/labs/) |
+
+Operations documents how to use and validate the product. It is distinct from the [UMC CLI Conformance](/architecture/universal-management-contract/umc/cli-conformance/) engineering analysis.
+`)
+await write('platform/architecture/_meta.js', `export default { index: 'Architecture', README: 'Technical Reference' }\n`)
+await write('platform/api/_meta.js', `export default { index: 'API Home', README: 'Technical Reference', 'oem-api-catalog': 'API Catalog' }\n`)
+await write('platform/event-state-service/_meta.js', `export default { index: 'Event State Service', README: 'Technical Reference', 'admin-api': 'Administration API', validation: 'Validation', 'lifecycle-contract': 'Lifecycle Contract', gaps: 'Recovery and Gaps' }\n`)
+await write('platform/operations/_meta.js', `export default { index: 'Operations', README: 'Technical Reference' }\n`)
 await write('platform/api/oem-api-catalog.md', `# OEM API Catalog
 
 The catalog is the single documentation inventory for OEM administration and
@@ -632,7 +704,7 @@ directly mutate databases, Kafka, state, or projections.
 `)
 
 await write('platform/_meta.js', `export default {
-  index: 'Engineering Overview',
+  index: 'Engineering Event Management',
   architecture: 'Integrated Architecture',
   'event-gateway': 'Event Gateway',
   'event-processor': 'Event Processor',
