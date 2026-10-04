@@ -335,8 +335,8 @@ canonical [OEM Architecture Definition](/architecture/oem-architecture-definitio
 - [Event State Service](/platform/event-state-service/)
 - [Operations](/platform/operations/)
 - [Components](/platform/components/)
-- [Kafka](/platform/kafka/)
-- [Frontend and Dashboards](/platform/dashboards/)
+- [Kafka](/platform/kafka/installation-and-certification/)
+- [Frontend and Dashboards](/platform/dashboards/product-observability/)
 
 The original [Engineering Platform technical README](/platform/README/) remains
 available as a deep reference.
@@ -348,7 +348,7 @@ Implementation-facing architecture and service ownership references for the engi
 | Area | Reference |
 | --- | --- |
 | Integrated architecture | [Technical Reference README](/platform/architecture/README/) |
-| Event processing | [Event Processor](/platform/event-processor/) |
+| Event processing | [Correlation Engine](/platform/event-processor/correlation-engine-service/) |
 | Components | [OEM Component Catalog](/platform/components/oem-component-catalog/) |
 | UMC | [Universal Management Contract](/architecture/universal-management-contract/) |
 
@@ -378,7 +378,7 @@ Event State Service (ESS) owns documented event lifecycle, history and quarantin
 | Administration API | [ESS administration API](/platform/event-state-service/admin-api/) |
 | Validation | [Validation](/platform/event-state-service/validation/) |
 | Lifecycle contract | [Lifecycle contract](/platform/event-state-service/lifecycle-contract/) |
-| CLI | \`emctl event-state-service admin|test\`; [UMC CLI Conformance](/architecture/universal-management-contract/umc/cli-conformance/) |
+| CLI | \`emctl event-state-service admin|test\`; [UMC CLI Conformance](/architecture/universal-management-contract/) |
 | Recovery and gaps | [Recovery/gaps](/platform/event-state-service/gaps/) |
 `)
 await write('platform/operations/index.md', `# Operations
@@ -392,7 +392,7 @@ Operational entry points for the documented local Event Management runtime.
 | Installation and bootstrap | [Deployment](/deployment/); [Kafka installation](/platform/kafka/installation-and-certification/) |
 | Recovery and validation | [Data Authority & Replay](/architecture/data-authority-replay/); [Certification Labs](/platform/labs/) |
 
-Operations documents how to use and validate the product. It is distinct from the [UMC CLI Conformance](/architecture/universal-management-contract/umc/cli-conformance/) engineering analysis.
+Operations documents how to use and validate the product. It is distinct from the [UMC CLI Conformance](/architecture/universal-management-contract/) engineering analysis.
 `)
 await write('platform/architecture/_meta.js', `export default { index: 'Architecture', README: 'Technical Reference' }\n`)
 await write('platform/api/_meta.js', `export default { index: 'API Home', README: 'Technical Reference', 'oem-api-catalog': 'API Catalog' }\n`)
