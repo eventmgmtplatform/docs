@@ -334,7 +334,7 @@ canonical [OEM Architecture Definition](/architecture/oem-architecture-definitio
 - [CLI Interoperability](/platform/cli-interoperability/)
 - [Event State Service](/platform/event-state-service/)
 - [Operations](/platform/operations/)
-- [Components](/platform/components/)
+- [Components](/platform/components/oem-component-catalog/)
 - [Kafka](/platform/kafka/installation-and-certification/)
 - [Frontend and Dashboards](/platform/dashboards/product-observability/)
 
