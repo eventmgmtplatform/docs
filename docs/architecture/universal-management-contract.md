@@ -69,8 +69,9 @@ Provider-specific designs such as `oem integration register --type glpi` or
 
 ## Conformance
 
-The current CLI baseline is documented in [CLI Conformance — UMC-CLI-01](umc/cli-conformance.md).
-It is a discovery record, not an implementation claim or a start of remediation.
+The current CLI baseline is documented in [CLI Conformance — UMC-CLI-01](umc/cli-conformance.md),
+and the current API inventory in [API Conformance — UMC-API-01](umc/api-conformance.md).
+Both are discovery records, not implementation claims or a start of remediation.
 
 ## Management API
 
