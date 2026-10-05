@@ -365,6 +365,7 @@ The API home organizes existing implementation and contract references; it does 
 | OpenAPI source | [OpenAPI reference](/downloads/platform/api/openapi.yaml) |
 | Administration inventory | [Administration API Inventory](/platform/administration-api-inventory/) |
 | UMC API conformance | [UMC-API-01](/architecture/umc/api-conformance/) |
+| UMC Web conformance | [UMC-WEB-01](/architecture/umc/web-conformance/) |
 | UMC relationship | [Universal Management Contract](/architecture/universal-management-contract/) |
 
 Current API documentation describes evidenced implementation surfaces. The UMC Management API is an approved target contract; UMC-API-01 records the current conformance inventory and its gaps.

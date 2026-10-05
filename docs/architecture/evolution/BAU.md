@@ -41,6 +41,8 @@ application feature backlog.
 - UMC-API — inventory management APIs against the common contract.
 - UMC-API-01 — current API inventory and UMC conformance matrix completed; gaps
   remain for future BAU convergence.
+- UMC-WEB-01 — current Web Console/BFF inventory and conformance matrix
+  completed; convergence findings remain for future BAU work.
 - UMC-WEB — inventory Web Console, BFF, and controlled data-access paths.
 - UMC-DATA — inventory administrative, migration, and bootstrap scripts.
 - UMC-RESOURCE-MODEL — map existing resources to the designed envelope.
