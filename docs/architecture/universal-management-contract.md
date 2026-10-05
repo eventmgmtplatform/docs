@@ -72,7 +72,9 @@ Provider-specific designs such as `oem integration register --type glpi` or
 The current CLI baseline is documented in [CLI Conformance — UMC-CLI-01](umc/cli-conformance.md),
 and the current API inventory in [API Conformance — UMC-API-01](umc/api-conformance.md).
 The current Web Console/BFF inventory is documented in [Web Conformance — UMC-WEB-01](umc/web-conformance.md).
-All three are discovery records, not implementation claims or a start of remediation.
+The current data-administration and PostgreSQL scripting inventory is documented
+in [Data Conformance — UMC-DATA-01](umc/data-conformance.md). All four are
+discovery records, not implementation claims or a start of remediation.
 
 ## Management API
 

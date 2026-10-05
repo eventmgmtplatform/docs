@@ -44,7 +44,14 @@ application feature backlog.
 - UMC-WEB-01 — current Web Console/BFF inventory and conformance matrix
   completed; convergence findings remain for future BAU work.
 - UMC-WEB — inventory Web Console, BFF, and controlled data-access paths.
-- UMC-DATA — inventory administrative, migration, and bootstrap scripts.
+- UMC-DATA — current PostgreSQL ownership, runtime/administrative write paths,
+  migration, bootstrap, seed, backup/recovery and governed-scripting candidates
+  inventoried by UMC-DATA-01; convergence gaps remain grouped below.
+- UMC-DATA-01 — data administration baseline completed without database or
+  product mutation. P0: database/security boundaries and direct-mutation
+  governance. P1: governed-scripting contract, bootstrap/idempotency and
+  persistence ownership. P2: audit/transaction consistency and backup/recovery
+  integration. P3: legacy/test isolation and cleanup.
 - UMC-RESOURCE-MODEL — map existing resources to the designed envelope.
 - UMC-SECURITY — define identity, authorization, secret-reference, and tenant boundaries.
 - UMC-AUDIT — define result and audit-event conformance.
@@ -62,7 +69,8 @@ application feature backlog.
 
 ## NEXT
 
-- Execute UMC-CLI-01, UMC-API-01, UMC-WEB-01, and UMC-DATA-01 inventories.
+- Review the completed UMC-CLI-01, UMC-API-01, UMC-WEB-01 and UMC-DATA-01
+  inventories at the human gate before authorizing UMC-CONFORMANCE-01.
 
 - Record a reviewed decision for the runtime destination and Helm.
 - Recover the RHEL bundle or equivalent attributable evidence for independent
