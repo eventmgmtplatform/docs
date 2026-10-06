@@ -203,6 +203,7 @@ await write('architecture/_meta.js', `export default {
 
 await write('architecture/umc/_meta.js', `export default {
   conformance: 'Master Conformance — UMC-CONFORMANCE-01',
+  engineering: 'Engineering Architecture — UMC-ENGINEERING-01',
   'cli-conformance': 'CLI Conformance — UMC-CLI-01',
   'api-conformance': 'API Conformance — UMC-API-01',
   'web-conformance': 'Web Conformance — UMC-WEB-01',

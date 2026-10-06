@@ -55,6 +55,8 @@ application feature backlog.
 - UMC-CONFORMANCE-01 — cross-surface consolidation approved and released;
   D01–D14 are APPROVED. UMC-ENGINEERING-01 PRECONDITION = SATISFIED, but no
   implementation or follow-up workstream has started.
+- UMC-ENGINEERING-01 — implementable engineering architecture drafted for
+  Human Gate. No product implementation or downstream workstream was started.
 
 ### UMC CONSOLIDATED BAU REGISTER
 
@@ -84,9 +86,9 @@ application feature backlog.
 
 ## NEXT
 
-- UMC-ENGINEERING-01 PRECONDITION = SATISFIED by the approved
-  [UMC-CONFORMANCE-01](../umc/conformance.md) decisions D01–D14. Do not execute
-  it or any specialized UMC workstream without separate authorization.
+- Review [UMC-ENGINEERING-01](../umc/engineering.md) at Human Gate. Its
+  downstream readiness classifications do not authorize UMC-RESOURCE-01 or any
+  implementation workstream.
 
 - Record a reviewed decision for the runtime destination and Helm.
 - Recover the RHEL bundle or equivalent attributable evidence for independent

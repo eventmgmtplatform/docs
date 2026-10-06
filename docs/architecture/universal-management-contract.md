@@ -78,6 +78,7 @@ UMC-ENGINEERING-01 remains a separately authorized workstream.
 | Evidence | Reference |
 | --- | --- |
 | Master Conformance | [UMC-CONFORMANCE-01](umc/conformance.md) |
+| Engineering Architecture | [UMC-ENGINEERING-01](umc/engineering.md) |
 | CLI | [UMC-CLI-01](umc/cli-conformance.md) |
 | API | [UMC-API-01](umc/api-conformance.md) |
 | Web | [UMC-WEB-01](umc/web-conformance.md) |
