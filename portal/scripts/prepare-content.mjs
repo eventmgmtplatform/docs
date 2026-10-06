@@ -77,6 +77,63 @@ const normalizeMarkdown = async directory => {
 }
 await normalizeMarkdown(destination)
 
+// Keep product-owned synchronized changelog Markdown unchanged. In the Nextra
+// presentation mirror, expose the last product commit that touched each
+// component changelog at the certified product authority snapshot
+// abd899c2c852828f3e0cbbdcfc63a6f1793f21cc. These are deliberately plain,
+// full SHAs: the catalog must not turn component provenance into source links.
+const changelogCommits = [
+  ['event-gateway', '051243ea016190f22bc78e886ab042b2a7a1c069'],
+  ['event-processor', '793a6802914299c797c963ad408a61133bac6a2f'],
+  ['event-state-service', '97b46e16d92605ba39cff246d3c03050b35d0475'],
+  ['integration-worker', '5322a73258f50561617c0cb5b43d96a253be69d0'],
+  ['event-management-console', '793a6802914299c797c963ad408a61133bac6a2f'],
+  ['itsm-ticketing-dashboard', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['enrichment-engine', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['ServiceNow', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['GNM / Everbridge', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['CACF / NEXT', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['Infraestructura local y cloud', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['PostgreSQL / migraciones', '793a6802914299c797c963ad408a61133bac6a2f'],
+  ['Kafka / topics', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['Terraform / convenciones', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['Terraform GCP', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['GCP / artifact-registry', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['GCP / cloud-build', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['GCP / cloud-storage', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['GCP / continuous-delivery', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['GCP / iam', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['GCP / networking', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['GCP / secret-manager', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['GCP / bootstrap', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['GCP / ambiente dev', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['Terraform / project-common', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['Despliegue / CI-CD', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['Operación / scripts', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['Contratos compartidos', 'b3cf1572f25357553ecb018844cb404ee4b22b48'],
+  ['Gobierno Git', '793a6802914299c797c963ad408a61133bac6a2f'],
+  ['Documentación transversal', '793a6802914299c797c963ad408a61133bac6a2f'],
+  ['Testing', '5322a73258f50561617c0cb5b43d96a253be69d0']
+]
+const changelogCatalogPath = resolve(destination, 'platform/changelogs/README.md')
+const changelogCatalog = await readFile(changelogCatalogPath, 'utf8')
+const changelogCommitTable = [
+  '## Índice canónico',
+  '',
+  '| Componente | Último commit |',
+  '|---|---|',
+  ...changelogCommits.map(([component, commit]) => `| ${component} | \`${commit}\` |`),
+  ''
+].join('\n')
+const changelogCatalogWithCommits = changelogCatalog.replace(
+  /## Índice canónico\n\n\| Componente \| Changelog \|\n\|---\|---\|\n(?:\|.*\n)+/,
+  changelogCommitTable
+)
+if (changelogCatalogWithCommits === changelogCatalog) {
+  throw new Error('Expected canonical component changelog table was not found')
+}
+await writeFile(changelogCatalogPath, changelogCatalogWithCommits, 'utf8')
+
 // The public home is a concise portal entry point. Keep this presentation-only
 // adjustment in the disposable Nextra mirror; docs/index.md remains canonical.
 const homePath = resolve(destination, 'index.md')
