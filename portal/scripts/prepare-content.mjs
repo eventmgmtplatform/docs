@@ -144,6 +144,14 @@ await write('architecture/_meta.js', `export default {
   publication: { display: 'hidden' }
 }\n`)
 
+await write('architecture/umc/_meta.js', `export default {
+  conformance: 'Master Conformance — UMC-CONFORMANCE-01',
+  'cli-conformance': 'CLI Conformance — UMC-CLI-01',
+  'api-conformance': 'API Conformance — UMC-API-01',
+  'web-conformance': 'Web Conformance — UMC-WEB-01',
+  'data-conformance': 'Data Conformance — UMC-DATA-01'
+}\n`)
+
 await write('platform/labs/keep/_meta.js', `export default {
   index: 'Overview',
   architecture: 'Architecture',

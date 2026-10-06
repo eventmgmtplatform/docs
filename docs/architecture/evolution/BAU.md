@@ -52,12 +52,27 @@ application feature backlog.
   governance. P1: governed-scripting contract, bootstrap/idempotency and
   persistence ownership. P2: audit/transaction consistency and backup/recovery
   integration. P3: legacy/test isolation and cleanup.
-- UMC-RESOURCE-MODEL — map existing resources to the designed envelope.
-- UMC-SECURITY — define identity, authorization, secret-reference, and tenant boundaries.
-- UMC-AUDIT — define result and audit-event conformance.
-- UMC-CONFORMANCE — define cross-surface equivalence tests.
-- UMC-BOOTSTRAP — define idempotent initialization conformance.
-- UMC-INTEROPERABILITY — define the configurable BFF/data-access mode.
+- UMC-CONFORMANCE-01 — cross-surface consolidation approved and released;
+  D01–D14 are APPROVED. UMC-ENGINEERING-01 PRECONDITION = SATISFIED, but no
+  implementation or follow-up workstream has started.
+
+### UMC CONSOLIDATED BAU REGISTER
+
+| ID | Priority | Capability | Surfaces | Dependency | Ownership | Target workstream | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| UMC-G01 | P0 | Identity, authorization and scope | All | Approved D10 | Common + domains | UMC-SECURITY-01 | REGISTERED |
+| UMC-G02 | P0 | Resource identity/schema | All | Approved D07/D08 | Common contract | UMC-RESOURCE-01 | REGISTERED |
+| UMC-G03 | P0 | Action/capability model | All | UMC-G02 | Common + domains | UMC-ACTION-01 | REGISTERED |
+| UMC-G04 | P0 | Result/error/async envelope | CLI/API/Web | UMC-G02/G03 | Common contract | UMC-RESULT-01 | REGISTERED |
+| UMC-G05 | P0 | Semantic audit and correlation | All | UMC-G01–G04 | Common + domains | UMC-AUDIT-01 | REGISTERED |
+| UMC-G06 | P1 | Gateway, routing and capability registry | CLI/API/Web | Approved D03/D13, UMC-G01–G05 | Common layer | UMC-CORE-01 / UMC-API-02 | REGISTERED |
+| UMC-G07 | P1 | Thin CLI and offline split | CLI | UMC-G01–G06, approved D12 | CLI + Deployment | UMC-CLI-02 | REGISTERED |
+| UMC-G08 | P1 | BFF mutation convergence | Web/API | UMC-G01–G06 | Web/BFF + domains | UMC-WEB-02 | REGISTERED |
+| UMC-G09 | P1 | Governed scripting and bootstrap ledger | Data/CLI | UMC-G01/G04/G05, approved D09 | Deployment/Operations | UMC-DATA-02 / UMC-BOOTSTRAP-01 | REGISTERED |
+| UMC-G10 | P1 | Provider lifecycle specialization | API/Web/Data | UMC-G02–G06 | Integration domain | Domain conformance | REGISTERED |
+| UMC-G11 | P1 | Datasource and rule vertical slices | API/Web/Data | UMC-G02–G06 | Owning domains | UMC engineering slices | REGISTERED |
+| UMC-G12 | P2 | Executable conformance profile | All | Implemented slices | Quality/Common | UMC-CONFORMANCE-02 | REGISTERED |
+| UMC-G13 | P2 | Legacy/demo transition | CLI/Web/Data | UMC-G07–G12 | Owning domains | Follow-up | REGISTERED |
 
 ## MASTER DELIVERY REMAINING
 
@@ -69,8 +84,9 @@ application feature backlog.
 
 ## NEXT
 
-- Review the completed UMC-CLI-01, UMC-API-01, UMC-WEB-01 and UMC-DATA-01
-  inventories at the human gate before authorizing UMC-CONFORMANCE-01.
+- UMC-ENGINEERING-01 PRECONDITION = SATISFIED by the approved
+  [UMC-CONFORMANCE-01](../umc/conformance.md) decisions D01–D14. Do not execute
+  it or any specialized UMC workstream without separate authorization.
 
 - Record a reviewed decision for the runtime destination and Helm.
 - Recover the RHEL bundle or equivalent attributable evidence for independent

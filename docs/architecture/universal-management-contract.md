@@ -67,7 +67,23 @@ oem config interoperability set
 Provider-specific designs such as `oem integration register --type glpi` or
 `--type custom-api` are specializations that require later conformance work.
 
-## Conformance
+## Master Conformance
+
+[UMC-CONFORMANCE-01 — Master Cross-Surface Conformance](umc/conformance.md)
+consolidates the four approved inventories and records the evidence-supported,
+Human-Gate-approved management-plane direction. Decisions UMC-CONF-D01 through
+D14 are **APPROVED**. This approval does not start implementation;
+UMC-ENGINEERING-01 remains a separately authorized workstream.
+
+| Evidence | Reference |
+| --- | --- |
+| Master Conformance | [UMC-CONFORMANCE-01](umc/conformance.md) |
+| CLI | [UMC-CLI-01](umc/cli-conformance.md) |
+| API | [UMC-API-01](umc/api-conformance.md) |
+| Web | [UMC-WEB-01](umc/web-conformance.md) |
+| Data | [UMC-DATA-01](umc/data-conformance.md) |
+
+## Conformance inventories
 
 The current CLI baseline is documented in [CLI Conformance — UMC-CLI-01](umc/cli-conformance.md),
 and the current API inventory in [API Conformance — UMC-API-01](umc/api-conformance.md).
