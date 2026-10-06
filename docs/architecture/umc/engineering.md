@@ -1,6 +1,8 @@
 # UMC Implementable Engineering Architecture — UMC-ENGINEERING-01
 
-**Status:** ENGINEERING DESIGN / HUMAN GATE REQUIRED
+**Status:** APPROVED / DOCUMENTED
+
+**Implementation:** NOT STARTED
 
 **Baseline:** documentation `fe79f38ed7ddb6e277165a48650e0252d399c470`
 
@@ -9,6 +11,15 @@ UMC-CONFORMANCE-01 and approved decisions UMC-CONF-D01 through D14.
 
 **Boundary:** implementable architecture only. This design creates no runtime
 component, API, CLI, BFF route, database object, migration, directory or test.
+
+## Solution Architecture
+
+**APPROVED VISUAL ASSET:** PENDING INTEGRATION
+
+No approved raster visual is physically available in this workspace. The
+approved engineering diagram in the Logical component model remains the
+canonical solution view for this release; no replacement or alternative
+architecture is inferred.
 
 ## Engineering answer
 
@@ -636,9 +647,34 @@ No calendar dates or implementation authorization are implied.
 Parallel work is safe only within these dependency boundaries. No listed
 workstream is started by UMC-ENGINEERING-01.
 
-## Human Gate
+## Risks
 
-UMC-ENGINEERING-01 is ready for review as an implementable engineering
-architecture. It preserves approved D01–D14 and domain ownership, defines
+- The Management Gateway could accumulate domain behavior unless its thin
+  boundary and adapter ownership are enforced.
+- Common contracts and federated OpenAPI definitions could drift without
+  generated compatibility checks and domain conformance profiles.
+- Offline and governed-scripting exceptions could become bypass paths unless
+  capability, authorization, audit and evidence requirements remain explicit.
+- Premature legacy retirement could break existing CLI, Web, API or operations
+  behavior before equivalent paths have acceptance evidence.
+- Distributed audit contributions could lose traceability if request and
+  execution identities are not propagated consistently.
+
+## Open Decisions
+
+The following are intentionally delegated to the named future contract or
+implementation workstreams and do not block this architecture approval:
+
+- final resource schemas and contract versions;
+- authentication technology;
+- physical audit persistence and audit-unavailable fail/queue policy;
+- whether a shared execution-status capability is required;
+- Datasource delete semantics; and
+- final ownership split for Rule types.
+
+## Approval
+
+UMC-ENGINEERING-01 is approved as an implementable engineering architecture.
+It preserves approved D01–D14 and domain ownership, defines
 component/module/interface/dependency/flow/transition/sequencing boundaries,
-and contains no product implementation.
+and starts no product implementation or downstream workstream.

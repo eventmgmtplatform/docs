@@ -23,6 +23,10 @@ application feature backlog.
 - D6 environment evolution and environment-aware installation/deployment documentation view defined.
 - AI-01 planned runtime architecture normalized with explicit model, retrieval,
   agent, tool, governance and implementation-evidence boundaries.
+- UMC-ENGINEERING-01 approved and documented with thin Management Gateway,
+  hybrid Capability Registry, federated domain ownership, hybrid CLI,
+  Control/Data/Deployment planes and sequenced vertical slices. Implementation
+  remains NOT STARTED.
 
 ## IN PROGRESS
 
@@ -55,15 +59,15 @@ application feature backlog.
 - UMC-CONFORMANCE-01 — cross-surface consolidation approved and released;
   D01–D14 are APPROVED. UMC-ENGINEERING-01 PRECONDITION = SATISFIED, but no
   implementation or follow-up workstream has started.
-- UMC-ENGINEERING-01 — implementable engineering architecture drafted for
-  Human Gate. No product implementation or downstream workstream was started.
+- UMC-ENGINEERING-01 — COMPLETE / APPROVED. No product implementation or
+  downstream workstream was started.
 
 ### UMC CONSOLIDATED BAU REGISTER
 
 | ID | Priority | Capability | Surfaces | Dependency | Ownership | Target workstream | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| UMC-G01 | P0 | Identity, authorization and scope | All | Approved D10 | Common + domains | UMC-SECURITY-01 | REGISTERED |
-| UMC-G02 | P0 | Resource identity/schema | All | Approved D07/D08 | Common contract | UMC-RESOURCE-01 | REGISTERED |
+| UMC-G01 | P0 | Identity, authorization and scope | All | Approved D10 | Common + domains | UMC-SECURITY-01 | READY_IN_PARALLEL |
+| UMC-G02 | P0 | Resource identity/schema | All | Approved D07/D08 | Common contract | UMC-RESOURCE-01 | NEXT_PRIMARY |
 | UMC-G03 | P0 | Action/capability model | All | UMC-G02 | Common + domains | UMC-ACTION-01 | REGISTERED |
 | UMC-G04 | P0 | Result/error/async envelope | CLI/API/Web | UMC-G02/G03 | Common contract | UMC-RESULT-01 | REGISTERED |
 | UMC-G05 | P0 | Semantic audit and correlation | All | UMC-G01–G04 | Common + domains | UMC-AUDIT-01 | REGISTERED |
@@ -84,11 +88,16 @@ application feature backlog.
 - Keep operating-system/runtime certification and future ADR work outside the
   completed Master assembly.
 
+The planned foundation workstreams UMC-RESOURCE-01, UMC-ACTION-01,
+UMC-RESULT-01, UMC-SECURITY-01 and UMC-AUDIT-01 converge at the **UMC CONTRACT
+FOUNDATION GATE**. Common implementation is not authorized before that gate.
+
 ## NEXT
 
-- Review [UMC-ENGINEERING-01](../umc/engineering.md) at Human Gate. Its
-  downstream readiness classifications do not authorize UMC-RESOURCE-01 or any
-  implementation workstream.
+- UMC-RESOURCE-01 — NEXT PRIMARY CONTRACT WORKSTREAM; precondition satisfied,
+  but execution requires separate authorization.
+- UMC-SECURITY-01 — PARALLELIZABLE FOUNDATION WORKSTREAM; ready in parallel,
+  but execution requires separate authorization.
 
 - Record a reviewed decision for the runtime destination and Helm.
 - Recover the RHEL bundle or equivalent attributable evidence for independent

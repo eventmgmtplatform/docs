@@ -72,13 +72,14 @@ Provider-specific designs such as `oem integration register --type glpi` or
 [UMC-CONFORMANCE-01 — Master Cross-Surface Conformance](umc/conformance.md)
 consolidates the four approved inventories and records the evidence-supported,
 Human-Gate-approved management-plane direction. Decisions UMC-CONF-D01 through
-D14 are **APPROVED**. This approval does not start implementation;
-UMC-ENGINEERING-01 remains a separately authorized workstream.
+D14 are **APPROVED**. [UMC-ENGINEERING-01](umc/engineering.md) is also
+**APPROVED / DOCUMENTED** and defines the implementable engineering pattern.
+Neither approval starts product implementation.
 
 | Evidence | Reference |
 | --- | --- |
 | Master Conformance | [UMC-CONFORMANCE-01](umc/conformance.md) |
-| Engineering Architecture | [UMC-ENGINEERING-01](umc/engineering.md) |
+| Engineering Architecture — APPROVED | [UMC-ENGINEERING-01](umc/engineering.md) |
 | CLI | [UMC-CLI-01](umc/cli-conformance.md) |
 | API | [UMC-API-01](umc/api-conformance.md) |
 | Web | [UMC-WEB-01](umc/web-conformance.md) |
