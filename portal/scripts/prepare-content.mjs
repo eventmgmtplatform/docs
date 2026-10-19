@@ -1141,7 +1141,7 @@ duplicate them:
 [Enrichment](/operations/enrichment/) ·
 [Routing](/operations/routing/) ·
 [Filters & Criteria](/operations/filters-criteria/) ·
-[Ticketing](/platform/event-processor/routing-backend/) ·
+[Ticketing](/operations/ticketing/) ·
 [Notifications](/platform/gnm/CHANGELOG/) ·
 [Automation](/platform/cacf/README/)
 
@@ -1206,7 +1206,7 @@ await write('operations/index.md', [
   ['Enrichment', '/operations/enrichment/'],
   ['Routing', '/operations/routing/'],
   ['Filters & Criteria', '/operations/filters-criteria/'],
-  ['Ticketing', '/platform/event-processor/routing-backend/'],
+  ['Ticketing', '/operations/ticketing/'],
   ['Notifications', '/platform/gnm/CHANGELOG/'],
   ['Automation', '/platform/cacf/README/'],
   ['Runbooks', 'operations/platform-operations-guide/'],
@@ -1230,7 +1230,7 @@ await write('operations/_meta.js', `export default {
       enrichment: { title: 'Enrichment', href: '/operations/enrichment/' },
       routing: { title: 'Routing', href: '/operations/routing/' },
       'filters-criteria': { title: 'Filters & Criteria', href: '/operations/filters-criteria/' },
-      ticketing: { title: 'Ticketing', href: '/platform/event-processor/routing-backend/' },
+      ticketing: { title: 'Ticketing', href: '/operations/ticketing/' },
       notifications: { title: 'Notifications', href: '/platform/gnm/CHANGELOG/' },
       automation: { title: 'Automation', href: '/platform/cacf/README/' }
     }
