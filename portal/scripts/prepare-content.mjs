@@ -1140,7 +1140,7 @@ duplicate them:
 [Blackouts & Maintenance](/operations/blackouts-maintenance/) ·
 [Enrichment](/operations/enrichment/) ·
 [Routing](/operations/routing/) ·
-[Filters & Criteria](/platform/event-processor/policy-backend/) ·
+[Filters & Criteria](/operations/filters-criteria/) ·
 [Ticketing](/platform/event-processor/routing-backend/) ·
 [Notifications](/platform/gnm/CHANGELOG/) ·
 [Automation](/platform/cacf/README/)
@@ -1205,7 +1205,7 @@ await write('operations/index.md', [
   ['Blackouts & Maintenance', '/operations/blackouts-maintenance/'],
   ['Enrichment', '/operations/enrichment/'],
   ['Routing', '/operations/routing/'],
-  ['Filters & Criteria', '/platform/event-processor/policy-backend/'],
+  ['Filters & Criteria', '/operations/filters-criteria/'],
   ['Ticketing', '/platform/event-processor/routing-backend/'],
   ['Notifications', '/platform/gnm/CHANGELOG/'],
   ['Automation', '/platform/cacf/README/'],
@@ -1229,7 +1229,7 @@ await write('operations/_meta.js', `export default {
       'blackouts-maintenance': { title: 'Blackouts & Maintenance', href: '/operations/blackouts-maintenance/' },
       enrichment: { title: 'Enrichment', href: '/operations/enrichment/' },
       routing: { title: 'Routing', href: '/operations/routing/' },
-      'filters-criteria': { title: 'Filters & Criteria', href: '/platform/event-processor/policy-backend/' },
+      'filters-criteria': { title: 'Filters & Criteria', href: '/operations/filters-criteria/' },
       ticketing: { title: 'Ticketing', href: '/platform/event-processor/routing-backend/' },
       notifications: { title: 'Notifications', href: '/platform/gnm/CHANGELOG/' },
       automation: { title: 'Automation', href: '/platform/cacf/README/' }
