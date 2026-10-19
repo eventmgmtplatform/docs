@@ -1,10 +1,10 @@
-# Open Event Management — Architecture Definition
+# Event Management — Architecture Definition
 
 | Architecture role | Source set | Scope |
 |---|---|---|
 | Canonical master definition | Approved OEM Golden Architecture Set | Product-wide synthesis |
 
-This page explains the complete Open Event Management (OEM) architecture once.
+This page explains the complete Event Management (OEM) architecture once.
 The linked Golden architectures remain authoritative for domain depth; this
 Master composes them and does not supersede them.
 
