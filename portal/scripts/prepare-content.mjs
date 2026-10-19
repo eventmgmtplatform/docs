@@ -1135,7 +1135,7 @@ duplicate them:
 
 [Correlation](/operations/correlation/) ·
 [Deduplication](/operations/deduplication/) ·
-[Suppression](/platform/event-processor/correlation-suppression-commands/) ·
+[Suppression](/operations/suppression/) ·
 [Auto-Suppression](/platform/event-processor/auto-suppression/) ·
 [Blackouts & Maintenance](/platform/event-processor/rest-and-blackouts/) ·
 [Enrichment](/platform/event-processor/enrichment-and-inventory/) ·
@@ -1200,7 +1200,7 @@ await write('operations/index.md', [
   '## Configuration', '',
   ['Correlation', '/operations/correlation/'],
   ['Deduplication', '/operations/deduplication/'],
-  ['Suppression', '/platform/event-processor/correlation-suppression-commands/'],
+  ['Suppression', '/operations/suppression/'],
   ['Auto-Suppression', '/platform/event-processor/auto-suppression/'],
   ['Blackouts & Maintenance', '/platform/event-processor/rest-and-blackouts/'],
   ['Enrichment', '/platform/event-processor/enrichment-and-inventory/'],
@@ -1224,7 +1224,7 @@ await write('operations/_meta.js', `export default {
     items: {
       correlation: { title: 'Correlation', href: '/operations/correlation/' },
       deduplication: { title: 'Deduplication', href: '/operations/deduplication/' },
-      suppression: { title: 'Suppression', href: '/platform/event-processor/correlation-suppression-commands/' },
+      suppression: { title: 'Suppression', href: '/operations/suppression/' },
       'auto-suppression': { title: 'Auto-Suppression', href: '/platform/event-processor/auto-suppression/' },
       'blackouts-maintenance': { title: 'Blackouts & Maintenance', href: '/platform/event-processor/rest-and-blackouts/' },
       enrichment: { title: 'Enrichment', href: '/platform/event-processor/enrichment-and-inventory/' },
