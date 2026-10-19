@@ -1134,7 +1134,8 @@ Use the existing Operations Configuration capabilities; this page does not
 duplicate them:
 
 [Correlation](/operations/correlation/) ·
-[Deduplication and Suppression](/platform/event-processor/correlation-suppression-commands/) ·
+[Deduplication](/operations/deduplication/) ·
+[Suppression](/platform/event-processor/correlation-suppression-commands/) ·
 [Auto-Suppression](/platform/event-processor/auto-suppression/) ·
 [Blackouts & Maintenance](/platform/event-processor/rest-and-blackouts/) ·
 [Enrichment](/platform/event-processor/enrichment-and-inventory/) ·
@@ -1198,7 +1199,7 @@ await write('operations/index.md', [
   '# Operations', '',
   '## Configuration', '',
   ['Correlation', '/operations/correlation/'],
-  ['Deduplication', '/platform/event-processor/correlation-suppression-commands/'],
+  ['Deduplication', '/operations/deduplication/'],
   ['Suppression', '/platform/event-processor/correlation-suppression-commands/'],
   ['Auto-Suppression', '/platform/event-processor/auto-suppression/'],
   ['Blackouts & Maintenance', '/platform/event-processor/rest-and-blackouts/'],
@@ -1222,7 +1223,7 @@ await write('operations/_meta.js', `export default {
     type: 'menu',
     items: {
       correlation: { title: 'Correlation', href: '/operations/correlation/' },
-      deduplication: { title: 'Deduplication', href: '/platform/event-processor/correlation-suppression-commands/' },
+      deduplication: { title: 'Deduplication', href: '/operations/deduplication/' },
       suppression: { title: 'Suppression', href: '/platform/event-processor/correlation-suppression-commands/' },
       'auto-suppression': { title: 'Auto-Suppression', href: '/platform/event-processor/auto-suppression/' },
       'blackouts-maintenance': { title: 'Blackouts & Maintenance', href: '/platform/event-processor/rest-and-blackouts/' },
