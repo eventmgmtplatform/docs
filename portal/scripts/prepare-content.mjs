@@ -1213,7 +1213,7 @@ await write('operations/index.md', [
   ['Observability', 'operations/observability/'],
   ['Incidents', 'operations/incidents/'],
   ['Recovery', 'operations/recovery/'],
-  ['Security', 'security/secrets-management/']
+  ['Security', 'operations/security/']
 ].map((line) => Array.isArray(line) ? `- [${line[0]}](${portalHref(line[1])})` : line).join('\n') + '\n')
 
 await write('operations/_meta.js', `export default {
@@ -1232,7 +1232,8 @@ await write('operations/_meta.js', `export default {
       'filters-criteria': { title: 'Filters & Criteria', href: '/operations/filters-criteria/' },
       ticketing: { title: 'Ticketing', href: '/operations/ticketing/' },
       notifications: { title: 'Notifications', href: '/operations/notifications/' },
-      automation: { title: 'Automation', href: '/operations/automation/' }
+      automation: { title: 'Automation', href: '/operations/automation/' },
+      security: { title: 'Security', href: '/operations/security/' }
     }
   },
   'platform-operations-guide': 'Platform Operations Guide',
