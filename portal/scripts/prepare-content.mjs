@@ -1133,7 +1133,7 @@ No new installation command is introduced here.
 Use the existing Operations Configuration capabilities; this page does not
 duplicate them:
 
-[Correlation](/platform/event-processor/correlation-service-manual-rules/) ·
+[Correlation](/operations/correlation/) ·
 [Deduplication and Suppression](/platform/event-processor/correlation-suppression-commands/) ·
 [Auto-Suppression](/platform/event-processor/auto-suppression/) ·
 [Blackouts & Maintenance](/platform/event-processor/rest-and-blackouts/) ·
@@ -1197,7 +1197,7 @@ procedures.
 await write('operations/index.md', [
   '# Operations', '',
   '## Configuration', '',
-  ['Correlation', '/platform/event-processor/correlation-service-manual-rules/'],
+  ['Correlation', '/operations/correlation/'],
   ['Deduplication', '/platform/event-processor/correlation-suppression-commands/'],
   ['Suppression', '/platform/event-processor/correlation-suppression-commands/'],
   ['Auto-Suppression', '/platform/event-processor/auto-suppression/'],
@@ -1221,7 +1221,7 @@ await write('operations/_meta.js', `export default {
     title: 'Configuration',
     type: 'menu',
     items: {
-      correlation: { title: 'Correlation', href: '/platform/event-processor/correlation-service-manual-rules/' },
+      correlation: { title: 'Correlation', href: '/operations/correlation/' },
       deduplication: { title: 'Deduplication', href: '/platform/event-processor/correlation-suppression-commands/' },
       suppression: { title: 'Suppression', href: '/platform/event-processor/correlation-suppression-commands/' },
       'auto-suppression': { title: 'Auto-Suppression', href: '/platform/event-processor/auto-suppression/' },
