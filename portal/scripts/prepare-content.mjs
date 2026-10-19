@@ -1142,7 +1142,7 @@ duplicate them:
 [Routing](/operations/routing/) ·
 [Filters & Criteria](/operations/filters-criteria/) ·
 [Ticketing](/operations/ticketing/) ·
-[Notifications](/platform/gnm/CHANGELOG/) ·
+[Notifications](/operations/notifications/) ·
 [Automation](/platform/cacf/README/)
 
 Policies, inventory, and CMDB-related material remain owned by their existing
@@ -1207,7 +1207,7 @@ await write('operations/index.md', [
   ['Routing', '/operations/routing/'],
   ['Filters & Criteria', '/operations/filters-criteria/'],
   ['Ticketing', '/operations/ticketing/'],
-  ['Notifications', '/platform/gnm/CHANGELOG/'],
+  ['Notifications', '/operations/notifications/'],
   ['Automation', '/platform/cacf/README/'],
   ['Runbooks', 'operations/platform-operations-guide/'],
   ['Observability', 'operations/observability/'],
@@ -1231,7 +1231,7 @@ await write('operations/_meta.js', `export default {
       routing: { title: 'Routing', href: '/operations/routing/' },
       'filters-criteria': { title: 'Filters & Criteria', href: '/operations/filters-criteria/' },
       ticketing: { title: 'Ticketing', href: '/operations/ticketing/' },
-      notifications: { title: 'Notifications', href: '/platform/gnm/CHANGELOG/' },
+      notifications: { title: 'Notifications', href: '/operations/notifications/' },
       automation: { title: 'Automation', href: '/platform/cacf/README/' }
     }
   },
