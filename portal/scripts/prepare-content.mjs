@@ -1329,7 +1329,7 @@ certification.
 | CACF | Asynchronous automation execution and callback result handling | Local foundation implemented and validated; production certification not claimed | [CACF](/integrations/cacf/) |
 | Custom API | Provider-neutral registration and governed provider execution model | Governed provider model documented; implementation capabilities remain evidence-dependent | [Custom API](/integrations/custom-api/) |
 | GLPI | Ticket creation, solution, closure and follow-up through the GLPI adapter | Implemented in the documented integration baseline | [GLPI](/integrations/glpi/) |
-| GNM / Everbridge | Notification lifecycle, lookup and confirmed close processing | Implemented/evidenced in the GNM changelog; broader chaining remains future scope | [GNM / Everbridge](/platform/gnm/CHANGELOG/) |
+| GNM / Everbridge | Notification lifecycle, lookup and confirmed close processing | Implemented/evidenced in the GNM changelog; broader chaining remains future scope | [GNM / Everbridge](/integrations/gnm/) |
 | ChatOps | Integration surface placeholder | Documentation pending; implementation not claimed | [ChatOps](/integrations/chatops/) |
 | Bridge Extensions | Integration surface placeholder | Documentation pending; implementation not claimed | [Bridge Extensions](/integrations/bridge-extensions/) |
 | BMC Helix | Integration surface placeholder | Documentation pending; implementation not claimed | [BMC Helix](/integrations/bmc-helix/) |
@@ -1339,6 +1339,7 @@ await write('integrations/_meta.js', `export default {
   index: 'Integrations',
   'custom-api': 'Custom API',
   cacf: 'CACF',
+  gnm: 'GNM / Everbridge',
   servicenow: 'ServiceNow',
   'integration-architecture': 'Integration Architecture — Instances'
 }\n`)
@@ -2092,7 +2093,7 @@ await write('integrations/index.md', landing('Integrations', [
   ['CACF', 'integrations/cacf/'],
   ['GLPI', 'integrations/glpi/'],
   ['ServiceNow', 'integrations/servicenow/'],
-  ['GNM', '../platform/gnm/CHANGELOG/'],
+  ['GNM', 'integrations/gnm/'],
   ['ChatOps', 'integrations/chatops/'],
   ['Bridge Extensions', 'integrations/bridge-extensions/'],
   ['BMC Helix', 'integrations/bmc-helix/'],
