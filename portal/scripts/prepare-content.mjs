@@ -1139,7 +1139,7 @@ duplicate them:
 [Auto-Suppression](/operations/auto-suppression/) ·
 [Blackouts & Maintenance](/operations/blackouts-maintenance/) ·
 [Enrichment](/operations/enrichment/) ·
-[Routing](/platform/event-processor/routing-backend/) ·
+[Routing](/operations/routing/) ·
 [Filters & Criteria](/platform/event-processor/policy-backend/) ·
 [Ticketing](/platform/event-processor/routing-backend/) ·
 [Notifications](/platform/gnm/CHANGELOG/) ·
@@ -1204,7 +1204,7 @@ await write('operations/index.md', [
   ['Auto-Suppression', '/operations/auto-suppression/'],
   ['Blackouts & Maintenance', '/operations/blackouts-maintenance/'],
   ['Enrichment', '/operations/enrichment/'],
-  ['Routing', '/platform/event-processor/routing-backend/'],
+  ['Routing', '/operations/routing/'],
   ['Filters & Criteria', '/platform/event-processor/policy-backend/'],
   ['Ticketing', '/platform/event-processor/routing-backend/'],
   ['Notifications', '/platform/gnm/CHANGELOG/'],
@@ -1228,7 +1228,7 @@ await write('operations/_meta.js', `export default {
       'auto-suppression': { title: 'Auto-Suppression', href: '/operations/auto-suppression/' },
       'blackouts-maintenance': { title: 'Blackouts & Maintenance', href: '/operations/blackouts-maintenance/' },
       enrichment: { title: 'Enrichment', href: '/operations/enrichment/' },
-      routing: { title: 'Routing', href: '/platform/event-processor/routing-backend/' },
+      routing: { title: 'Routing', href: '/operations/routing/' },
       'filters-criteria': { title: 'Filters & Criteria', href: '/platform/event-processor/policy-backend/' },
       ticketing: { title: 'Ticketing', href: '/platform/event-processor/routing-backend/' },
       notifications: { title: 'Notifications', href: '/platform/gnm/CHANGELOG/' },
