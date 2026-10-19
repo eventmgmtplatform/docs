@@ -1212,7 +1212,7 @@ await write('operations/index.md', [
   ['Runbooks', 'operations/platform-operations-guide/'],
   ['Observability', 'operations/observability/'],
   ['Incidents', 'operations/incidents/'],
-  ['Recovery', 'operations/disaster-recovery/'],
+  ['Recovery', 'operations/recovery/'],
   ['Security', 'security/secrets-management/']
 ].map((line) => Array.isArray(line) ? `- [${line[0]}](${portalHref(line[1])})` : line).join('\n') + '\n')
 
@@ -1238,7 +1238,8 @@ await write('operations/_meta.js', `export default {
   'platform-operations-guide': 'Platform Operations Guide',
   observability: 'Observability',
   incidents: 'Incidents',
-  'disaster-recovery': 'Recovery'
+  'disaster-recovery': 'Disaster Recovery (Historical)',
+  recovery: 'Recovery'
 }\n`)
 
 await write('integrations/integration-architecture.md', `# Integration Architecture — Integration Instances
