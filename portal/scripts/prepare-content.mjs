@@ -1143,7 +1143,7 @@ duplicate them:
 [Filters & Criteria](/operations/filters-criteria/) ·
 [Ticketing](/operations/ticketing/) ·
 [Notifications](/operations/notifications/) ·
-[Automation](/platform/cacf/README/)
+[Automation](/operations/automation/)
 
 Policies, inventory, and CMDB-related material remain owned by their existing
 canonical platform pages.
@@ -1208,7 +1208,7 @@ await write('operations/index.md', [
   ['Filters & Criteria', '/operations/filters-criteria/'],
   ['Ticketing', '/operations/ticketing/'],
   ['Notifications', '/operations/notifications/'],
-  ['Automation', '/platform/cacf/README/'],
+  ['Automation', '/operations/automation/'],
   ['Runbooks', 'operations/platform-operations-guide/'],
   ['Observability', 'operations/observability/'],
   ['Incidents', 'operations/incidents/'],
@@ -1232,7 +1232,7 @@ await write('operations/_meta.js', `export default {
       'filters-criteria': { title: 'Filters & Criteria', href: '/operations/filters-criteria/' },
       ticketing: { title: 'Ticketing', href: '/operations/ticketing/' },
       notifications: { title: 'Notifications', href: '/operations/notifications/' },
-      automation: { title: 'Automation', href: '/platform/cacf/README/' }
+      automation: { title: 'Automation', href: '/operations/automation/' }
     }
   },
   'platform-operations-guide': 'Platform Operations Guide',
