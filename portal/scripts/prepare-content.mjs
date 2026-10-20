@@ -2190,7 +2190,7 @@ await write('ai-automation/index.md', landing('AI & Automation', [
 ]))
 
 await write('ai-automation/_meta.js', `export default {
-  index: { display: 'hidden' },
+  index: 'Overview',
   cacf: 'CACF',
   'local-llm-runtime-ollama': 'Local LLM Runtime — Ollama'
 }\n`)
