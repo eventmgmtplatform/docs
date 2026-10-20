@@ -1330,7 +1330,7 @@ certification.
 | Custom API | Provider-neutral registration and governed provider execution model | Governed provider model documented; implementation capabilities remain evidence-dependent | [Custom API](/integrations/custom-api/) |
 | GLPI | Ticket creation, solution, closure and follow-up through the GLPI adapter | Implemented in the documented integration baseline | [GLPI](/integrations/glpi/) |
 | GNM / Everbridge | Notification lifecycle, lookup and confirmed close processing | Implemented/evidenced in the GNM changelog; broader chaining remains future scope | [GNM / Everbridge](/integrations/gnm/) |
-| ChatOps | Integration surface placeholder | Documentation pending; implementation not claimed | [ChatOps](/integrations/chatops/) |
+| Teams - ChatOps | Teams Webhook notification delivery; Microsoft Graph and interactive bot capabilities are not implemented | Webhook delivery implemented and locally validated; provider delivery and human acknowledgement are not claimed | [Teams - ChatOps](/integrations/teams-chatops/) |
 | Bridge Extensions | Integration surface placeholder | Documentation pending; implementation not claimed | [Bridge Extensions](/integrations/bridge-extensions/) |
 | BMC Helix | Integration surface placeholder | Documentation pending; implementation not claimed | [BMC Helix](/integrations/bmc-helix/) |
 | ELK Pull Data | Integration surface placeholder | Documentation pending; implementation not claimed | [ELK Pull Data](/integrations/elk-pull-data/) |
@@ -1340,6 +1340,8 @@ await write('integrations/_meta.js', `export default {
   'custom-api': 'Custom API',
   cacf: 'CACF',
   gnm: 'GNM / Everbridge',
+  'teams-chatops': 'Teams - ChatOps',
+  chatops: { display: 'hidden' },
   servicenow: 'ServiceNow',
   'integration-architecture': 'Integration Architecture — Instances'
 }\n`)
@@ -2094,7 +2096,7 @@ await write('integrations/index.md', landing('Integrations', [
   ['GLPI', 'integrations/glpi/'],
   ['ServiceNow', 'integrations/servicenow/'],
   ['GNM', 'integrations/gnm/'],
-  ['ChatOps', 'integrations/chatops/'],
+  ['Teams - ChatOps', 'integrations/teams-chatops/'],
   ['Bridge Extensions', 'integrations/bridge-extensions/'],
   ['BMC Helix', 'integrations/bmc-helix/'],
   ['ELK Pull Data', 'integrations/elk-pull-data/']
