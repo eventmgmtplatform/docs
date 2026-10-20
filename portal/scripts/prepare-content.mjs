@@ -1332,7 +1332,7 @@ certification.
 | GNM / Everbridge | Notification lifecycle, lookup and confirmed close processing | Implemented/evidenced in the GNM changelog; broader chaining remains future scope | [GNM / Everbridge](/integrations/gnm/) |
 | Teams - ChatOps | Teams Webhook notification delivery; Microsoft Graph and interactive bot capabilities are not implemented | Webhook delivery implemented and locally validated; provider delivery and human acknowledgement are not claimed | [Teams - ChatOps](/integrations/teams-chatops/) |
 | Bridge Extensions | Integration surface placeholder | Documentation pending; implementation not claimed | [Bridge Extensions](/integrations/bridge-extensions/) |
-| BMC Helix | Integration surface placeholder | Documentation pending; implementation not claimed | [BMC Helix](/integrations/bmc-helix/) |
+| BMC Helix ITSM | Provider architecture and version-specific API research | Documentation complete; OEM adapter and runtime capabilities pending | [BMC Helix ITSM](/integrations/bmc-helix/) |
 | ELK Pull Data | Integration surface placeholder | Documentation pending; implementation not claimed | [ELK Pull Data](/integrations/elk-pull-data/) |
 `)
 await write('integrations/_meta.js', `export default {
@@ -1343,6 +1343,7 @@ await write('integrations/_meta.js', `export default {
   'teams-chatops': 'Teams - ChatOps',
   chatops: { display: 'hidden' },
   servicenow: 'ServiceNow',
+  'bmc-helix': 'BMC Helix ITSM',
   'integration-architecture': 'Integration Architecture — Instances'
 }\n`)
 
@@ -2104,7 +2105,6 @@ await write('integrations/index.md', landing('Integrations', [
 
 await write('integrations/chatops.md', '# ChatOps\n\nIntegration documentation pending.\n')
 await write('integrations/bridge-extensions.md', '# Bridge Extensions\n\nIntegration documentation pending.\n')
-await write('integrations/bmc-helix.md', '# BMC Helix\n\nIntegration documentation pending.\n')
 await write('integrations/elk-pull-data.md', '# ELK Pull Data\n\nIntegration documentation pending.\n')
 
 await write('ai-automation/local-llm-runtime-ollama.md', `# Local LLM Runtime — Ollama
