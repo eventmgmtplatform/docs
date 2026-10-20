@@ -2183,7 +2183,7 @@ commands or claim production operations.
 `)
 
 await write('ai-automation/index.md', landing('AI & Automation', [
-  ['AI-01 Architecture', '../architecture/ai-01-aiops-ai-architecture/'],
+  ['Architecture', '../architecture/ai-01-aiops-ai-architecture/'],
   ['Local LLM Runtime — Ollama', 'ai-automation/local-llm-runtime-ollama/'],
   ['AIOps implementation', '../platform/event-processor/aiops-engine/'],
   ['CACF / Automation', '../platform/cacf/README/']

@@ -1,387 +1,217 @@
-# AI-01 — OEM AIOps / AI Architecture
+# AI-01 — Event Management AI Architecture
 
-## Architecture Overview
+## 1. Architecture Overview
 
-| Architecture lifecycle | Documentation status | Scope |
-|---|---|---|
-| `PLANNED` | `DOCUMENTED`; partial AIOps evidence preserved separately | Cross-environment optional attachment |
+AI-01 separates the verified AIOps assessment implementation from a proposed Ollama-based architecture.
 
-AI-01 defines how Open Event Management can add intelligent investigation, reasoning, recommendation and governed agentic automation without changing OEM authority, security or vendor neutrality. AI is an optional interaction capability over OEM; it is not the OEM Core and is not required for core event management.
+| Classification | Architecture position |
+|---|---|
+| **CURRENT — IMPLEMENTED / VALIDATED** | Event Processor configuration CRUD and an explicitly invoked assessment using the synthetic `INTERNAL_MOCK` provider |
+| **TARGET — DESIGNED** | Optional local inference using Ollama behind a governed integration boundary |
+| **PENDING** | Context retrieval, prompt construction, model selection, response governance, persistence decisions and operational integrations |
 
-AI-01 is an architecture definition, not evidence that an LLM, open model, retrieval-augmented generation stack, vector index, model gateway, agent runtime, production tool executor or durable AI memory is deployed.
+The current assessment is not part of the automatic event pipeline. It does not perform real inference, persist assessment inputs or results, update event state, emit commands, or authorize remediation. AI remains optional; Event Management core processing continues when the assessment provider is unavailable.
 
-## Solution Architecture
+The diagrams use solid green and purple boundaries for verified current behavior and dashed blue boundaries for target or pending capabilities. The supplied raster overview was reviewed as a visual draft but is not published because several current-state labels and arrows are not supported by implementation evidence.
+
+## 2. Solution Architecture
 
 ```mermaid
 flowchart LR
-  SURFACE[User or Designed Event Trigger<br/>AIOps / AI Surface]
-  ORCH[AI Orchestration<br/>Context / Retrieval · Model Abstraction<br/>Agent / Workflow]
-  GOVERNED[Governed Tools and OEM APIs<br/>Authorization · Policy · Approval]
-  OEM[Authoritative OEM Core]
-  ASSURANCE[Governance · Security · Audit<br/>Observability · Evaluation]
-
-  SURFACE --> ORCH --> GOVERNED --> OEM
-  ASSURANCE -. applies across .-> ORCH
-  ASSURANCE -. governs .-> GOVERNED
-
-  classDef surface fill:#fff1ef,stroke:#b72c1a,color:#161616,stroke-width:1.5px;
-  classDef ai fill:#f6f2ff,stroke:#6929c4,color:#161616,stroke-width:1.5px;
-  classDef governance fill:#fff4e6,stroke:#b28600,color:#161616,stroke-width:2px;
-  classDef core fill:#e8f1ff,stroke:#0043ce,color:#161616,stroke-width:2px;
-  class SURFACE surface;
-  class ORCH ai;
-  class GOVERNED,ASSURANCE governance;
-  class OEM core;
+  subgraph CURRENT[CURRENT — IMPLEMENTED / VALIDATED]
+    CALLER[API caller<br/>required tenant metadata]
+    EP[Event Processor<br/>AIOps configuration and assessment API]
+    CONFIG[(PostgreSQL<br/>configuration and immutable change audit)]
+    MOCK[INTERNAL_MOCK<br/>synthetic assessment provider]
+    RESULT[Synthetic recommendation<br/>and confidence returned to caller]
+    CALLER -->|explicit assessment request| EP
+    EP -->|read enabled configuration| CONFIG
+    EP -->|resource, summary, severity| MOCK
+    MOCK -->|validated bounded response| EP
+    EP --> RESULT
+  end
+  subgraph TARGET[TARGET — DESIGNED / NOT IMPLEMENTED]
+    CONTEXT[Governed context preparation<br/>PENDING]
+    OLLAMA[Ollama local inference<br/>model not selected or certified]
+    VALIDATE[Structured response validation<br/>PENDING]
+    RECOMMEND[Recommendation only<br/>no operational authority]
+    CONTEXT --> OLLAMA --> VALIDATE --> RECOMMEND
+  end
+  EP -. future adapter and verified contracts .-> CONTEXT
+  RECOMMEND -. separate policy, authorization and approval .-> GOVERNED[Governed Event Management API or integration]
+  classDef current fill:#e5f6ec,stroke:#198038,color:#161616,stroke-width:1.5px;
+  classDef mock fill:#f6f2ff,stroke:#6929c4,color:#161616,stroke-width:1.5px;
+  classDef target fill:#f4f4f4,stroke:#0f62fe,color:#161616,stroke-width:1.5px,stroke-dasharray:5 4;
+  classDef gate fill:#fff4e6,stroke:#b28600,color:#161616,stroke-width:2px;
+  class CALLER,EP,CONFIG,RESULT current;
+  class MOCK mock;
+  class CONTEXT,OLLAMA,VALIDATE,RECOMMEND target;
+  class GOVERNED gate;
 ```
 
-AI orchestration can combine governed context, models and bounded workflows. Models do not directly control OEM. Recommendations and tool requests cross authorization and policy boundaries before an approved API can affect the authoritative OEM Core.
+*Caption — D01 Solution Architecture: the solid path is the verified, explicit `INTERNAL_MOCK` assessment. The dashed path is a proposed Ollama evolution. No arrow connects the current assessment to ticketing, notifications, automation, or event-state mutation.*
 
-## AI Capability Model
+The current provider contract returns only a synthetic recommendation and confidence value. `AiopsProvider` is an adapter boundary, but that boundary alone does not certify an Ollama provider, a real model, or a production integration.
 
-| Capability | Architectural meaning |
-|---|---|
-| Investigate | Assemble governed evidence for a bounded operational question |
-| Explain | Present traceable context about OEM state or decisions |
-| Summarize | Condense authorized event, lifecycle or integration context |
-| Recommend | Propose an action without granting authority to execute it |
-| Correlate Context | Relate approved signals and sources without redefining Processor correlation |
-| Plan | Construct bounded workflow steps within policy constraints |
-| Execute Governed Tool | Invoke an approved capability after authorization and validation |
-| Observe Outcome | Capture the result, policy decision and workflow outcome |
-
-This taxonomy defines architecture capabilities. It does not claim that every capability is implemented.
-
-## Engineering Architecture
+## 3. Technical Architecture
 
 ```mermaid
 flowchart TB
-  INTERACTION[Interaction Layer<br/>AIOps / AI Surface<br/>Interactive Request · Designed Event Trigger]
-  ORCHESTRATION[AI Orchestration Layer<br/>Orchestrator · Context Assembly<br/>Prompt / Instruction · Tool Selection]
-  CONTEXT[Retrieval / Context Layer<br/>Governed OEM APIs · OpenSearch Projection<br/>Approved Knowledge · Optional Vector Retrieval]
-  MODEL[Model Layer<br/>Gateway / Abstraction<br/>Commercial · Open · Enterprise · Specialized]
-  WORKFLOW[Agent / Workflow Layer<br/>Controlled Workflows · Bounded Agents<br/>Investigation · Recommendation · Governed Action]
-  TOOLS[Tool Layer<br/>Read Tools · Action Tools<br/>Integration / Automation Tools]
-  GOVERNANCE[Governance Layer<br/>Identity · Authorization · Policy · Approval<br/>Model · Prompt · Agent · Tool Governance]
-  OEM[OEM Boundary<br/>Governed Interface Layer · OEM APIs · OEM Core<br/>Kafka · PostgreSQL · OpenSearch]
-  ASSURANCE[Observability / Evaluation<br/>Audit · Retrieval Quality · Tool Execution<br/>Safety · Regression · Workflow Outcome]
-
-  INTERACTION --> ORCHESTRATION
-  ORCHESTRATION --> CONTEXT
-  CONTEXT --> MODEL
-  MODEL --> WORKFLOW
-  WORKFLOW --> TOOLS
-  TOOLS --> GOVERNANCE
-  GOVERNANCE --> OEM
-  ASSURANCE -. observes .-> ORCHESTRATION
-  ASSURANCE -. evaluates .-> WORKFLOW
-  ASSURANCE -. audits .-> TOOLS
-
-  classDef surface fill:#fff1ef,stroke:#b72c1a,color:#161616,stroke-width:1.5px;
-  classDef ai fill:#f6f2ff,stroke:#6929c4,color:#161616,stroke-width:1.5px;
-  classDef governance fill:#fff4e6,stroke:#b28600,color:#161616,stroke-width:2px;
-  classDef application fill:#e8f1ff,stroke:#0043ce,color:#161616,stroke-width:1.5px;
-  classDef data fill:#e5f6ec,stroke:#198038,color:#161616,stroke-width:1.5px;
-  class INTERACTION surface;
-  class ORCHESTRATION,CONTEXT,MODEL,WORKFLOW ai;
-  class TOOLS,GOVERNANCE,ASSURANCE governance;
-  class OEM application;
+  subgraph CURRENT[CURRENT — IMPLEMENTED / VALIDATED]
+    API[AiopsResource<br/>explicit REST invocation]
+    ENGINE[AiopsEngine<br/>enabled-configuration check]
+    REPO[AiopsConfigurations<br/>tenant-scoped configuration]
+    PG[(PostgreSQL<br/>configuration plus aiops_change audit)]
+    CLIENT[AiopsMockClient<br/>2 s connect and 3 s request timeout<br/>no redirect or retry]
+    WIREMOCK[WireMock aiops-mock<br/>synthetic constant response]
+    RETURN[Caller receives<br/>configuration revision, provider,<br/>recommendation and confidence]
+    API --> ENGINE
+    ENGINE --> REPO --> PG
+    ENGINE --> CLIENT --> WIREMOCK
+    WIREMOCK --> CLIENT --> RETURN
+  end
+  NOPERSIST[CURRENT GUARANTEE<br/>assessment request and result are not persisted<br/>no outbox, command, state update or remediation]
+  RETURN --> NOPERSIST
+  subgraph FUTURE[TARGET ROLES — DESIGNED / PENDING, NOT SEPARATE SERVICES]
+    ADAPTER[Ollama provider adapter<br/>contract and authentication pending]
+    ASSEMBLY[Context and prompt assembly<br/>sources, provenance and isolation pending]
+    SELECT[Model selection and lifecycle<br/>no model currently verified]
+    INFER[Ollama inference<br/>deployment and operations pending]
+    RESPONSE[Response schema and validation<br/>failure policy and audit pending]
+    ADAPTER --> ASSEMBLY --> SELECT --> INFER --> RESPONSE
+  end
+  ENGINE -. future replacement only after implementation and certification .-> ADAPTER
+  classDef current fill:#e5f6ec,stroke:#198038,color:#161616,stroke-width:1.5px;
+  classDef mock fill:#f6f2ff,stroke:#6929c4,color:#161616,stroke-width:1.5px;
+  classDef target fill:#f4f4f4,stroke:#0f62fe,color:#161616,stroke-width:1.5px,stroke-dasharray:5 4;
+  classDef boundary fill:#fff1ef,stroke:#da1e28,color:#161616,stroke-width:2px;
+  class API,ENGINE,REPO,PG,RETURN current;
+  class CLIENT,WIREMOCK mock;
+  class ADAPTER,ASSEMBLY,SELECT,INFER,RESPONSE target;
+  class NOPERSIST boundary;
 ```
 
-The engineering view separates interaction, orchestration, retrieval, model, workflow, tool, governance and OEM responsibilities. Agents and models have no direct connection to OEM stores.
+*Caption — D02 Technical Architecture: the current implementation consists of Event Processor classes plus PostgreSQL configuration/audit storage and a WireMock provider. Future context, orchestration, model, Ollama, and response roles are logical responsibilities—not claims of separately deployed services.*
 
-## Interaction Modes
+No verified configuration selects Llama 3.x or any other Event Management model. The separate OpenWebUI operator-tool setup references its own local model preset; it is not the Event Processor AIOps provider and is not evidence of the target architecture shown here.
 
-AI-01 supports two distinct invocation modes:
-
-- **Interactive:** a human uses the AIOps / AI surface to investigate, explain, summarize, request recommendations or propose a governed action.
-- **Event-driven:** a designed OEM event or lifecycle signal invokes a bounded AI workflow. AI is not invoked for every event by default.
-
-Both modes use the same identity, context, policy, tool and audit boundaries.
-
-## AI Orchestration
-
-AI orchestration coordinates context assembly, prompt or instruction selection, model invocation, workflow or agent steps and tool selection. It does not own OEM business rules, tool authorization or operational state.
-
-An orchestrator can support deterministic workflows and bounded agents without assuming that dynamic agentic behavior is always preferable.
-
-## Model Abstraction
-
-```text
-AI Orchestration
-  → Model Gateway / Model Abstraction
-  → Selected Model Provider
-```
-
-The vendor-neutral Model Layer can accommodate commercial LLM providers, open or self-hostable models, locally hosted models, enterprise-hosted models and specialized models. AI-01 selects no provider or model family.
-
-A future Model Gateway or abstraction can normalize requests and responses, route providers, select models, integrate provider authentication, enforce usage and model policy, and produce telemetry. It is not the OEM operational authority, tool-authorization engine or business-rule engine. No production gateway implementation is asserted.
-
-## Retrieval and Context
-
-```text
-Question / Task
-  → Retrieval Intent
-  → Approved Context Sources
-  → Context Assembly
-  → Model
-```
-
-Approved context can come from governed OEM APIs, event lifecycle views, OpenSearch search or analytics projections, and approved documentation or knowledge sources. Access remains bounded by identity, tenant or customer scope, policy and data classification.
-
-Context sources preserve their provenance and evidence class: a PostgreSQL-backed OEM API can expose authoritative operational state; OpenSearch supplies a projection; documentation supplies reference knowledge; model output is generated interpretation.
-
-## OpenSearch Relationship
-
-OpenSearch remains the **Search / Analytics Projection**. AI-01 can use it as an approved retrieval, search or analytics context source through governed interfaces.
-
-OpenSearch is not RAG by itself, a model, an agent or an operational authority. Retrieval does not promote a projection into authoritative state.
-
-## RAG Boundary
-
-Retrieval-augmented generation is the composition of **retrieval + context assembly + model generation**. It can use keyword, structured, semantic/vector or hybrid retrieval depending on a separately selected implementation.
-
-AI-01 does not claim that RAG or vector retrieval is implemented. Vector retrieval remains an optional abstraction, not a required OpenSearch capability.
-
-## Agent and Workflow Model
-
-| Pattern | Definition | Suitable uses |
-|---|---|---|
-| Workflow | Predetermined orchestration with controlled steps | Repeatable investigation, known remediation sequences and structured analysis |
-| Agent | Governed execution entity using a bounded goal, context, model reasoning, tools, workflow state and policy | Adaptive investigation, tool selection and constrained multi-step reasoning |
-
-An agent is not an LLM, a direct database client or an unrestricted automation identity. Workflow and agent patterns can coexist; neither is universally preferred.
-
-## Tool Model
-
-A tool is a bounded capability whose contract identifies its name, input and output schemas, required permission, side effects, error behavior and audit context. Tools can expose reads, event actions, ticket or notification operations, automation triggers and diagnostic queries.
-
-Tools invoke governed OEM APIs or integrations. They never provide direct store mutation merely because a model requested it.
-
-## Read vs Action Tools
-
-| Read tools | Action tools |
-|---|---|
-| Search; retrieve event; retrieve lifecycle; retrieve context; retrieve integration result; explain or summarize inputs | Acknowledge; close; suppress; route; ticket operation; notification; automation trigger; approved configuration change |
-
-Action tools require stronger authorization, policy, validation and audit controls. Model output alone cannot authorize an action.
-
-## Human Approval
+## 4. Business Process
 
 ```mermaid
-flowchart LR
-  RECOMMEND[AI Recommendation]
-  RISK[Risk / Policy Evaluation]
-  AUTO[Auto-Allowed]
-  REVIEW[Approval Required]
-  APPROVAL[Approval Decision]
-  TOOL[Approved Tool]
-  OEM[Governed OEM API]
-  DENIED[Denied / No Action]
-
-  RECOMMEND --> RISK
-  RISK -->|policy allows| AUTO --> TOOL
-  RISK -->|approval required| REVIEW --> APPROVAL
-  APPROVAL -->|approved| TOOL
-  APPROVAL -->|denied or timeout| DENIED
-  TOOL --> OEM
-
-  classDef ai fill:#f6f2ff,stroke:#6929c4,color:#161616,stroke-width:1.5px;
-  classDef governance fill:#fff4e6,stroke:#b28600,color:#161616,stroke-width:2px;
-  classDef application fill:#e8f1ff,stroke:#0043ce,color:#161616,stroke-width:1.5px;
-  class RECOMMEND ai;
-  class RISK,AUTO,REVIEW,APPROVAL,TOOL,DENIED governance;
-  class OEM application;
+flowchart TB
+  subgraph CURRENT[CURRENT — EXPLICIT ASSESSMENT ONLY]
+    C1[1. Caller submits resource,<br/>summary and severity]
+    C2[2. API validates request<br/>and tenant metadata]
+    C3[3. Engine reads enabled<br/>configuration and revision]
+    C4[4. INTERNAL_MOCK returns<br/>synthetic recommendation and confidence]
+    C5{5. Response valid<br/>and bounded?}
+    C6[6. Return assessment<br/>to the caller]
+    C7[Return sanitized<br/>provider-unavailable response]
+    C8[STOP<br/>no persistence, command,<br/>state mutation or remediation]
+    C1 --> C2 --> C3 --> C4 --> C5
+    C5 -->|yes| C6 --> C8
+    C5 -->|no, timeout or provider error| C7 --> C8
+  end
+  subgraph TARGET[TARGET — OPTIONAL OLLAMA FLOW / PENDING CONTRACTS]
+    T1[Designed invocation]
+    T2[Retrieve authorized context<br/>with provenance and tenant scope]
+    T3[Construct governed prompt<br/>and select certified model]
+    T4[Ollama inference]
+    T5[Validate and structure output]
+    T6[Recommendation]
+    T7{Policy and authorization}
+    T8{Human approval<br/>when required}
+    T9[Authorized domain service<br/>may execute an allowed action]
+    T10[No action]
+    T1 --> T2 --> T3 --> T4 --> T5 --> T6 --> T7
+    T7 -->|denied| T10
+    T7 -->|approval required| T8
+    T8 -->|denied or timeout| T10
+    T8 -->|approved| T9
+    T7 -->|separately authorized| T9
+  end
+  C8 -. future evolution does not change current behavior .-> T1
+  classDef current fill:#e5f6ec,stroke:#198038,color:#161616,stroke-width:1.5px;
+  classDef mock fill:#f6f2ff,stroke:#6929c4,color:#161616,stroke-width:1.5px;
+  classDef target fill:#f4f4f4,stroke:#0f62fe,color:#161616,stroke-width:1.5px,stroke-dasharray:5 4;
+  classDef decision fill:#fff4e6,stroke:#b28600,color:#161616,stroke-width:2px;
+  classDef stop fill:#fff1ef,stroke:#da1e28,color:#161616,stroke-width:2px;
+  class C1,C2,C3,C5,C6 current;
+  class C4 mock;
+  class C7,C8,T10 stop;
+  class T1,T2,T3,T4,T5,T6,T9 target;
+  class T7,T8 decision;
 ```
 
-Human-in-the-loop approval is supported when action policy requires it. Approval is risk- and policy-driven, not mandatory for every AI action.
-
-## Interactive AI Flow
-
-```text
-Human → AIOps / AI Surface → AI Orchestrator
-      → Retrieve / Reason → Response / Recommendation
-      → Optional Governed Action
-```
-
-Interactive use can investigate an event, summarize a situation, explain context, recommend a next step or request an approved remediation. AI-01 does not prescribe a specific user experience.
-
-## Event-Driven AI Flow
-
-```text
-Designed OEM Event / Kafka Trigger
-  → Designed AI Workflow
-  → Context Retrieval
-  → Model / Analysis
-  → Policy Decision
-  → Recommendation or Approved Tool Action
-  → Audit / Result
-```
-
-Kafka can supply designed triggers or context. It is not AI memory, agent state, a prompt store or model state.
-
-## AI Memory Boundary
-
-Conceptual memory categories include conversation or session context, workflow state and long-lived knowledge. These remain distinct from OEM operational state.
-
-PostgreSQL remains the Operational Source of Truth. AI memory cannot silently become a second operational authority. Durable AI memory requires a separate explicit architecture decision; AI-01 claims no production memory implementation.
-
-## Prompt / Instruction Governance
-
-Prompts and instructions are governed AI artifacts with identity, version, purpose, model compatibility, evaluation status and change history. Retrieved, user and event content remain data, not trusted instructions.
-
-Prompts contain no production secrets. Prompt versioning complements rather than replaces application and configuration governance.
-
-## Model Governance
-
-The architecture supports inventory and governance of model, provider, version, hosting mode, approved use cases, data policy, evaluation status and lifecycle status. These are governance contracts, not claims of an implemented model registry.
-
-## Agent Governance
-
-The architecture supports agent identity and version, bounded objective, allowed tools and data scopes, model configuration, policy, approval requirements, evaluation status and audit trail. Agents receive no unlimited credentials.
-
-## Tool Governance
-
-The architecture supports a tool registry, tool version, permission requirements, input/output contract, side-effect and risk classifications, error behavior and auditability. Action tools receive the strongest applicable controls.
-
-## Identity and Authorization
-
-Each interactive or event-driven workflow acts through identifiable human, service, workflow, agent and tool-execution principals. Authorization evaluates requested capability, resource and scope, applicable policy and tenant/customer context. AI cannot broaden the caller's effective access.
-
-AI-01 does not select a concrete IAM, RBAC or policy engine and does not claim that one uniform implementation already spans OEM.
-
-## AI Security
-
-AI security requires identity, least privilege, externalized secrets, data minimization, provider data boundaries, prompt/input controls, output validation, tool authorization, action policy, audit and abuse or rate controls where applicable.
-
-Secrets are not placed in prompts, model configuration committed to Git, logs or documentation. Provider credentials remain outside model and agent reasoning contexts.
-
-## Untrusted Input / Prompt Injection Boundary
-
-User input, event content and retrieved content are potentially untrusted. System instructions, policy and authorized tool definitions remain distinct from that content.
-
-A model request cannot grant tool permission. Tool authorization and action policy execute outside model reasoning, and untrusted content cannot override them.
-
-## Output Validation
-
-Model output is generated interpretation, not trusted authority. Before becoming a structured recommendation, tool input or state-changing action, output can require schema, policy and business-rule validation plus approval according to the use case.
-
-Invalid, ungrounded or unauthorized output produces no implicit OEM mutation.
-
-## AI Observability
-
-AI observability can cover request count, latency, model and provider errors, token or resource usage where applicable, retrieval success and quality, tool invocation and failures, workflow duration, inspectable agent decisions, policy decisions, approval outcomes and final workflow results.
-
-AI-01 selects no observability vendor and claims no completed production instrumentation.
-
-## AI Evaluation
-
-Evaluation can cover task correctness, retrieval quality, groundedness, hallucination, tool selection and correctness, policy compliance, security behavior, regression and workflow outcome.
-
-The architecture supports offline, pre-release, regression and controlled production evaluation. It defines no invented scores, thresholds or completed evaluation evidence.
-
-## AI Lifecycle / AI-02 Relationship
-
-```text
-Define → Develop → Evaluate → Approve
-       → Release → Observe → Re-evaluate → Retire
-```
-
-AI-01 defines the planned runtime architecture. [AI-02](evolution/future-architecture-register.md) remains a separate `PLANNED` architecture for delivery and governance of models, prompts, agents and tools. ARCH-REDESIGN-12 does not implement AI-02.
-
-## Data Privacy and Provider Boundary
-
-Provider and hosting decisions are policy-controlled using data classification, tenant/customer scope, model/provider identity, hosting mode, allowed context and retention policy. AI-01 does not assert that any particular provider is approved.
-
-Vendor neutrality preserves compatibility with local, enterprise-hosted and external providers behind the model abstraction.
-
-## Context Isolation
-
-Context retrieval preserves the same authorization and tenant/customer scope as the calling identity or designed workflow. An AI workflow cannot broaden data access through retrieval, model selection or tool invocation.
-
-This is an isolation principle, not a claim of a specific tenancy implementation.
-
-## Failure and Degradation Model
-
-| Failure domain | Architectural response |
-|---|---|
-| Model or provider unavailable | Fail the AI operation safely; preserve OEM Core availability |
-| Retrieval unavailable | Return a bounded failure or reduced-context result; do not fabricate authority |
-| Invalid model output | Reject during validation; invoke no action tool |
-| Tool failure | Preserve the explicit tool result and audit context |
-| Policy denial | Execute no action and return the governed decision |
-| Approval timeout | Execute no approval-dependent action |
-| Workflow failure | Contain failure within AI orchestration and preserve traceability |
-
-Graceful degradation is mandatory:
-
-```text
-AI Unavailable
-  → OEM Core Continues Operating
-  → GUI / CLI / API Remain Available According to Deployment
-```
-
-AI is additive and never a hard dependency for core event management.
-
-## Relationship to Multi-Surface
-
-[Multi-Surface](multi-surface-interaction.md) defines AIOps / AI as one optional governed interaction surface. AI-01 defines the internal intelligent architecture behind that surface and must traverse the same Governed Interface Layer.
-
-## Relationship to D0
-
-[D0](d0-logical-current.md) remains the authoritative definition of OEM Core components, event contracts, management boundary and data authority. AI-01 attaches above governed interfaces and does not redefine the Gateway, Processor, Worker or ESS.
-
-## Relationship to Data Authority & Replay
-
-[Data Authority & Replay](data-authority-replay.md) preserves PostgreSQL as Operational Source of Truth, Kafka as Transport / Replay Boundary and OpenSearch as Search / Analytics Projection. AI context and generated interpretation do not alter those roles.
-
-## Deployment Relationship
-
-AI-01 is cross-cutting and optional. It can attach to compatible D1, D3, D2, D4, D5A or D5B profiles only where separately selected capabilities, controls and evidence support it. The deployment architecture owns runtime placement; AI-01 owns the intelligent interaction boundary.
-
-D4 minimum and D5A/D5B do not require AI-01. No environment gains an AI dependency from this architecture definition.
-
-## Architectural Principles
-
-| Principle | Architectural consequence |
-|---|---|
-| AI Optionality | OEM Core operates independently of AI availability. |
-| OEM Authority | AI interpretation never replaces authoritative OEM state or decisions. |
-| Separation of Responsibilities | Interaction, retrieval, model, workflow, tool and governance roles remain distinct. |
-| Governed Actions | Models and agents act only through authorized, validated and audited tools. |
-| Vendor Neutrality | Model and provider choices remain behind an abstraction boundary. |
-| Retrieval Provenance | Context retains source, authority class and applicable scope. |
-| Least Privilege | Workflows, agents and tools receive bounded identities and permissions. |
-| Untrusted Content Isolation | Retrieved, user and event content cannot override policy or authorization. |
-| Validated Outputs | Model output is checked before structured or state-changing use. |
-| Observable and Evaluable | AI behavior is designed for traceability, measurement and regression evaluation. |
-| Graceful Degradation | AI failure does not compromise OEM Core operation. |
-| Lifecycle Separation | AI-01 runtime and AI-02 delivery/governance remain independently defined. |
-
-## Architecture Boundary
-
-AI-01 defines the planned runtime responsibilities and boundaries for AI interaction, orchestration, context, model abstraction, workflows and agents, tools, governance, security, observability, evaluation and graceful degradation.
-
-It does not define or implement a model provider, model gateway, RAG/vector technology, production agent runtime, durable AI memory, concrete IAM engine, observability vendor, evaluation thresholds or AI-02 delivery pipeline. It does not redefine OEM Core or deployment topology.
-
-## Implementation Evidence Boundary
-
-The certified product source documents one implemented **minimum independent AIOps Engine** inside Event Processor:
-
-- persistent configuration and revision handling;
-- REST CRUD;
-- immutable configuration-change audit records; and
-- explicit HTTP assessment against an internal mock provider.
-
-That engine is independent from the automatic event pipeline, performs no remediation, uses declarative tenant/actor headers rather than implemented authentication, and returns a synthetic mock assessment that is not real inference or provider compatibility evidence.
-
-There is no certified implementation evidence for an LLM or open model runtime, RAG, vector retrieval, production model gateway, production agents, production tool execution, durable AI memory, complete AI governance, production observability or production evaluation. Architecture definitions on this page must not be read as implementation claims.
-
-## Related Architectures
-
-- [Multi-Surface Interaction Architecture](multi-surface-interaction.md)
-- [D0 — OEM Logical Architecture](d0-logical-current.md)
-- [D6 — Environment Evolution & Deployment Model](d6-environment-evolution.md)
-- [Data Authority & Replay Boundary](data-authority-replay.md)
+*Caption — D03 Business Process: the current process begins only with an explicit assessment call and always ends without an operational side effect. The proposed Ollama process is optional and requires separate output validation, policy, authorization, and—where required—human approval before an authoritative domain service could execute an action.*
+
+A successful model response would not authorize an action. Human approval and policy authorization are distinct controls, and neither permits a model to bypass the service that owns the affected operational state.
+
+## 5. How Ollama Receives Context
+
+Ollama does not currently receive Event Management context through the Event Processor AIOps implementation. The current request to `INTERNAL_MOCK` contains only the verified assessment signal fields: resource, summary, and severity.
+
+In the target design, context delivery remains **PENDING** and must be implemented behind governed interfaces. Before any Ollama request, the design requires:
+
+1. an authorized invocation with tenant/customer scope;
+2. approved source selection and data minimization;
+3. provenance for event, history, configuration, rule, or knowledge context;
+4. separation of system instructions from untrusted event or retrieved content;
+5. a versioned prompt/instruction contract;
+6. a selected and certified model plus bounded request limits; and
+7. response-schema validation, audit, and failure handling.
+
+Event State Service or search projections may become context sources only through verified contracts. The target design does not grant an AI component direct database access. Context Builder and AI Orchestrator are names for possible logical roles; they are not evidenced as deployed services.
+
+## 6. Model Inference vs Training
+
+| Concept | Meaning in AI-01 | Current status |
+|---|---|---|
+| Prompt construction | Assemble system instructions, task, and bounded context | **PENDING** for the Event Processor AIOps path |
+| Context injection | Include authorized facts in an inference request | **PENDING** |
+| Retrieval | Select facts from approved sources before inference | **PENDING**; no RAG or vector retrieval claim |
+| Inference | Generate output from a configured model without changing model weights | **TARGET** for Ollama; not active in Processor |
+| Model training | Learn model weights from a training corpus | Out of scope and not implemented |
+| Fine-tuning | Modify an existing model for a specialized task | Out of scope and not implemented |
+
+Ollama execution would be inference, not training. Downloading or naming a model does not make it configured, validated, approved, or certified. No Llama 3.x configuration is asserted by AI-01.
+
+## 7. Current Implementation Status
+
+| Capability | Status | Evidence boundary |
+|---|---|---|
+| AIOps configuration CRUD, revision handling, soft delete, and change audit | **IMPLEMENTED / VALIDATED** | Event Processor and PostgreSQL |
+| Explicit assessment request | **IMPLEMENTED / VALIDATED** | Enabled configuration required |
+| Synthetic `INTERNAL_MOCK` provider | **IMPLEMENTED / VALIDATED** | WireMock; not real inference |
+| Bounded provider response validation and sanitized unavailability | **IMPLEMENTED / VALIDATED** | Recommendation and confidence only |
+| Automatic event-pipeline AI stage | **NOT IMPLEMENTED** | Assessment is explicitly invoked |
+| Assessment/result persistence | **NOT IMPLEMENTED** | No assessment history or outbox write |
+| Event-state update or command emission | **NOT IMPLEMENTED** | No operational side effects |
+| Ollama provider integration | **PENDING** | No certified adapter or deployment |
+| Model selection and configured model | **PENDING / UNKNOWN** | No verified Event Management model |
+| Context retrieval, prompt governance, and orchestration | **PENDING** | No verified contracts |
+| AI-triggered ticketing, notification, or automation | **PENDING** | Must use separately authorized domain integrations |
+
+## 8. Known Architectural Gaps
+
+- Define and certify a real provider contract; changing only the mock URL is not sufficient.
+- Decide whether Ollama is the approved target provider and document its deployment, health, authentication, network, resource, upgrade, and model-lifecycle controls.
+- Select and certify a model for an explicit use case; no model family is implied.
+- Define context sources, provenance, minimization, tenant isolation, prompt format, request limits, and untrusted-content handling.
+- Define response schemas, validation, confidence semantics, failure policy, audit, retention, and observability.
+- Decide whether assessments are persisted and identify the authoritative owner; the current implementation deliberately does not persist them.
+- Define policy, service authorization, human approval, and idempotent command boundaries before any operational integration.
+- Keep real inference failure isolated so core event processing remains available.
+
+## 9. Engineering References
+
+- [AIOps Engine implementation evidence](../platform/event-processor/aiops-engine.md)
+- [AIOps frontend handoff](../platform/event-processor/frontend-handoffs/aiops.md)
+- [Local LLM Runtime — Ollama](/ai-automation/local-llm-runtime-ollama/)
+- [D0 — Event Management Logical Architecture](d0-logical-current.md)
+- [Data Authority & Replay](data-authority-replay.md)
+- [Multi-Surface Interaction](multi-surface-interaction.md)
 - [AI-02 — AI Delivery & Governance Lifecycle](evolution/future-architecture-register.md)
 - [Architecture Evolution Register](evolution/index.md)
-- [AIOps Engine implementation evidence](../platform/event-processor/aiops-engine.md)
+
+AI-01 documents architecture and maturity boundaries. It does not deploy Ollama, configure a model, implement a new service, or authorize an operational action.
