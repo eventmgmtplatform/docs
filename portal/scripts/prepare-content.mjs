@@ -1334,6 +1334,7 @@ certification.
 | Bridge Extensions | Integration surface placeholder | Documentation pending; implementation not claimed | [Bridge Extensions](/integrations/bridge-extensions/) |
 | BMC Helix ITSM | Provider architecture and version-specific API research | Documentation complete; OEM adapter and runtime capabilities pending | [BMC Helix ITSM](/integrations/bmc-helix/) |
 | ELK Pull Data | Integration surface placeholder | Documentation pending; implementation not claimed | [ELK Pull Data](/integrations/elk-pull-data/) |
+| ELK Historical Event Export | Outbound historical event export to external Elasticsearch | Documentation complete; worker, resources and runtime capabilities pending | [ELK Historical Event Export](/integrations/elk/) |
 `)
 await write('integrations/_meta.js', `export default {
   index: 'Integrations',
@@ -1344,6 +1345,8 @@ await write('integrations/_meta.js', `export default {
   chatops: { display: 'hidden' },
   servicenow: 'ServiceNow',
   'bmc-helix': 'BMC Helix ITSM',
+  elk: 'ELK Historical Event Export',
+  'elk-pull-data': 'ELK Pull Data',
   'integration-architecture': 'Integration Architecture — Instances'
 }\n`)
 
@@ -2100,6 +2103,7 @@ await write('integrations/index.md', landing('Integrations', [
   ['Teams - ChatOps', 'integrations/teams-chatops/'],
   ['Bridge Extensions', 'integrations/bridge-extensions/'],
   ['BMC Helix', 'integrations/bmc-helix/'],
+  ['ELK Historical Event Export', 'integrations/elk/'],
   ['ELK Pull Data', 'integrations/elk-pull-data/']
 ]))
 
