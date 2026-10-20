@@ -2184,10 +2184,16 @@ commands or claim production operations.
 
 await write('ai-automation/index.md', landing('AI & Automation', [
   ['Architecture', '../architecture/ai-01-aiops-ai-architecture/'],
+  ['CACF', 'ai-automation/cacf/'],
   ['Local LLM Runtime — Ollama', 'ai-automation/local-llm-runtime-ollama/'],
-  ['AIOps implementation', '../platform/event-processor/aiops-engine/'],
-  ['CACF / Automation', '../platform/cacf/README/']
+  ['AIOps implementation', '../platform/event-processor/aiops-engine/']
 ]))
+
+await write('ai-automation/_meta.js', `export default {
+  index: { display: 'hidden' },
+  cacf: 'CACF',
+  'local-llm-runtime-ollama': 'Local LLM Runtime — Ollama'
+}\n`)
 
 await write('quality/status/index.md', `# Event Management Platform Status
 
