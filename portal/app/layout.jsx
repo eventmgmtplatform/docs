@@ -46,7 +46,7 @@ export default async function RootLayout({ children }) {
           footer={footer}
           sidebar={{ autoCollapse: true, defaultMenuCollapseLevel: 1 }}
           toc={{ backToTop: true }}
-          editLink="Edit this page"
+          editLink={null}
           feedback={{ content: null }}
         >
           {children}
